@@ -1,0 +1,264 @@
+﻿
+
+        <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stramline Academies Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main-container {
+            max-width: 640px;
+            margin: 0 auto;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            background-color:#1E90FF;
+        }
+
+        .container {
+            margin: 0px auto;
+            max-width: 640px;
+            height: 100px;
+            background:#1E90FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .title {
+            color: white;
+            font-size: 35px;
+            font-weight: 600px!;
+            font-family: Whitney, Helvetica Neue, Helvetica, Arial,
+                Lucida Grande, sans-serif;
+        }
+
+        .box1 {
+            width: 100vw;
+
+
+        }
+
+        .box1 {
+            width: 100vw;
+            height: 400px;
+            background: url(https://img.freepik.com/free-photo/standard-quality-control-collage-concept_23-2149595847.jpg?w=740&t=st=1698483847~exp=1698484447~hmac=f3cc1d0128ac0f33c63d077e714257cb286389def74945d48b6daec6260d0448) no-repeat;
+
+        }
+
+
+        .heading {
+
+            font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color:white;
+            letter-spacing: 0.27px;
+            margin-top: 10px;
+            padding: 0px 30px;
+        }
+
+        p {
+            display: block;
+            margin: 13px 0;
+            line-height: 20px;
+            padding: 0px 30px;
+            font-size: 15px;
+            text-align: justify;
+        }
+        .below-link{
+            text-align: center;
+        }
+        .login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            background:  #0000ff;
+            line-height: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            border: none;
+
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .heading2 h2 {
+            margin-top: 10px;
+            padding: 0px 30px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .copy-link {
+            margin-top: 10px;
+            padding: 0px 30px;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #294196;
+
+        }
+
+        .footer1 {
+            cursor: auto;
+            color: #99aab5;
+            font-family: Whitney, Helvetica Neue, Helvetica,
+                Arial, Lucida Grande, sans-serif;
+            font-size: 12px;
+            line-height: 24px;
+            text-align: center;
+        }
+
+        .footer2 {
+            cursor: auto;
+            color: #99aab5;
+            font-family: Whitney, Helvetica Neue, Helvetica,
+                Arial, Lucida Grande, sans-serif;
+            font-size: 12px;
+            line-height: 24px;
+            text-align: center;
+        }
+        @@media only screen and (max-width: 480px) {
+            @@-ms-viewport {
+                width: 320px;
+            }
+
+            @@viewport {
+                width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container" style="max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            background-color:#cac9d1;">
+        <div class="container" style=" margin: 0px auto;
+            max-width: 640px;
+            height: 100px;
+            background:#cac9d1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+">
+            <div class="title" style="color: darkblue;
+            font-size: 35px;
+            font-weight: bolder;
+            font-family: Whitney, Helvetica Neue, Helvetica, Arial,
+                Lucida Grande, sans-serif;">
+                Welcome to @Model.CompanyName!
+            </div>
+        </div>
+        <div class="box1"
+             style=" width: 100vw;
+            height: 400px;
+            background: url(https://img.freepik.com/free-photo/standard-quality-control-collage-concept_23-2149595847.jpg?w=740&t=st=1698483847~exp=1698484447~hmac=f3cc1d0128ac0f33c63d077e714257cb286389def74945d48b6daec6260d0448) no-repeat;">
+
+        </div>
+
+        <h2 class="heading" style=" font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color:darkblue;
+            letter-spacing: 0.27px;
+            margin-top: 10px;
+            padding: 0px 30px;">
+            Hey @Model.Name,
+        </h2>
+       
+        <p style=" display: block;
+            margin: 13px 0;
+            line-height: 20px;
+            padding: 0px 30px;
+            font-size: 15px;
+            text-align: justify;
+margin-left:30px;
+        }">
+            Thank you for registering with Streamline academies. Please find your Email and Password below as Login Credentials
+        </p>
+        <p style=" display: block;
+            margin: 13px 0;
+            line-height: 20px;
+            padding: 0px 30px;
+            font-size: 15px;
+            text-align: justify;
+        }">
+            Email: @Model.Email<br />
+            Password:@Model.Password<br />
+
+        </p>
+        <p class="below-link" style="  text-align: center;">
+            Please Click below link to Login<br />
+        </p>
+        <div class="login">
+            <button style=" background:  #0000ff;
+            line-height: 100%;
+            padding: 10px;
+            margin-left:30px;
+            border-radius: 3px;
+            border: none;">
+                <a style="color: white;
+            text-decoration: none;
+            font-size: 15px;" href="@Model.Link" target="_blank">Login</a>
+            </button>
+        </div>
+        <div class="heading2" style="margin-left:30px;">
+            <h2>
+                If above link does not work please copy and paste the below link on the url
+
+            </h2>
+            <p class="copy-link" style="margin-left:30px;">
+                @Model.Link
+            </p>
+        </div>
+
+    </div>
+    <div class="footer1" style=" cursor: auto;
+            color: #99aab5;
+            font-family: Whitney, Helvetica Neue, Helvetica,
+                Arial, Lucida Grande, sans-serif;
+            font-size: 12px;
+            line-height: 24px;
+color:darkblue;
+margin-left:30px;
+            text-align: center;">
+        Sent by @Model.CompanyName,
+    </div>
+    <div class="footer2" style="cursor: auto;
+            color: #99aab5;
+            font-family: Whitney, Helvetica Neue, Helvetica,
+                Arial, Lucida Grande, sans-serif;
+            font-size: 12px;
+margin-left:30px;
+color:darkblue;
+            line-height: 24px;
+            text-align: center;">
+        HSBR Layout, Kalyanagar,Bengaluru, India, 560043.
+    </div>
+</body>
+
+</html>
+    
+
