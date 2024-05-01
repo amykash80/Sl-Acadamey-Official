@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PublicComponent } from './public.component';
-import { HomeComponent } from './home/home.component';
-import { EnquiryComponent } from './enquiry/enquiry.component';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './Pages/home/home.component';
+import { EnquiryComponent } from './Pages/enquiry/enquiry.component';
+import { LoginComponent } from './Pages/login/login.component';
 
 const routes: Routes = [
   {path:"",component:PublicComponent,

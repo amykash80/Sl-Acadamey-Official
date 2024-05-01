@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../Services/auth.service';
-import { Login } from '../../Models/Common/login';
+import { AuthService } from '../../../Services/auth.service';
+import { Login } from '../../../Models/Common/login';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
