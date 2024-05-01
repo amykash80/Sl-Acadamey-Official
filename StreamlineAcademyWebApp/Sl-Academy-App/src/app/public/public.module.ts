@@ -16,7 +16,6 @@ import { AuthService } from '../Services/auth.service';
     EnquiryComponent,
     LoginComponent
   ],
-  providers:[AuthService],
   imports: [
     CommonModule,
     PublicRoutingModule

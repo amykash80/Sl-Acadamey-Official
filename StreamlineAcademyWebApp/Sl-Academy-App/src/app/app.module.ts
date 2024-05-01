@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { loaderInterceptor } from './Services/loader.interceptor';
+import { InterceptorService } from './Services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,8 @@ import { loaderInterceptor } from './Services/loader.interceptor';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useValue: loaderInterceptor,
-      multi: true
+      useClass: InterceptorService,
+       multi: true
     }
   ],
   bootstrap: [AppComponent]

@@ -16,7 +16,6 @@ export class AuthService {
   login(loginModel:Login):Observable<ApiResponse<LoginResponse>>{
     return this.httpCleint.post<ApiResponse<LoginResponse>>(this.baseUrl+"Auth/login",loginModel)
   }
-  
    enquiry(enquiryModel:Enquiry):Observable<ApiResponse<EnquiryResponse>>{
     return this.httpCleint.post<ApiResponse<EnquiryResponse>>(this.baseUrl+"Enquiry/add",enquiryModel)
    }
