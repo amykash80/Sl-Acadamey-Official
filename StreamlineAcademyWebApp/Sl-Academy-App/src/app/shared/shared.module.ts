@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { SharedComponent } from './shared.component';
+import { ChangepasswordComponent } from './Pages/changepassword/changepassword.component';
 
 
 @NgModule({
   declarations: [
-    SharedComponent
+    ChangepasswordComponent
   ],
   imports: [
     CommonModule,
