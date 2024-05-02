@@ -13,12 +13,12 @@ enquiryModel: EnquiryUpdate = new EnquiryUpdate()
 updateEnquiry()
 {
   this.enquiryModel.id ="7dfe534c-c9ee-417e-0f65-08dc6a6fa21a"
-  this.enquiryModel.name="Sushree"
+  this.enquiryModel.name="Sushree pani"
   this.enquiryModel.email="s@gmail.com"
   this.enquiryModel.phoneNumber="8984148806"
   this.enquiryService.updateEnquiry(this.enquiryModel).subscribe({
     next:(response)=>{
-      console.log(response)
+      console.log(response.message)
     },
     error:(error)=>
       {
