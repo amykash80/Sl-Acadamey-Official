@@ -150,7 +150,7 @@ public static class APIMessages
 			public static readonly string EnquiryUpdated = "Enquiry Updated Successfully.";
             public static readonly string EnquiryDeleted = "Enquiry Deleted Successfully.";
             public static readonly string EnquiryNameExist = "Name already Exist.";
-            public static readonly string EnquiryEmailExist = "Email already Exist.";
+            public static readonly string EnquiryEmailExist = "Enquiry on this Email Already Registered.";
             public static readonly string InvalidCredential = "Invalid Credentials.";
         }
 

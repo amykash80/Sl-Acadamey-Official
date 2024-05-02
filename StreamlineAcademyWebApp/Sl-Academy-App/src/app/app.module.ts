@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './Services/interceptor.service';
+import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InterceptorService } from './Services/interceptor.service';
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
        multi: true
-    }
+    },
+    provideHotToastConfig()
   ],
   bootstrap: [AppComponent]
 })

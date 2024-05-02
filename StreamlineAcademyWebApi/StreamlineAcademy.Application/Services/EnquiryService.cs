@@ -27,9 +27,6 @@ namespace StreamlineAcademy.Application.Services
        
         public async Task<ApiResponse<EnquiryResponseModel>> AddEnquiry(EnquiryRequestModel request)
         {
-            if( await enquiryrepository.FirstOrDefaultAsync(x=>x.Name== request.Name) is not null)
-                return ApiResponse<EnquiryResponseModel>.ErrorResponse(APIMessages.EnquiryManagement.EnquiryNameExist, HttpStatusCodes.Conflict);
-
             if (await enquiryrepository.FirstOrDefaultAsync(x => x.Email == request.Email ) is not null)
                 return ApiResponse<EnquiryResponseModel>.ErrorResponse(APIMessages.EnquiryManagement.EnquiryEmailExist, HttpStatusCodes.Conflict);
             var enquiry = new Enquiry()
@@ -133,7 +130,6 @@ namespace StreamlineAcademy.Application.Services
                     IsActive = true
                 });
                 return ApiResponse<IEnumerable<EnquiryResponseModel>>.SuccessResponse(sortedEnquiries, $"Found {enquiryList.Count()} Enquiries");
-                //return ApiResponse<IEnumerable<EnquiryResponseModel>>.SuccessResponse(mapper.Map<IEnumerable<EnquiryResponseModel>>(enquiryList.OrderBy(x => x.Name)), $"Found {enquiryList.Count()} Enquiries");
             }
             return ApiResponse<IEnumerable<EnquiryResponseModel>>.ErrorResponse(APIMessages.EnquiryManagement.EnquiryNotFound, HttpStatusCodes.NotFound);
         }

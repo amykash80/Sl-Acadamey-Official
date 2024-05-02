@@ -1,4 +1,4 @@
-import { Userrole } from "../../Enums/userrole";
+import { UserRole } from "../../Enums/userrole";
 
 export class Login {
     email?:string;
@@ -6,6 +6,6 @@ export class Login {
 }
 export class LoginResponse{
     fullName?:string;
-    userRole?:Userrole;
+    userRole?:UserRole;
     token?:string
 }
