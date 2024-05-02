@@ -13,3 +13,9 @@ export class EnquiryResponse {
     email?: string;
     phoneNumber?: string;
 }
+export class EnquiryUpdate {
+    id?:string;
+    name?: string;
+    email?: string;
+    phoneNumber?: string;
+}
