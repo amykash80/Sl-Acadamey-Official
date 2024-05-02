@@ -5,13 +5,15 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { EnquirylistComponent } from './pages/enquirylist/enquirylist.component';
 import { UpdateEnquiryComponent } from './pages/update-enquiry/update-enquiry.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     EnquirylistComponent,
-    UpdateEnquiryComponent
+    UpdateEnquiryComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
