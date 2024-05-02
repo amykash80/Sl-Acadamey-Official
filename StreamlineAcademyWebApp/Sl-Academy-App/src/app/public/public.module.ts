@@ -18,7 +18,7 @@ import { FotterComponent } from './components/fotter/fotter.component';
     EnquiryComponent,
     LoginComponent,
     NavbarComponent,
-    FotterComponent
+    FotterComponent,
   ],
   imports: [
     CommonModule,
