@@ -9,6 +9,7 @@ import { LoginComponent } from './Pages/login/login.component';
 import { AuthService } from '../Services/auth.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FotterComponent } from './components/fotter/fotter.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FotterComponent } from './components/fotter/fotter.component';
   ],
   imports: [
     CommonModule,
-    PublicRoutingModule
+    PublicRoutingModule,
+    FormsModule
   ]
 })
 export class PublicModule { }
