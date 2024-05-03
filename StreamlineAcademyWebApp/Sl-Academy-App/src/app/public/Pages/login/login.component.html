@@ -1,1 +1,46 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row gy-4">
+    <div class="col-lg-6 col-xl-5">
+      <form method="POST" #loginForm="ngForm" class="login-form">
+        <h5 class="form-title">Login</h5>
+        <div class="row">
+          <div class="form-group">
+            <label>email address</label>
+            <input
+              type="text"
+              class="form-control style-white"
+              name="email"
+              [(ngModel)]="loginModel.email"
+              id="name"
+              placeholder=""
+            />
+            <i class="far fa-user" aria-hidden="true"></i>
+          </div>
+          <div class="form-group style-3">
+            <label>Password *</label>
+            <input
+              type="password"
+              class="form-control style-white"
+              name="password"
+              [(ngModel)]="loginModel.password"
+              id="password"
+              placeholder=""
+              require=""
+            /><i class="far fa-eye-slash" aria-hidden="true"></i>
+          </div>
+          <div class="form-group col-6 text-start align-self-center">
+            <input class="style2" type="checkbox" id="remember" />
+            <label for="remember">Remember Me</label>
+          </div>
+          <div class="form-group col-6 text-end">
+            <a class="forget-password-btn" href="#">Forgot Password?</a>
+          </div>
+          <div class="form-btn col-12 text-center">
+            <button class="th-btn w-100" (click)="loggedIn()" [disabled]="loginForm.invalid">Log In</button>
+          </div>
+        </div>
+        <p class="form-messages mb-0 mt-3"></p>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,174 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --theme-color: #eb0029;
+  --title-color: #161921;
+  --body-color: #525960;
+  --smoke-color: #f5f5f5;
+  --smoke-color2: #f7f7f7;
+  --black-color: #000000;
+  --black-color-2: #6a7178;
+  --black-color-3: #242936;
+  --dark-color: #101010;
+  --gray-color: #d4d4d4;
+  --white-color: #ffffff;
+  --light-color: #72849b;
+  --yellow-color: #ffb539;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --border-color: #e0e0e0;
+  --title-font: "Poppins", sans-serif;
+  --body-font: "Poppins", sans-serif;
+  --style-font: "Norican", cursive;
+  --icon-font: "Font Awesome 5 Free";
+  --main-container: 1220px;
+  --container-gutters: 24px;
+  --section-space: 120px;
+  --section-space-mobile: 80px;
+  --section-title-space: 60px;
+  --ripple-ani-duration: 5s;
+}
+
+.slick-slide:focus,
+button:focus,
+a:focus,
+a:active,
+a.nice-select.open,
+input,
+input:hover,
+input:focus,
+input:active,
+input.nice-select.open,
+textarea,
+textarea:hover,
+textarea:focus,
+textarea:active,
+textarea.nice-select.open {
+  outline: none;
+  box-shadow: none !important;
+}
+
+select,
+.form-control,
+.form-select,
+textarea,
+input {
+  height: 56px;
+  padding: 0 25px 0 25px;
+  padding-right: 45px;
+  border: 1px solid transparent;
+  color: var(--body-color);
+  background-color: var(--smoke-color);
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+  font-family: var(--body-font);
+  -webkit-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
+}
+
+input[type="checkbox"] {
+  visibility: hidden;
+  opacity: 0;
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+input[type="checkbox"] ~ label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  display: block;
+}
+
+input[type="checkbox"].style2 ~ label {
+  color: #8b929c;
+  padding-left: 23px;
+  margin-bottom: -0.5em;
+}
+
+input[type="checkbox"].style2 ~ label:before {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #8b929c;
+  height: 14px;
+  width: 14px;
+  line-height: 14px;
+  border-radius: 3px;
+  top: 6px;
+}
+
+input[type="checkbox"] ~ label:before {
+  content: "";
+  font-family: var(--icon-font);
+  font-weight: 700;
+  position: absolute;
+  left: 0px;
+  top: 3.5px;
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color);
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* THEMED BTN 1 */
+.th-btn {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  vertical-align: middle;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  background-color: var(--theme-color);
+  color: var(--white-color);
+  font-family: var(--title-font);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+  text-transform: uppercase;
+  padding: 15px 35px;
+  border-radius: 10px;
+}
+
+.th-btn:before,
+.th-btn:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  top: 0;
+  width: 0%;
+  background-color: var(--title-color);
+  z-index: -1;
+  -webkit-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.th-btn:before {
+  left: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.th-btn:after {
+  right: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.th-btn:hover,
+.th-btn.active {
+  color: var(--white-color);
+}
+
+.th-btn:hover::before,
+.th-btn:hover:after,
+.th-btn.active::before,
+.th-btn.active:after {
+  width: 55%;
+  border-radius: 0;
+}
