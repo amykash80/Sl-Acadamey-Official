@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { EnquirylistComponent } from './pages/enquirylist/enquirylist.component';
 import { UpdateEnquiryComponent } from './pages/update-enquiry/update-enquiry.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { ChangepasswordComponent } from '../shared/Pages/changepassword/changepassword.component';
 
 const routes: Routes = [
   {path:"",component:AdminComponent,
@@ -12,6 +13,7 @@ const routes: Routes = [
     {path:"dashboard",component:DashboardComponent},
     {path:"enquirylist",component:EnquirylistComponent},
     {path:"updateenquiry",component:UpdateEnquiryComponent},
+    {path:"changePassword",component:ChangepasswordComponent}
   ]}
 ];
 

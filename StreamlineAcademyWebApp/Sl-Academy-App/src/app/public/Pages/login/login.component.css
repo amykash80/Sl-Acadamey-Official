@@ -1,0 +1,46 @@
+.login-form .form-group select,
+.login-form .form-group .form-control,
+.login-form .form-group .form-select,
+.login-form .form-group textarea,
+.login-form .form-group input {
+  background-color: transparent;
+  border: 1px solid var(--gray-color);
+  border-radius: 10px;
+}
+
+.login-form .form-group label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+  color: var(--body-color);
+  margin-bottom: 2px;
+}
+
+.login-form .form-group {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+input[type="checkbox"].style2 ~ label {
+  color: #8b929c;
+  padding-left: 23px;
+  margin-bottom: -0.5em;
+}
+
+input[type="checkbox"].style2 ~ label:before {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #8b929c;
+  height: 14px;
+  width: 14px;
+  line-height: 14px;
+  border-radius: 3px;
+  top: 6px;
+}
+
+.forget-password-btn {
+    color: var(--theme-color);
+    text-decoration: none;
+    outline: 0;
+    -webkit-transition: all ease 0.4s;
+    transition: all ease 0.4s;
+  }
