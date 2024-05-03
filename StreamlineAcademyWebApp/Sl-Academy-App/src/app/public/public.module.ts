@@ -10,6 +10,7 @@ import { AuthService } from '../Services/auth.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FotterComponent } from './components/fotter/fotter.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PublicRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class PublicModule { }
