@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row gy-4">
     <div class="col-lg-6 col-xl-5">
-      <form method="POST" class="login-form">
+      <form method="POST" #loginForm="ngForm" class="login-form">
         <h5 class="form-title">Login</h5>
         <div class="row">
           <div class="form-group">
-            <label>Username or email address</label>
+            <label>email address</label>
             <input
               type="text"
               class="form-control style-white"
-              name="name"
+              name="email"
+              [(ngModel)]="loginModel.email"
               id="name"
               placeholder=""
             />
@@ -21,6 +22,7 @@
               type="password"
               class="form-control style-white"
               name="password"
+              [(ngModel)]="loginModel.password"
               id="password"
               placeholder=""
               require=""
@@ -34,7 +36,7 @@
             <a class="forget-password-btn" href="#">Forgot Password?</a>
           </div>
           <div class="form-btn col-12 text-center">
-            <button class="th-btn w-100">Log In</button>
+            <button class="th-btn w-100" (click)="loggedIn()" [disabled]="loginForm.invalid">Log In</button>
           </div>
         </div>
         <p class="form-messages mb-0 mt-3"></p>

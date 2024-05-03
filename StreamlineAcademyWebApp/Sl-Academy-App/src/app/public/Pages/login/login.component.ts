@@ -16,8 +16,8 @@ export class LoginComponent {
   ) { }
   loginModel: Login = new Login();
   loggedIn() {
-    this.loginModel.email="r@example.com"
-    this.loginModel.password="r@1234"
+    // this.loginModel.email="r@example.com"
+    // this.loginModel.password="r@1234"
     this.authService.login(this.loginModel).subscribe({
       next: (response) => {
         if(response.isSuccess){
