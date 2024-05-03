@@ -59,7 +59,7 @@
             <p>Don't have an account? <a routerLink="/enquiry">Register Here</a></p>
         </div>
           <div class="form-btn col-12 text-center">
-            <button class="th-btn w-100" (click)="loggedIn()" [disabled]="loginForm.invalid">Log In
+            <button class="th-btn w-100" (click)="onLogIn()" [disabled]="loginForm.invalid">Log In
               <app-spinner *ngIf="loadSpinner"></app-spinner>
             </button>
           </div>

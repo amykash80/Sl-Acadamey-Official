@@ -20,7 +20,7 @@ export class LoginComponent {
   ) {}
   loginModel: Login = new Login();
   loadSpinner = false;
-  loggedIn() {
+  onLogIn() {
     this.loadSpinner=true;
     this.authService.login(this.loginModel).subscribe({
       next: (response) => {
