@@ -11,7 +11,7 @@ export class SharedService {
 
   getToken(): string {
     return localStorage.getItem("streamlineToken")
-      ? JSON.parse(localStorage['streamlineToken']).token
+      ? JSON.parse(localStorage['streamlineToken'])
       : '';
   }
   showSuccessToast(message: string) {
