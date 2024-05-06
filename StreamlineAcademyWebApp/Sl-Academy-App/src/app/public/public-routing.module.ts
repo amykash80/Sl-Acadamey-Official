@@ -11,7 +11,7 @@ const routes: Routes = [
     children:[
       {path:"",redirectTo:"/home",pathMatch:"full"},
       {path:"home",component:HomeComponent},
-      {path:"enquiry",component:EnquiryComponent,canActivate:[authGuard]},
+      {path:"enquiry",component:EnquiryComponent},
       {path:"login",component:LoginComponent
       },
     ]

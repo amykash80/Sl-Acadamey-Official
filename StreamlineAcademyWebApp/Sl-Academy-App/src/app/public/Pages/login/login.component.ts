@@ -25,7 +25,6 @@ export class LoginComponent {
     this.authService.login(this.loginModel).subscribe({
       next: (response) => {
         if (response.isSuccess) {
-          this.sharedService.showSuccessToast(response.message);
           localStorage.setItem("streamlineToken", JSON.stringify(response.result.token));
         } 
         else {

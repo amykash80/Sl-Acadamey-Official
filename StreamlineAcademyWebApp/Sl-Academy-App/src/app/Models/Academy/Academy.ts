@@ -1,6 +1,6 @@
 import { UserRole } from "../../Enums/userrole";
 
-export class Academy{
+export class RegisterAcademy{
     name?:string;
     academyName?:string;
     address?:string;
@@ -10,6 +10,7 @@ export class Academy{
     password?:string;
     academyTypeId?:string;
     countryId?:string;
+    stateId?:string;
     cityId?:string; 
 }
 
