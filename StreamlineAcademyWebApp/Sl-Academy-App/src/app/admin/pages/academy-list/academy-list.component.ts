@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AcademyService } from '../../../Services/academy.service';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { AcademyResponse } from '../../../Models/Academy/Academy';
 
 @Component({
   selector: 'app-academy-list',
@@ -9,14 +10,16 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 })
 export class AcademyListComponent {
   constructor(private academyService:AcademyService){}
-  seeData(){
+  acdemyList:AcademyResponse[]=[]
+  ngOnInit(){
     this.academyService.academyList().subscribe({
      next:(response)=>{
-       console.log(response)
+       this.acdemyList = response.result;
+       console.log(this.acdemyList)
      },
      error:(err:HttpErrorResponse)=>{
       if(err.status==HttpStatusCode.Unauthorized){
-        console.log("u r not authorized")
+        console.log(err.message)
       }
      }
     })
