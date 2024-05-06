@@ -38,7 +38,7 @@
               [(ngModel)]="loginModel.password"
               id="password"
               placeholder=""
-              [class.is-invalid]="email.touched && email.invalid"
+              [class.is-invalid]="password.touched && password.invalid"
               required
             /><i class="far fa-eye-slash" aria-hidden="true"></i>
             <div *ngIf="password.touched && password.invalid" class="error-message">
