@@ -5,15 +5,16 @@ import { EnquirylistComponent } from './pages/enquirylist/enquirylist.component'
 import { UpdateEnquiryComponent } from './pages/update-enquiry/update-enquiry.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { ChangepasswordComponent } from '../shared/Pages/changepassword/changepassword.component';
+import { authGuard } from '../shared/auth.guard';
 
 const routes: Routes = [
   {path:"",component:AdminComponent,
   children:[
     {path:"",redirectTo:"dashboard",pathMatch:"full"},
-    {path:"dashboard",component:DashboardComponent},
-    {path:"enquirylist",component:EnquirylistComponent},
-    {path:"updateenquiry",component:UpdateEnquiryComponent},
-    {path:"changePassword",component:ChangepasswordComponent}
+    {path:"dashboard",component:DashboardComponent,canActivate:[authGuard]},
+    {path:"enquirylist",component:EnquirylistComponent,canActivate:[authGuard]},
+    {path:"updateenquiry",component:UpdateEnquiryComponent,canActivate:[authGuard]},
+    {path:"changePassword",component:ChangepasswordComponent,canActivate:[authGuard]}
   ]}
 ];
 

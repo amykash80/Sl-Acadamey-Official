@@ -4,14 +4,16 @@ import { PublicComponent } from './public.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { EnquiryComponent } from './Pages/enquiry/enquiry.component';
 import { LoginComponent } from './Pages/login/login.component';
+import { authGuard } from '../shared/auth.guard';
 
 const routes: Routes = [
   {path:"",component:PublicComponent,
     children:[
       {path:"",redirectTo:"/home",pathMatch:"full"},
       {path:"home",component:HomeComponent},
-      {path:"enquiry",component:EnquiryComponent},
-      {path:"login",component:LoginComponent},
+      {path:"enquiry",component:EnquiryComponent,canActivate:[authGuard]},
+      {path:"login",component:LoginComponent
+      },
     ]
   }
 ];

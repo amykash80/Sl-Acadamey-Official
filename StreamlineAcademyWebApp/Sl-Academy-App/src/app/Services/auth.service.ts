@@ -23,5 +23,8 @@ export class AuthService {
    changePassword(changePasswordModel:ChangePassword):Observable<ApiResponse<string>>{
     return this.httpCleint.post<ApiResponse<string>>(this.baseUrl+"Auth/changePassword",changePasswordModel)
    }
+   isLoggedIn(): boolean {
+    return localStorage.getItem("streamlineToken") !== null;
+  }
 
 }
