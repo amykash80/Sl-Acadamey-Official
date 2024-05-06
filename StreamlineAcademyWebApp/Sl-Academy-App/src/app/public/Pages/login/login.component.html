@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <div class="container">
   <div class="row gy-4">
     <div class="col-lg-6 col-xl-5">
@@ -5,16 +6,27 @@
         <h5 class="form-title">Login</h5>
         <div class="row">
           <div class="form-group">
-            <label>email address</label>
+            <label>email address*</label>
             <input
               type="text"
               class="form-control style-white"
               name="email"
+              #email="ngModel"
               [(ngModel)]="loginModel.email"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              [class.is-invalid]="email.touched && email.invalid"
+              required
               id="name"
               placeholder=""
-            />
-            <i class="far fa-user" aria-hidden="true"></i>
+            /><i class="far fa-user" aria-hidden="true"></i>
+            <div *ngIf="email.touched && email.invalid" class="error-message">
+              <div *ngIf="email.errors?.['required']">
+                  email is required
+              </div>
+              <div *ngIf="email.errors?.['pattern']">
+                Please enter a valid email address
+            </div>
+          </div>
           </div>
           <div class="form-group style-3">
             <label>Password *</label>
@@ -22,11 +34,19 @@
               type="password"
               class="form-control style-white"
               name="password"
+              #password="ngModel"
               [(ngModel)]="loginModel.password"
               id="password"
               placeholder=""
-              require=""
+              [class.is-invalid]="password.touched && password.invalid"
+              required
             /><i class="far fa-eye-slash" aria-hidden="true"></i>
+            <div *ngIf="password.touched && password.invalid" class="error-message">
+              <div *ngIf="password.errors?.['required']">
+                  password is required
+              </div>
+              </div>
+         
           </div>
           <div class="form-group col-6 text-start align-self-center">
             <input class="style2" type="checkbox" id="remember" />
@@ -35,8 +55,13 @@
           <div class="form-group col-6 text-end">
             <a class="forget-password-btn" href="#">Forgot Password?</a>
           </div>
+          <div class="row mb-3">
+            <p>Don't have an account? <a routerLink="/enquiry">Register Here</a></p>
+        </div>
           <div class="form-btn col-12 text-center">
-            <button class="th-btn w-100" (click)="loggedIn()" [disabled]="loginForm.invalid">Log In</button>
+            <button class="th-btn w-100" (click)="onLogIn()" [disabled]="loginForm.invalid">Log In
+              <app-spinner *ngIf="loadSpinner"></app-spinner>
+            </button>
           </div>
         </div>
         <p class="form-messages mb-0 mt-3"></p>

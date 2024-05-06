@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
+  status = false;
+  addToggle()
+  {
+    this.status = !this.status;       
+  }
 }
