@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { EnquirylistComponent } from './pages/enquirylist/enquirylist.component';
 import { UpdateEnquiryComponent } from './pages/update-enquiry/update-enquiry.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { AcademyListComponent } from './pages/academy-list/academy-list.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     AdminComponent,
     EnquirylistComponent,
     UpdateEnquiryComponent,
-    DashboardComponent
+    DashboardComponent,
+    AcademyListComponent
   ],
   imports: [
     CommonModule,
