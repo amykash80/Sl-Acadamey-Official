@@ -11,14 +11,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class RegisterAcademyComponent {
 academyService=inject(AcademyService)
 academyRegistrationModel:RegisterAcademy=new RegisterAcademy()
-ngOnInit(){
+registerAcademy(){
   this.academyService.createAcademy(this.academyRegistrationModel).subscribe({
-   next:(response)=>{
-     console.log(response)
-   },
-   error:(err:HttpErrorResponse)=>{
-     console.log(err)
-   }
-  })
+    next:(response)=>{
+      console.log(response)
+    },
+    error:(err:HttpErrorResponse)=>{
+      console.log(err)
+    }
+   })
 }
 }
