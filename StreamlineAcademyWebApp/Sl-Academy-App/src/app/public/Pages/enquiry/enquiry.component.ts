@@ -16,11 +16,16 @@ export class EnquiryComponent {
   enquiryModel: Enquiry = new Enquiry()
 
   sendEnquiry() {
+    console.log("btn click");
+    
     this.authService.enquiry(this.enquiryModel).subscribe({
       next: (response) => {
         console.log(response)
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message)
+        }
+        else{
+          this.sharedService.showErrorToast(response.message)
         }
       },
       error: (err: HttpErrorResponse) => {
