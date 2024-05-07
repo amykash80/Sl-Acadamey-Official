@@ -5,21 +5,19 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">Day</th>
-              <th scope="col">Article Name</th>
-              <th scope="col">Author</th>
-              <th scope="col">Shares</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone Number</th>
               <th scope="col">Registration Status</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Bootstrap 4 CDN and Starter Template</td>
-              <td>Cristina</td>
-              <td>2.846</td>
-              <td class="text-danger">Accepted</td>
+            <tr *ngFor="let enquiry of enquirylist">
+              <td>{{enquiry.name}}</td>
+              <td>{{enquiry.email}}</td>
+              <td>{{enquiry.phoneNumber}}</td>
+              <td class="text-danger">{{enquiry.registrationStatus}}</td>
               <td>
                 <button type="button" class="btn btn-primary " style="margin-right: 3px;"><i class="far fa-eye"></i></button>
                 <button type="button" class="btn btn-success" style="margin-right: 3px;"><i class="fas fa-edit"></i></button>

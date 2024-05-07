@@ -51,6 +51,7 @@ namespace StreamlineAcademy.Application.Services
                     Name = enquiryResponse.Name,
                     Email = enquiryResponse.Email,
                     PhoneNumber = enquiryResponse.PhoneNumber,
+                    RegistrationStatus=RegistrationStatus.Pending,
                     IsActive = true,
                 };
                 return ApiResponse<EnquiryResponseModel>.SuccessResponse(response,APIMessages.EnquiryManagement.EnquiryAdded, HttpStatusCodes.Created);
