@@ -8,6 +8,7 @@ import { UpdateEnquiryComponent } from './pages/update-enquiry/update-enquiry.co
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AcademyListComponent } from './pages/academy-list/academy-list.component';
 import { RegisterAcademyComponent } from './pages/register-academy/register-academy.component';
+import { UpdateAcademyyComponent } from './pages/update-academyy/update-academyy.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RegisterAcademyComponent } from './pages/register-academy/register-acad
     UpdateEnquiryComponent,
     DashboardComponent,
     AcademyListComponent,
-    RegisterAcademyComponent
+    RegisterAcademyComponent,
+    UpdateAcademyyComponent
   ],
   imports: [
     CommonModule,
