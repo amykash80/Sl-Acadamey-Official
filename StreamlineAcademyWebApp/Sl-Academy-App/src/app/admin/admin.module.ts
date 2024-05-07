@@ -8,6 +8,8 @@ import { UpdateEnquiryComponent } from './pages/update-enquiry/update-enquiry.co
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AcademyListComponent } from './pages/academy-list/academy-list.component';
 import { RegisterAcademyComponent } from './pages/register-academy/register-academy.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,11 +19,13 @@ import { RegisterAcademyComponent } from './pages/register-academy/register-acad
     UpdateEnquiryComponent,
     DashboardComponent,
     AcademyListComponent,
-    RegisterAcademyComponent
+    RegisterAcademyComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FormsModule
   ]
 })
 export class AdminModule { }
