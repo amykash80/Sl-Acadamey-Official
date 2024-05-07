@@ -10,12 +10,12 @@ import { AcademyResponse } from '../../../Models/Academy/Academy';
 })
 export class AcademyListComponent {
   constructor(private academyService:AcademyService){}
-  acdemyList:AcademyResponse[]=[]
+  academyList:AcademyResponse[]=[]
   ngOnInit(){
     this.academyService.academyList().subscribe({
      next:(response)=>{
-       this.acdemyList = response.result;
-       console.log(this.acdemyList)
+       this.academyList = response.result;
+       console.log(this.academyList)
      },
      error:(err:HttpErrorResponse)=>{
       if(err.status==HttpStatusCode.Unauthorized){

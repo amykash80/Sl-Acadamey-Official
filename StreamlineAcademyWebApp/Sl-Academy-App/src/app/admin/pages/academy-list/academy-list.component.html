@@ -1,3 +1,45 @@
-<p>academy-list works!</p>
 
+
+<div class="content">
+    <div class="table-wrapper">
   
+    <div class="table-title mt-3 me-3">
+      <div class="row">
+        <div class="col-6 mt-2">
+          <h2>Academy List</h2>
+        </div>
+        <div class="col-sm-6">
+          <a  class="btn btn-success" routerLink="/admin/addacademy" data-toggle="modal"> <span>Add Academy</span></a>
+        </div>
+      </div>
+    </div>  
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>academyAdmin</th>
+        <th>academyName</th>
+        <th>address</th>
+        <th>phoneNumber</th>
+        <th>email</th>
+        <th>academyType</th>
+        <th>countryName</th>
+        <th>stateName</th>
+        <th>cityName</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor="let Academy of academyList">
+        <td>{{ Academy.academyAdmin }}</td>
+        <td>{{ Academy.academyName }}</td>
+        <td>{{ Academy.address }}</td>
+        <td>{{ Academy.phoneNumber }}</td>
+        <td>{{ Academy.email }}</td>
+        <td>{{ Academy.academyType }}</td>
+        <td>{{ Academy.countryName }}</td>
+        <td>{{ Academy.stateName }}</td>
+        <td>{{ Academy.cityName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

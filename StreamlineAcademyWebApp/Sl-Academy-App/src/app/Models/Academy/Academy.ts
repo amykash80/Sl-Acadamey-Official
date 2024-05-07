@@ -29,15 +29,14 @@ export class AcademyResponse{
     isActive?: boolean;
     userRole?:UserRole;  
 } 
-export class AcademyUpdate{
+export class UpdateAcademy{
     id?:string;
     name?:string;
     academyName?:string;
-    address?:number;
+    address?:string;
     postalCode?:string;
     phoneNumber?:string;
     email?:string;
-    password?:string;
     academyTypeId?:string;
     countryId?:string;
     stateId?:string; 

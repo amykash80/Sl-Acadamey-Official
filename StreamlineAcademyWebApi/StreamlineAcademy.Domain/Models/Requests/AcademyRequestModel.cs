@@ -45,9 +45,31 @@ namespace StreamlineAcademy.Domain.Models.Requests
         public Guid CityId { get; set; } 
     }
 
-    public class AcademyUpdateRequest : AcademyRequestModel
+    public class AcademyUpdateRequest 
     {
         public Guid Id { get; set; }
+
+       
+        public string? Name { get; set; }
+        
+        public string? AcademyName { get; set; }
+       
+        public string? Address { get; set; }
+        
+        public string? PostalCode { get; set; }
+        
+        public string? PhoneNumber { get; set; }
+        
+        public string? Email { get; set; }
+        
+       
+        public Guid AcademyTypeId { get; set; }
+       
+        public Guid CountryId { get; set; }
+        
+        public Guid StateId { get; set; }
+       
+        public Guid CityId { get; set; }
         public bool IsActive { get; set; }
 
     }

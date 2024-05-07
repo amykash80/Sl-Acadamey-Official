@@ -7,6 +7,7 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { ChangepasswordComponent } from '../shared/Pages/changepassword/changepassword.component';
 import { AcademyListComponent } from './pages/academy-list/academy-list.component';
 import { RegisterAcademyComponent } from './pages/register-academy/register-academy.component';
+import { UpdateAcademyyComponent } from './pages/update-academyy/update-academyy.component';
 
 const routes: Routes = [
   {path:"",component:AdminComponent,
@@ -14,10 +15,11 @@ const routes: Routes = [
     {path:"",redirectTo:"dashboard",pathMatch:"full"},
     {path:"dashboard",component:DashboardComponent},
     {path:"enquirylist",component:EnquirylistComponent},
-    {path:"update-enquiry",component:UpdateEnquiryComponent},
+    {path:"updateenquiry",component:UpdateEnquiryComponent},
     {path:"change-Password",component:ChangepasswordComponent},
     {path:"academylist",component:AcademyListComponent},
     {path:"register-academy",component:RegisterAcademyComponent},
+    {path:"update-academy",component:UpdateAcademyyComponent},
     
   ]}
 ];
