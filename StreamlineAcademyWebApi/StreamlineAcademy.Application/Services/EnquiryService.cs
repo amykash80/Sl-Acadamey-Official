@@ -128,6 +128,7 @@ namespace StreamlineAcademy.Application.Services
                     Name = e.Name,
                     Email = e.Email,
                     PhoneNumber = e.PhoneNumber,
+                    RegistrationStatus= e.RegistrationStatus,
                     IsActive = true
                 });
                 return ApiResponse<IEnumerable<EnquiryResponseModel>>.SuccessResponse(sortedEnquiries, $"Found {enquiryList.Count()} Enquiries");

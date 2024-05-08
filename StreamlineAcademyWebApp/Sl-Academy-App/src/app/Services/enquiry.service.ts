@@ -19,4 +19,7 @@ export class EnquiryService {
  updateEnquiry(enquiryModel:EnquiryUpdate):Observable<ApiResponse<EnquiryResponse>>{
    return this.HttpClient.put<ApiResponse<EnquiryResponse>>(this.baseUrl+"Enquiry/update",enquiryModel)
  }
+ deleteEnquiry(id:string):Observable<ApiResponse<string>>{
+   return this.HttpClient.delete<ApiResponse<string>>(this.baseUrl+"Enquiry/delete/"+id)
+ }
 }

@@ -4,7 +4,7 @@ export class RegisterAcademy{
     name?:string;
     academyName?:string;
     address?:string;
-    postalCode?:number;
+    postalCode?:string;
     phoneNumber?:string;
     email?:string;
     password?:string;
@@ -18,7 +18,7 @@ export class AcademyResponse{
     id?:string;
     academyAdmin?:string;
     academyName?:string;
-    address?:number;
+    address?:string;
     postalCode?:string;
     phoneNumber?:string;
     email?:string;
