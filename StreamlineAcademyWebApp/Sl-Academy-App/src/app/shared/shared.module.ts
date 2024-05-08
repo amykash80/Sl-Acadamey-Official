@@ -6,10 +6,12 @@ import { ChangepasswordComponent } from './Pages/changepassword/changepassword.c
 import { SpinnerComponent } from './Pages/spinner/spinner.component';
 
 
+
 @NgModule({
   declarations: [
     ChangepasswordComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    
   ],
   imports: [
     CommonModule,
