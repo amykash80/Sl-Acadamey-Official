@@ -10,6 +10,7 @@ import { RegisterAcademyComponent } from './pages/register-academy/register-acad
 import { UpdateAcademyyComponent } from './pages/update-academyy/update-academyy.component';
 import { CreateAcademyTypeComponent } from './pages/create-academy-type/create-academy-type.component';
 import { AcademyTypeListComponent } from './pages/academy-type-list/academy-type-list.component';
+import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 
 const routes: Routes = [
   {path:"",component:AdminComponent,
@@ -24,6 +25,8 @@ const routes: Routes = [
     {path:"update-academy/:id",component:UpdateAcademyyComponent},
     {path:"create-academyType",component:CreateAcademyTypeComponent},
     {path:"academy-type-list",component:AcademyTypeListComponent},
+    {path:"contactInfo",component:ProfileComponent},
+    
   ]}
 ];
 
