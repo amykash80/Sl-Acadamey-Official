@@ -173,7 +173,7 @@ public static class APIMessages
         public const string PhoneNumberAlreadyRegistered = "Phone Number already registered.";
         public const string EmailOrPasswordIsIncorrect = "Email or/and Password is Incorrect.";
         public const string PasswordChangedSuccess = "Password changed successfully.";
-        public const string LinkExpired = "Email verification link has been expired, please try again.";
+        public const string LinkExpired = "Email verification link has been expired, please try with diffrent Reset Code again.";
         public const string EmailVerified = "Email verified successfully, please try to login again.";
         public const string VerifyEmailError = "Please verify your email to login.";
         public const string InactiveUser = "Your account is temporarily inactive. Please contact the administrator for assistance.";

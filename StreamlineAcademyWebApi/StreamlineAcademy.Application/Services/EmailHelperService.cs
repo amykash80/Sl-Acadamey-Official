@@ -100,7 +100,7 @@ namespace StreamlineAcademy.Application.Services
             string body = await emailTempelateRenderer.RenderTemplateAsync(APIMessages.TemplateNames.PasswordReset, new
             {
                     CompanyName = APIMessages.ProjectName,
-                    Link = $"{contextService.HttpContextClientURL()}/{AppRoutes.ClientResetPasswordRoute}?resetcode={restcode}"
+					ResetCode= restcode,
 			
             });
             var emailMessage = CreateMailMessage(emailAddress, subject, body);
