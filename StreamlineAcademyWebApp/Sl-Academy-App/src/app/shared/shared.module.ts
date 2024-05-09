@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './Pages/forgot-password/forgot-password
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 
 
+
 @NgModule({
   declarations: [
     ChangepasswordComponent,
