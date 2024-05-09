@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ChangepasswordComponent,
-    SpinnerComponent
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
   ],
   exports:[
     ChangepasswordComponent,
-    SpinnerComponent
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }
