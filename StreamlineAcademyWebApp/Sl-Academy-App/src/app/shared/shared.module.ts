@@ -5,12 +5,16 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { ChangepasswordComponent } from './Pages/changepassword/changepassword.component';
 import { SpinnerComponent } from './Pages/spinner/spinner.component';
 import { FormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './Pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 
 
 @NgModule({
   declarations: [
     ChangepasswordComponent,
     SpinnerComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +24,8 @@ import { FormsModule } from '@angular/forms';
   exports:[
     ChangepasswordComponent,
     SpinnerComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ]
 })
 export class SharedModule { }
