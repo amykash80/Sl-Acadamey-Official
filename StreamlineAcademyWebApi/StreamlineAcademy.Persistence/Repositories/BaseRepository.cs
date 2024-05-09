@@ -21,7 +21,7 @@ namespace StreamlineAcademy.Persistence.Repositories
         }
         public async Task<int> DeleteAsync(T model)
         {
-            context.Set<T>().Remove(model);
+            context.Set<T>().Update(model);
             return await context.SaveChangesAsync();
         }
 

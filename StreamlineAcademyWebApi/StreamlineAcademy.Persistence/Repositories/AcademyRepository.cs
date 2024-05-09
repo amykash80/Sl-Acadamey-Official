@@ -119,7 +119,9 @@ namespace StreamlineAcademy.Persistence.Repositories
 					CountryName = a.Country!.CountryName,
 					StateName = a.State!.StateName,
 					CityName = a.City!.CityName,
-					UserRole = a.User.UserRole
+					UserRole = a.User.UserRole,
+					IsActive = a.User.IsActive,
+					
 				})
 				.ToListAsync();
 

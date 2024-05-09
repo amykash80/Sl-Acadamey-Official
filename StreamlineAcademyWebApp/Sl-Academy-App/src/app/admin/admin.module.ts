@@ -10,6 +10,8 @@ import { AcademyListComponent } from './pages/academy-list/academy-list.componen
 import { RegisterAcademyComponent } from './pages/register-academy/register-academy.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
+import { CreateAcademyTypeComponent } from './pages/create-academy-type/create-academy-type.component';
+import { AcademyTypeListComponent } from './pages/academy-type-list/academy-type-list.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     AcademyListComponent,
     RegisterAcademyComponent,
-    SidebarComponent
+    SidebarComponent,
+    CreateAcademyTypeComponent,
+    AcademyTypeListComponent,
   ],
   imports: [
     CommonModule,

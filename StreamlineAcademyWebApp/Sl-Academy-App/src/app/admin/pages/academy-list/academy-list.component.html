@@ -9,7 +9,7 @@
           <h2>Academy List</h2>
         </div>
         <div class="col-sm-6">
-          <a  class="btn btn-success" routerLink="/admin/addacademy" data-toggle="modal"> <span>Add Academy</span></a>
+          <a  class="btn btn-success" routerLink="/admin/register-academy" data-toggle="modal"> <span>Add Academy</span></a>
         </div>
       </div>
     </div>  
@@ -23,8 +23,8 @@
         <th>email</th>
         <th>academyType</th>
         <th>countryName</th>
-        <th>stateName</th>
-        <th>cityName</th>
+        <th>IsActive</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -37,8 +37,11 @@
         <td>{{ Academy.email }}</td>
         <td>{{ Academy.academyType }}</td>
         <td>{{ Academy.countryName }}</td>
-        <td>{{ Academy.stateName }}</td>
-        <td>{{ Academy.cityName }}</td>
+        <td>{{ Academy.isActive }}</td>
+        <td>
+          <button type="button" class="btn btn-success" [routerLink]="['/admin/update-academy',Academy.id]" ><i class="fas fa-edit"></i></button>
+          <button type="button" class="btn btn-danger" (click)="deleteAcademy(Academy.id)"><i class="far fa-trash-alt"></i></button>
+        </td>
       </tr>
     </tbody>
   </table>
