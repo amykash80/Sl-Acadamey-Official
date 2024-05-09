@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 import { ChangepasswordComponent } from './Pages/changepassword/changepassword.component';
 import { SpinnerComponent } from './Pages/spinner/spinner.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SpinnerComponent } from './Pages/spinner/spinner.component';
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    FormsModule
   ],
   exports:[
     ChangepasswordComponent,
