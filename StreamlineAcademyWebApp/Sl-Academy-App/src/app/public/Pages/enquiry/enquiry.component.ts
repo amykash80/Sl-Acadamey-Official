@@ -16,8 +16,6 @@ export class EnquiryComponent {
   enquiryModel: Enquiry = new Enquiry()
 
   sendEnquiry() {
-    console.log("btn click");
-    
     this.authService.enquiry(this.enquiryModel).subscribe({
       next: (response) => {
         console.log(response)
