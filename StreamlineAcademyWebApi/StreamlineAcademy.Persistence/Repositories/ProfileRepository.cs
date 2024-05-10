@@ -50,6 +50,21 @@ namespace StreamlineAcademy.Persistence.Repositories
             return new AddressInfoResponseModel() { };
         }
 
+        public async Task<List<City>> GetAllCities()
+        {
+            return await Task.Run(()=>context.Cities.ToListAsync());
+        }
+
+        public async Task<List<Country>> GetAllCountries()
+        {
+            return await Task.Run(() => context.Countries.ToListAsync());
+
+        }
+
+        public async Task<List<State>> GetAllStates()
+        {
+            return await Task.Run(() => context.States.ToListAsync());
+        }
     }
 
 }

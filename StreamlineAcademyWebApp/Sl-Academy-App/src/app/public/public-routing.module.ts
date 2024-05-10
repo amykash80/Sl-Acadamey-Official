@@ -4,7 +4,6 @@ import { PublicComponent } from './public.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { EnquiryComponent } from './Pages/enquiry/enquiry.component';
 import { LoginComponent } from './Pages/login/login.component';
-import { authGuard } from '../shared/auth.guard';
 import { ForgotPasswordComponent } from '../shared/Pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../shared/Pages/reset-password/reset-password.component';
 

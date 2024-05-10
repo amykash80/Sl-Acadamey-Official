@@ -100,7 +100,7 @@ namespace StreamlineAcademy.Application.Services
             string body = await emailTempelateRenderer.RenderTemplateAsync(APIMessages.TemplateNames.PasswordReset, new
             {
                     CompanyName = APIMessages.ProjectName,
-					ResetCode= restcode,
+                    Link = $"http://localhost:4200/reset-password?resetCode={restcode}" 
 			
             });
             var emailMessage = CreateMailMessage(emailAddress, subject, body);

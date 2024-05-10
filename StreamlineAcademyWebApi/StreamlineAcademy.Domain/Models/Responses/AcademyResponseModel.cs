@@ -22,5 +22,12 @@ namespace StreamlineAcademy.Domain.Models.Responses
             public string? CityName { get; set; } 
             public bool IsActive { get; set; }
             public UserRole UserRole { get; set; } 
+            public Guid? CountryId {  get; set; }
+            public Guid? SateId { get; set; }
+            public Guid? CityId { get; set; }
+             public Guid? AcademyTypeId { get; set; }
+
+
+
     }
 }

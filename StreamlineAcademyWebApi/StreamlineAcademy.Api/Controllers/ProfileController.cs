@@ -13,7 +13,6 @@ namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProfileController : ControllerBase
     {
        
@@ -37,5 +36,11 @@ namespace StreamlineAcademy.Api.Controllers
 
         [HttpPost("uploadPhoto")]
         public async Task<ApiResponse<FileResponseModel>> UploadPhoto([FromForm]FileRequestModel model) => await profileService.UploadPhoto(model);
+        [HttpGet("countries")]
+        public async Task<ApiResponse<List<CountryResponse>>> GetAllCountries() => await profileService.GetAllCountries();
+        [HttpGet("states")]
+        public async Task<ApiResponse<List<StateResponse>>> GetAllStates() => await profileService.GetAllStates();
+        [HttpGet("cities")]
+        public async Task<ApiResponse<List<CityResponse>>> GetAllCities() => await profileService.GetAllCities();
     }
 }

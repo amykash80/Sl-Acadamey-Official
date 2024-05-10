@@ -88,7 +88,11 @@ namespace StreamlineAcademy.Persistence.Repositories
                     StateName = academy.State!.StateName,
                     CityName = academy.City!.CityName,
 					IsActive=academy.User.IsActive,
-                    UserRole = academy.User.UserRole
+                    UserRole = academy.User.UserRole,
+					CountryId=academy.Country.Id,
+					SateId=academy.State.Id,
+					CityId=academy.City.Id,
+					AcademyTypeId=academy.AcademyType.Id,
                 };
 
                 return response;
@@ -121,6 +125,10 @@ namespace StreamlineAcademy.Persistence.Repositories
 					CityName = a.City!.CityName,
 					UserRole = a.User.UserRole,
 					IsActive = a.User.IsActive,
+					AcademyTypeId=a.AcademyType.Id,
+					CountryId=a.Country.Id,
+					CityId=a.City.Id,
+					SateId=a.State.Id
 					
 				})
 				.ToListAsync();

@@ -8,15 +8,16 @@ export class RegisterAcademy{
     phoneNumber?:string;
     email?:string;
     password?:string;
-    academyTypeId?:string;
-    countryId?:string;
-    stateId?:string;
-    cityId?:string; 
+    academyTypeId?:string=''
+    countryId?:string=''
+    stateId?:string=''
+    cityId?:string=''
 }
 
 export class AcademyResponse{
     id?:string;
     academyAdmin?:string;
+    name?:string
     academyName?:string;
     address?:string;
     postalCode?:string;
@@ -28,6 +29,10 @@ export class AcademyResponse{
     cityName?:string; 
     isActive?: boolean;
     userRole?:UserRole;  
+    academyTypeId?:string=''
+    countryId?:string=''
+    stateId?:string=''
+    cityId?:string=""
 } 
 export class UpdateAcademy{
     id?:string;

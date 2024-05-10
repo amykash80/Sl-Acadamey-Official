@@ -16,6 +16,11 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<AddressInfoResponseModel>> GetAddressInfoById();
         Task<ApiResponse<AddressInfoResponseModel>> UpdateAddress(AddressInfoUpdateModel request);
         Task<ApiResponse<FileResponseModel>> UploadPhoto(FileRequestModel request);
+        Task<ApiResponse<List<CountryResponse>>> GetAllCountries();
+        Task<ApiResponse<List<StateResponse>>> GetAllStates();
+        Task<ApiResponse<List<CityResponse>>> GetAllCities();
+
+
 
     }
 }
