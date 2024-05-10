@@ -7,6 +7,7 @@ import { SpinnerComponent } from './Pages/spinner/spinner.component';
 import { FormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './Pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ResetPasswordComponent } from './Pages/reset-password/reset-password.co
     SpinnerComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

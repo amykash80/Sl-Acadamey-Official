@@ -25,7 +25,7 @@ const routes: Routes = [
     {path:"update-academy/:id",component:UpdateAcademyyComponent},
     {path:"create-academyType",component:CreateAcademyTypeComponent},
     {path:"academy-type-list",component:AcademyTypeListComponent},
-    {path:"contactInfo",component:ProfileComponent},
+    {path:"profile",component:ProfileComponent},
     
   ]}
 ];
