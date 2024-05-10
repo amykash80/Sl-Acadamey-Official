@@ -19,7 +19,7 @@ export class AcademyService {
   academyList():Observable<ApiResponse<AcademyResponse[]>>{
     return this.http.get<ApiResponse<AcademyResponse[]>>(this.baseUrl+"Academy/getAll-acadamies")
   }
-  updateAcademy(academyUpdateModel:RegisterAcademy):Observable<ApiResponse<AcademyResponse>>{
+  updateAcademy(academyUpdateModel:UpdateAcademy):Observable<ApiResponse<AcademyResponse>>{
     return this.http.put<ApiResponse<AcademyResponse>>(this.baseUrl+"Academy/update",academyUpdateModel)
   }
  deleteAcademy(id:string):Observable<ApiResponse<string>>{
@@ -27,7 +27,7 @@ export class AcademyService {
  }
 
  getAcademyById(id:string):Observable<ApiResponse<AcademyResponse>>{
-  return this.http.get<ApiResponse<AcademyResponse>>(this.baseUrl+"Academy/getById"+id)
+  return this.http.get<ApiResponse<AcademyResponse>>(this.baseUrl+"Academy/getById/"+id)
  }
 
   createAcademyType(academyTypeModel: AcademyType): Observable<ApiResponse<AcademyTypeResponse>>{

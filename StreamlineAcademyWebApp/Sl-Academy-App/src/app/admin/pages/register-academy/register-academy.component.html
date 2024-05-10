@@ -98,7 +98,8 @@
               name="academyTypeId"
               [(ngModel)]="academyRegistrationModel.academyTypeId"
             >
-              Populate options dynamically
+            <option value="">Select Academy Type</option>
+            <option *ngFor="let academyType of academyTypeList" [value]="academyType.id">{{ academyType.academyTypeName }}</option>
             </select>
           </div>
 
@@ -107,8 +108,11 @@
             <select
               class="form-control"
               name="countryId"
+              (change)="filterStates($event)"
               [(ngModel)]="academyRegistrationModel.countryId"
             >
+            <option value="">Select Country</option>
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
              
             </select>
           </div>
@@ -118,9 +122,11 @@
             <select
               class="form-control"
               name="stateId"
+              (change)="filteredCities($event)"
               [(ngModel)]="academyRegistrationModel.stateId"
             >
-              Populate options dynamically based on selected country
+            <option value="">Select state</option>
+            <option *ngFor="let state of filteredStates" [value]="state.id">{{ state.stateName }}</option>
             </select>
           </div>
 
@@ -131,7 +137,8 @@
               name="cityId"
               [(ngModel)]="academyRegistrationModel.cityId"
             >
-              Populate options dynamically based on selected state
+            <option value="">Select city</option>
+            <option *ngFor="let city of filteredCitiesList" [value]="city.id">{{ city.cityName }}</option>
             </select>
           </div>
 

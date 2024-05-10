@@ -3,6 +3,7 @@ import { AcademyService } from '../../../Services/academy.service';
 import { AcademyType } from '../../../Models/Academy/AcademyType';
 import { SharedService } from '../../../Services/shared.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-academy-type',
@@ -11,7 +12,8 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 })
 export class CreateAcademyTypeComponent {
 constructor(private _academyService: AcademyService,
-            private sharedService:SharedService
+            private sharedService:SharedService,
+            private router:Router
 ){}
 academyTypeModel:AcademyType=new AcademyType();
 createAcademyType()
@@ -21,6 +23,7 @@ this._academyService.createAcademyType(this.academyTypeModel).subscribe({
     console.log(response)
     if(response.isSuccess){
       this.sharedService.showSuccessToast(response.message)
+      this.router.navigate(['/admin/academy-type-list'])
     }
     else{
       this.sharedService.showErrorToast(response.message)

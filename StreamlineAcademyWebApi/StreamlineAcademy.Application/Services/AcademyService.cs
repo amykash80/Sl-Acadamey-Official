@@ -107,7 +107,7 @@ namespace StreamlineAcademy.Application.Services
                     {
                         var updateStatusResponse = await academyRepository.UpdateRegistrationStatus(academy.Id, RegistrationStatus.Approved);
                         var res = await academyRepository.GetAcademyById(academy.Id);
-                        return ApiResponse<AcademyResponseModel>.SuccessResponse(res);
+                        return ApiResponse<AcademyResponseModel>.SuccessResponse(res,"Academy Registered Successfully");
                     }
                 } 
                 return ApiResponse<AcademyResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest); 

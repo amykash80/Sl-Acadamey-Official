@@ -9,9 +9,10 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AcademyListComponent } from './pages/academy-list/academy-list.component';
 import { RegisterAcademyComponent } from './pages/register-academy/register-academy.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
-import { FormsModule } from '@angular/forms';
 import { CreateAcademyTypeComponent } from './pages/create-academy-type/create-academy-type.component';
 import { AcademyTypeListComponent } from './pages/academy-type-list/academy-type-list.component';
+import { FormsModule } from '@angular/forms';
+import { UpdateAcademyyComponent } from './pages/update-academyy/update-academyy.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { AcademyTypeListComponent } from './pages/academy-type-list/academy-type
     SidebarComponent,
     CreateAcademyTypeComponent,
     AcademyTypeListComponent,
+    UpdateAcademyyComponent
   ],
   imports: [
     CommonModule,
