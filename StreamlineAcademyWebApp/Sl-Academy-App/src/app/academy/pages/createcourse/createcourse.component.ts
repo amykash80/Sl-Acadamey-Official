@@ -13,8 +13,18 @@ export class CreateCourseComponent {
   courseService =inject(CourseService)
   sharedService=inject(SharedService)
   courseModel: CreateCourse = new CreateCourse();
+  categories: any[] = [];
   constructor() {}
-  
+
+  ngOnInit(): void {
+    this.getAllCategories();
+  }
+  getAllCategories() {
+    this.courseService.getCategory().subscribe((categories) => {
+      this.categories = categories.result;
+      console.log(this.categories);
+    });
+  }
   createCourse() {
     this.courseService.createCourse(this.courseModel).subscribe({
       next: (response) => {
