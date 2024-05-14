@@ -34,7 +34,7 @@ namespace StreamlineAcademy.Application.Services
             var courseContent = new CourseContent()
             {
                 TaskName = request.TaskName,
-                Discription=request.Description,
+                Description=request.Description,
                 DurationInHours = request.Duration,
                 CourseId=request.CourseId,
                 IsActive = true,
