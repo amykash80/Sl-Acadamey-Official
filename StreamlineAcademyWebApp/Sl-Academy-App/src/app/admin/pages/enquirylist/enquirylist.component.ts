@@ -30,7 +30,7 @@ loadAllEnquiries(){
 deleteEnquiry(enquiryId: any) {
   this.sharedService
     .fireConfirmSwal('Are You sure you want to delete this Enquiry ')
-    .then((result) => {
+    .then((result:any) => {
       if (result.isConfirmed) {
         this.enquiryService.deleteEnquiry(enquiryId).subscribe({
           next: (response) => {

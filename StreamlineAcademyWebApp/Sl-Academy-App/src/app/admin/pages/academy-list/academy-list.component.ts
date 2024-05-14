@@ -37,7 +37,7 @@ export class AcademyListComponent {
   deleteAcademy(academyId: any) {
     this.sharedService
       .fireConfirmSwal('Are You sure you want to delete this Academy ')
-      .then((result) => {
+      .then((result:any) => {
         if (result.isConfirmed) {
           this.academyService.deleteAcademy(academyId).subscribe({
             next: (response) => {
