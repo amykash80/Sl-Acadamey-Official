@@ -17,13 +17,13 @@ export class CreateCourseComponent {
   constructor() {}
 
   ngOnInit(): void {
-    this.getAllCategories();
+    this.getAllCategory();
   }
-  getAllCategories() {
+  getAllCategory() {
     this.courseService.getCategories().subscribe((categories) => {
       this.categories = categories.result;
       console.log(this.categories);
-      
+    
     });
   }
 
