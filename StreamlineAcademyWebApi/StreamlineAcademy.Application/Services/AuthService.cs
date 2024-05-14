@@ -74,6 +74,7 @@ namespace StreamlineAcademy.Application.Services
             {
                 FullName = user.Name,
                 UserRole = user.UserRole,
+                UserId = user.Id,
                 Token = jwtProvider.GenerateToken(user) 
             };
 

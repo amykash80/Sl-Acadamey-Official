@@ -22,7 +22,7 @@ export class CourseService {
   updateCourse(courseUpdateModel:UpdateCourse):Observable<ApiResponse<CourseResponse>>{
     return this.http.put<ApiResponse<CourseResponse>>(this.baseUrl+"Course/update",courseUpdateModel)
   }
-  getCategory():Observable<any>{
+  getCategories():Observable<any>{
     return this.http.get<any>(environment.apiUrl+"Course/getAll-CourseCategories");
   }
 }
