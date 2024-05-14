@@ -32,6 +32,7 @@ export class CreateCourseComponent {
   }
 
   createCourse() {
+    this.courseModel.academyId=this.academyId
     this.courseService.createCourse(this.courseModel).subscribe({
       next: (response) => {
         console.log(response)
