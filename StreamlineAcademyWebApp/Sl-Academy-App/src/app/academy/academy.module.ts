@@ -8,6 +8,8 @@ import { CreateCourseComponent } from './pages/createcourse/createcourse.compone
 import { CourseListComponent } from './pages/course-list/course-list.component';
 import { UpdateCourseComponent } from './pages/update-course/update-course.component';
 import { FormsModule } from '@angular/forms';
+import { CreateCourseContentComponent } from './pages/create-course-content/create-course-content.component';
+import { CourseContentListComponent } from './pages/course-content-list/course-content-list.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     CreateCourseComponent,
     CourseListComponent,
     UpdateCourseComponent,
+    CreateCourseContentComponent,
+    CourseContentListComponent,
     
     
   ],

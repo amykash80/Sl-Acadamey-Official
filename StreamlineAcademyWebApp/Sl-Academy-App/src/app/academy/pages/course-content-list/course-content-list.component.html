@@ -1,0 +1,30 @@
+<p>course-content-list works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>Enquiry List</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Task Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let courseContent of courseContentList">
+              <td>{{courseContent.taskName}}</td>
+              <td>{{courseContent.description}}</td>
+              <td>{{courseContent.duration}}</td>
+              <td>
+                <button type="button" class="btn btn-success" style="margin-right: 3px;"><i class="fas fa-edit"></i>Edit</button>
+                <button type="button" class="btn btn-danger" (click)="deleteCourseContent(courseContent.id)"><i class="far fa-trash-alt"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
-import { CourseResponse, CreateCourse, UpdateCourse } from '../Models/Academy/Course';
+import { CourseContent, CourseContentResponse, CourseResponse, CreateCourse, UpdateCourse } from '../Models/Academy/Course';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/Common/api-response';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +26,13 @@ export class CourseService {
   getCategories():Observable<any>{
     return this.http.get<any>(environment.apiUrl+"Course/getAll-CourseCategories");
   }
+  createCourseContent(courseContentModel:CourseContent):Observable<ApiResponse<CourseContentResponse>>{
+    return this.http.post<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/createContent",courseContentModel)
+  }
+  getCourseContentsByCourseId():Observable<ApiResponse<CourseContentResponse[]>>{
+    return this.http.get<ApiResponse<CourseContentResponse[]>>(this.baseUrl+"CourseContent/getContentByCourseId")
+  }
+  deleteCourseContent(id:string):Observable<ApiResponse<string>>{
+    return this.http.delete<ApiResponse<string>>(this.baseUrl+"CourseContent/deleteContent/"+id)
+   }
 }

@@ -30,6 +30,12 @@
                 <button type="button" class="btn btn-success" style="margin-right: 3px;">
                   <i class="fas fa-edit"></i>
                 </button>
+                <button type="button" class="btn btn-danger" [routerLink]="['/academy/create-course-content',course.id]">
+                  Add Content
+                </button>
+                <button type="button" class="btn btn-danger" [routerLink]="['/academy/course-content-list',course.id]">
+                  view Content
+                </button>
               </td>
             </tr>
           </tbody>
