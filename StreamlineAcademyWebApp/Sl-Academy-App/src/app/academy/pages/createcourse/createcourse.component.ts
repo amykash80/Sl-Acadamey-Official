@@ -15,12 +15,13 @@ export class CreateCourseComponent {
   sharedService=inject(SharedService)
   courseModel: CreateCourse = new CreateCourse();
   categories: any[] = [];
-  Key:string=''
+  academyId:string=''
   constructor() {}
 
   ngOnInit(): void {
     this.getAllCategory();
-    
+    this.academyId = localStorage.getItem('userId')!
+    console.log(this.academyId)    
   }
   getAllCategory() {
     this.courseService.getCategories().subscribe((categories) => {
@@ -31,6 +32,7 @@ export class CreateCourseComponent {
   }
 
   createCourse() {
+    this.courseModel.academyId=this.academyId
     this.courseService.createCourse(this.courseModel).subscribe({
       next: (response) => {
         console.log(response)
