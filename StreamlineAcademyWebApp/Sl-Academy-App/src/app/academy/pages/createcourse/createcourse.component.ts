@@ -20,11 +20,12 @@ export class CreateCourseComponent {
     this.getAllCategories();
   }
   getAllCategories() {
-    this.courseService.getCategory().subscribe((categories) => {
+    this.courseService.getCategories().subscribe((categories) => {
       this.categories = categories.result;
       console.log(this.categories);
     });
   }
+
   createCourse() {
     this.courseService.createCourse(this.courseModel).subscribe({
       next: (response) => {
