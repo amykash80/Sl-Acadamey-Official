@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { CourseService } from '../../../Services/course.service';
 import { SharedService } from '../../../Services/shared.service';
 import { CreateCourse } from '../../../Models/Academy/Course';
+import { JSDocComment } from '@angular/compiler';
 
 @Component({
   selector: 'app-createcourse',
@@ -14,10 +15,12 @@ export class CreateCourseComponent {
   sharedService=inject(SharedService)
   courseModel: CreateCourse = new CreateCourse();
   categories: any[] = [];
+  Key:string=''
   constructor() {}
 
   ngOnInit(): void {
     this.getAllCategory();
+    
   }
   getAllCategory() {
     this.courseService.getCategories().subscribe((categories) => {
