@@ -7,6 +7,7 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { CreateCourseComponent } from './pages/createcourse/createcourse.component';
 import { CourseListComponent } from './pages/course-list/course-list.component';
 import { UpdateCourseComponent } from './pages/update-course/update-course.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UpdateCourseComponent } from './pages/update-course/update-course.compo
   ],
   imports: [
     CommonModule,
-    AcademyRoutingModule
+    AcademyRoutingModule,
+    FormsModule,
   ]
 })
 export class AcademyModule { }
