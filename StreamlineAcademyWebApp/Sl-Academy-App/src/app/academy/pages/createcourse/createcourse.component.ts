@@ -23,6 +23,7 @@ export class CreateCourseComponent {
     this.courseService.getCategories().subscribe((categories) => {
       this.categories = categories.result;
       console.log(this.categories);
+      
     });
   }
 
