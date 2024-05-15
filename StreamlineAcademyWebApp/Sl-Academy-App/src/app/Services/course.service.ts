@@ -26,6 +26,12 @@ export class CourseService {
   getCategories():Observable<any>{
     return this.http.get<any>(environment.apiUrl+"Course/getAll-CourseCategories");
   }
+  getCourseById(id: string): Observable<ApiResponse<CourseResponse>> {
+    return this.http.get<ApiResponse<CourseResponse>>(`${this.baseUrl}Course/getCourseById/${id}`);
+  }
+  deleteCourse(id:string):Observable<ApiResponse<string>>{
+    return this.http.delete<ApiResponse<string>>(this.baseUrl+"Course/delete/"+id)
+   }
   createCourseContent(courseContentModel:CourseContent):Observable<ApiResponse<CourseContentResponse>>{
     return this.http.post<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/createContent",courseContentModel)
   }

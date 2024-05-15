@@ -20,7 +20,7 @@ const routes: Routes = [
     {path:"dashboard",component:DashboardComponent},
     {path:"create-course",component:CreateCourseComponent},
     {path:"course-list",component:CourseListComponent},
-    {path:"update-course",component:UpdateCourseComponent},
+    {path:"update-course/:id",component:UpdateCourseComponent},
     {path:"create-course-content/:id",component:CreateCourseContentComponent},
     {path:"course-content-list/:id",component:CourseContentListComponent},
     {path:"update-course-content/:id/:courseId",component:UpdateCourseContentComponent}
