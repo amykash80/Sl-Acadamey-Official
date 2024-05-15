@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
-import { CourseResponse, CreateCourse, UpdateCourse } from '../Models/Academy/Course';
+import { CourseContent, CourseContentResponse, CourseResponse, CreateCourse, UpdateCourse, UpdateCourseContent } from '../Models/Academy/Course';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/Common/api-response';
+
 
 @Injectable({
   providedIn: 'root'

@@ -48,6 +48,7 @@ export class SharedService {
     this.fireConfirmSwal('Are You sure you want to Logout ').then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('streamlineToken');
+        localStorage.removeItem('userId')
         this.router.navigate(['login']);
       }
     });

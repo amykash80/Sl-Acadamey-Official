@@ -22,7 +22,7 @@
               <td>{{enquiry.isActive}}</td>
 
               <td>
-                <button type="button" class="btn btn-success" style="margin-right: 3px;"><i class="fas fa-edit"></i>Edit</button>
+                <button type="button" class="btn btn-success" [routerLink]="['/admin/updateenquiry',enquiry.id]" style="margin-right: 3px;"><i class="fas fa-edit"></i>Edit</button>
                 <button type="button" class="btn btn-danger" (click)="deleteEnquiry(enquiry.id)"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>

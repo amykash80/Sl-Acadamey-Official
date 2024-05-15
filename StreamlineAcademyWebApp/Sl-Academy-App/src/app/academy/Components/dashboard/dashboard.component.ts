@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SharedService } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
+  shared=inject(SharedService)
+  onLogOut(){
+    this.shared.logOutUser();
+  }
 }

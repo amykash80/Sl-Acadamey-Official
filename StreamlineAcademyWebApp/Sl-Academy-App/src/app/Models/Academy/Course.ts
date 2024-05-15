@@ -9,7 +9,7 @@ export class CreateCourse{
 
 export class CourseResponse{
     id?:string;
-    name?:string;
+    name?:string=""
     description?:string;
     durationInWeeks?:number;
     categoryName?:string;
@@ -27,4 +27,25 @@ export class UpdateCourse{
     fee?:number;
     categoryId?:string;
     academyId?:string;
+}
+export class CourseContent{
+    taskName?:string;
+    description?:string;
+    duration?:number;
+    courseId?:string=''
+}
+export class CourseContentResponse{
+    id?:string;
+    taskName?:string;
+    description?:string;
+    duration?:number;
+    courseName?:string;
+    isActive?:boolean;
+}
+export class UpdateCourseContent{
+    id?:string;
+    taskName?:string;
+    description?:string;
+    duration?:number;
+    courseId?:string=''
 }
