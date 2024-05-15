@@ -1,1 +1,41 @@
-<p>update-course works!</p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-xl-9">
+        <form  #courseForm="ngForm"
+        method="POST"
+        class="register-form ajax-contact">
+          <h5 class="form-title">Create Course</h5>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label><i class="far fa-user"></i>Name</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="course.name" placeholder="Enter course name" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label>  <i class="far fa-file-alt"></i>Description</label>
+              <textarea class="form-control" name="description" [(ngModel)]="course.description" placeholder="Enter course description" required></textarea>
+            </div>
+            <div class="form-group col-md-6">
+              <label><i class="far fa-calendar-alt"></i>Duration (in weeks)</label>
+              <input type="number" class="form-control" name="durationInWeeks" [(ngModel)]="course.durationInWeeks" placeholder="Enter course duration" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label><i class="fas fa-dollar-sign"></i>Fee</label>
+              <input type="number" class="form-control" name="fee" [(ngModel)]="course.fee" placeholder="Enter course fee" required>
+            </div>
+            
+            <div class="form-group col-md-6">
+                <label><i class="fas fa-list-alt"></i> Category</label>
+                <select class="form-control" name="categoryId" [(ngModel)]="course.categoryId">
+                  <option value="">Select Category</option>
+                  <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
+                </select>
+              </div>
+          </div>
+          <div class="form-btn col-12 text-center">
+            <button class="th-btn black-btn-2 w-100" (click)="updateCourse()">Create Course</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

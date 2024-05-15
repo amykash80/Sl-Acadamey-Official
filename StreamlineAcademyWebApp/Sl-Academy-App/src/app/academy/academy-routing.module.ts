@@ -16,7 +16,9 @@ const routes: Routes = [
     {path:"dashboard",component:DashboardComponent},
     {path:"create-course",component:CreateCourseComponent},
     {path:"course-list",component:CourseListComponent},
-    {path:"update-course",component:UpdateCourseComponent},
+    {path:"update-course/:id",component:UpdateCourseComponent},
+    {path:"delete-course/:id",component:UpdateCourseComponent},
+    
   ]
   }
 ];
