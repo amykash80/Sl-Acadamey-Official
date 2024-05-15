@@ -7,5 +7,7 @@ export class Login {
 export class LoginResponse{
     fullName?:string;
     userRole?:UserRole;
+    userId?:string;
     token?:string
+
 }

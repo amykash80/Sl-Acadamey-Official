@@ -9,7 +9,8 @@ import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,

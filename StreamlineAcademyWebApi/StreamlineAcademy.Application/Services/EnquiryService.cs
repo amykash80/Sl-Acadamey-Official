@@ -51,6 +51,7 @@ namespace StreamlineAcademy.Application.Services
                     Name = enquiryResponse.Name,
                     Email = enquiryResponse.Email,
                     PhoneNumber = enquiryResponse.PhoneNumber,
+                    RegistrationStatus=RegistrationStatus.Pending,
                     IsActive = true,
                 };
                 return ApiResponse<EnquiryResponseModel>.SuccessResponse(response,APIMessages.EnquiryManagement.EnquiryAdded, HttpStatusCodes.Created);
@@ -109,7 +110,7 @@ namespace StreamlineAcademy.Application.Services
                     Name = existingEnquiry.Name,
                     Email = existingEnquiry.Email,
                     PhoneNumber = existingEnquiry.PhoneNumber,
-                    IsActive = true,
+                    IsActive = existingEnquiry.IsActive,
                 };
                 return ApiResponse<EnquiryResponseModel>.SuccessResponse(deleteResponse, APIMessages.EnquiryManagement.EnquiryDeleted);
             }
@@ -127,7 +128,8 @@ namespace StreamlineAcademy.Application.Services
                     Name = e.Name,
                     Email = e.Email,
                     PhoneNumber = e.PhoneNumber,
-                    IsActive = true
+                    RegistrationStatus= e.RegistrationStatus,
+                    IsActive = e.IsActive
                 });
                 return ApiResponse<IEnumerable<EnquiryResponseModel>>.SuccessResponse(sortedEnquiries, $"Found {enquiryList.Count()} Enquiries");
             }

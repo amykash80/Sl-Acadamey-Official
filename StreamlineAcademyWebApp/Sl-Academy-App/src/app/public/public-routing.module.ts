@@ -4,20 +4,28 @@ import { PublicComponent } from './public.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { EnquiryComponent } from './Pages/enquiry/enquiry.component';
 import { LoginComponent } from './Pages/login/login.component';
+import { ForgotPasswordComponent } from '../shared/Pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from '../shared/Pages/reset-password/reset-password.component';
 
 const routes: Routes = [
-  {path:"",component:PublicComponent,
-    children:[
-      {path:"",redirectTo:"/home",pathMatch:"full"},
-      {path:"home",component:HomeComponent},
-      {path:"enquiry",component:EnquiryComponent},
-      {path:"login",component:LoginComponent},
-    ]
-  }
+  {
+    path: '',
+    component: PublicComponent,
+    children: [
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'enquiry', component: EnquiryComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
+
+
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PublicRoutingModule { }
+export class PublicRoutingModule {}

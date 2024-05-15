@@ -6,7 +6,6 @@ import { PublicComponent } from './public.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { EnquiryComponent } from './Pages/enquiry/enquiry.component';
 import { LoginComponent } from './Pages/login/login.component';
-import { AuthService } from '../Services/auth.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FotterComponent } from './components/fotter/fotter.component';
 import { FormsModule } from '@angular/forms';

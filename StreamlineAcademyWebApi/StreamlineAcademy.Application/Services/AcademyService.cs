@@ -107,7 +107,7 @@ namespace StreamlineAcademy.Application.Services
                     {
                         var updateStatusResponse = await academyRepository.UpdateRegistrationStatus(academy.Id, RegistrationStatus.Approved);
                         var res = await academyRepository.GetAcademyById(academy.Id);
-                        return ApiResponse<AcademyResponseModel>.SuccessResponse(res);
+                        return ApiResponse<AcademyResponseModel>.SuccessResponse(res,"Academy Registered Successfully");
                     }
                 } 
                 return ApiResponse<AcademyResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest); 
@@ -187,7 +187,7 @@ namespace StreamlineAcademy.Application.Services
             var userId = contextService.GetUserId();
             var existingAcademy = await academyRepository.GetAcademyTypeById(x =>x.Name==model.Name);
             if (existingAcademy is not null)
-                return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.AcademyManagement.AcademyAlreadyRegistered, HttpStatusCodes.Conflict);
+                return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.AcademyManagement.AcademyTypeAlreadyRegistered, HttpStatusCodes.Conflict);
                 var acdemyType = new AcademyType() {
                 Name= model.Name,
                 CreatedBy = userId,
@@ -205,7 +205,7 @@ namespace StreamlineAcademy.Application.Services
                 Id= acdemyType.Id,
                 AcademyTypeName=model.Name,
                 };
-                return ApiResponse<AcademyTypeResponseModel>.SuccessResponse(returnModel);
+                return ApiResponse<AcademyTypeResponseModel>.SuccessResponse(returnModel,"AcademyType Added Successfully");
             }
             return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
 
@@ -223,6 +223,7 @@ namespace StreamlineAcademy.Application.Services
                     { 
                         Id = item.Id,
                         AcademyTypeName = item.Name,
+                        IsActive=item.IsActive,
                   
                     };
                     academyTypeRequestModels.Add(academyTypeResponse);
@@ -233,5 +234,7 @@ namespace StreamlineAcademy.Application.Services
 
             return ApiResponse<IEnumerable<AcademyTypeResponseModel>>.ErrorResponse(APIMessages.AcademyManagement.AcademyNotFound, HttpStatusCodes.NotFound);
         }
+
+
     }
 }

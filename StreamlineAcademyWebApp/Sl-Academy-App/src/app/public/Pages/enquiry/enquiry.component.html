@@ -1,0 +1,70 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-xl-6">
+      <form #enquiryForm="ngForm" method="POST" class="register-form ajax-contact" (ngSubmit)="sendEnquiry()">
+        <h5 class="form-title">Send Enquiry</h5>
+        <div class="form-group">
+          <label>Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="enquiryModel.name"
+            placeholder=""
+            required
+          />
+          <i class="far fa-user"></i>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+            <div *ngIf="name.errors?.['required']">Name is required.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            #email="ngModel"
+            [(ngModel)]="enquiryModel.email"
+            placeholder=""
+            required
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          />
+          <i class="far fa-envelope"></i>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['pattern']">Enter a valid email address.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            #phoneNumber="ngModel"
+            [(ngModel)]="enquiryModel.phoneNumber"
+            placeholder=""
+            required
+            pattern="[0-9]{10}"
+          />
+          <i class="fas fa-phone"></i>
+          <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="text-danger">
+            <div *ngIf="phoneNumber.errors?.['required']">Phone number is required.</div>
+            <div *ngIf="phoneNumber.errors?.['pattern']">Enter a 10-digit phone number.</div>
+          </div>
+        </div>
+
+        <div class="form-btn col-12 text-center">
+          <button type="submit"  class="th-btn black-btn-2 w-100" [disabled]="enquiryForm.invalid">Register Now</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+  

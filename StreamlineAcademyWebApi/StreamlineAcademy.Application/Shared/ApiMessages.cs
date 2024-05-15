@@ -110,8 +110,10 @@ public static class APIMessages
 			public static readonly string AcademyUpdated = "Academy Updated Successfully.";
 			public static readonly string AcademyDeleted = "Academy Deleted Successfully.";
             public static readonly string AcademyAlreadyRegistered = "Academy with this email already registered";
+            public static readonly string AcademyTypeAlreadyRegistered = "AcademyType with this name already registered";
 
-		}
+
+        }
         public static class UserManagement
         {
             public static readonly string UserNotFound = "user not found.";
@@ -171,7 +173,7 @@ public static class APIMessages
         public const string PhoneNumberAlreadyRegistered = "Phone Number already registered.";
         public const string EmailOrPasswordIsIncorrect = "Email or/and Password is Incorrect.";
         public const string PasswordChangedSuccess = "Password changed successfully.";
-        public const string LinkExpired = "Email verification link has been expired, please try again.";
+        public const string LinkExpired = "Email verification link has been expired, please try with diffrent Reset Code again.";
         public const string EmailVerified = "Email verified successfully, please try to login again.";
         public const string VerifyEmailError = "Please verify your email to login.";
         public const string InactiveUser = "Your account is temporarily inactive. Please contact the administrator for assistance.";
@@ -192,7 +194,7 @@ public static class APIMessages
     }
 		public static class AppRoutes
 		{
-			public static readonly string ClientResetPasswordRoute = "resetpassword";
+			public static readonly string ClientResetPasswordRoute = "reset-password";
 			public static readonly string loginRoute = "login";
 
 		}

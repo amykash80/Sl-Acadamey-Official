@@ -22,6 +22,9 @@ export class EnquiryComponent {
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message)
         }
+        else{
+          this.sharedService.showErrorToast(response.message)
+        }
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.BadRequest) {

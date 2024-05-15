@@ -74,6 +74,7 @@ namespace StreamlineAcademy.Application.Services
             {
                 FullName = user.Name,
                 UserRole = user.UserRole,
+                UserId = user.Id,
                 Token = jwtProvider.GenerateToken(user) 
             };
 
@@ -113,7 +114,7 @@ namespace StreamlineAcademy.Application.Services
             var currentTime = DateTime.UtcNow;
             var user = await userRepository.FirstOrDefaultAsync(x =>x.ResetCode==model.ResetCode);
 
-            if (user is null)
+            if (user.ResetCode is null)
                 return ApiResponse<string>.ErrorResponse(APIMessages.Auth.InValidResetCode, HttpStatusCodes.NotFound);
 
             if (user.ResetExpiry <= currentTime)

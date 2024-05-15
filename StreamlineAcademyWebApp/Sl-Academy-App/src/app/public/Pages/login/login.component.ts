@@ -25,11 +25,12 @@ export class LoginComponent {
     this.authService.login(this.loginModel).subscribe({
       next: (response) => {
         if (response.isSuccess) {
-          this.sharedService.showSuccessToast(response.message);
           localStorage.setItem("streamlineToken", JSON.stringify(response.result.token));
+          localStorage.setItem("userId", response.result.userId!);
         } 
         else {
           this.sharedService.showErrorToast(response.message);
+          this.loadSpinner=false;
         }
         switch(response.result.userRole){
           case UserRole.SuperAdmin:

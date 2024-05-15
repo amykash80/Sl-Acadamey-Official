@@ -90,6 +90,7 @@ namespace StreamlineAcademy.Application.Services
         }
 
         public async Task<ApiResponse<AddressInfoResponseModel>> GetAddressInfoById()
+       
         {
 
             var id = contextService.GetUserId();
@@ -158,6 +159,28 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<FileResponseModel>.ErrorResponse(APIMessages.TechnicalError);
         }
 
-       
+        public async Task<ApiResponse<List<CountryResponse>>> GetAllCountries()
+        {
+          var countryList= await profileRepository.GetAllCountries();
+           var newResponse= countryList.Select(country=>new CountryResponse() { Id=country.Id,CountryName=country.CountryName });
+            return ApiResponse<List<CountryResponse>>.SuccessResponse(newResponse.ToList());
+
+
+        }
+
+        public async Task<ApiResponse<List<StateResponse>>> GetAllStates()
+        {
+            var stateList = await profileRepository.GetAllStates();
+            var newResponse = stateList.Select(state => new StateResponse() {Id=state.Id,StateName=state.StateName,CountryId=state.CountryId});
+            return ApiResponse<List<StateResponse>>.SuccessResponse(newResponse.ToList());
+        }
+
+        public async Task<ApiResponse<List<CityResponse>>> GetAllCities()
+        {
+
+            var cityList = await profileRepository.GetAllCities();
+            var newResponse = cityList.Select(city => new CityResponse() { Id = city.Id, CityName = city.CityName,SateId=city.StateId });
+            return ApiResponse<List<CityResponse>>.SuccessResponse(newResponse.ToList());
+        }
     }
 }
