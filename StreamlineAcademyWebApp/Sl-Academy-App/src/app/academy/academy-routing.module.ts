@@ -10,9 +10,6 @@ import { CourseContentListComponent } from './Pages/course-content-list/course-c
 import { UpdateCourseContentComponent } from './Pages/update-course-content/update-course-content.component';
 
 
-
-
-
 const routes: Routes = [
   {path:"",component:AcademyComponent,
   children:[
