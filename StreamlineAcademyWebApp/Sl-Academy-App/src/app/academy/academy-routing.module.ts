@@ -8,11 +8,7 @@ import { UpdateCourseComponent } from './Pages/update-course/update-course.compo
 import { CreateCourseContentComponent } from './Pages/create-course-content/create-course-content.component';
 import { CourseContentListComponent } from './Pages/course-content-list/course-content-list.component';
 import { UpdateCourseContentComponent } from './Pages/update-course-content/update-course-content.component';
-// import { CreateCourseComponent } from './pages/createcourse/createcourse.component';
-// import { CourseListComponent } from './pages/course-list/course-list.component';
-// import { UpdateCourseComponent } from './pages/update-course/update-course.component';
-// import { CreateCourseContentComponent } from './pages/create-course-content/create-course-content.component';
-// import { CourseContentListComponent } from './pages/course-content-list/course-content-list.component';
+
 
 
 
