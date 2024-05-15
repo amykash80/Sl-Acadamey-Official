@@ -18,7 +18,7 @@ const routes: Routes = [
     {path:"",redirectTo:"dashboard",pathMatch:"full"},
     {path:"dashboard",component:DashboardComponent},
     {path:"enquirylist",component:EnquirylistComponent},
-    {path:"updateenquiry",component:UpdateEnquiryComponent},
+    {path:"updateenquiry/:id",component:UpdateEnquiryComponent},
     {path:"change-Password",component:ChangepasswordComponent},
     {path:"academylist",component:AcademyListComponent},
     {path:"register-academy",component:RegisterAcademyComponent},

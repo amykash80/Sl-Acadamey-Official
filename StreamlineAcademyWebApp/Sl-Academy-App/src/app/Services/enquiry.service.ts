@@ -22,4 +22,7 @@ export class EnquiryService {
  deleteEnquiry(id:string):Observable<ApiResponse<string>>{
    return this.HttpClient.delete<ApiResponse<string>>(this.baseUrl+"Enquiry/delete/"+id)
  }
+ getEnquiryById(id:string):Observable<ApiResponse<EnquiryResponse>>{
+return this.HttpClient.get<ApiResponse<EnquiryResponse>>(this.baseUrl+"Enquiry/getById/"+id)
+ }
 }

@@ -28,12 +28,16 @@ loadAllEnquiries(){
    })
 }
 deleteEnquiry(enquiryId: any) {
+  console.log(enquiryId);
+  
   this.sharedService
     .fireConfirmSwal('Are You sure you want to delete this Enquiry ')
     .then((result:any) => {
       if (result.isConfirmed) {
         this.enquiryService.deleteEnquiry(enquiryId).subscribe({
           next: (response) => {
+            console.log(response);
+            
             if (response.isSuccess) {
               this.sharedService.showSuccessToast(response.message);
               this.loadAllEnquiries();
