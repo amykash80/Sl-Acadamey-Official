@@ -29,6 +29,7 @@ namespace StreamlineAcademy.Persistence.Repositories
            TaskName = c.TaskName,
            Description = c.Discription,
            Duration = c.DurationInHours,
+           IsActive= c.IsActive,
            CourseName=c.Course!.Name,
            
        })

@@ -19,12 +19,15 @@ export class CourseContentListComponent {
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.courseId=paramVal['id']
+  this.loadAllCourseContents();
+  
   })
 }
 loadAllCourseContents(){
-  this.courseService.getCourseContentsByCourseId().subscribe({
+  this.courseService.getCourseContentsByCourseId(this.courseId).subscribe({
     next: (response) => {
       this.courseContentList = response.result;
+      console.log(this.courseContentList)
     },
     error: (err: HttpErrorResponse) => {
       if (err.status == HttpStatusCode.Unauthorized) {

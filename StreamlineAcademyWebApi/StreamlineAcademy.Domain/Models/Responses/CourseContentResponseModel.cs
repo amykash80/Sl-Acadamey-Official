@@ -13,5 +13,6 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? Description { get; set; }
         public int Duration { get; set; }
         public string? CourseName { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

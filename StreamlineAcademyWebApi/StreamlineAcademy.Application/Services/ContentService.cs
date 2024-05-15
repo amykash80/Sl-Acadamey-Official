@@ -28,13 +28,13 @@ namespace StreamlineAcademy.Application.Services
 
         public async Task<ApiResponse<CourseContentResponseModel>> CreateContent(CourseContentRequestModel request)
         {
-            var contentId = await courseRepository.GetByIdAsync(x => x.Id == request.CourseId);
-            if (contentId == null)
-                return ApiResponse<CourseContentResponseModel>.ErrorResponse(APIMessages.ContentManagement.ContentNotFound, HttpStatusCodes.Conflict);
+            var courseId = await courseRepository.GetByIdAsync(x => x.Id == request.CourseId);
+            if (courseId == null)
+                return ApiResponse<CourseContentResponseModel>.ErrorResponse(APIMessages.CourseManagement.CourseNotFound, HttpStatusCodes.Conflict);
             var courseContent = new CourseContent()
             {
                 TaskName = request.TaskName,
-                Description=request.Description,
+                Discription=request.Description,
                 DurationInHours = request.Duration,
                 CourseId=request.CourseId,
                 IsActive = true,
@@ -50,11 +50,12 @@ namespace StreamlineAcademy.Application.Services
                 var contentResponse = await contentRepository.GetByIdAsync(x => x.Id == courseContent.Id);
                 var response = new CourseContentResponseModel()
                 {
-                    Id=courseContent.Id, 
-                   TaskName=courseContent.TaskName,
-                   Description=courseContent.Discription,
-                   Duration=courseContent.DurationInHours,
-                   CourseName=courseContent.Course!.Name
+                   Id= contentResponse.Id, 
+                   TaskName= contentResponse.TaskName,
+                   Description= contentResponse.Discription,
+                   Duration= contentResponse.DurationInHours,
+                   CourseName=courseContent.Course!.Name,
+                   IsActive= courseContent.IsActive,
 
                 };
                 return ApiResponse<CourseContentResponseModel>.SuccessResponse(response, APIMessages.ContentManagement.ContentAdded, HttpStatusCodes.Created);

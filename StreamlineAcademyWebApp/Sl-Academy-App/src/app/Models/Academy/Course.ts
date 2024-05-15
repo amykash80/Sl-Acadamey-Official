@@ -38,4 +38,12 @@ export class CourseContentResponse{
     description?:string;
     duration?:number;
     courseName?:string;
+    isActive?:boolean;
+}
+export class UpdateCourseContent{
+    id?:string;
+    taskName?:string;
+    description?:string;
+    duration?:number;
+    courseId?:string=''
 }

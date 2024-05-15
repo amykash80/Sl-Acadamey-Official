@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
-import { CourseContent, CourseContentResponse, CourseResponse, CreateCourse, UpdateCourse } from '../Models/Academy/Course';
+import { CourseContent, CourseContentResponse, CourseResponse, CreateCourse, UpdateCourse, UpdateCourseContent } from '../Models/Academy/Course';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/Common/api-response';
 
@@ -29,10 +29,16 @@ export class CourseService {
   createCourseContent(courseContentModel:CourseContent):Observable<ApiResponse<CourseContentResponse>>{
     return this.http.post<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/createContent",courseContentModel)
   }
-  getCourseContentsByCourseId():Observable<ApiResponse<CourseContentResponse[]>>{
-    return this.http.get<ApiResponse<CourseContentResponse[]>>(this.baseUrl+"CourseContent/getContentByCourseId")
+  getCourseContentsByCourseId(courseId:string):Observable<ApiResponse<CourseContentResponse[]>>{
+    return this.http.get<ApiResponse<CourseContentResponse[]>>(this.baseUrl+"CourseContent/getContentByCourseId/"+courseId)
   }
   deleteCourseContent(id:string):Observable<ApiResponse<string>>{
     return this.http.delete<ApiResponse<string>>(this.baseUrl+"CourseContent/deleteContent/"+id)
    }
+   getCourseContentById(contentId:string):Observable<ApiResponse<CourseContentResponse>>{
+    return this.http.get<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/getContentById/"+contentId)
+   }
+   updateCourseContent(courseContentUpdateModel:UpdateCourseContent):Observable<ApiResponse<CourseContentResponse>>{
+    return this.http.put<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/updateContent",courseContentUpdateModel)
+  }
 }
