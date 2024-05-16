@@ -1,45 +1,41 @@
-import { Component, inject, resolveForwardRef } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AcademyService } from '../../../Services/academy.service';
-import { RegisterAcademy } from '../../../Models/Academy/Academy';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CountryService } from '../../../Services/country.service';
-import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
 import { SharedService } from '../../../Services/shared.service';
+import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
+import { RegisterAcademy } from '../../../Models/Academy/Academy';
+import { LocationRequestModel } from '../../../Models/Location/Location';
+import { LocationService } from '../../../Services/location.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register-academy',
-  templateUrl: './register-academy.component.html',
-  styleUrl: './register-academy.component.css',
+  selector: 'app-add-location',
+  templateUrl: './add-location.component.html',
+  styleUrl: './add-location.component.css'
 })
-export class RegisterAcademyComponent {
-  academyService = inject(AcademyService);
+export class AddLocationComponent {
+  locationService = inject(LocationService);
   countryService = inject(CountryService);
-  router=inject(Router)
   sharedService=inject(SharedService)
+  router=inject(Router)
+  academyId:string=''
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
   filteredStates: any[] = [];
   filteredCitiesList: any[] = [];
-  academyTypeList:AcademyTypeResponse[]=[];
   selectedCountryId: string = '';
   selectedStateId: string = '';
-  academyRegistrationModel: RegisterAcademy = new RegisterAcademy();
+  locationModel: LocationRequestModel = new LocationRequestModel();
   constructor() {}
 
   ngOnInit(): void {
     this.getAllCountries();
     this.getAllStates();
     this.getAllCities();
-    this.getAllAcademyTypes();
   }
-  getAllAcademyTypes(){
-    this.academyService.getAcademyTypes().subscribe(academyTypes=>{
-      this.academyTypeList=academyTypes.result
-      console.log(this.academyTypeList)
-    })
-  }
+ 
   getAllCountries() {
     this.countryService.getCountries().subscribe((countries) => {
       this.countries = countries.result;
@@ -72,13 +68,13 @@ export class RegisterAcademyComponent {
     console.log(this.filteredCitiesList);
   }
 
-  registerAcademy() {
-    this.academyRegistrationModel.postalCode=this.academyRegistrationModel.postalCode?.toString();
-    this.academyService.createAcademy(this.academyRegistrationModel).subscribe({
+  addLocation() {
+    this.locationModel.postalCode=this.locationModel.postalCode?.toString();
+    this.locationService.addLocation(this.locationModel).subscribe({
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
-          this.router.navigate(['/admin/academylist'])
+          this.router.navigate(['/academy/location-list'])
         }
         else{
           this.sharedService.showErrorToast(response.message)
@@ -88,5 +84,5 @@ export class RegisterAcademyComponent {
         console.log(err);
       },
     });
-  }
+   }
 }

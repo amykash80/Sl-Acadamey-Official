@@ -79,7 +79,9 @@ namespace StreamlineAcademy.Application.Services
             };
 
             return ApiResponse<LoginResponseModel>.SuccessResponse(response,APIMessages.Auth.LoggedIn);
+
         }
+        
 
 		public async Task<bool> IsEmailUnique(string email)
 		{
