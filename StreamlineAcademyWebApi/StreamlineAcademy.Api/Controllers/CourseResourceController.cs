@@ -12,7 +12,7 @@ namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles =nameof(UserRole.AcademyAdmin))]
+    //[Authorize(Roles =nameof(UserRole.AcademyAdmin))]
     public class CourseResourceController : ControllerBase
     {
         private readonly ICourseResourceService courseResourceService;
@@ -23,7 +23,7 @@ namespace StreamlineAcademy.Api.Controllers
         }
 
         [HttpPost("addCourseResource")]
-        public async Task<ApiResponse<CourseResourceResponseModel>> AddCourceResource(CourseResourceRequestModel request)=> await courseResourceService.AddCourseResource(request);
+        public async Task<ApiResponse<CourseResourceResponseModel>> AddCourceResource([FromForm]CourseResourceRequestModel request)=> await courseResourceService.AddCourseResource(request);
         [HttpPut("updateCourseResource")]
         public async Task<ApiResponse<CourseResourceResponseModel>> UpdateCourseResource(CourseResourceUpdateRequest request)=>await courseResourceService.UpdateCourseResource(request);
         [HttpDelete("deleteCourseResource")]

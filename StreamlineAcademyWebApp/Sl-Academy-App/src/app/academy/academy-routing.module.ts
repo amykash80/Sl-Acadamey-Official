@@ -8,6 +8,8 @@ import { UpdateCourseComponent } from './Pages/update-course/update-course.compo
 import { CreateCourseContentComponent } from './Pages/create-course-content/create-course-content.component';
 import { CourseContentListComponent } from './Pages/course-content-list/course-content-list.component';
 import { UpdateCourseContentComponent } from './Pages/update-course-content/update-course-content.component';
+import { CreateCourseResourceComponent } from './pages/create-course-resource/create-course-resource.component';
+import { CourseResourceListComponent } from './pages/course-resource-list/course-resource-list.component';
 
 
 
@@ -23,7 +25,9 @@ const routes: Routes = [
     {path:"update-course/:id",component:UpdateCourseComponent},
     {path:"create-course-content/:id",component:CreateCourseContentComponent},
     {path:"course-content-list/:id",component:CourseContentListComponent},
-    {path:"update-course-content/:id/:courseId",component:UpdateCourseContentComponent}
+    {path:"update-course-content/:id/:courseId",component:UpdateCourseContentComponent},
+    {path:"create-course-resource/:id",component:CreateCourseResourceComponent},
+    {path:"course-resource-list/:id",component:CourseResourceListComponent},
   ]
   }
 ];
