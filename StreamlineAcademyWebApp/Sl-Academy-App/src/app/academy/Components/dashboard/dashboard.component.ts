@@ -11,4 +11,11 @@ export class DashboardComponent {
   onLogOut(){
     this.shared.logOutUser();
   }
+  addLocation(){
+
+  }
+  viewLocations(){
+    
+  }
+
 }

@@ -76,6 +76,10 @@ namespace StreamlineAcademy.Persistence.Repositories
                     StateName = location.State!.StateName,
                     CityName = location.City!.CityName,
                     IsActive = location.IsActive,
+                    CountryId=location.CountryId,
+                    StateId=location.StateId,
+                    CityId=location.CityId,
+                    
                 };
 
                 return response;

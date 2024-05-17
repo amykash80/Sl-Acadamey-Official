@@ -99,7 +99,6 @@
             <select
               class="form-control"
               name="countryId"
-              (change)="filterStates($event)"
               [(ngModel)]="academy.countryId"
             >
             <option value="">Select Country</option>
@@ -113,11 +112,10 @@
             <select
               class="form-control"
               name="stateId"
-              (change)="filteredCities($event)"
               [(ngModel)]="academy.stateId"
             >
             <option value="">Select state</option>
-            <option *ngFor="let state of filteredStates" [value]="state.id">{{ state.stateName }}</option>
+            <option *ngFor="let state of states" [value]="state.id">{{ state.stateName }}</option>
             </select>
           </div>
 
@@ -130,7 +128,7 @@
               [(ngModel)]="academy.cityId"
             >
             <option value="">Select city</option>
-            <option *ngFor="let city of filteredCitiesList" [value]="city.id">{{ city.cityName }}</option>
+            <option *ngFor="let city of cities" [value]="city.id">{{ city.cityName }}</option>
             </select>
           </div>
 

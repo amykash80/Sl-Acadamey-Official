@@ -10,6 +10,11 @@ import { CourseContentListComponent } from './Pages/course-content-list/course-c
 import { UpdateCourseContentComponent } from './Pages/update-course-content/update-course-content.component';
 import { CreateCourseResourceComponent } from './pages/create-course-resource/create-course-resource.component';
 import { CourseResourceListComponent } from './pages/course-resource-list/course-resource-list.component';
+import { CreateBatchComponent } from './Pages/create-batch/create-batch.component';
+import { AddLocationComponent } from './Pages/add-location/add-location.component';
+import { LocationListComponent } from './Pages/location-list/location-list.component';
+import { LocationMapComponent } from './pages/location-map/location-map.component';
+import { UpdateLocationComponent } from './pages/update-location/update-location.component';
 
 
 const routes: Routes = [
@@ -25,6 +30,11 @@ const routes: Routes = [
     {path:"update-course-content/:id/:courseId",component:UpdateCourseContentComponent},
     {path:"create-course-resource/:id",component:CreateCourseResourceComponent},
     {path:"course-resource-list/:id",component:CourseResourceListComponent},
+    {path:"create-batch/:courseId",component:CreateBatchComponent},
+    {path:"add-location",component:AddLocationComponent},
+    {path:"location-list",component:LocationListComponent},
+    {path:"location-map/:latitude/:longitude",component:LocationMapComponent},
+    {path:"update-location/:id",component:UpdateLocationComponent}
   ]
   }
 ];

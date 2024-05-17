@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>Location List</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Address</th>
+              <th scope="col">CountryName</th>
+              <th scope="col">CityName</th>
+              <th scope="col">StateName</th>
+              <th scope="col">IsActive</th>
+              <th scope="col">PostalCode</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let location of locationList">
+              <td>{{location.address}}</td>
+              <td>{{location.countryName}}</td>
+              <td>{{location.cityName}}</td>
+              <td>{{location.stateName}}</td>
+              <td>{{location.postalCode}}</td>
+              <td class="text-danger">{{location.isActive}}</td>
+        
+
+              <td>
+                <button type="button" class="btn btn-success" [routerLink]="['/academy/location-map',location.latitude,location.longitude]" style="margin-right: 3px;">view Map</button>
+                <button style="margin-right: 3px;" class="btn btn-primary" [routerLink]="['/academy/update-location',location.id]"><i class="fas fa-edit"></i></button>
+            
+                <button type="button" class="btn btn-danger" (click)="deleteLocation(location.id)"><i class="far fa-trash-alt"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

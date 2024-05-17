@@ -50,9 +50,10 @@ export class LoginComponent {
         }
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.BadRequest) {
+        if (err.status == HttpStatusCode.InternalServerError) {
           console.log(err.message);
           this.sharedService.showErrorToast(err.message);
+          this.loadSpinner=false;
         }
       },
     });
