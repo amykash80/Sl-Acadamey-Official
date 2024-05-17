@@ -34,6 +34,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Description = courseResource.Description,
                     Type =courseResource.Type!,
                     FilePath = courseResource.FilePath,
+                    CourseId = courseResource.Id,
                     CourseName = courseResource.Name,
                 };
 

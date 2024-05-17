@@ -179,22 +179,11 @@ namespace StreamlineAcademy.Application.Services
             if (returnVal > 0)
             {
                 var responseModel = await courseRepository.GetCourseById(existingCourse.Id);
-                var response = new CourseResponseModel()
-                {
-                    Id = existingCourse.Id,
-                    Name = existingCourse.Name,
-                    Description = existingCourse.Description,
-                    DurationInWeeks = existingCourse.DurationInWeeks,
-                    CategoryName = responseModel.CategoryName,
-                    AcademyName = responseModel.AcademyName,
-                    Fee = existingCourse.Fee,
-                    IsActive = existingCourse.IsActive
-                };
-                return ApiResponse<CourseResponseModel>.SuccessResponse(response, APIMessages.CourseManagement.CourseUpdated, HttpStatusCodes.OK);
+                return ApiResponse<CourseResponseModel>.SuccessResponse(responseModel, APIMessages.CourseManagement.CourseUpdated, HttpStatusCodes.OK);
             }
             return ApiResponse<CourseResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
-
+       
         public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesByAcademyId()
         {
             var academyId = contextService.GetUserId();
