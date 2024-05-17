@@ -72,6 +72,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Description = a.Description,
                     DurationInWeeks = a.DurationInWeeks, 
                     CategoryName = a.CourseCategory!.CategoryName,
+                    CategoryId=a.CourseCategory!.Id,
                     AcademyName = a.Academy!.AcademyName,
                     IsActive = a.IsActive,
                     Fee = a.Fee,

@@ -30,7 +30,10 @@ const routes: Routes = [
     {path:"add-location",component:AddLocationComponent},
     {path:"location-list",component:LocationListComponent},
     {path:"location-map/:latitude/:longitude",component:LocationMapComponent},
-    {path:"update-location/:id",component:UpdateLocationComponent}
+    {path:"update-location/:id",component:UpdateLocationComponent},
+    {path:"update-course/:id",component:UpdateCourseComponent},
+    {path:"delete-course/:id",component:UpdateCourseComponent},
+    
   ]
   }
 ];

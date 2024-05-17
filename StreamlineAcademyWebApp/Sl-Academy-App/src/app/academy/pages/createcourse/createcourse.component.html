@@ -23,14 +23,13 @@
             <input type="number" class="form-control" name="fee" [(ngModel)]="courseModel.fee" placeholder="Enter course fee" required>
           </div>
           
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-list-alt"></i> Category</label>
-              <select class="form-control" name="categoryId" [(ngModel)]="courseModel.categoryId">
-                <option value="">Select Category ID</option>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-list-alt"></i> Category</label>
+            <select class="form-control" name="categoryId" [(ngModel)]="courseModel.categoryId">
+                <option value="">Select Category</option>
                 <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
-              </select>
-              
-            </div>
+            </select>
+        </div>
         </div>
         <div class="form-btn col-12 text-center">
           <button class="th-btn black-btn-2 w-100" (click)="createCourse()">Create Course</button>

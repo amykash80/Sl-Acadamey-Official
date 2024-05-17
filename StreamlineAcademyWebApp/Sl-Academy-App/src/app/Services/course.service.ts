@@ -26,19 +26,10 @@ export class CourseService {
   getCategories():Observable<any>{
     return this.http.get<any>(environment.apiUrl+"Course/getAll-CourseCategories");
   }
-  createCourseContent(courseContentModel:CourseContent):Observable<ApiResponse<CourseContentResponse>>{
-    return this.http.post<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/createContent",courseContentModel)
+  getCourseById(id: string): Observable<ApiResponse<CourseResponse>> {
+    return this.http.get<ApiResponse<CourseResponse>>(`${this.baseUrl}Course/getCourseById/${id}`);
   }
-  getCourseContentsByCourseId(courseId:string):Observable<ApiResponse<CourseContentResponse[]>>{
-    return this.http.get<ApiResponse<CourseContentResponse[]>>(this.baseUrl+"CourseContent/getContentByCourseId/"+courseId)
-  }
-  deleteCourseContent(id:string):Observable<ApiResponse<string>>{
-    return this.http.delete<ApiResponse<string>>(this.baseUrl+"CourseContent/deleteContent/"+id)
+  deleteCourse(id:string):Observable<ApiResponse<string>>{
+    return this.http.delete<ApiResponse<string>>(this.baseUrl+"Course/delete/"+id)
    }
-   getCourseContentById(contentId:string):Observable<ApiResponse<CourseContentResponse>>{
-    return this.http.get<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/getContentById/"+contentId)
-   }
-   updateCourseContent(courseContentUpdateModel:UpdateCourseContent):Observable<ApiResponse<CourseContentResponse>>{
-    return this.http.put<ApiResponse<CourseContentResponse>>(this.baseUrl+"CourseContent/updateContent",courseContentUpdateModel)
-  }
 }

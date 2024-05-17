@@ -13,6 +13,7 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? Description { get; set; }
         public int? DurationInWeeks { get; set; }
         public string? CategoryName { get; set; }
+        public Guid ? CategoryId { get; set; }
         public string? AcademyName { get; set; }
         public int? Fee { get; set; }
         public bool IsActive { get; set; }
