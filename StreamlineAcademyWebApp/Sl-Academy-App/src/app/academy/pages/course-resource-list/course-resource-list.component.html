@@ -5,9 +5,9 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">Task Name</th>
+              <th scope="col">Name</th>
               <th scope="col">Description</th>
-              <th scope="col">Duration</th>
+              <th scope="col">Type</th>
               <th scope="col">IsActive</th>
               <th scope="col">Actions</th>
             </tr>
@@ -18,9 +18,11 @@
               <td>{{courseResource.description}}</td>
               <td>{{courseResource.type}}</td>
               <td>{{courseResource.isActive}}</td>
-              <td>
-              
-              </td>
+                <td>
+
+<button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-course-resource',courseResource.id,courseId]"><i class="fas fa-edit"></i>Edit</button>
+                  <button type="button" class="btn btn-danger" (click)="deleteCourseResource(courseResource.id)"><i class="far fa-trash-alt"></i></button>
+                </td>
             </tr>
           </tbody>
         </table>

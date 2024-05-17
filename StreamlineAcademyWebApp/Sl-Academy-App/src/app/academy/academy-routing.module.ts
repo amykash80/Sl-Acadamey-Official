@@ -15,6 +15,7 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
     {path:"add-location",component:AddLocationComponent},
     {path:"location-list",component:LocationListComponent},
     {path:"location-map/:latitude/:longitude",component:LocationMapComponent},
-    {path:"update-location/:id",component:UpdateLocationComponent}
+    {path:"update-location/:id",component:UpdateLocationComponent},
+    {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
   ]
   }
 ];

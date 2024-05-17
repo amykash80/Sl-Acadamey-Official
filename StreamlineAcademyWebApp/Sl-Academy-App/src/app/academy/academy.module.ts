@@ -18,6 +18,7 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { UpdateLocationComponent } from './pages/update-location/update-location
     LocationListComponent,
     LocationMapComponent,
     UpdateLocationComponent,
+    UpdateCorseResourceComponent,
     
     
   ],
