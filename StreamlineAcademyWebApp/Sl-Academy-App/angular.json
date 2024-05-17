@@ -40,7 +40,7 @@
               "src/assets/css/magnific-popup.min.css",
               "src/assets/css/style.css",
               "src/assets/css/custom.css",
-              "src/assets/css/datatables.css",
+              "src/assets/css/datatable.css",
               "src/assets/css/main.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@ngneat/hot-toast/src/styles/styles.css"
