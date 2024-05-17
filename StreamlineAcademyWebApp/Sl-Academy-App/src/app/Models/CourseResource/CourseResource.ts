@@ -3,7 +3,7 @@ import { CourseResourceType } from "../../Enums/courseresourcetype";
 export class CourseResource{
     Name?:string;
     Description?:string;
-    Type?:CourseResourceType;
+    Type?:CourseResourceType
     CourseId?:string=''
     File?:File;
 }
