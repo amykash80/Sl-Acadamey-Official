@@ -1,4 +1,5 @@
-<div class="container">
+<div class="app-main__inner">
+  <div class="container">
     <div class="row">
       <div class="col-12">
         <h2>Enquiry List</h2>
@@ -15,15 +16,28 @@
           </thead>
           <tbody>
             <tr *ngFor="let enquiry of enquirylist">
-              <td>{{enquiry.name}}</td>
-              <td>{{enquiry.email}}</td>
-              <td>{{enquiry.phoneNumber}}</td>
-              <td class="text-danger">{{enquiry.registrationStatus}}</td>
-              <td>{{enquiry.isActive}}</td>
+              <td>{{ enquiry.name }}</td>
+              <td>{{ enquiry.email }}</td>
+              <td>{{ enquiry.phoneNumber }}</td>
+              <td class="text-danger">{{ enquiry.registrationStatus }}</td>
+              <td>{{ enquiry.isActive }}</td>
 
               <td>
-                <button type="button" class="btn btn-success" [routerLink]="['/admin/updateenquiry',enquiry.id]" style="margin-right: 3px;"><i class="fas fa-edit"></i>Edit</button>
-                <button type="button" class="btn btn-danger" (click)="deleteEnquiry(enquiry.id)"><i class="far fa-trash-alt"></i></button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  [routerLink]="['/admin/updateenquiry', enquiry.id]"
+                  style="margin-right: 3px"
+                >
+                  <i class="fas fa-edit"></i>Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="deleteEnquiry(enquiry.id)"
+                >
+                  <i class="far fa-trash-alt"></i>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -31,4 +45,4 @@
       </div>
     </div>
   </div>
-  
+</div>
