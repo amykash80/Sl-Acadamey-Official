@@ -36,10 +36,29 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/css/slick.min.css",
+              "src/assets/css/magnific-popup.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/custom.css",
+              "src/assets/css/datatable.css",
+              "src/assets/css/main.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@ngneat/hot-toast/src/styles/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery-3.6.0.min.js",
+              "src/assets/js/jquery.counterup.min.js",
+              "src/assets/js/jquery-ui.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/jquery.magnific-popup.min.js",
+              "src/assets/js/slick.min.js",
+              "src/assets/js/nice-select.min.js",
+              "src/assets/js/tweenmax.min.js",
+              "src/assets/js/imagesloaded.pkgd.min.js",
+              "src/assets/js/isotope.pkgd.min.js",
+              "src/assets/js/main.js",
+              "src/assets/js/datatable.js"
+            ]
           },
           "configurations": {
             "production": {

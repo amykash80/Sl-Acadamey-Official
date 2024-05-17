@@ -3,8 +3,9 @@ export class CreateCourse{
     description?:string;
     durationInWeeks?:number;
     fee?:number;
-    categoryId?:string;
+    categoryId?:string=''
     academyId?:string;
+    
 }
 
 export class CourseResponse{
@@ -16,6 +17,8 @@ export class CourseResponse{
     academyName?:string;
     fee?:number;
     isActive?:boolean;
+    categoryId?:string=''
+    academyId?:string=''
 }
 export class UpdateCourse{
     id?:string;

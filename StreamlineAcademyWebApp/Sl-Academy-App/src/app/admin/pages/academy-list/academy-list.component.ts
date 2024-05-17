@@ -13,12 +13,10 @@ export class AcademyListComponent {
   constructor(
     private academyService: AcademyService,
     private sharedService: SharedService
-  ) {}
-  academyList: AcademyResponse[] = [];
-  
-  ngOnInit() {
+  ) {
     this.loadAllAcademies();
   }
+  academyList: AcademyResponse[] = [];
 
   loadAllAcademies() {
     this.academyService.academyList().subscribe({

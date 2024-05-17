@@ -11,6 +11,13 @@ import { CreateCourseContentComponent } from './Pages/create-course-content/crea
 import { CourseContentListComponent } from './Pages/course-content-list/course-content-list.component';
 import { UpdateCourseContentComponent } from './Pages/update-course-content/update-course-content.component';
 import { FormsModule } from '@angular/forms';
+import { CreateCourseResourceComponent } from './pages/create-course-resource/create-course-resource.component';
+import { CourseResourceListComponent } from './pages/course-resource-list/course-resource-list.component';
+import { CreateBatchComponent } from './Pages/create-batch/create-batch.component';
+import { AddLocationComponent } from './Pages/add-location/add-location.component';
+import { LocationListComponent } from './Pages/location-list/location-list.component';
+import { LocationMapComponent } from './pages/location-map/location-map.component';
+import { UpdateLocationComponent } from './pages/update-location/update-location.component';
 
 
 @NgModule({
@@ -23,6 +30,13 @@ import { FormsModule } from '@angular/forms';
     CreateCourseContentComponent,
     CourseContentListComponent,
     UpdateCourseContentComponent,
+    CreateCourseResourceComponent,
+    CourseResourceListComponent,
+    CreateBatchComponent,
+    AddLocationComponent,
+    LocationListComponent,
+    LocationMapComponent,
+    UpdateLocationComponent,
     
     
   ],

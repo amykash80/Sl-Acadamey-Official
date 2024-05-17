@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CountryService } from '../../../Services/country.service';
 import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
 import { SharedService } from '../../../Services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-academy',
@@ -14,6 +15,7 @@ import { SharedService } from '../../../Services/shared.service';
 export class RegisterAcademyComponent {
   academyService = inject(AcademyService);
   countryService = inject(CountryService);
+  router=inject(Router)
   sharedService=inject(SharedService)
   countries: any[] = [];
   states: any[] = [];
@@ -76,6 +78,7 @@ export class RegisterAcademyComponent {
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
+          this.router.navigate(['/admin/academylist'])
         }
         else{
           this.sharedService.showErrorToast(response.message)

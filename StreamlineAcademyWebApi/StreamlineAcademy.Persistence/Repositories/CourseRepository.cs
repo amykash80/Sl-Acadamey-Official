@@ -53,6 +53,8 @@ namespace StreamlineAcademy.Persistence.Repositories
                     AcademyName=course.Academy!.AcademyName,
                     IsActive = course.IsActive,
                     Fee = course.Fee,
+                    CategoryId = course.CategoryId,
+                    
                 };
 
                 return response;
