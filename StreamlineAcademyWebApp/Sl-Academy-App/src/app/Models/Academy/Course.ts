@@ -5,6 +5,7 @@ export class CreateCourse{
     fee?:number;
     categoryId?:string=''
     academyId?:string;
+    
 }
 
 export class CourseResponse{

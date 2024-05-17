@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class UpdateCourseComponent {
-  router: any;
+
   constructor(private courseService:CourseService,
               private sharedService:SharedService,
               private route: ActivatedRoute  ){

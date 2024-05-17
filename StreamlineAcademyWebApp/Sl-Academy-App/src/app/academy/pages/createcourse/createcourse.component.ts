@@ -4,6 +4,7 @@ import { CourseService } from '../../../Services/course.service';
 import { SharedService } from '../../../Services/shared.service';
 import { CreateCourse } from '../../../Models/Academy/Course';
 import { JSDocComment } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createcourse',
@@ -13,10 +14,11 @@ import { JSDocComment } from '@angular/compiler';
 export class CreateCourseComponent {
   courseService =inject(CourseService)
   sharedService=inject(SharedService)
+  
   courseModel: CreateCourse = new CreateCourse();
   categories: any[] = [];
   academyId:string=''
-  constructor() {}
+  constructor(private router:Router) {}
 
   ngOnInit(): void {
     this.getAllCategory();
@@ -38,6 +40,7 @@ export class CreateCourseComponent {
         console.log(response)
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message)
+          this.router.navigate(['/academy/course-list']);
         }
         else{
           this.sharedService.showErrorToast(response.message)

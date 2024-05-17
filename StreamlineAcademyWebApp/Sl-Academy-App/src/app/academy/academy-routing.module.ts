@@ -8,6 +8,8 @@ import { UpdateCourseComponent } from './Pages/update-course/update-course.compo
 import { CreateCourseContentComponent } from './Pages/create-course-content/create-course-content.component';
 import { CourseContentListComponent } from './Pages/course-content-list/course-content-list.component';
 import { UpdateCourseContentComponent } from './Pages/update-course-content/update-course-content.component';
+import { CreateCourseResourceComponent } from './pages/create-course-resource/create-course-resource.component';
+import { CourseResourceListComponent } from './pages/course-resource-list/course-resource-list.component';
 import { CreateBatchComponent } from './Pages/create-batch/create-batch.component';
 import { AddLocationComponent } from './Pages/add-location/add-location.component';
 import { LocationListComponent } from './Pages/location-list/location-list.component';
@@ -22,10 +24,12 @@ const routes: Routes = [
     {path:"dashboard",component:DashboardComponent},
     {path:"create-course",component:CreateCourseComponent},
     {path:"course-list",component:CourseListComponent},
-    {path:"update-course",component:UpdateCourseComponent},
+    {path:"update-course/:id",component:UpdateCourseComponent},
     {path:"create-course-content/:id",component:CreateCourseContentComponent},
     {path:"course-content-list/:id",component:CourseContentListComponent},
     {path:"update-course-content/:id/:courseId",component:UpdateCourseContentComponent},
+    {path:"create-course-resource/:id",component:CreateCourseResourceComponent},
+    {path:"course-resource-list/:id",component:CourseResourceListComponent},
     {path:"create-batch/:courseId",component:CreateBatchComponent},
     {path:"add-location",component:AddLocationComponent},
     {path:"location-list",component:LocationListComponent},

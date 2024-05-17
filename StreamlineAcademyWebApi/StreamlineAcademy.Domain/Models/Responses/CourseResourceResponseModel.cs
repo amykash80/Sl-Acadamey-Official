@@ -16,6 +16,7 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? FilePath { get; set; }
         public CourseResourceType? Type { get; set; }  
         public string? CourseName { get; set; }
+        public Guid? CourseId { get; set;}
 
     }
 }
