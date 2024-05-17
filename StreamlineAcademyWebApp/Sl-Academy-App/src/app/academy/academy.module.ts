@@ -19,6 +19,7 @@ import { LocationListComponent } from './Pages/location-list/location-list.compo
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
 import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { CreateInstructorComponent } from './pages/create-instructor/create-inst
     LocationMapComponent,
     UpdateLocationComponent,
     CreateInstructorComponent,
+    InstructorListComponent,
     
     
   ],

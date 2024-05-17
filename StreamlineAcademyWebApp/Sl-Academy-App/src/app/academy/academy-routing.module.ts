@@ -15,6 +15,8 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 
 
 const routes: Routes = [
@@ -34,7 +36,9 @@ const routes: Routes = [
     {path:"add-location",component:AddLocationComponent},
     {path:"location-list",component:LocationListComponent},
     {path:"location-map/:latitude/:longitude",component:LocationMapComponent},
-    {path:"update-location/:id",component:UpdateLocationComponent}
+    {path:"update-location/:id",component:UpdateLocationComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
   ]
   }
 ];

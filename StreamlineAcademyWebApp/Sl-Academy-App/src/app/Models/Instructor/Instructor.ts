@@ -1,3 +1,4 @@
+import { Skill } from "../../Enums/skill";
 import { UserRole } from "../../Enums/userrole";
 
 export class InstructorRequestModel{
@@ -23,8 +24,8 @@ export class InstructorResponseModel{
     phoneNumber?:string;
     email?:string;
     password?:string;
-    skill?:number;
-    workExperience?:number;
+    skill?:Skill;
+    workExperiance?:number;
     dateOfBirth?:string;
     countryId?:string=''
     stateId?:string=''
@@ -44,7 +45,7 @@ export class InstructorUpdateModel{
     phoneNumber?:string;
     email?:string;
     password?:string;
-    skill?:number;
+    skill?:Skill;
     workExperience?:number;
     dateOfBirth?:string;
     countryId?:string;
