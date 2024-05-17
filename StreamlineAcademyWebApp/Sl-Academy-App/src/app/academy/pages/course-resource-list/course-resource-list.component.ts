@@ -36,22 +36,22 @@ loadAllCourseResource(){
     },
   });
 }
-// deleteCourseContent(courseContentId: any) {
-//   this.sharedService
-//     .fireConfirmSwal('Are You sure you want to delete this Content ')
-//     .then((result:any) => {
-//       if (result.isConfirmed) {
-//         this.courseService.deleteCourseContent(courseContentId).subscribe({
-//           next: (response) => {
-//             if (response.isSuccess) {
-//               this.sharedService.showSuccessToast(response.message);
-//               this.loadAllCourseContents();
-//             } else {
-//               this.sharedService.showErrorToast(response.message);
-//             }
-//           },
-//         });
-//       }
-//     });
-// }
+deleteCourseResource(courseResourceId: any) {
+  this.sharedService
+    .fireConfirmSwal('Are You sure you want to delete this Resource ')
+    .then((result:any) => {
+      if (result.isConfirmed) {
+        this.courseResourceService.deleteCourseResource(courseResourceId).subscribe({
+          next: (response) => {
+            if (response.isSuccess) {
+              this.sharedService.showSuccessToast(response.message);
+              this.loadAllCourseResource();
+            } else {
+              this.sharedService.showErrorToast(response.message);
+            }
+          },
+        });
+      }
+    });
+}
 }
