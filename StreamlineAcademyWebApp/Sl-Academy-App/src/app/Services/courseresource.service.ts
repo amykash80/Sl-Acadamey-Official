@@ -22,5 +22,8 @@ export class CourseresourceService {
   updateCourseResource(courseResourceUpdateModel:UpdateCourseResource):Observable<ApiResponse<CourseResourceResponse>>{
     return this.http.put<ApiResponse<CourseResourceResponse>>(this.baseUrl+"CourseResource/updatecourseResource",courseResourceUpdateModel)
   }
+  deleteCourseResource(id:string):Observable<ApiResponse<string>>{
+    return this.http.delete<ApiResponse<string>>(this.baseUrl+"CourseResource/deleteCourseResource/"+id)
+  }
  
 }
