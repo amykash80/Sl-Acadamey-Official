@@ -20,8 +20,9 @@ export class ForgotPasswordComponent {
     this.authService.forgotPassword(this.forgotPasswordModel).subscribe({
    next:(res)=>{
     if(res.isSuccess){
-   this.sharedService.showSuccessToast(res.message)
-   this.router.navigate(['/reset-password'])
+      console.log(res);
+      
+   this.sharedService.showSuccessToast(res.result)
     }
     else {
    this.sharedService.showErrorToast(res.message)

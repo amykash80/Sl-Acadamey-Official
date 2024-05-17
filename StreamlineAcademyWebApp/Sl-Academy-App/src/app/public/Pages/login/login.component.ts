@@ -30,6 +30,7 @@ export class LoginComponent {
         } 
         else {
           this.sharedService.showErrorToast(response.message);
+          this.loadSpinner=false;
         }
         switch(response.result.userRole){
           case UserRole.SuperAdmin:

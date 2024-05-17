@@ -18516,7 +18516,7 @@ hr.style1 {
 .filter-menu .indicator {
   position: absolute;
   height: 12px;
-  background-image: url("../img/theme-img/button_shape.png");
+  background-image: url("/assets/img/theme-img/button_shape.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   width: calc(var(--width-set) + 24px);

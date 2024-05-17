@@ -12,9 +12,6 @@ import { CreateCourseResourceComponent } from './pages/create-course-resource/cr
 import { CourseResourceListComponent } from './pages/course-resource-list/course-resource-list.component';
 
 
-
-
-
 const routes: Routes = [
   {path:"",component:AcademyComponent,
   children:[
