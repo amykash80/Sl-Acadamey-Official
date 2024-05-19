@@ -13,8 +13,6 @@ export class DashboardComponent {
   {
     this.status = !this.status;       
   }
-  onLogOut(){
-    this.shared.logOutUser();
-  }
+ 
 
 }
