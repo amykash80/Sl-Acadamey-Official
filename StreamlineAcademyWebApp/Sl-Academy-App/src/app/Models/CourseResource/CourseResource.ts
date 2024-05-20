@@ -3,7 +3,7 @@ import { CourseResourceType } from "../../Enums/courseresourcetype";
 export class CourseResource{
     Name?:string;
     Description?:string;
-    Type?:CourseResourceType;
+    Type?:CourseResourceType
     CourseId?:string=''
     File?:File;
 }
@@ -17,13 +17,14 @@ export class CourseResourceResponse{
     courseId?:string=''
     courseName?:string;
     isActive?:boolean;
+    File?:File
 }
 
 export class UpdateCourseResource{
-    id?:string;
-    name?:string;
-    description?:string;
-    type?:CourseResourceType;
-    courseId?:string;
-    file?:File;
+    Id?:string;
+    Name?:string;
+    Description?:string;
+    Type?:CourseResourceType;
+    CourseId?:string;
+    File?:File;
 }

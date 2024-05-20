@@ -1,2 +1,11 @@
-        <router-outlet></router-outlet>
-
+<div
+  class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
+>
+  <app-dashboard-header></app-dashboard-header>
+  <div class="app-main">
+    <app-sidebar class="app-sidebar sidebar-shadow"></app-sidebar>
+    <div class="app-main__outer">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

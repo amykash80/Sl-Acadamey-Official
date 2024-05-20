@@ -17,10 +17,16 @@ export class CourseresourceService {
     return this.http.post<ApiResponse<CourseResourceResponse>>(this.baseUrl + "CourseResource/addCourseResource",courseResourceModel)
   }
   getCourseResourceByCourseId(courseId:string):Observable<ApiResponse<CourseResourceResponse[]>>{
-    return this.http.get<ApiResponse<CourseResourceResponse[]>>(this.baseUrl+"CourseResource/getCourseResourceByCourseId"+courseId)
+    return this.http.get<ApiResponse<CourseResourceResponse[]>>(this.baseUrl+"CourseResource/getCourseResourceByCourseId/"+courseId)
   }
-  updateCourseResource(courseResourceUpdateModel:UpdateCourseResource):Observable<ApiResponse<CourseResourceResponse>>{
+  updateCourseResource(courseResourceUpdateModel:FormData):Observable<ApiResponse<CourseResourceResponse>>{
     return this.http.put<ApiResponse<CourseResourceResponse>>(this.baseUrl+"CourseResource/updatecourseResource",courseResourceUpdateModel)
+  }
+  deleteCourseResource(id:string):Observable<ApiResponse<string>>{
+    return this.http.delete<ApiResponse<string>>(this.baseUrl+"CourseResource/deleteCourseResource/"+id)
+  }
+  getCourseResourceById(id:string):Observable<ApiResponse<CourseResourceResponse>>{
+    return this.http.get<ApiResponse<CourseResourceResponse>>(this.baseUrl+"CourseResource/getCourseResourceById/"+id)
   }
  
 }
