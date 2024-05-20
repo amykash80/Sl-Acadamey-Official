@@ -15,4 +15,7 @@ export class BatchService {
   createBatch(courseModel:BatchRequestModel):Observable<ApiResponse<BatchResponseModel>>{
     return this.http.post<ApiResponse<BatchResponseModel>>(this.baseUrl + "Batch/createBatch",courseModel)
   }
+  getAllBatchesByCourseId(courseId:string):Observable<ApiResponse<BatchResponseModel[]>>{
+    return this.http.get<ApiResponse<BatchResponseModel[]>>(this.baseUrl + "Batch/getAllBatchesByCourseId/"+courseId)
+  }
 }

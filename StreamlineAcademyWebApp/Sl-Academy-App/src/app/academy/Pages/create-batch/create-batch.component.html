@@ -15,9 +15,11 @@
                 [(ngModel)]="batchModel.batchName"
                 [class.is-invalid]="batchName.touched && batchName.invalid"
                 required
+                maxlength="40"
                 placeholder=""
               />
               <div *ngIf="batchName.touched && batchName.errors?.['required']" class="error-message">Batch Name is required</div>
+
             </div>
   
             <div class="form-group col-md-6">
@@ -32,10 +34,14 @@
                 [class.is-invalid]="batchSize.touched && batchSize.invalid"
                 required
                 min="1"
+                max="40"
                 placeholder=""
               />
               <div *ngIf="batchSize.touched && batchSize.errors?.['required']" class="error-message">Batch Size is required</div>
               <div *ngIf="batchSize.touched && batchSize.errors?.['min']" class="error-message">Batch Size must be at least 1</div>
+              <div *ngIf="batchSize.touched && batchSize.errors?.['max']" class="error-message">Batch Size cannot exceed 40</div>
+            
+              
             </div>
   
             <div class="form-group col-md-6">
@@ -50,6 +56,7 @@
                 [class.is-invalid]="startDate.touched && startDate.invalid"
                 required
                 placeholder=""
+                (change)="validateDates(batchForm)"
               />
               <div *ngIf="startDate.touched && startDate.errors?.['required']" class="error-message">Start Date is required</div>
             </div>
@@ -66,8 +73,11 @@
                 [class.is-invalid]="endDate.touched && endDate.invalid"
                 required
                 placeholder=""
+                (change)="validateDates(batchForm)"
               />
               <div *ngIf="endDate.touched && endDate.errors?.['required']" class="error-message">End Date is required</div>
+              <div *ngIf="endDate.touched && endDate.errors?.['endDateInvalid']" class="error-message">End Date must be greater than Start Date</div>
+  
             </div>
   
             <div class="form-group col-md-6">
@@ -107,7 +117,9 @@
             </div>
   
             <div class="form-btn col-12 text-center">
-              <button class="th-btn w-100" [disabled]="batchForm.invalid" (click)="addBatch()">Add Now</button>
+              <button class="th-btn w-100" [disabled]="batchForm.invalid" (click)="addBatch()">Add Now
+                <app-spinner *ngIf="loadSpinner"></app-spinner>
+            </button>
             </div>
           </div>
           <p class="form-messages mb-0 mt-3"></p>

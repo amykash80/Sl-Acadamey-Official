@@ -23,6 +23,8 @@ import { CreateInstructorComponent } from './pages/create-instructor/create-inst
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HeaderComponent } from './Components/header/header.component';
+import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { HeaderComponent } from './Components/header/header.component';
     InstructorListComponent,
     SidebarComponent,
     HeaderComponent,
+    BatchListComponent
     
     
   ],
@@ -54,6 +57,7 @@ import { HeaderComponent } from './Components/header/header.component';
     CommonModule,
     AcademyRoutingModule,
     FormsModule,
+    SharedModule
   ]
 })
 export class AcademyModule { }

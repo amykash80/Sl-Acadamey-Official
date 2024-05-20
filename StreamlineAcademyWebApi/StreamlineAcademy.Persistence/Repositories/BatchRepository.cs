@@ -40,7 +40,11 @@ namespace StreamlineAcademy.Persistence.Repositories
                     EndDate = batch.EndDate,
                     CourseName = batch.Course?.Name,
                     InstructorName = batch.Instructor?.User?.Name,
-                    LocationName = batch.Location?.Address
+                    LocationName = batch.Location?.Address,
+                    InstructorId=batch.Instructor?.Id,
+                    LocationId=batch.Location?.Id,
+                    IsActive= batch.IsActive,       
+                    
                 };
 
                 return response;

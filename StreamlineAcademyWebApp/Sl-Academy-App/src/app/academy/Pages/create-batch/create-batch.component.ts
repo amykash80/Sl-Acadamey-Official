@@ -8,6 +8,7 @@ import { LocationService } from '../../../Services/location.service';
 import { BatchService } from '../../../Services/batch.service';
 import { SharedService } from '../../../Services/shared.service';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-batch',
@@ -22,6 +23,7 @@ export class CreateBatchComponent {
   sharedService=inject(SharedService)
   router=inject(Router)
   courseId: string = '';
+  loadSpinner:boolean=false
   constructor() {
     this.activatedRoute.params.subscribe((paramVal) => {
       this.courseId = paramVal['courseId'];
@@ -47,22 +49,36 @@ export class CreateBatchComponent {
   batchModel: BatchRequestModel = new BatchRequestModel();
   instructors: InstructorResponseModel[] = [];
   locations: LocationResponseModel[] = [];
+  validateDates(form: NgForm) {
+    const startDate = new Date(this.batchModel.startDate!);
+    const endDate = new Date(this.batchModel.endDate!);
+    
+    if (startDate && endDate && endDate <= startDate) {
+      form.controls['endDate'].setErrors({ endDateInvalid: true });
+    } else {
+      form.controls['endDate'].setErrors(null);
+    }
+  }
   addBatch() {
+    this.loadSpinner=true;
     this.batchModel.courseId=this.courseId
   this.batchService.createBatch(this.batchModel).subscribe({
       next: (response) => {
         console.log(response)
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message);
-          // this.router.navigate(['/academy/course-list'])
+          this.loadSpinner=false;
+          this.router.navigate(['/academy/batch-list',this.courseId])
         }
         else{
-          this.sharedService.showErrorToast(response.message)
+          this.sharedService.showErrorToast(response.message);
+          this.loadSpinner=false;
         }
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.BadRequest) {
           console.log(err.message)
+          this.loadSpinner=false;
         }
       }
     });
