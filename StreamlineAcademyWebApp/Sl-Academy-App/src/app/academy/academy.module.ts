@@ -21,6 +21,8 @@ import { UpdateLocationComponent } from './pages/update-location/update-location
 import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { HeaderComponent } from './Components/header/header.component';
 
 
 @NgModule({
@@ -43,6 +45,8 @@ import { InstructorListComponent } from './pages/instructor-list/instructor-list
     UpdateCorseResourceComponent,
     CreateInstructorComponent,
     InstructorListComponent,
+    SidebarComponent,
+    HeaderComponent,
     
     
   ],

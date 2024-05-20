@@ -28,7 +28,7 @@ import { DashboardHeaderComponent } from './Components/dashboard-header/dashboar
     CreateAcademyTypeComponent,
     AcademyTypeListComponent,
     UpdateAcademyyComponent,
-    DashboardHeaderComponent
+    DashboardHeaderComponent,
   ],
   imports: [
     CommonModule,

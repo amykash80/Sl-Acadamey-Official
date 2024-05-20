@@ -42,7 +42,9 @@ const routes: Routes = [
     {path:"create-instructor",component:CreateInstructorComponent},
     {path:"instructor-list",component:InstructorListComponent},
   ]
-  }
+  
+  },
+
 ];
 
 @NgModule({

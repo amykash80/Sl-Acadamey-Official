@@ -26,8 +26,9 @@ const routes: Routes = [
     {path:"create-academyType",component:CreateAcademyTypeComponent},
     {path:"academy-type-list",component:AcademyTypeListComponent},
     {path:"profile",component:ProfileComponent},
-    
-  ]}
+
+  ]},
+
 ];
 
 @NgModule({
