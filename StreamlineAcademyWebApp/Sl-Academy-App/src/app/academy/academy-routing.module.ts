@@ -16,6 +16,8 @@ import { LocationListComponent } from './Pages/location-list/location-list.compo
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
 import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 
 
 const routes: Routes = [
@@ -37,6 +39,8 @@ const routes: Routes = [
     {path:"location-map/:latitude/:longitude",component:LocationMapComponent},
     {path:"update-location/:id",component:UpdateLocationComponent},
     {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
   ]
   }
 ];
