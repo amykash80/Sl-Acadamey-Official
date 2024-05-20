@@ -18,6 +18,7 @@ import { UpdateLocationComponent } from './pages/update-location/update-location
 import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
+import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
     {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
     {path:"create-instructor",component:CreateInstructorComponent},
     {path:"instructor-list",component:InstructorListComponent},
+    {path:"batch-list/:courseId",component:BatchListComponent}
   ]
   
   },
