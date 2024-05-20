@@ -40,6 +40,9 @@
               <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/create-batch',course.id]">
                 Add Batch
               </button>
+              <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/batch-list',course.id]">
+                view Batches
+              </button>
               <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/create-course-resource',course.id]">Add Resource</button>
               <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-course',course.id]"><i class="fas fa-edit"></i></button>
              <button type="button" class="btn btn-danger" (click)="deleteCourse(course.id)"><i class="far fa-trash-alt"></i></button>

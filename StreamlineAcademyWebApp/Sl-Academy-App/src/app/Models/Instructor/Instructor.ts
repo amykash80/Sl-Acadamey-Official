@@ -9,7 +9,7 @@ export class InstructorRequestModel{
     email?:string;
     password?:string;
     skill?:Skill;
-    workExperience?:number;
+    workExperiance?:number;
     dateOfBirth?:string;
     countryId?:string=''
     stateId?:string=''

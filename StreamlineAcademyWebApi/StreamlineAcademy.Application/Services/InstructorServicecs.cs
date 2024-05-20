@@ -78,7 +78,7 @@ namespace StreamlineAcademy.Application.Services
                     StateId = model.StateId,
                     CityId = model.CityId,
                     AcademyId=academyId,
-                    WorkExperiance=model.WorkExperience,
+                    WorkExperiance=model.WorkExperiance,
                     DateOfBirth=model.DateOfBirth,
                     Skill=Skill.Programming
                 };
@@ -167,7 +167,7 @@ namespace StreamlineAcademy.Application.Services
 
             var instructor = await instructorRepository.GetByIdAsync(x=>x.Id==user.Id);
             instructor.DateOfBirth = request.DateOfBirth;
-            instructor.WorkExperiance = request.WorkExperience;
+            instructor.WorkExperiance = request.WorkExperiance;
             instructor.DateOfBirth=request.DateOfBirth;
             instructor.CountryId= request.CountryId;
             instructor.StateId=request.StateId;
