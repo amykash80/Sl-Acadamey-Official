@@ -27,12 +27,7 @@ export class CreateInstructorComponent {
   selectedStateId: string = '';
   instructorModel: InstructorRequestModel = new InstructorRequestModel();
   instructors:InstructorResponseModel[]=[];
-//   skill: Skill[] = Object.values(Skill)
-// .filter(value => typeof value === 'number') as Skill[];
 
-// getSkillName(type: Skill): string {
-//   return Skill[type];
-// }
 
   constructor(
   ) {}

@@ -2,11 +2,9 @@
     <div class="row justify-content-center">
       <div class="col-lg-6 col-xl-9">
         <form
-          #instructorRegistrationForm="ngForm"
-          method="POST"
-          class="register-form ajax-contact"
+        method="POST" #updateInstructorForm="ngForm" class="register-form ajax-contact"
         >
-          <h5 class="form-title">Register an Instructor</h5>
+          <h5 class="form-title">Update Instructor</h5>
           <div class="row">
             <div class="form-group col-md-6">
               <label><i class="far fa-user"></i> Name*</label>
@@ -15,7 +13,7 @@
                 class="form-control"
                 name="name"
                 #name="ngModel"
-                [(ngModel)]="instructorModel.name"
+                [(ngModel)]="instructor.name"
                 placeholder="Enter your name"
                 required
               />
@@ -28,7 +26,7 @@
                 class="form-control"
                 name="address"
                 #address="ngModel"
-                [(ngModel)]="instructorModel.address"
+                [(ngModel)]="instructor.address"
                 placeholder="Enter your address"
                 required
               />
@@ -41,7 +39,7 @@
                 class="form-control"
                 name="postalCode"
                 #postalCode="ngModel"
-                [(ngModel)]="instructorModel.postalCode"
+                [(ngModel)]="instructor.postalCode"
                 placeholder="Enter your postal code"
                 required
                 minlength="6"
@@ -56,7 +54,7 @@
                 class="form-control"
                 name="phoneNumber"
                 #phoneNumber="ngModel"
-                [(ngModel)]="instructorModel.phoneNumber"
+                [(ngModel)]="instructor.phoneNumber"
                 placeholder="Enter your phone number"
                 required
               />
@@ -69,56 +67,49 @@
                 class="form-control"
                 name="email"
                 #email="ngModel"
-                [(ngModel)]="instructorModel.email"
+                [(ngModel)]="instructor.email"
                 placeholder="Enter your email"
                 required
               />
               <div *ngIf="email.touched && email.errors?.['required']" class="error-message">Email is required</div>
               <div *ngIf="email.touched && email.errors?.['email']" class="error-message">Invalid email format</div>
             </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-lock"></i> Password*</label>
-              <input
-                type="password"
-                class="form-control"
-                name="password"
-                #password="ngModel"
-                [(ngModel)]="instructorModel.password"
-                placeholder="Enter your password"
-                required
-              />
-              <div *ngIf="password.touched && password.errors?.['required']" class="error-message">Password is required</div>
-            </div>
-            <div class="form-group">
-              <label for="resourceType">Skill:</label>
-              <select class="form-control" id="skill" 
-              (change)="getDrpDownValue($event)"
-               name="Skill">
-                 <option Value="0" selected>Select Skill</option>
-                 <option value="1">Programming</option>
-                  <option Value="2">Design</option>
-                 <option Value="3">Marketing</option>
-                 <option Value="4">Writing</option>
-                 <option Value="5">Communication</option>
-                 <option Value="6">Other</option>
-   
-              </select>
-            </div>
             
+           
+            <div class="form-group col-md-6">
+              <label for="skill">Skill:</label>
+              <select
+                class="form-control"
+                id="skill"
+                name="skill"
+                #skill="ngModel"
+                [(ngModel)]="instructor.skill"
+                required
+              >
+                <option value="0" selected>Select Skill</option>
+                <option value="1">Programming</option>
+                <option value="2">Design</option>
+                <option value="3">Marketing</option>
+                <option value="4">Writing</option>
+                <option value="5">Communication</option>
+                <option value="6">Other</option>
+              </select>
+              <div *ngIf="skill.touched && skill.errors?.['required']" class="error-message">Skill is required</div>
+            </div>
             <div class="form-group col-md-6">
               <label><i class="fas fa-briefcase"></i> Work Experience (Years)*</label>
               <input
                 type="number"
                 class="form-control"
-                name="workExperience"
-                #workExperience="ngModel"
-                [(ngModel)]="instructorModel.WorkExperiance"
+                name="WorkExperiance"
+                #WorkExperiance="ngModel"
+                [(ngModel)]="instructor.workExperiance"
                 placeholder="Enter your work experience"
                 required
                 min="0"
               />
-              <div *ngIf="workExperience.touched && workExperience.errors?.['required']" class="error-message">Work experience is required</div>
-              <div *ngIf="workExperience.touched && workExperience.errors?.['min']" class="error-message">Work experience must be a positive number</div>
+              <div *ngIf="WorkExperiance.touched && WorkExperiance.errors?.['required']" class="error-message">Work experience is required</div>
+              <div *ngIf="WorkExperiance.touched && WorkExperiance.errors?.['min']" class="error-message">Work experience must be a positive number</div>
             </div>
             <div class="form-group col-md-6">
               <label><i class="far fa-calendar-alt"></i> Date of Birth*</label>
@@ -127,64 +118,74 @@
                 class="form-control"
                 name="dateOfBirth"
                 #dateOfBirth="ngModel"
-                [(ngModel)]="instructorModel.dateOfBirth"
-                placeholder="Enter your date of birth"
+                [(ngModel)]="instructor.dateOfBirth"
                 required
               />
               <div *ngIf="dateOfBirth.touched && dateOfBirth.errors?.['required']" class="error-message">Date of birth is required</div>
             </div>
             <div class="form-group col-md-6">
-              <label><i class="fas fa-globe"></i> Country*</label>
+              <label>Country*</label>
               <select
-                class="form-control"
+                class="form-control "
                 name="countryId"
                 #countryId="ngModel"
                 (change)="filterStates($event)"
-                [(ngModel)]="instructorModel.countryId"
+                [(ngModel)]="instructor.countryId"
+                [class.is-invalid]="countryId.touched && countryId.invalid"
                 required
+                placeholder=""
               >
-                <option value="">Select Country</option>
-                <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
+              <option value="">Select Country</option>
+              <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
+               
               </select>
               <div *ngIf="countryId.touched && countryId.errors?.['required']" class="error-message">Country is required</div>
             </div>
             <div class="form-group col-md-6">
-              <label><i class="fas fa-flag"></i> State*</label>
+              <label>State*</label>
               <select
-                class="form-control"
+                class="form-control "
                 name="stateId"
+                ngModel
                 #stateId="ngModel"
-                (change)="filteredCities($event)"
-                [(ngModel)]="instructorModel.stateId"
+                [(ngModel)]="instructor.stateId"
+              (change)="filteredCities($event)"
+                [class.is-invalid]="stateId.touched && stateId.invalid"
                 required
+                placeholder=""
               >
-                <option value="">Select state</option>
-                <option *ngFor="let state of filteredStates" [value]="state.id">{{ state.stateName }}</option>
+              <option value="">Select state</option>
+              <option *ngFor="let state of states" [value]="state.id">{{ state.stateName }}</option>
               </select>
               <div *ngIf="stateId.touched && stateId.errors?.['required']" class="error-message">State is required</div>
             </div>
+
             <div class="form-group col-md-6">
-              <label><i class="fas fa-city"></i> City*</label>
-              <select
-                class="form-control"
-                name="cityId"
-                #cityId="ngModel"
-                [(ngModel)]="instructorModel.cityId"
-                required
-              >
-                <option value="">Select city</option>
-                <option *ngFor="let city of filteredCitiesList" [value]="city.id">{{ city.cityName }}</option>
-              </select>
-              <div *ngIf="cityId.touched && cityId.errors?.['required']" class="error-message">City is required</div>
-            </div>
+                <label>City*</label>
+                <select
+                  class="form-control"
+                  name="cityId"
+                  ngModel
+                  #cityId="ngModel"
+                  [(ngModel)]="instructor.cityId"
+                  [class.is-invalid]="cityId.touched && cityId.invalid"
+                  required
+                >
+                  <option value="">Select City</option>
+                  <option *ngFor="let city of cities" [value]="city.id">{{ city.cityName }}</option>
+                </select>
+                <div *ngIf="cityId.touched && cityId.invalid && cityId.errors?.['required']" class="error-message">City required</div>
+              </div>
+  
+           
           </div>
           <div class="form-btn col-12 text-center">
             <button
               class="th-btn black-btn-2 w-100"
-              [disabled]="instructorRegistrationForm.invalid"
-              (click)="addInstructor()"
+              lass="th-btn w-100" [disabled]="updateInstructorForm.invalid"
+              (click)="updateInstructor()"
             >
-              Register Now
+              Update Instructor
             </button>
           </div>
           <p class="form-messages mb-0 mt-3"></p>

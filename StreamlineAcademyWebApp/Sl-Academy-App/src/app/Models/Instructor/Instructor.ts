@@ -9,7 +9,7 @@ export class InstructorRequestModel{
     email?:string;
     password?:string;
     skill?:number;
-    workExperience?:number;
+    WorkExperiance?:number;
     dateOfBirth?:string;
     countryId?:string=''
     stateId?:string=''
@@ -23,7 +23,6 @@ export class InstructorResponseModel{
     postalCode?:string;
     phoneNumber?:string;
     email?:string;
-    password?:string;
     skill?:Skill;
     workExperiance?:number;
     dateOfBirth?:string;
@@ -31,7 +30,7 @@ export class InstructorResponseModel{
     stateId?:string=''
     cityId?:string=''
     userRole?:UserRole;
-    countryName?:string;
+    countryName?:string=''
     stateName?:string; 
     cityName?:string;
     isActive?: boolean;
@@ -44,9 +43,8 @@ export class InstructorUpdateModel{
     postalCode?:string;
     phoneNumber?:string;
     email?:string;
-    password?:string;
     skill?:Skill;
-    workExperience?:number;
+    WorkExperiance?:number;
     dateOfBirth?:string;
     countryId?:string;
     stateId?:string;

@@ -21,6 +21,7 @@ import { UpdateLocationComponent } from './pages/update-location/update-location
 import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { UpdateCorseResourceComponent } from './pages/update-corse-resource/upda
     CreateInstructorComponent,
     InstructorListComponent,
     UpdateCorseResourceComponent,
+    UpdateInstructorComponent,
     
     
   ],
