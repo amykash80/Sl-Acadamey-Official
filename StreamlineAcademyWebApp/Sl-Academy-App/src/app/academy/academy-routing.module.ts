@@ -19,6 +19,9 @@ import { CreateInstructorComponent } from './pages/create-instructor/create-inst
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 
 
 const routes: Routes = [
@@ -43,8 +46,13 @@ const routes: Routes = [
     {path:"instructor-list",component:InstructorListComponent},
     {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
     { path:"update-instructor/:id", component: UpdateInstructorComponent },
+    {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
   ]
-  }
+  
+  },
+
 ];
 
 @NgModule({

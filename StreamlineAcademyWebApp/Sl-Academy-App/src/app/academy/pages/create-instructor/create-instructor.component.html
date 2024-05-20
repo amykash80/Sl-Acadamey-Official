@@ -92,15 +92,16 @@
             <div class="form-group">
               <label for="resourceType">Skill:</label>
               <select class="form-control" id="skill" 
-              (change)="getDrpDownValue($event)"
+              (change)="onSkillChange($event)"
                name="Skill">
-                 <option Value="0" selected>Select Skill</option>
+                 <option value="0" selected>Select Skill</option>
                  <option value="1">Programming</option>
-                  <option Value="2">Design</option>
-                 <option Value="3">Marketing</option>
-                 <option Value="4">Writing</option>
-                 <option Value="5">Communication</option>
-                 <option Value="6">Other</option>
+                 <option value="2">Design</option>
+                 <option value="3">Marketing</option>
+                 <option value="4">Writing</option>
+                 <option value="5">Communication</option>
+                 <option value="6">Other</option>
+             
    
               </select>
             </div>

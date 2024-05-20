@@ -15,7 +15,6 @@ import { Skill } from '../../../Enums/skill';
 export class CreateInstructorComponent {
   instructorService=inject(InstructorService)
   countryService = inject(CountryService);
-  dropDownVal:number=0
   router=inject(Router)
   sharedService=inject(SharedService)
   countries: any[] = [];
@@ -28,17 +27,19 @@ export class CreateInstructorComponent {
   instructorModel: InstructorRequestModel = new InstructorRequestModel();
   instructors:InstructorResponseModel[]=[];
 
-
   constructor(
   ) {}
+  selectedSkill!: Skill;
+
   ngOnInit(): void {
     this.getAllCountries();
     this.getAllStates();
     this.getAllCities();
-   
   }
-  getDrpDownValue(event:any){
-  this.dropDownVal=event.target.value
+  onSkillChange(event: Event){
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectedSkill = Number(value) as Skill;
+    console.log(this.selectedSkill); 
   }
 
   getAllCountries() {
@@ -72,16 +73,14 @@ export class CreateInstructorComponent {
     );
     console.log(this.filteredCitiesList);
   }
-  addInstructor() {
-    console.log("btn clicked");
-    
+  addInstructor() {    
     this.instructorModel.postalCode=this.instructorModel.postalCode?.toString();
-    this.instructorModel.skill=this.dropDownVal
+    this.instructorModel.skill=this.selectedSkill
     this.instructorService.addinstructor(this.instructorModel).subscribe({
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
-          this.router.navigate(['/academy/instuctor-list'])
+          this.router.navigate(['/instuctor-list'])
         }
         else{
           this.sharedService.showErrorToast(response.message)

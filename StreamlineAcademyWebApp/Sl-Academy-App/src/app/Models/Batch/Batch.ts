@@ -4,6 +4,9 @@ export class BatchRequestModel{
     startDate?:Date;
     endDate?:Date;
     courseId?:string;
-    instructorId?:string;
-    locationId?:string;
+    instructorId?:string=''
+    locationId?:string=''
+}
+export class BatchResponseModel{
+    
 }
