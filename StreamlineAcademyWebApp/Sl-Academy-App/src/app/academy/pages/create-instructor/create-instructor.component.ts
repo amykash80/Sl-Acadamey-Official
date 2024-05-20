@@ -15,7 +15,6 @@ import { Skill } from '../../../Enums/skill';
 export class CreateInstructorComponent {
   instructorService=inject(InstructorService)
   countryService = inject(CountryService);
-  dropDownVal:number=0
   router=inject(Router)
   sharedService=inject(SharedService)
   countries: any[] = [];
@@ -37,7 +36,7 @@ export class CreateInstructorComponent {
     this.getAllStates();
     this.getAllCities();
   }
-  onSkillChange(event: Event): void {
+  onSkillChange(event: Event){
     const value = (event.target as HTMLSelectElement).value;
     this.selectedSkill = Number(value) as Skill;
     console.log(this.selectedSkill); 
@@ -74,9 +73,7 @@ export class CreateInstructorComponent {
     );
     console.log(this.filteredCitiesList);
   }
-  addInstructor() {
-    console.log("btn clicked");
-    
+  addInstructor() {    
     this.instructorModel.postalCode=this.instructorModel.postalCode?.toString();
     this.instructorModel.skill=this.selectedSkill
     this.instructorService.addinstructor(this.instructorModel).subscribe({
