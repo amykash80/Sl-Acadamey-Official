@@ -8,7 +8,7 @@ export class InstructorRequestModel{
     phoneNumber?:string;
     email?:string;
     password?:string;
-    skill?:number;
+    skill?:Skill;
     workExperience?:number;
     dateOfBirth?:string;
     countryId?:string=''

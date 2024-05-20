@@ -27,23 +27,20 @@ export class CreateInstructorComponent {
   selectedStateId: string = '';
   instructorModel: InstructorRequestModel = new InstructorRequestModel();
   instructors:InstructorResponseModel[]=[];
-//   skill: Skill[] = Object.values(Skill)
-// .filter(value => typeof value === 'number') as Skill[];
-
-// getSkillName(type: Skill): string {
-//   return Skill[type];
-// }
 
   constructor(
   ) {}
+  selectedSkill!: Skill;
+
   ngOnInit(): void {
     this.getAllCountries();
     this.getAllStates();
     this.getAllCities();
-   
   }
-  getDrpDownValue(event:any){
-  this.dropDownVal=event.target.value
+  onSkillChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectedSkill = Number(value) as Skill;
+    console.log(this.selectedSkill); 
   }
 
   getAllCountries() {
@@ -81,12 +78,12 @@ export class CreateInstructorComponent {
     console.log("btn clicked");
     
     this.instructorModel.postalCode=this.instructorModel.postalCode?.toString();
-    this.instructorModel.skill=this.dropDownVal
+    this.instructorModel.skill=this.selectedSkill
     this.instructorService.addinstructor(this.instructorModel).subscribe({
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
-          this.router.navigate(['/academy/instuctor-list'])
+          this.router.navigate(['/instuctor-list'])
         }
         else{
           this.sharedService.showErrorToast(response.message)
