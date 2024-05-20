@@ -25,6 +25,10 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
 
 
 @NgModule({
@@ -49,7 +53,11 @@ import { SharedModule } from '../shared/shared.module';
     InstructorListComponent,
     SidebarComponent,
     HeaderComponent,
-    BatchListComponent
+    BatchListComponent,
+    CreateInstructorComponent,
+    InstructorListComponent,
+    UpdateCorseResourceComponent,
+    UpdateInstructorComponent,
     
     
   ],
