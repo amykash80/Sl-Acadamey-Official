@@ -17,5 +17,10 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? InstructorName { get; set; }
         public string? LocationName { get; set; }
         public string? StudentName {  get; set; }
+        public bool ? IsActive { get; set; }
+        public Guid ? InstructorId { get; set; }
+        public Guid? LocationId { get; set; }
+        public Guid? CourseId { get; set; }
+
     }
 }

@@ -25,6 +25,8 @@ import { CreateInstructorComponent } from './pages/create-instructor/create-inst
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { UpdateInstructorComponent } from './pages/update-instructor/update-inst
     InstructorListComponent,
     UpdateCorseResourceComponent,
     UpdateInstructorComponent,
+    UpdateBatchComponent,
+    
     
     
   ],
@@ -61,6 +65,8 @@ import { UpdateInstructorComponent } from './pages/update-instructor/update-inst
     CommonModule,
     AcademyRoutingModule,
     FormsModule,
+    SharedModule
+  
   ]
 })
 export class AcademyModule { }

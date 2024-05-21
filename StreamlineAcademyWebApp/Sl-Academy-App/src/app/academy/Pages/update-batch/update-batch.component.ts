@@ -1,31 +1,40 @@
 import { Component, inject } from '@angular/core';
-import { BatchRequestModel } from '../../../Models/Batch/Batch';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  BatchRequestModel,
+  BatchResponseModel,
+  UpdateBatchModel,
+} from '../../../Models/Batch/Batch';
 import { InstructorResponseModel } from '../../../Models/Instructor/Instructor';
 import { LocationResponseModel } from '../../../Models/Location/Location';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InstructorService } from '../../../Services/instructor.service';
 import { LocationService } from '../../../Services/location.service';
 import { BatchService } from '../../../Services/batch.service';
 import { SharedService } from '../../../Services/shared.service';
-import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
-  selector: 'app-create-batch',
-  templateUrl: './create-batch.component.html',
-  styleUrl: './create-batch.component.css',
+  selector: 'app-update-batch',
+  templateUrl: './update-batch.component.html',
+  styleUrl: './update-batch.component.css',
 })
-export class CreateBatchComponent {
+export class UpdateBatchComponent {
   activatedRoute = inject(ActivatedRoute);
   instructorService = inject(InstructorService);
   locationService = inject(LocationService);
   batchService = inject(BatchService);
   sharedService = inject(SharedService);
   router = inject(Router);
-  courseId: string = '';
-  loadSpinner: boolean = false;
+  batchId: string = '';
+  loadSpinner = false;
+  updateBatchModel: UpdateBatchModel = new UpdateBatchModel();
   constructor() {
     this.activatedRoute.params.subscribe((paramVal) => {
-      this.courseId = paramVal['courseId'];
+      this.batchId = paramVal['batchId'];
+      this.batchService.getBatchById(this.batchId).subscribe((batch) => {
+        this.batchModel = batch.result;
+        console.log(this.batchModel);
+      });
     });
   }
   ngOnInit() {
@@ -35,35 +44,38 @@ export class CreateBatchComponent {
   getAllInstructors() {
     this.instructorService.instructorList().subscribe((res) => {
       this.instructors = res.result;
-      console.log(this.instructors);
     });
   }
   getAllLocations() {
     this.locationService.getAllLocations().subscribe((res) => {
       this.locations = res.result;
-      console.log(this.locations);
     });
   }
-  batchModel: BatchRequestModel = new BatchRequestModel();
+  batchModel: BatchResponseModel = new BatchResponseModel();
   instructors: InstructorResponseModel[] = [];
   locations: LocationResponseModel[] = [];
-  addBatch() {
+  updatedBatch() {
     this.loadSpinner = true;
-    this.batchModel.courseId = this.courseId;
-    this.batchService.createBatch(this.batchModel).subscribe({
+    this.updateBatchModel = this.batchModel;
+    this.updateBatchModel.id = this.batchId;
+    this.batchService.updateBatch(this.updateBatchModel).subscribe({
       next: (response) => {
         console.log(response);
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message);
           this.loadSpinner = false;
-          this.router.navigate(['/academy/batch-list',this.courseId])
+
+          this.router.navigate([
+            '/academy/batch-list',
+            this.batchModel.courseId,
+          ]);
         } else {
           this.sharedService.showErrorToast(response.message);
           this.loadSpinner = false;
         }
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.Unauthorized) {
+        if (err.status == HttpStatusCode.BadRequest) {
           console.log(err.message);
           this.loadSpinner = false;
         }

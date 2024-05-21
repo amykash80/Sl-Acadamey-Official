@@ -20,6 +20,7 @@ import { CreateInstructorComponent } from './pages/create-instructor/create-inst
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
     {path:"instructor-list",component:InstructorListComponent},
     {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
     { path:"update-instructor/:id", component: UpdateInstructorComponent },
+    {path:"update-batch/:batchId",component:UpdateBatchComponent}
   ]
   
   },

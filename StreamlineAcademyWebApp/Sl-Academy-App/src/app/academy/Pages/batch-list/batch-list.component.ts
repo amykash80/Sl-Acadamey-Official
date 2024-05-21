@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BatchService } from '../../../Services/batch.service';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SharedService } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-batch-list',
@@ -13,7 +14,8 @@ export class BatchListComponent {
   courseId!: string
   batchList:BatchResponseModel[]=[]
 constructor(private activatedRoute: ActivatedRoute,
-           private batchService: BatchService){
+           private batchService: BatchService,
+          private sharedService:SharedService){
   this.activatedRoute.params.subscribe((paramVal) => {
     this.courseId = paramVal['courseId'];
   });
@@ -31,5 +33,23 @@ getAllBatchesByCourseId(){
       console.log(err);
     }
   });
+}
+deleteBatch(batchId:any){
+  this.sharedService
+      .fireConfirmSwal('Are You sure you want to delete this Batch ')
+      .then((result:any) => {
+        if (result.isConfirmed) {
+          this.batchService.deleteBatch(batchId).subscribe({
+            next: (response) => {
+              if (response.isSuccess) {
+                this.sharedService.showSuccessToast(response.message);
+                this.getAllBatchesByCourseId();
+              } else {
+                this.sharedService.showErrorToast(response.message);
+              }
+            },
+          });
+        }
+      });
 }
 }
