@@ -26,6 +26,7 @@ export class RegisterAcademyComponent {
   selectedCountryId: string = '';
   selectedStateId: string = '';
   academyRegistrationModel: RegisterAcademy = new RegisterAcademy();
+  loadSpinner:boolean = false;
   constructor() {}
 
   ngOnInit(): void {
@@ -73,19 +74,26 @@ export class RegisterAcademyComponent {
   }
 
   registerAcademy() {
+    this.loadSpinner=true;
     this.academyRegistrationModel.postalCode=this.academyRegistrationModel.postalCode?.toString();
     this.academyService.createAcademy(this.academyRegistrationModel).subscribe({
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
+    this.loadSpinner=false;
+
           this.router.navigate(['/admin/academylist'])
         }
         else{
           this.sharedService.showErrorToast(response.message)
+    this.loadSpinner=false;
+
         }
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
+    this.loadSpinner=false;
+
       },
     });
   }

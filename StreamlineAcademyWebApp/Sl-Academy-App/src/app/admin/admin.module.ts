@@ -16,6 +16,7 @@ import { UpdateAcademyyComponent } from './pages/update-academyy/update-academyy
 import { DashboardHeaderComponent } from './Components/dashboard-header/dashboard-header.component';
 import { RegistrationStatusPipe } from '../Pipes/registration-status.pipe';
 import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enquiry.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enqu
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

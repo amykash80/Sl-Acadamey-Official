@@ -17,12 +17,14 @@ export class AcademyListComponent {
     this.loadAllAcademies();
   }
   academyList: AcademyResponse[] = [];
+  filteredAcademyList: AcademyResponse[] = [];
+  searchText: string = '';
 
   loadAllAcademies() {
     this.academyService.academyList().subscribe({
       next: (response) => {
         this.academyList = response.result;
-        console.log(this.academyList);
+     this.filteredAcademyList=this.academyList;
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.Unauthorized) {
@@ -31,11 +33,25 @@ export class AcademyListComponent {
       },
     });
   }
+  filterAcademies(): void {
+    if (!this.searchText.trim()) {
+      this.filteredAcademyList = this.academyList.slice();
+      return;
+    }
+
+    const searchTerm = this.searchText.toLowerCase();
+    this.filteredAcademyList = this.academyList.filter(
+      (academy) =>
+        academy.academyName!.toLowerCase().startsWith(searchTerm) ||
+        academy.email!.toLowerCase().startsWith(searchTerm) ||
+        academy.phoneNumber!.toLowerCase().startsWith(searchTerm)
+    );
+  }
 
   deleteAcademy(academyId: any) {
     this.sharedService
       .fireConfirmSwal('Are You sure you want to delete this Academy ')
-      .then((result:any) => {
+      .then((result: any) => {
         if (result.isConfirmed) {
           this.academyService.deleteAcademy(academyId).subscribe({
             next: (response) => {
