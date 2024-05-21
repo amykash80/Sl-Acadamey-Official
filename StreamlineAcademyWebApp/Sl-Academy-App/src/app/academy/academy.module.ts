@@ -18,10 +18,13 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
-import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
-import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 
 
 @NgModule({
@@ -45,6 +48,12 @@ import { UpdateInstructorComponent } from './pages/update-instructor/update-inst
     InstructorListComponent,
     UpdateCorseResourceComponent,
     UpdateInstructorComponent,
+    UpdateCorseResourceComponent,
+    CreateInstructorComponent,
+    InstructorListComponent,
+    SidebarComponent,
+    HeaderComponent,
+    BatchListComponent,
     
     
   ],

@@ -8,9 +8,7 @@ import { SharedService } from '../../../Services/shared.service';
 })
 export class DashboardComponent {
   shared=inject(SharedService)
-  onLogOut(){
-    this.shared.logOutUser();
-  }
+  
   addLocation(){
 
   }

@@ -2,6 +2,11 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import Swal from 'sweetalert2';
+import { AcademyService } from './academy.service';
+import { AuthService } from './auth.service';
+import { EnquiryService } from './enquiry.service';
+import { AcademyResponse } from '../Models/Academy/Academy';
+import { EnquiryResponse } from '../Models/Common/enquiry';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +15,29 @@ export class SharedService {
   constructor() {}
   toast = inject(HotToastService);
   router = inject(Router);
+  academyService=inject(AcademyService);
+  enquiryService=inject(EnquiryService);
+  academyList:AcademyResponse[]=[];
+  enquiryList:EnquiryResponse[]=[];
 
   getToken(): string {
     return localStorage.getItem('streamlineToken')
       ? JSON.parse(localStorage['streamlineToken'])
       : '';
+  }
+  getAllAcademies():AcademyResponse[]{
+    this.academyService.academyList().subscribe((response) => {
+      this.academyList=response.result;
+    });
+    return this.academyList
+
+  }
+  getAllEnquiries():EnquiryResponse[]{
+    this.enquiryService.enquiryList().subscribe((response) => {
+      this.enquiryList=response.result;
+    });
+    return this.enquiryList
+
   }
   showSuccessToast(message: string) {
     this.toast.success(message);

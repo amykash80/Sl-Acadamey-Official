@@ -15,10 +15,11 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
-import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
-import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 
 
 const routes: Routes = [
@@ -43,8 +44,14 @@ const routes: Routes = [
     {path:"instructor-list",component:InstructorListComponent},
     {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
     { path:"update-instructor/:id", component: UpdateInstructorComponent },
+    {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
+    {path:"batch-list/:courseId",component:BatchListComponent},
   ]
-  }
+  
+  },
+
 ];
 
 @NgModule({

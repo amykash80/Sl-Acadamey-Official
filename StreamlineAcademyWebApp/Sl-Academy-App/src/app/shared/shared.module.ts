@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './Pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProfileComponent } from './Pages/profile/profile.component';
     SpinnerComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ProfileComponent
+    ProfileComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { ProfileComponent } from './Pages/profile/profile.component';
     ChangepasswordComponent,
     SpinnerComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    NotFoundComponent
   ]
 })
 export class SharedModule { }

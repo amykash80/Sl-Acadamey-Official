@@ -34,7 +34,7 @@ namespace StreamlineAcademy.Domain.Models.Requests
 
         [Required(ErrorMessage = "Work experience is required")]
         [Range(0, int.MaxValue, ErrorMessage = "Work experience must be a positive number")]
-        public int WorkExperience { get; set; }
+        public int WorkExperiance { get; set; }
 
         [Required(ErrorMessage = "Date of Birth is required")]
         [DataType(DataType.Date)]
