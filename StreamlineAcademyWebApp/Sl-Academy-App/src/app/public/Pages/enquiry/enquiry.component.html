@@ -86,6 +86,7 @@
             class="th-btn black-btn-2 w-100"
             [disabled]="enquiryForm.invalid"
           >
+          <app-spinner *ngIf="loadSpinner"></app-spinner>
             Register Now
           </button>
         </div>

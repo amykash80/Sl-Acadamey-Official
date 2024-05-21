@@ -11,6 +11,7 @@ import { UpdateAcademyyComponent } from './pages/update-academyy/update-academyy
 import { CreateAcademyTypeComponent } from './pages/create-academy-type/create-academy-type.component';
 import { AcademyTypeListComponent } from './pages/academy-type-list/academy-type-list.component';
 import { ProfileComponent } from '../shared/Pages/profile/profile.component';
+import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enquiry.component';
 
 const routes: Routes = [
   {path:"",component:AdminComponent,
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path:"create-academyType",component:CreateAcademyTypeComponent},
     {path:"academy-type-list",component:AcademyTypeListComponent},
     {path:"profile",component:ProfileComponent},
+    {path:"register-enquiry/:id",component:RegisterEnquiryComponent}
 
   ]},
 
