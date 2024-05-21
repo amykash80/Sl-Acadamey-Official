@@ -19,6 +19,7 @@ import { UpdateCorseResourceComponent } from './pages/update-corse-resource/upda
 import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
 import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,10 @@ const routes: Routes = [
     {path:"create-instructor",component:CreateInstructorComponent},
     {path:"instructor-list",component:InstructorListComponent},
     {path:"batch-list/:courseId",component:BatchListComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
+    {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
+    { path:"update-instructor/:id", component: UpdateInstructorComponent },
   ]
   
   },

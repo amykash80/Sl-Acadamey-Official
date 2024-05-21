@@ -18,12 +18,13 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
-import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
-import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
-import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
 
 
 @NgModule({
@@ -49,6 +50,10 @@ import { BatchListComponent } from './Pages/batch-list/batch-list.component';
     SidebarComponent,
     HeaderComponent,
     BatchListComponent,
+    CreateInstructorComponent,
+    InstructorListComponent,
+    UpdateCorseResourceComponent,
+    UpdateInstructorComponent,
     
     
   ],
