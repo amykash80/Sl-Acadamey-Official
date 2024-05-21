@@ -11,8 +11,8 @@ export class BatchResponseModel{
     id?:string;
     batchName?:string;
     batchSize?:number;
-    startDate?:Date;
-    endDate?:Date;
+    startDate?:string;
+    endDate?:string;
     courseName?:string;
     instructorName?:string;
     locationName?:string;

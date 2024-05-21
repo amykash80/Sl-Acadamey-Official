@@ -26,7 +26,7 @@
               <td>{{batch.locationName}}</td>
               <td class="status">{{batch.isActive}}</td>
               <td>
-              <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-batch',batch.id]"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-batch',batch.id,courseId]"><i class="fas fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" (click)="deleteBatch(batch.id)"><i class="far fa-trash-alt"></i></button>
               </td>
     

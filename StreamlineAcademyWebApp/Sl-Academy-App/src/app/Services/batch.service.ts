@@ -25,6 +25,6 @@ export class BatchService {
     return this.http.get<ApiResponse<BatchResponseModel>>(this.baseUrl+"Batch/getBatchById/"+id)
   }
   updateBatch(batchUpdateModel:UpdateBatchModel):Observable<ApiResponse<BatchResponseModel>>{
-    return this.http.put<ApiResponse<BatchRequestModel>>(this.baseUrl+"Batch/updateBatch",batchUpdateModel)
+    return this.http.put<ApiResponse<BatchResponseModel>>(this.baseUrl+"Batch/updateBatch",batchUpdateModel)
   }
 }

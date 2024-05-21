@@ -26,14 +26,20 @@ export class UpdateBatchComponent {
   sharedService = inject(SharedService);
   router = inject(Router);
   batchId: string = '';
+  courseId:string=''
   loadSpinner = false;
   updateBatchModel: UpdateBatchModel = new UpdateBatchModel();
   constructor() {
     this.activatedRoute.params.subscribe((paramVal) => {
       this.batchId = paramVal['batchId'];
+      this.courseId=paramVal['courseId']
+
       this.batchService.getBatchById(this.batchId).subscribe((batch) => {
-        this.batchModel = batch.result;
-        console.log(this.batchModel);
+        this.batchModel = batch.result;   
+        this.batchModel.startDate = this.batchModel.startDate ? new Date(this.batchModel.startDate).toISOString().substring(0, 10): '';
+        this.batchModel.endDate = this.batchModel.endDate ? new Date(this.batchModel.endDate).toISOString().substring(0, 10): '';
+
+
       });
     });
   }
@@ -56,7 +62,13 @@ export class UpdateBatchComponent {
   locations: LocationResponseModel[] = [];
   updatedBatch() {
     this.loadSpinner = true;
-    this.updateBatchModel = this.batchModel;
+    this.updateBatchModel.courseId = this.courseId;
+    this.updateBatchModel.batchName=this.batchModel.batchName;
+    this.updateBatchModel.batchSize=this.batchModel.batchSize
+    this.updateBatchModel.instructorId=this.batchModel.instructorId
+    this.updateBatchModel.locationId=this.batchModel.locationId
+    this.updateBatchModel.startDate=new Date(this.batchModel.startDate!)
+    this.updateBatchModel.endDate=new Date(this.batchModel.endDate!)
     this.updateBatchModel.id = this.batchId;
     this.batchService.updateBatch(this.updateBatchModel).subscribe({
       next: (response) => {
