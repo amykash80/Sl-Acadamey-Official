@@ -24,7 +24,7 @@
               <td>{{batch.instructorName}}</td>
               <td>{{batch.locationName}}</td>
               <td class="status">{{batch.isActive}}</td>
-    
+              <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/create-batch-schedule',batch.id,courseId]">Add Schedule</button>
     
               </tr>
         

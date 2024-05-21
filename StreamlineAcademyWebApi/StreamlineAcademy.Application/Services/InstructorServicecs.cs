@@ -167,7 +167,7 @@ namespace StreamlineAcademy.Application.Services
 
             var instructor = await instructorRepository.GetByIdAsync(x=>x.Id==user.Id);
             instructor.DateOfBirth = request.DateOfBirth;
-            instructor.WorkExperiance = request.WorkExperiance;
+            instructor.WorkExperiance = request.WorkExperience;
             instructor.DateOfBirth=request.DateOfBirth;
             instructor.CountryId= request.CountryId;
             instructor.StateId=request.StateId;

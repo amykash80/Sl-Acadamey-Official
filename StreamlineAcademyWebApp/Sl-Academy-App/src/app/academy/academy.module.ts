@@ -25,6 +25,9 @@ import { InstructorListComponent } from './pages/instructor-list/instructor-list
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { CreateBatchScheduleComponent } from './pages/create-batch-schedule/create-batch-schedule.component';
+import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
+import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import { BatchListComponent } from './Pages/batch-list/batch-list.component';
     SidebarComponent,
     HeaderComponent,
     BatchListComponent,
+    CreateBatchScheduleComponent,
+    BatchScheduleListComponent,
+    UpdateBatchScheduleComponent,
     
     
   ],

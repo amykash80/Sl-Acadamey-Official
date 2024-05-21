@@ -16,5 +16,6 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> GetAllSchedules();
         Task<ApiResponse<ScheduleResponseModel>> UpdateSchedule(ScheduleUpdateRequest request);
         Task<ApiResponse<ScheduleResponseModel>> DeleteSchedule(Guid id);
+        Task<ApiResponse<ScheduleResponseModel>> GetScheduleById(Guid id);
     }
 }

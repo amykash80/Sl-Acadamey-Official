@@ -20,6 +20,9 @@ import { UpdateInstructorComponent } from './pages/update-instructor/update-inst
 import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
 import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
 import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { CreateBatchScheduleComponent } from './pages/create-batch-schedule/create-batch-schedule.component';
+import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
+import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
 
 
 const routes: Routes = [
@@ -48,6 +51,9 @@ const routes: Routes = [
     {path:"create-instructor",component:CreateInstructorComponent},
     {path:"instructor-list",component:InstructorListComponent},
     {path:"batch-list/:courseId",component:BatchListComponent},
+    {path:"create-batch-schedule/:id/:cId",component:CreateBatchScheduleComponent},
+    {path:"batch-schedule-list/:id/:courseId",component:BatchScheduleListComponent},
+    {path:"update-batch-schedule/:id/:batchId/:courseId",component:UpdateBatchScheduleComponent},
   ]
   
   },
