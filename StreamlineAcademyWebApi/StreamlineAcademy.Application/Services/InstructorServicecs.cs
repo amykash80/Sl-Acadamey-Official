@@ -78,7 +78,7 @@ namespace StreamlineAcademy.Application.Services
                     StateId = model.StateId,
                     CityId = model.CityId,
                     AcademyId=academyId,
-                    WorkExperiance=model.WorkExperience,
+                    WorkExperiance=model.WorkExperiance,
                     DateOfBirth=model.DateOfBirth,
                     Skill=Skill.Programming
                 };
@@ -88,7 +88,7 @@ namespace StreamlineAcademy.Application.Services
                     if (await emailHelperService.SendRegistrationEmail(user.Email!, user.Name!, model.Password!))
                     {
                         var res = await instructorRepository.GetInstructorById(instructor.Id);
-                        return ApiResponse<InstructorResponseModel>.SuccessResponse(res);
+                        return ApiResponse<InstructorResponseModel>.SuccessResponse(res,"Instructor Added Successfully");
                     }
                 }
                 return ApiResponse<InstructorResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest);

@@ -1,4 +1,5 @@
 export enum CourseResourceType{
+    selectType=0,
     YouTube=1,
     PDF=2,
     Document=3,

@@ -148,7 +148,7 @@ public static class APIMessages
         public static class EnquiryManagement
 		{
 			public static readonly string EnquiryNotFound = "Enquiry not found.";
-			public static readonly string EnquiryAdded = "Enquiry Added Successfully.";
+			public static readonly string EnquiryAdded = "Thanks for Contacting Us.We will reach you soon";
 			public static readonly string EnquiryUpdated = "Enquiry Updated Successfully.";
             public static readonly string EnquiryDeleted = "Enquiry Deleted Successfully.";
             public static readonly string EnquiryNameExist = "Name already Exist.";

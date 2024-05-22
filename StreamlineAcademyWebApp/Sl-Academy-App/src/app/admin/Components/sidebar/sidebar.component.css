@@ -476,3 +476,12 @@ html {
       width: calc(100% - 55px);
     }
   }
+  .vertical-nav-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+  
+  .vertical-nav-menu li a i {
+    flex-shrink: 0; /* Prevent the icon from shrinking */
+  }

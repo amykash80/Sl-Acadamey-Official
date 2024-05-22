@@ -1,34 +1,76 @@
-<div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h2>Enquiry List</h2>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Registration Status</th>
-              <th scope="col">IsActive</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let enquiry of enquirylist">
-              <td>{{enquiry.name}}</td>
-              <td>{{enquiry.email}}</td>
-              <td>{{enquiry.phoneNumber}}</td>
-              <td class="text-danger">{{enquiry.registrationStatus}}</td>
-              <td>{{enquiry.isActive}}</td>
-
-              <td>
-                <button type="button" class="btn btn-success" [routerLink]="['/admin/updateenquiry',enquiry.id]" style="margin-right: 3px;"><i class="fas fa-edit"></i>Edit</button>
-                <button type="button" class="btn btn-danger" (click)="deleteEnquiry(enquiry.id)"><i class="far fa-trash-alt"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<section class="py-3 py-md-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-10">
+        <div class="card widget-card border-light shadow-sm">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between mb-4">
+              <h5 class="card-title widget-card-title">Enquiry List</h5>
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search Enquiries"
+                [(ngModel)]="searchText"
+                (input)="filterEnquiries()"
+              />
+            </div>
+            <div class="table-responsive">
+              <table
+                class="table table-borderless bsb-table-xl text-nowrap align-middle m-0"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone No</th>
+                    <th>Registration Status</th>
+                    <th>IsActive</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let enquiry of filteredEnquiryList">
+                    <td>{{ enquiry.name }}</td>
+                    <td>{{ enquiry.email }}</td>
+                    <td>{{ enquiry.phoneNumber }}</td>
+                    <td>
+                      {{ enquiry.registrationStatus | registrationStatus }}
+                    </td>
+                    <td>{{ enquiry.isActive }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-success btn-sm"
+                        [routerLink]="['/admin/updateenquiry', enquiry.id]"
+                        style="margin-right: 3px"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteEnquiry(enquiry.id)"
+                      >
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                      <button *ngIf="pending"
+                        type="button"
+                        class=" btn-sm add-batch-btn"
+                        [routerLink]="['/admin/register-enquiry',enquiry.id]"
+                      >
+                       +Register
+                      </button>
+                    
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+</section>

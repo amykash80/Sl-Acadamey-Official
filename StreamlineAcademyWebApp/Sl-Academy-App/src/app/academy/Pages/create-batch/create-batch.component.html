@@ -1,1 +1,121 @@
-<p>create-batch works!</p>
+<div class="container my-5">
+    <div class="row gy-4 justify-content-center">
+      <div class="col-lg-6 col-xl-9">
+        <form method="POST" #batchForm="ngForm" class="register-form ajax-contact">
+          <h5 class="form-title">Add new Batch</h5>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Batch Name*</label>
+              <input
+                type="text"
+                class="form-control style-white"
+                name="batchName"
+                ngModel
+                #batchName="ngModel"
+                [(ngModel)]="batchModel.batchName"
+                [class.is-invalid]="batchName.touched && batchName.invalid"
+                required
+                placeholder=""
+              />
+              <div *ngIf="batchName.touched && batchName.errors?.['required']" class="error-message">Batch Name is required</div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>Batch Size*</label>
+              <input
+                type="number"
+                class="form-control style-white"
+                name="batchSize"
+                ngModel
+                #batchSize="ngModel"
+                [(ngModel)]="batchModel.batchSize"
+                [class.is-invalid]="batchSize.touched && batchSize.invalid"
+                required
+                min="1"
+                placeholder=""
+              />
+              <div *ngIf="batchSize.touched && batchSize.errors?.['required']" class="error-message">Batch Size is required</div>
+              <div *ngIf="batchSize.touched && batchSize.errors?.['min']" class="error-message">Batch Size must be at least 1</div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>Start Date*</label>
+              <input
+                type="date"
+                class="form-control style-white"
+                name="startDate"
+                ngModel
+                #startDate="ngModel"
+                [(ngModel)]="batchModel.startDate"
+                [class.is-invalid]="startDate.touched && startDate.invalid"
+                required
+                placeholder=""
+              />
+              <div *ngIf="startDate.touched && startDate.errors?.['required']" class="error-message">Start Date is required</div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>End Date*</label>
+              <input
+                type="date"
+                class="form-control style-white"
+                name="endDate"
+                ngModel
+                #endDate="ngModel"
+                [(ngModel)]="batchModel.endDate"
+                [class.is-invalid]="endDate.touched && endDate.invalid"
+                required
+                placeholder=""
+              />
+              <div *ngIf="endDate.touched && endDate.errors?.['required']" class="error-message">End Date is required</div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>Instructor*</label>
+              <select
+                class="form-control"
+                name="instructorId"
+                ngModel
+                #instructorId="ngModel"
+                [(ngModel)]="batchModel.instructorId"
+                [class.is-invalid]="instructorId.touched && instructorId.invalid"
+                required
+                placeholder=""
+              >
+                <option value="">Select Instructor</option>
+                <option *ngFor="let instructor of instructors" [value]="instructor.id">{{ instructor.name }}</option>
+              </select>
+              <div *ngIf="instructorId.touched && instructorId.errors?.['required']" class="error-message">Instructor is required</div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>Location*</label>
+              <select
+                class="form-control"
+                name="locationId"
+                ngModel
+                #locationId="ngModel"
+                [(ngModel)]="batchModel.locationId"
+                [class.is-invalid]="locationId.touched && locationId.invalid"
+                required
+                placeholder=""
+              >
+                <option value="">Select Location</option>
+                <option *ngFor="let location of locations" [value]="location.id">{{ location.address }}</option>
+              </select>
+              <div *ngIf="locationId.touched && locationId.errors?.['required']" class="error-message">Location is required</div>
+            </div>
+  
+            <div class="form-btn col-12 text-center">
+              <button class="th-btn w-100" [disabled]="batchForm.invalid" (click)="addBatch()">
+                <app-spinner *ngIf="loadSpinner"></app-spinner>
+
+                Add Now</button>
+            </div>
+          </div>
+          <p class="form-messages mb-0 mt-3"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  

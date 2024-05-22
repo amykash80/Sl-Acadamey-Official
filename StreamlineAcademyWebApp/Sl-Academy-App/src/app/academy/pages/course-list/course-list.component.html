@@ -30,21 +30,70 @@
             <td>{{course.academyName}}</td>
             <td>{{course.isActive }}</td>
             <td>
-              <button type="button" class="btn btn-success" style="margin-right: 3px;">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button type="button" class="btn btn-danger" style="margin-right: 3px;" [routerLink]="['/academy/create-course-content',course.id]">
-                Add Content
-              </button>
-              <button type="button" class="btn btn-primary" [routerLink]="['/academy/course-content-list',course.id]">
-                view Content
-              </button>
-              <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/create-batch',course.id]">
-                Add Batch
-              </button>
+              <div class="card-body">
+                <div class="page-title-actions">
+                  <div class="d-inline-block dropdown">
+                    <button
+                      type="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      class="btn-shadow dropdown-toggle btn btn-info"
+                    >
+                      <span class="btn-icon-wrapper pr-2 opacity-7"> </span>
+                      More
+                    </button>
+                    <div
+                      tabindex="-1"
+                      role="menu"
+                      aria-hidden="true"
+                      class="dropdown-menu dropdown-menu-left"
+                    >
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" [routerLink]="['/academy/create-course-content',course.id]">
+                            <i class="nav-link-icon lnr-inbox"></i>
+                            <span> Add content</span>
+                       
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link"  [routerLink]="['/academy/course-content-list',course.id]">
+                            <i class="nav-link-icon lnr-book"></i>
+                            <span> View content</span>
+                           
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link"  [routerLink]="['/academy/create-batch',course.id]">
+                            <i class="nav-link-icon lnr-book"></i>
+                            <span> add batch</span>
+                           
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" [routerLink]="['/academy/batch-list',course.id]">
+                            <i class="nav-link-icon lnr-book"></i>
+                            <span> view batches</span>
+                           
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" [routerLink]="['/academy/create-course-resource',course.id]">
+                            <i class="nav-link-icon lnr-book"></i>
+                            <span> add resource</span>
+                           
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           <div>
               <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-course',course.id]"><i class="fas fa-edit"></i></button>
              <button type="button" class="btn btn-danger" (click)="deleteCourse(course.id)"><i class="far fa-trash-alt"></i></button>
-             <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/create-course-resource',course.id]">Add More</button>
+            </div>
             </td>
           </tr> 
         </tbody>

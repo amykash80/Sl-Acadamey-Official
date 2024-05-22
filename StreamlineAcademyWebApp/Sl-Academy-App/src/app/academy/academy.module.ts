@@ -18,6 +18,15 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,6 +46,18 @@ import { UpdateLocationComponent } from './pages/update-location/update-location
     LocationListComponent,
     LocationMapComponent,
     UpdateLocationComponent,
+    UpdateCorseResourceComponent,
+    CreateInstructorComponent,
+    InstructorListComponent,
+    SidebarComponent,
+    HeaderComponent,
+    BatchListComponent,
+    CreateInstructorComponent,
+    InstructorListComponent,
+    UpdateCorseResourceComponent,
+    UpdateInstructorComponent,
+    UpdateBatchComponent,
+    
     
     
   ],
@@ -44,6 +65,8 @@ import { UpdateLocationComponent } from './pages/update-location/update-location
     CommonModule,
     AcademyRoutingModule,
     FormsModule,
+    SharedModule
+  
   ]
 })
 export class AcademyModule { }

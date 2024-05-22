@@ -20,10 +20,8 @@
               <td>{{location.countryName}}</td>
               <td>{{location.cityName}}</td>
               <td>{{location.stateName}}</td>
-              <td>{{location.postalCode}}</td>
               <td class="text-danger">{{location.isActive}}</td>
-        
-
+              <td>{{location.postalCode}}</td>      
               <td>
                 <button type="button" class="btn btn-success" [routerLink]="['/academy/location-map',location.latitude,location.longitude]" style="margin-right: 3px;">view Map</button>
                 <button style="margin-right: 3px;" class="btn btn-primary" [routerLink]="['/academy/update-location',location.id]"><i class="fas fa-edit"></i></button>

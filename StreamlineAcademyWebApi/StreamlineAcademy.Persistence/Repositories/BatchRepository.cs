@@ -40,7 +40,11 @@ namespace StreamlineAcademy.Persistence.Repositories
                     EndDate = batch.EndDate,
                     CourseName = batch.Course?.Name,
                     InstructorName = batch.Instructor?.User?.Name,
-                    LocationName = batch.Location?.Address
+                    LocationName = batch.Location?.Address,
+                    IsActive = batch.IsActive,
+                    InstructorId = batch.InstructorId,
+                    LocationId = batch.LocationId,
+                    CourseId=batch.CourseId,
                 };
 
                 return response;
@@ -87,6 +91,10 @@ namespace StreamlineAcademy.Persistence.Repositories
                     CourseName = b.Course!.Name,
                     InstructorName = b.Instructor!.User!.Name,
                     LocationName = b.Location!.Address,
+                    IsActive= b.IsActive,
+                    InstructorId=b.InstructorId,
+                    LocationId=b.LocationId,
+                    CourseId=b.Course!.Id,
 
                 })
                 .ToListAsync();

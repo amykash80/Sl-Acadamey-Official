@@ -15,6 +15,12 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
+import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
 
 
 const routes: Routes = [
@@ -34,9 +40,20 @@ const routes: Routes = [
     {path:"add-location",component:AddLocationComponent},
     {path:"location-list",component:LocationListComponent},
     {path:"location-map/:latitude/:longitude",component:LocationMapComponent},
-    {path:"update-location/:id",component:UpdateLocationComponent}
+    {path:"update-location/:id",component:UpdateLocationComponent},
+    {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
+    {path:"batch-list/:courseId",component:BatchListComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
+    {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
+    { path:"update-instructor/:id", component: UpdateInstructorComponent },
+    {path:"update-batch/:batchId/:courseId",component:UpdateBatchComponent}
   ]
-  }
+  
+  },
+
 ];
 
 @NgModule({
