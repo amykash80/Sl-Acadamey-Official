@@ -40,9 +40,14 @@ export class UpdateBatchScheduleComponent {
     this.batchScheduleService.getBatchScheduleById(this.batchScheduleId).subscribe(res => {
       this.batchScheduleModel = res.result;
       console.log(this.batchScheduleModel);
-      
-      this.batchScheduleModel.date = this.batchScheduleModel.date ? new Date(this.batchScheduleModel.date).toISOString().substring(0, 10) : '';
+      this.batchScheduleModel.date = this.formatDateToISOStringDateOnly(this.batchScheduleModel.date);
     });
+  }
+  formatDateToISOStringDateOnly(date: string | Date | undefined): string {
+    if (!date) return '';
+    const dt = new Date(date);
+    dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+    return dt.toISOString().substring(0, 10); // yyyy-MM-dd format
   }
   updateBatchSchedule(){
     this.updateBatchScheduleModel =this.batchScheduleModel;
