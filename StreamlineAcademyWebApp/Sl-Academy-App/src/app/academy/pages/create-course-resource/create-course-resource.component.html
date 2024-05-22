@@ -34,7 +34,8 @@
             
           </div>
           <div class="form-btn col-12 text-center">
-            <button class="th-btn black-btn-2 w-100">Create Resource</button>
+            <button  class="th-btn w-100" [disabled]="courseResourseForm.invalid">
+              <app-spinner *ngIf="loadSpinner"></app-spinner>Create Resource</button>
           </div>
         </form>
       </div>

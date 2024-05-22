@@ -21,7 +21,9 @@
         
           </div>
           <div class="form-btn col-12 text-center">
-            <button class="th-btn black-btn-2 w-100" (click)="createCourseContent()">Create Content</button>
+            <button class="th-btn w-100" [disabled]="courseForm.invalid"  (click)="createCourseContent()">
+              <app-spinner *ngIf="loadSpinner"></app-spinner>
+              Create Content</button>
           </div>
         </form>
       </div>

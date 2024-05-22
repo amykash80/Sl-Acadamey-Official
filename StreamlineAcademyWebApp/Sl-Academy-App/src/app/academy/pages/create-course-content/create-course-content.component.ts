@@ -18,6 +18,7 @@ export class CreateCourseContentComponent {
 courseContentModel:CourseContent=new CourseContent();
 courses:CourseResponse[]=[];
 courseId:string=''
+loadSpinner: boolean = false;
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
     this.courseId=paramVal['id'];
@@ -25,21 +26,25 @@ ngOnInit(){
 }
 
 createCourseContent(){
+  this.loadSpinner = true;
   this.courseContentModel.courseId=this.courseId;
   this.courseService.createCourseContent(this.courseContentModel).subscribe({
     next: (response) => {
       console.log(response)
       if (response.isSuccess) {
         this.sharedService.showSuccessToast(response.message);
+        this.loadSpinner = false;
         this.router.navigate(['/academy/course-list'])
       }
       else{
         this.sharedService.showErrorToast(response.message)
+        this.loadSpinner = false;
       }
     },
     error: (err: HttpErrorResponse) => {
       if (err.status == HttpStatusCode.BadRequest) {
         console.log(err.message)
+        this.loadSpinner = false;
       }
     }
   });

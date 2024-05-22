@@ -21,11 +21,10 @@ export class CreateCourseResourceComponent {
   sharedService = inject(SharedService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
-
   courseResourceModel: CourseResource = new CourseResource();
   courses: CourseResourceResponse[] = [];
   courseId: string = '';
-
+  loadSpinner: boolean = false;
   ngOnInit() {
     this.activatedRoute.params.subscribe((paramVal) => {
       this.courseId = paramVal['id'];
@@ -33,6 +32,7 @@ export class CreateCourseResourceComponent {
   }
 
   createCourseResource(event: Event) {
+    this.loadSpinner = true;
     this.courseResourceModel.CourseId = this.courseId;
     let myForm = event.target as HTMLFormElement;
     let formData = new FormData(myForm);
@@ -42,10 +42,12 @@ export class CreateCourseResourceComponent {
       .subscribe((res) => {
         if (res.isSuccess) {
           this.sharedService.showSuccessToast(res.message);
+          this.loadSpinner = false;
           this.router.navigate(['/academy/course-resource-list',this.courseId])
         }
         else{
           this.sharedService.showErrorToast(res.message)
+          this.loadSpinner = false;
         }
       });
   }

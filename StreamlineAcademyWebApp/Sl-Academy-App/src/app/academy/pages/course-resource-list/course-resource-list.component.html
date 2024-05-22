@@ -2,6 +2,15 @@
     <div class="row">
       <div class="col-12">
         <h2>CourseResource List</h2>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search "
+            [(ngModel)]="searchText"
+            (input)="filterCourseResource()"
+          />
+        </div>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -13,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let courseResource of courseResourceList">
+            <tr *ngFor="let courseResource of filteredCourseResourceList">
               <td>{{courseResource.name}}</td>
               <td>{{courseResource.description}}</td>
               <td>{{courseResource.type}}</td>

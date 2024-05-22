@@ -16,6 +16,8 @@ export class CourseResourceListComponent {
   sharedService=inject(SharedService)
   courseId:string=''
   courseResourceList:CourseResourceResponse[]=[];
+  filteredCourseResourceList: CourseResourceResponse[] = [];
+  searchText: string = '';
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.courseId=paramVal['id']
@@ -23,10 +25,24 @@ ngOnInit(){
   
   })
 }
+filterCourseResource(): void {
+  if (!this.searchText.trim()) {
+    this.filteredCourseResourceList = this.courseResourceList.slice();
+    return;
+  }
+
+  const searchTerm = this.searchText.toLowerCase();
+  this.filteredCourseResourceList = this.courseResourceList.filter(
+    (courseResource) =>
+      courseResource.name!.toLowerCase().startsWith(searchTerm) ||
+      courseResource.description!.toLowerCase().startsWith(searchTerm) 
+  );
+}
 loadAllCourseResource(){
   this.courseResourceService.getCourseResourceByCourseId(this.courseId).subscribe({
     next: (response) => {
       this.courseResourceList = response.result;
+      this.filteredCourseResourceList = this.courseResourceList;
       console.log(this.courseResourceList)
     },
     error: (err: HttpErrorResponse) => {
