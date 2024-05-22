@@ -12,6 +12,7 @@
                 <th>Instructor Name</th>
                 <th>Location Name</th>
                 <th>IsActive</th>
+                <th>Actions</th>
 
               </tr>
             </thead>
@@ -25,6 +26,10 @@
               <td>{{batch.locationName}}</td>
               <td class="status">{{batch.isActive}}</td>
               <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/create-batch-schedule',batch.id,courseId]">Add Schedule</button>
+              <td>
+              <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-batch',batch.id,courseId]"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" (click)="deleteBatch(batch.id)"><i class="far fa-trash-alt"></i></button>
+              </td>
     
               </tr>
         
@@ -32,25 +37,3 @@
       </table>
     </div>
   </section>
-<!-- 
-     <tr>
-            <th>Batch Name</th>
-            <th>Batch Size</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>IsActive</th>
-            <th>Instructor Name</th>
-            <th>Location Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let batch of batchList ">
-          <td>{{batch.batchName}}</td>
-          <td>{{batch.batchSize}}</td>
-          <td>{{batch.startDate}}</td>
-          <td>{{batch.endDate}}</td>
-          <td>{{batch.batchSize}}</td>
-
-
-          </tr>
- -->

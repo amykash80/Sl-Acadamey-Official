@@ -18,16 +18,18 @@ import { AddLocationComponent } from './Pages/add-location/add-location.componen
 import { LocationListComponent } from './Pages/location-list/location-list.component';
 import { LocationMapComponent } from './pages/location-map/location-map.component';
 import { UpdateLocationComponent } from './pages/update-location/update-location.component';
-import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
-import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
-import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
-import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
-import { SidebarComponent } from './Components/sidebar/sidebar.component';
-import { HeaderComponent } from './Components/header/header.component';
-import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 import { CreateBatchScheduleComponent } from './pages/create-batch-schedule/create-batch-schedule.component';
 import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
 import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { BatchListComponent } from './Pages/batch-list/batch-list.component';
+import { CreateInstructorComponent } from './pages/create-instructor/create-instructor.component';
+import { InstructorListComponent } from './pages/instructor-list/instructor-list.component';
+import { UpdateCorseResourceComponent } from './pages/update-corse-resource/update-corse-resource.component';
+import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
+import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -60,6 +62,12 @@ import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/upda
     CreateBatchScheduleComponent,
     BatchScheduleListComponent,
     UpdateBatchScheduleComponent,
+    CreateInstructorComponent,
+    InstructorListComponent,
+    UpdateCorseResourceComponent,
+    UpdateInstructorComponent,
+    UpdateBatchComponent,
+    
     
     
   ],
@@ -67,6 +75,8 @@ import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/upda
     CommonModule,
     AcademyRoutingModule,
     FormsModule,
+    SharedModule
+  
   ]
 })
 export class AcademyModule { }

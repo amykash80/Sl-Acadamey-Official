@@ -1,3 +1,15 @@
 :host {
   width: 100%;
 }
+.black-btn-2{
+  cursor: pointer;
+}
+.error-message {
+  color: #ff6347;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.error-message div {
+  margin-left: 10px; 
+}

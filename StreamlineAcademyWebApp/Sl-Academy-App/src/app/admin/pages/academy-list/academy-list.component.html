@@ -1,63 +1,79 @@
-<div class="content">
-  <div class="table-wrapper">
-    <div class="table-title mt-3 me-3">
-      <div class="row">
-        <div class="col-6 mt-2">
-          <h2>Academy List</h2>
-        </div>
-        <div class="col-sm-6">
-          <a
-            class="btn btn-success"
-            routerLink="/admin/register-academy"
-            data-toggle="modal"
-          >
-            <span>Add Academy</span></a
-          >
+<section class="py-3 py-md-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-10">
+        <div class="card widget-card border-light shadow-sm">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between mb-4">
+              <h5 class="card-title widget-card-title">Academy List</h5>
+              <div>
+                <a
+                  class="btn btn-success"
+                  routerLink="/admin/register-academy"
+                  data-toggle="modal"
+                >
+                  <span>Add Academy</span>
+                </a>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search Academies"
+                [(ngModel)]="searchText"
+                (input)="filterAcademies()"
+              />
+            </div>
+            <div class="table-responsive">
+              <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
+                <thead>
+                  <tr>
+                    <th>Academy Admin</th>
+                    <th>Academy Name</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Academy Type</th>
+                    <th>Country Name</th>
+                    <th>IsActive</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let academy of filteredAcademyList">
+                    <td>{{ academy.academyAdmin }}</td>
+                    <td>{{ academy.academyName }}</td>
+                    <td>{{ academy.address }}</td>
+                    <td>{{ academy.phoneNumber }}</td>
+                    <td>{{ academy.email }}</td>
+                    <td>{{ academy.academyType }}</td>
+                    <td>{{ academy.countryName }}</td>
+                    <td>{{ academy.isActive }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-success btn-sm"
+                        [routerLink]="['/admin/update-academy', academy.id]"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteAcademy(academy.id)"
+                      >
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>academyAdmin</th>
-          <th>academyName</th>
-          <th>address</th>
-          <th>phoneNumber</th>
-          <th>email</th>
-          <th>academyType</th>
-          <th>countryName</th>
-          <th>IsActive</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let Academy of academyList">
-          <td>{{ Academy.academyAdmin }}</td>
-          <td>{{ Academy.academyName }}</td>
-          <td>{{ Academy.address }}</td>
-          <td>{{ Academy.phoneNumber }}</td>
-          <td>{{ Academy.email }}</td>
-          <td>{{ Academy.academyType }}</td>
-          <td>{{ Academy.countryName }}</td>
-          <td>{{ Academy.isActive }}</td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-success"
-              [routerLink]="['/admin/update-academy', Academy.id]"
-            >
-              <i class="fas fa-edit"></i>
-            </button>
-            <button
-              type="button"
-              class="btn btn-danger"
-              (click)="deleteAcademy(Academy.id)"
-            >
-              <i class="far fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-</div>
+</section>
+

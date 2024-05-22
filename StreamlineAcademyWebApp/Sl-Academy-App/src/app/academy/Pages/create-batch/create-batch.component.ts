@@ -18,10 +18,11 @@ export class CreateBatchComponent {
   activatedRoute = inject(ActivatedRoute);
   instructorService = inject(InstructorService);
   locationService = inject(LocationService);
-  batchService=inject(BatchService)
-  sharedService=inject(SharedService)
-  router=inject(Router)
+  batchService = inject(BatchService);
+  sharedService = inject(SharedService);
+  router = inject(Router);
   courseId: string = '';
+  loadSpinner: boolean = false;
   constructor() {
     this.activatedRoute.params.subscribe((paramVal) => {
       this.courseId = paramVal['courseId'];
@@ -34,37 +35,39 @@ export class CreateBatchComponent {
   getAllInstructors() {
     this.instructorService.instructorList().subscribe((res) => {
       this.instructors = res.result;
-      console.log(this.instructors)
+      console.log(this.instructors);
     });
   }
   getAllLocations() {
     this.locationService.getAllLocations().subscribe((res) => {
       this.locations = res.result;
-      console.log(this.locations)
-
+      console.log(this.locations);
     });
   }
   batchModel: BatchRequestModel = new BatchRequestModel();
   instructors: InstructorResponseModel[] = [];
   locations: LocationResponseModel[] = [];
   addBatch() {
-    this.batchModel.courseId=this.courseId
-  this.batchService.createBatch(this.batchModel).subscribe({
+    this.loadSpinner = true;
+    this.batchModel.courseId = this.courseId;
+    this.batchService.createBatch(this.batchModel).subscribe({
       next: (response) => {
-        console.log(response)
+        console.log(response);
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message);
-          // this.router.navigate(['/academy/course-list'])
-        }
-        else{
-          this.sharedService.showErrorToast(response.message)
+          this.loadSpinner = false;
+          this.router.navigate(['/academy/batch-list',this.courseId])
+        } else {
+          this.sharedService.showErrorToast(response.message);
+          this.loadSpinner = false;
         }
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.BadRequest) {
-          console.log(err.message)
+        if (err.status == HttpStatusCode.Unauthorized) {
+          console.log(err.message);
+          this.loadSpinner = false;
         }
-      }
+      },
     });
   }
 }

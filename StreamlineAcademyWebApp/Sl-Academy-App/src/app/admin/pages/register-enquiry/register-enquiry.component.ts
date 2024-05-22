@@ -1,33 +1,46 @@
-import { Component, inject, resolveForwardRef } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Enquiry, EnquiryResponse } from '../../../Models/Common/enquiry';
+import { EnquiryService } from '../../../Services/enquiry.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AcademyService } from '../../../Services/academy.service';
+import { CountryService } from '../../../Services/country.service';
+import { SharedService } from '../../../Services/shared.service';
+import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
 import { RegisterAcademy } from '../../../Models/Academy/Academy';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CountryService } from '../../../Services/country.service';
-import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
-import { SharedService } from '../../../Services/shared.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register-academy',
-  templateUrl: './register-academy.component.html',
-  styleUrl: './register-academy.component.css',
+  selector: 'app-register-enquiry',
+  templateUrl: './register-enquiry.component.html',
+  styleUrl: './register-enquiry.component.css'
 })
-export class RegisterAcademyComponent {
+export class RegisterEnquiryComponent {
+  enquiryId:string=''
   academyService = inject(AcademyService);
   countryService = inject(CountryService);
-  router = inject(Router);
-  sharedService = inject(SharedService);
+  enquiryService = inject(EnquiryService);
+  router=inject(Router)
+  route=inject(ActivatedRoute)
+  sharedService=inject(SharedService)
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
   filteredStates: any[] = [];
   filteredCitiesList: any[] = [];
-  academyTypeList: AcademyTypeResponse[] = [];
+  academyTypeList:AcademyTypeResponse[]=[];
   selectedCountryId: string = '';
   selectedStateId: string = '';
+  enquiry:EnquiryResponse=new EnquiryResponse()
   academyRegistrationModel: RegisterAcademy = new RegisterAcademy();
-  loadSpinner: boolean = false;
-  constructor() {}
+  constructor() {
+this.route.params.subscribe(params => {
+  this.enquiryId=params['id']
+  this.enquiryService.getEnquiryById(this.enquiryId).subscribe(res=>{
+    this.enquiry=res.result;
+    console.log(this.enquiry)
+  })
+})
+  }
 
   ngOnInit(): void {
     this.getAllCountries();
@@ -35,11 +48,11 @@ export class RegisterAcademyComponent {
     this.getAllCities();
     this.getAllAcademyTypes();
   }
-  getAllAcademyTypes() {
-    this.academyService.getAcademyTypes().subscribe((academyTypes) => {
-      this.academyTypeList = academyTypes.result;
-      console.log(this.academyTypeList);
-    });
+  getAllAcademyTypes(){
+    this.academyService.getAcademyTypes().subscribe(academyTypes=>{
+      this.academyTypeList=academyTypes.result
+      console.log(this.academyTypeList)
+    })
   }
   getAllCountries() {
     this.countryService.getCountries().subscribe((countries) => {
@@ -74,24 +87,22 @@ export class RegisterAcademyComponent {
   }
 
   registerAcademy() {
-    this.loadSpinner = true;
-    this.academyRegistrationModel.postalCode =
-      this.academyRegistrationModel.postalCode?.toString();
+   this.academyRegistrationModel.name=this.enquiry.name;
+   this.academyRegistrationModel.email=this.enquiry.email;
+   this.academyRegistrationModel.phoneNumber=this.enquiry.phoneNumber;
+    this.academyRegistrationModel.postalCode=this.academyRegistrationModel.postalCode?.toString();
     this.academyService.createAcademy(this.academyRegistrationModel).subscribe({
       next: (response) => {
-        if (response.isSuccess) {
-          this.sharedService.showSuccessToast(response.message);
-          this.loadSpinner = false;
-
-          this.router.navigate(['/admin/academylist']);
-        } else {
-          this.sharedService.showErrorToast(response.message);
-          this.loadSpinner = false;
+        if(response.isSuccess){
+          this.sharedService.showSuccessToast(response.message)
+          this.router.navigate(['/admin/academylist'])
+        }
+        else{
+          this.sharedService.showErrorToast(response.message)
         }
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
-        this.loadSpinner = false;
       },
     });
   }

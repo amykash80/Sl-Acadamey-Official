@@ -16,19 +16,27 @@
               name="name"
               #name="ngModel"
               [(ngModel)]="academyRegistrationModel.name"
+              required
               placeholder=""
             />
+            <div *ngIf="name.touched && name.invalid" class="error-message">
+              <div *ngIf="name.errors?.['required']">Admin Name is required</div>
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label><i class="far fa-user"></i> Academy Name</label>
             <input
               type="text"
               class="form-control"
-              name="name"
-              #name="ngModel"
+              name="academyName"
+              #academyName="ngModel"
               [(ngModel)]="academyRegistrationModel.academyName"
+              required
               placeholder=""
             />
+            <div *ngIf="academyName.touched && academyName.invalid" class="error-message">
+              <div *ngIf="academyName.errors?.['required']">Academy Name is required</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -39,8 +47,14 @@
               name="email"
               #email="ngModel"
               [(ngModel)]="academyRegistrationModel.email"
+              required
+              email
               placeholder=""
             />
+            <div *ngIf="email.touched && email.invalid" class="error-message">
+              <div *ngIf="email.errors?.['required']">Email is required</div>
+              <div *ngIf="email.errors?.['email']">Invalid email address</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -51,8 +65,14 @@
               name="phoneNumber"
               #phoneNumber="ngModel"
               [(ngModel)]="academyRegistrationModel.phoneNumber"
+              required
+              pattern="^\d{10}$"
               placeholder=""
             />
+            <div *ngIf="phoneNumber.touched && phoneNumber.invalid" class="error-message">
+              <div *ngIf="phoneNumber.errors?.['required']">Phone Number is required</div>
+              <div *ngIf="phoneNumber.errors?.['pattern']">Phone Number must be 10 digits</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -63,8 +83,14 @@
               name="password"
               #password="ngModel"
               [(ngModel)]="academyRegistrationModel.password"
+              required
+              minlength="6"
               placeholder=""
             />
+            <div *ngIf="password.touched && password.invalid" class="error-message">
+              <div *ngIf="password.errors?.['required']">Password is required</div>
+              <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -75,8 +101,12 @@
               name="address"
               #address="ngModel"
               [(ngModel)]="academyRegistrationModel.address"
+              required
               placeholder=""
             />
+            <div *ngIf="address.touched && address.invalid" class="error-message">
+              <div *ngIf="address.errors?.['required']">Address is required</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -87,8 +117,14 @@
               name="postalCode"
               #postalCode="ngModel"
               [(ngModel)]="academyRegistrationModel.postalCode"
+              required
+              pattern="^\d{5,6}$"
               placeholder=""
             />
+            <div *ngIf="postalCode.touched && postalCode.invalid" class="error-message">
+              <div *ngIf="postalCode.errors?.['required']">Postal Code is required</div>
+              <div *ngIf="postalCode.errors?.['pattern']">Postal Code must be 5-6 digits</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -96,11 +132,16 @@
             <select
               class="form-control"
               name="academyTypeId"
+              #academyType="ngModel"
               [(ngModel)]="academyRegistrationModel.academyTypeId"
+              required
             >
-            <option value="">Select Academy Type</option>
-            <option *ngFor="let academyType of academyTypeList" [value]="academyType.id">{{ academyType.academyTypeName }}</option>
+              <option value="">Select Academy Type</option>
+              <option *ngFor="let academyType of academyTypeList" [value]="academyType.id">{{ academyType.academyTypeName }}</option>
             </select>
+            <div *ngIf="academyType.touched && academyType.invalid" class="error-message">
+              <div *ngIf="academyType.errors?.['required']">Academy Type is required</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -108,13 +149,17 @@
             <select
               class="form-control"
               name="countryId"
+              #country="ngModel"
               (change)="filterStates($event)"
               [(ngModel)]="academyRegistrationModel.countryId"
+              required
             >
-            <option value="">Select Country</option>
-            <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
-             
+              <option value="">Select Country</option>
+              <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
             </select>
+            <div *ngIf="country.touched && country.invalid" class="error-message">
+              <div *ngIf="country.errors?.['required']">Country is required</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -122,12 +167,17 @@
             <select
               class="form-control"
               name="stateId"
+              #state="ngModel"
               (change)="filteredCities($event)"
               [(ngModel)]="academyRegistrationModel.stateId"
+              required
             >
-            <option value="">Select state</option>
-            <option *ngFor="let state of filteredStates" [value]="state.id">{{ state.stateName }}</option>
+              <option value="">Select state</option>
+              <option *ngFor="let state of filteredStates" [value]="state.id">{{ state.stateName }}</option>
             </select>
+            <div *ngIf="state.touched && state.invalid" class="error-message">
+              <div *ngIf="state.errors?.['required']">State is required</div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
@@ -135,18 +185,25 @@
             <select
               class="form-control"
               name="cityId"
+              #city="ngModel"
               [(ngModel)]="academyRegistrationModel.cityId"
+              required
             >
-            <option value="">Select city</option>
-            <option *ngFor="let city of filteredCitiesList" [value]="city.id">{{ city.cityName }}</option>
+              <option value="">Select city</option>
+              <option *ngFor="let city of filteredCitiesList" [value]="city.id">{{ city.cityName }}</option>
             </select>
+            <div *ngIf="city.touched && city.invalid" class="error-message">
+              <div *ngIf="city.errors?.['required']">City is required</div>
+            </div>
           </div>
 
           <div class="form-btn col-12 text-center">
             <button
               class="th-btn black-btn-2 w-100"
               (click)="registerAcademy()"
+              [disabled]="academyRegistrationForm.invalid"
             >
+              <app-spinner *ngIf="loadSpinner"></app-spinner>
               Register Now
             </button>
           </div>
