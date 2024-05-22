@@ -55,7 +55,7 @@
                       >
                         <i class="far fa-trash-alt"></i>
                       </button>
-                      <button
+                      <button *ngIf="pending"
                         type="button"
                         class=" btn-sm add-batch-btn"
                         [routerLink]="['/admin/register-enquiry',enquiry.id]"

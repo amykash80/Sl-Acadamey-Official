@@ -26,17 +26,20 @@ namespace StreamlineAcademy.Application.Services
     {
         private readonly IAcademyRepository academyRepository;
         private readonly IUserRepository userRepository;
-		private readonly IEmailHelperService emailHelperService;
+        private readonly IEnquiryRepository enquiryRepository;
+        private readonly IEmailHelperService emailHelperService;
         private readonly IContextService contextService;
 
         public AcademyService(IAcademyRepository academyRepository,
                                IUserRepository userRepository ,
+                               IEnquiryRepository enquiryRepository ,
                                IEmailHelperService emailHelperService,
                                IContextService contextService)
         {
             this.academyRepository = academyRepository;
             this.userRepository = userRepository;
-			this.emailHelperService = emailHelperService;
+            this.enquiryRepository = enquiryRepository;
+            this.emailHelperService = emailHelperService;
             this.contextService = contextService;
         }
 
@@ -105,7 +108,8 @@ namespace StreamlineAcademy.Application.Services
 				{
                     if (await emailHelperService.SendRegistrationEmail(user.Email!, user.Name!, request.Password!))
                     {
-                        var updateStatusResponse = await academyRepository.UpdateRegistrationStatus(academy.Id, RegistrationStatus.Approved);
+                        var enquiry=await enquiryRepository.GetByIdAsync(enquiry=>enquiry.Name==request.Name);
+                        var updateStatusResponse = await academyRepository.UpdateRegistrationStatus(enquiry.Id, RegistrationStatus.Approved);
                         var res = await academyRepository.GetAcademyById(academy.Id);
                         return ApiResponse<AcademyResponseModel>.SuccessResponse(res,"Academy Registered Successfully");
                     }

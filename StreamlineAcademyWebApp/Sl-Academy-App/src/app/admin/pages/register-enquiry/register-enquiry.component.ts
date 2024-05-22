@@ -16,6 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegisterEnquiryComponent {
   enquiryId:string=''
+  pending:boolean = false
   academyService = inject(AcademyService);
   countryService = inject(CountryService);
   enquiryService = inject(EnquiryService);
