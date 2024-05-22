@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EnquiryService } from '../../../Services/enquiry.service';
 import { Enquiry, EnquiryResponse } from '../../../Models/Common/enquiry';
 import { SharedService } from '../../../Services/shared.service';
+import { RegistrationStatus } from '../../../Enums/RegistrationStatus';
 
 @Component({
   selector: 'app-enquirylist',
@@ -16,6 +17,8 @@ export class EnquirylistComponent {
   enquirylist: EnquiryResponse[] = [];
   filteredEnquiryList: EnquiryResponse[] = [];
   searchText: string = '';
+  pending:boolean=false;
+  registrationStatus=RegistrationStatus
   ngOnInit() {
     this.loadAllEnquiries();
   }
