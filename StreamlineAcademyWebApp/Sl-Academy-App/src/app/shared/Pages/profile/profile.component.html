@@ -4,9 +4,8 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">User</a></li>
-            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            <li class="breadcrumb-item">admin</li>
+            <li class="breadcrumb-item active" aria-current="page">profile</li>
           </ol>
         </nav>
       </div>
@@ -16,14 +15,14 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+            <img src="{{apiBaseUrl+ filePath}}"  alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
             <h5 class="my-3"><p>{{ contactInfo.name }}</p></h5>
-            
-            <div class="d-flex justify-content-center mb-2">
-              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Follow</button>
-              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Message</button>
+            <div class="custom-file mb-3">
+              <input type="file" name="File" (change)="getFile($event) " class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Upload Photo &nbsp;</label>
             </div>
+          
           </div>
         </div>
         <div class="card mb-4 mb-lg-0">
@@ -31,22 +30,22 @@
             <ul class="list-group list-group-flush rounded-3">
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fas fa-globe fa-lg text-warning"></i>
-                <p class="mb-0">https://mdbootstrap.com</p>
+                <p class="mb-0">{{contactInfo.name}}.com</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                <p class="mb-0">mdbootstrap</p>
+                <p class="mb-0">{{contactInfo.name}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                <p class="mb-0">mdbootstrap</p>
+                <p class="mb-0">{{contactInfo.name}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                <p class="mb-0">mdbootstrap</p>
+                <p class="mb-0">{{contactInfo.name}}</p>
               </li>
             </ul>
           </div>
@@ -56,12 +55,12 @@
         <div class="card mb-4">
           <div class="card-body">
               <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-primary" (click)="toggleContactEditMode()">
+                <button type="button" class="btn btn-info" (click)="toggleContactEditMode()">
                   {{ isContactEditMode ? 'Cancel' : 'Edit' }}
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-secondary ms-2"
+                  class="btn btn-outline-info ms-2"
                   (click)="saveContact()"
                   [hidden]="!isContactEditMode"
                 >
@@ -127,12 +126,12 @@
           <div class="card mb-4">
             <div class="card-body">
               <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-primary" (click)="toggleAddressEditMode()">
+                <button type="button" class="btn btn-info" (click)="toggleAddressEditMode()">
                   {{ isAddressEditMode ? 'Cancel' : 'Edit' }}
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-secondary ms-2"
+                  class="btn btn-outline-info ms-2"
                   (click)="saveContact()"
                   [hidden]="!isAddressEditMode"
                 >

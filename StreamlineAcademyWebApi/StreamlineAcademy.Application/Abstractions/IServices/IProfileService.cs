@@ -19,6 +19,8 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<List<CountryResponse>>> GetAllCountries();
         Task<ApiResponse<List<StateResponse>>> GetAllStates();
         Task<ApiResponse<List<CityResponse>>> GetAllCities();
+        Task<ApiResponse<FileResponseModel>> GetFilePath();
+
 
 
 

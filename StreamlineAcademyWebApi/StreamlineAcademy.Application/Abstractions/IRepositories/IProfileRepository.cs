@@ -15,7 +15,6 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<AddressInfoResponseModel> GetAddressInfo(Guid? id);
         Task<List<Country>> GetAllCountries();
         Task<List<State>> GetAllStates();
-
         Task<List<City>> GetAllCities();
     }
 }

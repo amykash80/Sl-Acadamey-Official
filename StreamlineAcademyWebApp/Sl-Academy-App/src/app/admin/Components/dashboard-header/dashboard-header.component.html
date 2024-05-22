@@ -247,8 +247,8 @@
       <div class="widget-content p-0">
         <div class="widget-content-wrapper">
           <div class="widget-content-left ml-3 header-user-info">
-            <div class="widget-heading">Alina Mclourd</div>
-            <div class="widget-subheading">VP People Manager</div>
+            <div class="widget-heading">{{loggedInUserDetails.fullName}}</div>
+            <div class="widget-subheading">portal Admin</div>
           </div>
           <div class="widget-content-left">
             <div class="btn-group">
@@ -287,9 +287,9 @@
                             />
                           </div>
                           <div class="widget-content-left">
-                            <div class="widget-heading">Alina Mcloughlin</div>
+                            <div class="widget-heading">{{loggedInUserDetails.fullName}}</div>
                             <div class="widget-subheading opacity-8">
-                              A short profile description
+                              Managing the whole portal
                             </div>
                           </div>
                           <div class="widget-content-right mr-2">
@@ -307,36 +307,11 @@
                 <div class="scroll-area-xs" style="height: 150px">
                   <div class="scrollbar-container ps">
                     <ul class="nav flex-column">
-                      <li class="nav-item-header nav-item">Activity</li>
-                      <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link"
-                          >Chat
-                          <div class="ml-auto badge badge-pill badge-info">
-                            8
-                          </div>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link"
-                          >Recover Password</a
-                        >
-                      </li>
-                      <li class="nav-item-header nav-item">My Account</li>
-                      <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link"
-                          >Settings
-                          <div class="ml-auto badge badge-success">New</div>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link"
-                          >Messages
-                          <div class="ml-auto badge badge-warning">512</div>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link">Logs</a>
-                      </li>
+                     <a routerLink="/admin/profile">
+                      <li class="nav-item-header nav-item">view profile</li>
+                    </a>
+                     
+                    
                     </ul>
                   </div>
                 </div>

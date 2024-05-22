@@ -18,16 +18,19 @@ namespace StreamlineAcademy.Persistence.Repositories
         private readonly StreamlineDbContet context;
         private readonly IContextService contextService;
         private readonly IUserRepository userRepository;
+        private readonly IFileRepository fileRepository;
         private readonly IAcademyRepository academyRepository;
 
         public ProfileRepository(StreamlineDbContet context,
                                  IContextService contextService,
                                  IUserRepository userRepository,
+                                 IFileRepository fileRepository,
                                  IAcademyRepository academyRepository) : base(context)
         {
             this.context = context;
             this.contextService = contextService;
             this.userRepository = userRepository;
+            this.fileRepository = fileRepository;
             this.academyRepository = academyRepository;
         }
 
@@ -65,6 +68,8 @@ namespace StreamlineAcademy.Persistence.Repositories
         {
             return await Task.Run(() => context.States.ToListAsync());
         }
+
+      
     }
 
 }
