@@ -17,6 +17,8 @@ export class BatchScheduleListComponent {
   batchId:string=''
   courseId:string=''
   batchScheduleList:BatchScheduleResponseModel[]=[];
+  filterBatchSchedules: BatchScheduleResponseModel[] = [];
+  searchText: string = '';
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.batchId=paramVal['id']
@@ -24,10 +26,25 @@ ngOnInit(){
   this.loadAllBatchSchedules(); 
   })
 }
+filterBatchSchedule(): void {
+  if (!this.searchText.trim()) {
+    this.filterBatchSchedules = this.batchScheduleList.slice();
+    return;
+  }
+
+  const searchTerm = this.searchText.toLowerCase();
+  this.filterBatchSchedules = this.batchScheduleList.filter(
+    (schedule) =>
+      schedule.contentName!.toLowerCase().startsWith(searchTerm) ||
+      schedule.date!.toLowerCase().startsWith(searchTerm)
+  );
+}
+
 loadAllBatchSchedules(){
   this.batchScheduleService.getAllSchedulesByBatchId(this.batchId).subscribe({
     next: (response) => {
       this.batchScheduleList = response.result;
+      this.filterBatchSchedules=this.batchScheduleList;
       console.log(this.batchScheduleList)
     },
     error: (err: HttpErrorResponse) => {

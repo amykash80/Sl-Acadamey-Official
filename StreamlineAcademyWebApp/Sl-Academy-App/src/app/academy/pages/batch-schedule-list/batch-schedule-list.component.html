@@ -2,6 +2,15 @@
     <div class="row">
       <div class="col-12">
         <h2>Batch Schedule List</h2>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search Batch Schedules"
+            [(ngModel)]="searchText"
+            (input)="filterBatchSchedule()"
+          />
+        </div>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -15,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let batchSchedule of batchScheduleList">
+            <tr *ngFor="let batchSchedule of filterBatchSchedules">
               <td>{{ batchSchedule.batchName }}</td>
               <td>{{ batchSchedule.contentName }}</td>
               <td>{{ batchSchedule.date | date: 'shortDate' }}</td>

@@ -23,6 +23,7 @@ export class CreateBatchScheduleComponent {
   batchId:string=''
   courseId:string=''
   contents: any[] = [];
+  loadSpinner: boolean = false;
 
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
@@ -41,21 +42,25 @@ getAllContents() {
   });
 }
 createBatchSchedule(){
+  this.loadSpinner = true;
   this.batchScheduleModel.batchId=this.batchId;
   this.batchScheduleService.createBatchSchedule(this.batchScheduleModel).subscribe({
     next: (response) => {
       console.log(response)
       if (response.isSuccess) {
         this.sharedService.showSuccessToast(response.message);
+        this.loadSpinner = false;
         this.router.navigate(['/academy/batch-schedule-list',this.batchId,this.courseId])
       }
       else{
         this.sharedService.showErrorToast(response.message)
+        this.loadSpinner = false;
       }
     },
     error: (err: HttpErrorResponse) => {
       if (err.status == HttpStatusCode.BadRequest) {
         console.log(err.message)
+        this.loadSpinner = false;
       }
     }
   });
