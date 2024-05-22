@@ -11,5 +11,6 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
     public interface IFileService
     {
         Task<string> UploadFileAsync(Module module,Guid entityId,IFormFile file);
+
     }
 }

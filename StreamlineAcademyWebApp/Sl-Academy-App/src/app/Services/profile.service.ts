@@ -32,5 +32,8 @@ export class ProfileService {
   getImagePath(){
     return this.http.get<ApiResponse<FileResponse>>(this.baseUrl+"Profile/filePath")
   }
+  changeProfilePicture(data:FormData){
+    return this.http.post<ApiResponse<FileResponse>>(this.baseUrl+"Profile/changeProfilePicture",data)
+  }
 
 }

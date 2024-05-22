@@ -13,7 +13,12 @@ namespace StreamlineAcademy.Domain.Models.Requests
     public class FileRequestModel
     {
         public Module Module { get; set; }
-        public IFormFile? File { get; set; }  
+        public IFormFile? File { get; set; }
     }
+
+    public class FileRequestUpdateModel : FileRequestModel { 
+    public Guid Id { get; set; }
+    }
+
 
 }
