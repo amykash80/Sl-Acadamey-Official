@@ -4,6 +4,7 @@ import { environment } from '../../enviroments/enviroment';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/Common/api-response';
 import { AddressResponse, ContactResponse, GetAddress, GetContact } from '../Models/Common/Profile';
+import { FileResponse } from '../Models/Common/fileResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,12 @@ export class ProfileService {
   }
   updateAddress(addressUpdateModel:GetAddress):Observable<ApiResponse<AddressResponse>>{
     return this.http.put<ApiResponse<AddressResponse>>(this.baseUrl+"Profile/updateAddressInfo",addressUpdateModel)
+  }
+  uploadImage(data:FormData):Observable<ApiResponse<FileResponse>>{
+    return this.http.post<ApiResponse<FileResponse>>(this.baseUrl+"Profile/uploadPhoto",data)
+  }
+  getImagePath(){
+    return this.http.get<ApiResponse<FileResponse>>(this.baseUrl+"Profile/filePath")
   }
 
 }

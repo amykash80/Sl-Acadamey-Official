@@ -1,8 +1,11 @@
+import { UserRole } from "../../Enums/userrole";
+
 export class ContactResponse {
     id?: string;
     name?: string;
     email?: string;
     phoneNumber?: string;
+    userRole?:UserRole
 }
 export class GetContact {
     name?: string;

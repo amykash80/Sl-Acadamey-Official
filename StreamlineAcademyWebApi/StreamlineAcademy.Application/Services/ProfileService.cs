@@ -58,7 +58,8 @@ namespace StreamlineAcademy.Application.Services
                 Id = contact.Id,
                 Name = contact.Name,
                 Email = contact.Email,
-                PhoneNumber = contact.PhoneNumber
+                PhoneNumber = contact.PhoneNumber,
+                UserRole=contact.UserRole,
             };
             return ApiResponse<ContactInfoResponseModel>.SuccessResponse(responseModel);
 
@@ -181,6 +182,15 @@ namespace StreamlineAcademy.Application.Services
             var cityList = await profileRepository.GetAllCities();
             var newResponse = cityList.Select(city => new CityResponse() { Id = city.Id, CityName = city.CityName,SateId=city.StateId });
             return ApiResponse<List<CityResponse>>.SuccessResponse(newResponse.ToList());
+        }
+
+        public async  Task<ApiResponse<FileResponseModel>> GetFilePath()
+        {
+            var userId = contextService.GetUserId();
+            var appFile = await fileRepository.GetByIdAsync(x => x.EntityId == userId);
+            if (appFile is not null)
+                return ApiResponse<FileResponseModel>.SuccessResponse(new FileResponseModel() { FilePath = appFile.FilePath, Id = appFile.Id });
+            return ApiResponse<FileResponseModel>.ErrorResponse("something Went Wrong");
         }
     }
 }

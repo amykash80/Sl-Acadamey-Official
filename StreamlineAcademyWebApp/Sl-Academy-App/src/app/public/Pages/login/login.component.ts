@@ -26,7 +26,7 @@ export class LoginComponent {
       next: (response) => {
         if (response.isSuccess) {
           localStorage.setItem("streamlineToken", JSON.stringify(response.result.token));
-          localStorage.setItem("userId", response.result.userId!);
+          localStorage.setItem("responseObj", JSON.stringify(response.result))
         } 
         else {
           this.sharedService.showErrorToast(response.message);
