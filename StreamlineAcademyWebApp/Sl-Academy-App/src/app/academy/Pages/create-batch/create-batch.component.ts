@@ -8,6 +8,7 @@ import { LocationService } from '../../../Services/location.service';
 import { BatchService } from '../../../Services/batch.service';
 import { SharedService } from '../../../Services/shared.service';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-batch',
@@ -47,6 +48,16 @@ export class CreateBatchComponent {
   batchModel: BatchRequestModel = new BatchRequestModel();
   instructors: InstructorResponseModel[] = [];
   locations: LocationResponseModel[] = [];
+  validateDates(form: NgForm) {
+    const startDate = new Date(this.batchModel.startDate!);
+    const endDate = new Date(this.batchModel.endDate!);
+    
+    if (startDate && endDate && endDate <= startDate) {
+      form.controls['endDate'].setErrors({ endDateInvalid: true });
+    } else {
+      form.controls['endDate'].setErrors(null);
+    }
+  }
   addBatch() {
     this.loadSpinner = true;
     this.batchModel.courseId = this.courseId;

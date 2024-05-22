@@ -80,7 +80,7 @@ namespace StreamlineAcademy.Application.Services
                     AcademyId=academyId,
                     WorkExperiance=model.WorkExperiance,
                     DateOfBirth=model.DateOfBirth,
-                    Skill=Skill.Programming
+                    Skill=model.Skill,
                 };
                 var result = await instructorRepository.InsertAsync(instructor);
                 if (result > 0)

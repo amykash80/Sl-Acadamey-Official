@@ -49,7 +49,11 @@ const routes: Routes = [
     {path:"instructor-list",component:InstructorListComponent},
     {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
     { path:"update-instructor/:id", component: UpdateInstructorComponent },
-    {path:"update-batch/:batchId/:courseId",component:UpdateBatchComponent}
+    {path:"update-batch/:batchId/:courseId",component:UpdateBatchComponent},
+    {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
+    {path:"create-instructor",component:CreateInstructorComponent},
+    {path:"instructor-list",component:InstructorListComponent},
+    {path:"batch-list/:courseId",component:BatchListComponent}
   ]
   
   },
