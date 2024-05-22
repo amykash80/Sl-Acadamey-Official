@@ -25,7 +25,8 @@ export class UpdateCourseComponent {
   course:CourseResponse = new CourseResponse();
   updateCourseModel: UpdateCourse = new UpdateCourse()
   courseModel: CreateCourse = new CreateCourse();
-  
+  loadSpinner: boolean = false;
+
   ngOnInit(): void {
     this.getAllCategory();
     this.academyId = localStorage.getItem('userId')!;
@@ -37,7 +38,9 @@ export class UpdateCourseComponent {
       });
     });
   }
-  
+   cancel() {
+    this.router.navigate(['/academy/course-list']); 
+  }
   getAllCategory() {
     this.courseService.getCategories().subscribe((categories) => {
       this.categories = categories.result;
@@ -47,6 +50,7 @@ export class UpdateCourseComponent {
   }
   
   updateCourse(){ 
+    this.loadSpinner = true;
      this.updateCourseModel=this.course;
     this.updateCourseModel.academyId=this.academyId
     console.log(this.updateCourseModel);
@@ -54,14 +58,17 @@ export class UpdateCourseComponent {
       next:(response)=>{
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message);
+          this.loadSpinner = false;
           this.router.navigate(['/academy/course-list']);
         }
         else{
           this.sharedService.showErrorToast(response.message)
+          this.loadSpinner = false;
         }
       },
       error:(err)=>{
         console.log(err)
+        this.loadSpinner = false;
       }
     })
   }

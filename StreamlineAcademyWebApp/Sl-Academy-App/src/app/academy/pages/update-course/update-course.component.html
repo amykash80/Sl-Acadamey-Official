@@ -32,7 +32,13 @@
               </div>
           </div>
           <div class="form-btn col-12 text-center">
-            <button class="th-btn black-btn-2 w-100" (click)="updateCourse()">Update Course</button>
+            <div class="button-group">
+            <button class="th-btn w-50 update-btn"[disabled]="courseForm.invalid" (click)="updateCourse()">
+              <app-spinner *ngIf="loadSpinner"></app-spinner>Update Course</button>
+              <button class="th-btn w-50"  (click)="cancel()">
+                Cancel
+              </button>
+            </div>
           </div>
         </form>
       </div>

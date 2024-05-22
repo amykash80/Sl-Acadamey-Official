@@ -19,7 +19,7 @@ export class CreateCourseComponent {
   categories: any[] = [];
   academyId:string=''
   constructor(private router:Router) {}
-
+  loadSpinner: boolean = false;
   ngOnInit(): void {
     this.getAllCategory();
     this.academyId = localStorage.getItem('userId')!
@@ -34,21 +34,25 @@ export class CreateCourseComponent {
   }
 
   createCourse() {
+    this.loadSpinner = true;
     this.courseModel.academyId=this.academyId
     this.courseService.createCourse(this.courseModel).subscribe({
       next: (response) => {
         console.log(response)
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message)
+          this.loadSpinner = false;
           this.router.navigate(['/academy/course-list']);
         }
         else{
           this.sharedService.showErrorToast(response.message)
+          this.loadSpinner = false;
         }
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.BadRequest) {
           console.log(err.message)
+          this.loadSpinner = false;
         }
       }
     });

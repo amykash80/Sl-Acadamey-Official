@@ -20,6 +20,7 @@ export class UpdateBatchScheduleComponent {
   contents: any[] = [];
   batchScheduleModel:BatchScheduleResponseModel=new BatchScheduleResponseModel();
   updateBatchScheduleModel:UpdateBatchScheduleModel=new UpdateBatchScheduleModel();
+  loadSpinner: boolean = false;
   ngOnInit(){
     this.activatedRoute.params.subscribe(paramVal=>{
       this.batchScheduleId=paramVal['id'];
@@ -50,20 +51,24 @@ export class UpdateBatchScheduleComponent {
     return dt.toISOString().substring(0, 10); // yyyy-MM-dd format
   }
   updateBatchSchedule(){
+    this.loadSpinner = true;
     this.updateBatchScheduleModel =this.batchScheduleModel;
     this.batchScheduleModel.batchId=this.batchId;
-  this.batchScheduleService.updateBatchSchedule(this.updateBatchScheduleModel).subscribe({
+    this.batchScheduleService.updateBatchSchedule(this.updateBatchScheduleModel).subscribe({
     next:(response)=>{
       if(response.isSuccess){
         this.sharedService.showSuccessToast(response.message);
+        this.loadSpinner = false;
         this.router.navigate(['/academy/batch-schedule-list', this.batchId, this.courseId]);
       }
       else{
         this.sharedService.showErrorToast(response.message)
+        this.loadSpinner = false;
       }
     },
     error:(err)=>{
       console.log(err)
+      this.loadSpinner = false;
     }
   })
   }

@@ -33,7 +33,8 @@
             </div>
         </div>
         <div class="form-btn col-12 text-center">
-          <button class="th-btn black-btn-2 w-100" (click)="createCourse()">Create Course</button>
+          <button class="th-btn w-100" [disabled]="courseForm.invalid" (click)="createCourse()">C
+            <app-spinner *ngIf="loadSpinner"></app-spinner>reate Course</button>
         </div>
       </form>
     </div>

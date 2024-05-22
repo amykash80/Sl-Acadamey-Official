@@ -104,6 +104,7 @@ saveAddress() {
         this.sharedService.showSuccessToast(response.message);
         this.addressInfo = { ...this.addressModel };
         this.isAddressEditMode = false; 
+        this.isContactEditMode = false;
       } else {
         this.sharedService.showErrorToast(response.message);
       }

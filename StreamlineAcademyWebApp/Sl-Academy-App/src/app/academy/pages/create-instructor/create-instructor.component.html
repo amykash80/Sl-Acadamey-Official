@@ -185,6 +185,7 @@
               [disabled]="instructorRegistrationForm.invalid"
               (click)="addInstructor()"
             >
+            <app-spinner *ngIf="loadSpinner"></app-spinner>
               Register Now
             </button>
           </div>

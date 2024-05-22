@@ -13,9 +13,9 @@ export class GetContact {
     phoneNumber?: string;
 }
 export class UpdateContact {
-    name?: string;
-    email?: string;
-    phoneNumber?: string;
+    name?: string=''
+    email?: string=''
+    phoneNumber?: string=''
 }
 export class AddressResponse {
     id?: string;
@@ -26,11 +26,11 @@ export class AddressResponse {
     cityName?: string;
 }
 export class UpdateAddress {
-    address?: string;
-    postalCode?: string;
-    countryName?: string;
-    stateName?: string;
-    cityName?: string;
+    address?: string=''
+    postalCode?: string=''
+    countryName?: string=''
+    stateName?: string=''
+    cityName?: string=''
 }
 export class GetAddress {
     address?: string;

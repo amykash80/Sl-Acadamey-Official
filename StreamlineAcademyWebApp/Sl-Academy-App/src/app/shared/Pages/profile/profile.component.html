@@ -64,7 +64,7 @@
                   (click)="saveContact()"
                   [hidden]="!isContactEditMode"
                 >
-                  Save
+                  Save Contact
                 </button>
                 </div>
                 <div >
@@ -126,16 +126,16 @@
           <div class="card mb-4">
             <div class="card-body">
               <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-info" (click)="toggleAddressEditMode()">
+                <button  type="button" class="btn btn-info" (click)="toggleAddressEditMode()">
                   {{ isAddressEditMode ? 'Cancel' : 'Edit' }}
                 </button>
                 <button
                   type="button"
                   class="btn btn-outline-info ms-2"
-                  (click)="saveContact()"
+                  (click)="saveAddress()"
                   [hidden]="!isAddressEditMode"
                 >
-                  Save
+                  Save Address
                 </button>
                 </div>
                 <div class="row" *ngIf="!isAddressEditMode">

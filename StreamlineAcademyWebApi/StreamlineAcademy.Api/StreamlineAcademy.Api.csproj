@@ -32,6 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Files\0756cbbb-c46d-4b6e-b2f3-ce3708382a34Lipa1.jpg" />
+    <Content Remove="wwwroot\Files\afa6ad9f-6ea3-4419-9624-ae6b43b006c2Lipa2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

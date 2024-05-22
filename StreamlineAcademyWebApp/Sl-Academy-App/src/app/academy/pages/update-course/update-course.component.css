@@ -1,0 +1,7 @@
+.update-btn {
+    background-color: green; /* Change to your desired green color */
+    color: white;
+  }
+  .button-group button {
+    margin-right: 0px; /* Adjust the spacing as needed */
+  }
