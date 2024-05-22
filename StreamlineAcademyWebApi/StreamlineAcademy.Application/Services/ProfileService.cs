@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Org.BouncyCastle.Asn1.Ocsp;
 using StreamlineAcademy.Application.Abstractions.Identity;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Application.Abstractions.IServices;
 using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using System;
@@ -191,6 +193,28 @@ namespace StreamlineAcademy.Application.Services
             if (appFile is not null)
                 return ApiResponse<FileResponseModel>.SuccessResponse(new FileResponseModel() { FilePath = appFile.FilePath, Id = appFile.Id });
             return ApiResponse<FileResponseModel>.ErrorResponse("something Went Wrong");
+        }
+
+        public async Task<ApiResponse<FileResponseModel>> changeProfilePicture(FileRequestUpdateModel model)
+        {
+            var userId = contextService.GetUserId();
+            if (userId is null)
+            {
+                return ApiResponse<FileResponseModel>.ErrorResponse((APIMessages.ProfileManagement.UserNotFound));
+            }
+            var filePath = await GetFilePath();
+            var appFiles = new AppFiles
+            {
+                Id = model.Id,
+                Module = model.Module,
+                FilePath = filePath.Result!.FilePath,
+                EntityId = userId
+            };
+
+            var fileSave = await fileRepository.UpdateAsync(appFiles);
+            if (fileSave > 0)
+                return ApiResponse<FileResponseModel>.SuccessResponse(new FileResponseModel() { Id = userId, FilePath = filePath.Result.FilePath }, APIMessages.ProfileManagement.PhotoUploaded);
+            return ApiResponse<FileResponseModel>.ErrorResponse(APIMessages.TechnicalError);
         }
     }
 }

@@ -21,6 +21,8 @@ namespace StreamlineAcademy.Application.Services
             this.storageService = storageService;
             this.fileRepository = fileRepository;
         }
+
+
         public async Task<string> UploadFileAsync(Module module, Guid entityId, IFormFile file)
         {
            var filePath=await storageService.UploadFileAsync(file);
@@ -30,7 +32,9 @@ namespace StreamlineAcademy.Application.Services
             Module=module,
             EntityId=entityId,
             FilePath= filePath,
-            CreatedDate=DateTime.Now
+            CreatedDate=DateTime.Now,
+
+            
             };
 
             var returnVal=await fileRepository.InsertAsync(appFiles);

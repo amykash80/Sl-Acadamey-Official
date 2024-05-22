@@ -36,6 +36,9 @@ namespace StreamlineAcademy.Api.Controllers
 
         [HttpPost("uploadPhoto")]
         public async Task<ApiResponse<FileResponseModel>> UploadPhoto([FromForm]FileRequestModel model) => await profileService.UploadPhoto(model);
+
+        [HttpPost("changeProfilePicture")]
+        public async Task<ApiResponse<FileResponseModel>> changeProfile([FromForm] FileRequestUpdateModel model) => await profileService.changeProfilePicture(model);
         [HttpGet("filePath")]
         public async Task<ApiResponse<FileResponseModel>> GetFilePath() => await profileService.GetFilePath();
         [HttpGet("countries")]

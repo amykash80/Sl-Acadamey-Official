@@ -15,13 +15,19 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{apiBaseUrl+ filePath}}"  alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+            <img  src="{{apiBaseUrl+ filePath}}"  alt="avatar"
+              class="rounded-circle img-fluid" style="width: 200px;">
             <h5 class="my-3"><p>{{ contactInfo.name }}</p></h5>
-            <div class="custom-file mb-3">
-              <input type="file" name="File" (change)="getFile($event) " class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Upload Photo &nbsp;</label>
-            </div>
+            <ng-container *ngIf="!filePath; else showUploadOption">
+              <div class="custom-file mb-3">
+                <input type="file" name="File" #fileUploadControl (change)="getFile($event)" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Upload Photo &nbsp;</label>
+              </div>
+              
+            </ng-container>
+            <ng-template #showUploadOption>
+              <button class="btn btn-info" (click)="showFileInput()">Change Photo</button>
+            </ng-template>
           
           </div>
         </div>

@@ -1,4 +1,6 @@
-﻿using StreamlineAcademy.Application.Shared;
+﻿using Microsoft.AspNetCore.Http;
+using StreamlineAcademy.Application.Shared;
+using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using System;
@@ -20,6 +22,8 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<List<StateResponse>>> GetAllStates();
         Task<ApiResponse<List<CityResponse>>> GetAllCities();
         Task<ApiResponse<FileResponseModel>> GetFilePath();
+        Task<ApiResponse<FileResponseModel>> changeProfilePicture(FileRequestUpdateModel model);
+
 
 
 
