@@ -27,6 +27,8 @@ export class UpdateAcademyyComponent {
       this.academyId = params['id'];
       this.academyService.getAcademyById(this.academyId).subscribe(academy=>{
         this.academy=academy.result;
+        console.log(this.academy);
+        
       })
     });
   }
@@ -41,6 +43,7 @@ export class UpdateAcademyyComponent {
   selectedCountryId: string = '';
   selectedStateId: string = '';
   updateAcademyModel: UpdateAcademy = new UpdateAcademy();
+  loadSpinner: boolean = false;
 
 
   ngOnInit(): void {
@@ -62,6 +65,8 @@ export class UpdateAcademyyComponent {
   getAllStates() {
     this.countryService.getStates().subscribe((res) => {
       this.states = res.result;
+      console.log(this.states);
+      
     });
   }
   getAllCities() {
@@ -82,16 +87,20 @@ export class UpdateAcademyyComponent {
     );
   }
   updateAcademy(){
+    this.loadSpinner=true;
     this.updateAcademyModel=this.academy;
     this.updateAcademyModel.postalCode?.toString();
     this.academyService.updateAcademy(this.updateAcademyModel).subscribe({
       next:(response)=>{
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message);
+          this.loadSpinner=false;
           this.router.navigate(['/admin/academylist'])
         }
         else{
           this.sharedService.showErrorToast(response.message)
+          this.loadSpinner=false;
+
         }
       },
       error:(err)=>{

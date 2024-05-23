@@ -33,6 +33,7 @@ namespace StreamlineAcademy.Domain.Entities
 
         #region navigation
         public Batch? Batch { get; set; }
+
         #endregion
     }
 }

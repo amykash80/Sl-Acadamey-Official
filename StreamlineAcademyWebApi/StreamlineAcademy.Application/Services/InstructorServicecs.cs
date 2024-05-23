@@ -139,7 +139,7 @@ namespace StreamlineAcademy.Application.Services
 
         public async Task<ApiResponse<InstructorResponseModel>> GetInstructorById(Guid id)
         {
-            var instructor = await instructorRepository.GetInstructorById(id);
+            var instructor = await instructorRepository.GetByIdAsync(_=>_.Id==id);
             if (instructor is null)
                 return ApiResponse<InstructorResponseModel>.ErrorResponse(APIMessages.InstructorManagement.InstructorNotFound, HttpStatusCodes.NotFound);
 
