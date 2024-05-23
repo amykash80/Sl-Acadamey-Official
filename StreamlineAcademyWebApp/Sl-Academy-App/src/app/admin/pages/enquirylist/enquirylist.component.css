@@ -19,3 +19,6 @@
 .custom-card .table {
   border-radius: inherit;
 }
+.table {
+  border-collapse: separate;
+}
