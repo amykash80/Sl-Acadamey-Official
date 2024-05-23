@@ -19,6 +19,7 @@ export class UpdateLocationComponent {
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
+  loadSpinner=false
   filteredStates: any[] = [];
   filteredCitiesList: any[] = [];
   constructor(
@@ -69,19 +70,26 @@ export class UpdateLocationComponent {
     );
   }
   updateLocation(){
+    this.loadSpinner=true;
   this.updateLocationModel=this.location;
   this.locationService.updateLocation(this.updateLocationModel).subscribe({
     next:(response)=>{
       if(response.isSuccess){
         this.sharedService.showSuccessToast(response.message);
+      this.loadSpinner=false;
+
         this.router.navigate(['/academy/location-list'])
       }
       else{
         this.sharedService.showErrorToast(response.message)
+    this.loadSpinner=false;
+
       }
     },
     error:(err)=>{
       console.log(err)
+    this.loadSpinner=false;
+
     }
   })
   }

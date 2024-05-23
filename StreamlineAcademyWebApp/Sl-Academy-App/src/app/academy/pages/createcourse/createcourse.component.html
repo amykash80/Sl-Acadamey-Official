@@ -1,41 +1,59 @@
+
 <div class="container my-5">
+  <div class="row mb-4">
+    <div class="col">
+      <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 custom-breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/academy/dashboard">academy</li>
+          <li class="breadcrumb-item active" aria-current="page">create-course</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
   <div class="row justify-content-center">
     <div class="col-lg-6 col-xl-9">
-      <form  #courseForm="ngForm"
-      method="POST"
-      class="register-form ajax-contact">
+      <form #courseForm="ngForm" method="POST" class="register-form ajax-contact">
         <h5 class="form-title">Create Course</h5>
         <div class="row">
           <div class="form-group col-md-6">
-            <label><i class="far fa-user"></i>Name</label>
-            <input type="text" class="form-control" name="name" [(ngModel)]="courseModel.name" placeholder="Enter course name" required>
+            <label><i class="far fa-user"></i> Name</label>
+            <input type="text" class="form-control form-control-lg" name="name" [(ngModel)]="courseModel.name" #name="ngModel" placeholder=" course name" required>
+            <div *ngIf="name.touched && name.errors?.['required']" class="error-message ">Name is required.</div>
           </div>
           <div class="form-group col-md-6">
-            <label>  <i class="far fa-file-alt"></i>Description</label>
-            <textarea class="form-control" name="description" [(ngModel)]="courseModel.description" placeholder="Enter course description" required></textarea>
+            <label><i class="far fa-file-alt"></i> Description</label>
+            <textarea class="form-control form-control-lg" name="description" [(ngModel)]="courseModel.description" #description="ngModel" placeholder=" course description" required></textarea>
+            <div *ngIf="description.touched && description.errors?.['required']" class="error-message ">Description is required.</div>
           </div>
           <div class="form-group col-md-6">
-            <label><i class="far fa-calendar-alt"></i>Duration (in weeks)</label>
-            <input type="number" class="form-control" name="durationInWeeks" [(ngModel)]="courseModel.durationInWeeks" placeholder="Enter course duration" required>
+            <label><i class="far fa-calendar-alt"></i> Duration (in weeks)</label>
+            <input type="number" class="form-control form-control-lg" name="durationInWeeks" [(ngModel)]="courseModel.durationInWeeks" #durationInWeeks="ngModel" placeholder=" course duration" required min="1" max="52">
+            <div *ngIf="durationInWeeks.touched && durationInWeeks.errors?.['required']" class="error-message ">Duration is required.</div>
+            <div *ngIf="durationInWeeks.touched && (durationInWeeks.errors?.['min'] || durationInWeeks.errors?.['max'])" class="text-danger">Duration must be between 1 and 52 weeks.</div>
           </div>
           <div class="form-group col-md-6">
-            <label><i class="fas fa-dollar-sign"></i>Fee</label>
-            <input type="number" class="form-control" name="fee" [(ngModel)]="courseModel.fee" placeholder="Enter course fee" required>
+            <label><i class="fas fa-dollar-sign"></i> Fee</label>
+            <input type="number" class="form-control form-control-lg" name="fee" [(ngModel)]="courseModel.fee" #fee="ngModel" placeholder=" course fee" required min="0" max="100000">
+            <div *ngIf="fee.touched && fee.errors?.['required']" class="text-danger">Fee is required.</div>
+            <div *ngIf="fee.touched && (fee.errors?.['min'] || fee.errors?.['max'])" class="error-message ">Fee must be between 0 and 100000.</div>
           </div>
-          
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-list-alt"></i> Category</label>
-              <select class="form-control" name="categoryId" [(ngModel)]="courseModel.categoryId">
-                <option value="">Select Category</option>
-                <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
-              </select>
-              
-            </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-list-alt"></i> Category</label>
+            <select class="form-control form-control-lg" name="categoryId" [(ngModel)]="courseModel.categoryId" #categoryId="ngModel" required>
+              <option value="">Select Category</option>
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
+            </select>
+            <div *ngIf="categoryId.touched && categoryId.errors?.['required']" class="error-message ">Category is required.</div>
+          </div>
         </div>
         <div class="form-btn col-12 text-center">
-          <button class="th-btn black-btn-2 w-100" (click)="createCourse()">Create Course</button>
+          <button class="th-btn black-btn-2 w-100" (click)="createCourse()" [disabled]="courseForm.invalid">
+            <app-spinner *ngIf="loadSpinner"></app-spinner>
+            Create Course</button>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+

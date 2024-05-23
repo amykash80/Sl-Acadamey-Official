@@ -1,4 +1,14 @@
 <div class="container my-5">
+  <div class="row mb-4">
+    <div class="col">
+      <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 custom-breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/academy/dashboard">academy</li>
+          <li class="breadcrumb-item active" aria-current="page">update-loaction</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
     <div class="row gy-4 justify-content-center">
       <div class="col-lg-6 col-xl-9">
         <form method="POST" #updateLocationForm="ngForm" class="register-form ajax-contact">
@@ -131,7 +141,8 @@
               </div>
   
             <div class="form-btn col-12 text-center">
-              <button class="th-btn w-100" [disabled]="updateLocationForm.invalid" (click)="updateLocation()">Update Now</button>
+              <button class="th-btn w-100" [disabled]="updateLocationForm.invalid" (click)="updateLocation()">
+               <app-spinner *ngIf="loadSpinner"></app-spinner> Update Now</button>
             </div>
           </div>
           <p class="form-messages mb-0 mt-3"></p>

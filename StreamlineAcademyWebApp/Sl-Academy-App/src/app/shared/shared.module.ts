@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './Pages/forgot-password/forgot-password
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     SpinnerComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

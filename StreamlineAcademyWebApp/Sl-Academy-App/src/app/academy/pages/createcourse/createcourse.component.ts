@@ -9,48 +9,53 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-createcourse',
   templateUrl: './createcourse.component.html',
-  styleUrl: './createcourse.component.css'
+  styleUrl: './createcourse.component.css',
 })
 export class CreateCourseComponent {
-  courseService =inject(CourseService)
-  sharedService=inject(SharedService)
-  
+  courseService = inject(CourseService);
+  sharedService = inject(SharedService);
+
   courseModel: CreateCourse = new CreateCourse();
   categories: any[] = [];
-  academyId:string=''
-  constructor(private router:Router) {}
+  academyId: string = '';
+  loadSpinner = false;
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.getAllCategory();
-    this.academyId = localStorage.getItem('userId')!
-    console.log(this.academyId)    
+    this.academyId = JSON.parse(localStorage.getItem('responseObj')!).userId!;
+    console.log(this.academyId);
   }
   getAllCategory() {
     this.courseService.getCategories().subscribe((categories) => {
       this.categories = categories.result;
       console.log(this.categories);
-    
     });
   }
 
   createCourse() {
-    this.courseModel.academyId=this.academyId
+    this.loadSpinner = true;
+    this.courseModel.academyId = this.academyId;
     this.courseService.createCourse(this.courseModel).subscribe({
       next: (response) => {
-        console.log(response)
+        console.log(response);
         if (response.isSuccess) {
-          this.sharedService.showSuccessToast(response.message)
+          this.sharedService.showSuccessToast(response.message);
+          this.loadSpinner = false;
+
           this.router.navigate(['/academy/course-list']);
-        }
-        else{
-          this.sharedService.showErrorToast(response.message)
+        } else {
+          this.sharedService.showErrorToast(response.message);
+          this.loadSpinner = false;
         }
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.BadRequest) {
-          console.log(err.message)
+          this.loadSpinner = false;
+
+          console.log(err.message);
         }
-      }
+      },
     });
   }
 }

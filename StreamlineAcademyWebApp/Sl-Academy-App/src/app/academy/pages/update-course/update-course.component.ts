@@ -1,34 +1,37 @@
 import { Component } from '@angular/core';
 import { CourseService } from '../../../Services/course.service';
-import { CourseResponse, CreateCourse, UpdateCourse } from '../../../Models/Academy/Course';
+import {
+  CourseResponse,
+  CreateCourse,
+  UpdateCourse,
+} from '../../../Models/Academy/Course';
 import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-course',
   templateUrl: './update-course.component.html',
-  styleUrl: './update-course.component.css'
+  styleUrl: './update-course.component.css',
 })
-
 export class UpdateCourseComponent {
+  constructor(
+    private courseService: CourseService,
+    private sharedService: SharedService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  constructor(private courseService:CourseService,
-              private sharedService:SharedService,
-              private route: ActivatedRoute,
-              private router:Router){
-   
-  }
-  
   courseId: string = '';
+  loadSpinner = false;
   categories: any[] = [];
-  academyId:string=''
-  course:CourseResponse = new CourseResponse();
-  updateCourseModel: UpdateCourse = new UpdateCourse()
+  academyId: string = '';
+  course: CourseResponse = new CourseResponse();
+  updateCourseModel: UpdateCourse = new UpdateCourse();
   courseModel: CreateCourse = new CreateCourse();
-  
+
   ngOnInit(): void {
     this.getAllCategory();
-    this.academyId = localStorage.getItem('userId')!;
+    this.academyId = JSON.parse(localStorage.getItem('responseObj')!).userId!;
     this.route.params.subscribe((params) => {
       this.courseId = params['id'];
       this.courseService.getCourseById(this.courseId).subscribe((course) => {
@@ -37,32 +40,34 @@ export class UpdateCourseComponent {
       });
     });
   }
-  
+
   getAllCategory() {
     this.courseService.getCategories().subscribe((categories) => {
       this.categories = categories.result;
       console.log(this.categories);
-    
     });
   }
-  
-  updateCourse(){ 
-     this.updateCourseModel=this.course;
-    this.updateCourseModel.academyId=this.academyId
+
+  updateCourse() {
+    this.loadSpinner = true;
+    this.updateCourseModel = this.course;
+    this.updateCourseModel.academyId = this.academyId;
     console.log(this.updateCourseModel);
     this.courseService.updateCourse(this.updateCourseModel).subscribe({
-      next:(response)=>{
-        if(response.isSuccess){
+      next: (response) => {
+        if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message);
+          this.loadSpinner = false;
           this.router.navigate(['/academy/course-list']);
-        }
-        else{
-          this.sharedService.showErrorToast(response.message)
+        } else {
+          this.sharedService.showErrorToast(response.message);
+          this.loadSpinner = false;
         }
       },
-      error:(err)=>{
-        console.log(err)
-      }
-    })
+      error: (err) => {
+        console.log(err);
+        this.loadSpinner = false;
+      },
+    });
   }
 }

@@ -27,6 +27,7 @@ export class AddLocationComponent {
   filteredCitiesList: any[] = [];
   selectedCountryId: string = '';
   selectedStateId: string = '';
+  loadSpinner=false
   locationModel: LocationRequestModel = new LocationRequestModel();
   constructor() {}
 
@@ -69,19 +70,25 @@ export class AddLocationComponent {
   }
 
   addLocation() {
+    this.loadSpinner=true;
     this.locationModel.postalCode=this.locationModel.postalCode?.toString();
     this.locationService.addLocation(this.locationModel).subscribe({
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
+          this.loadSpinner=false;
           this.router.navigate(['/academy/location-list'])
         }
         else{
           this.sharedService.showErrorToast(response.message)
+          this.loadSpinner=false;
+
         }
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
+        this.loadSpinner=false;
+
       },
     });
    }
