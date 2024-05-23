@@ -4,6 +4,7 @@ import { InstructorService } from '../../../Services/instructor.service';
 import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryService } from '../../../Services/country.service';
+import { Skill } from '../../../Enums/skill';
 
 @Component({
   selector: 'app-update-instructor',
@@ -23,6 +24,7 @@ export class UpdateInstructorComponent {
   selectedCountryId: string = '';
   selectedStateId: string = '';
   previousPassword: string = '';
+  selectedSkill!:Skill
 
   constructor(
     private instructorService: InstructorService,
@@ -52,6 +54,11 @@ export class UpdateInstructorComponent {
   
   getDrpDownValue(event:any){
   this.dropDownVal=event.target.value
+  }
+  onSkillChange(event: Event){
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectedSkill = Number(value) as Skill;
+    console.log(this.selectedSkill); 
   }
 
   getAllCountries() {
@@ -83,6 +90,7 @@ export class UpdateInstructorComponent {
   }
   updateInstructor(): void {
     this.updateInstructorModel=this.instructor;
+    this.updateInstructorModel.skill=this.selectedSkill;
   this.instructorService.updateInstructor(this.updateInstructorModel).subscribe({
     next:(response)=>{
       if(response.isSuccess){

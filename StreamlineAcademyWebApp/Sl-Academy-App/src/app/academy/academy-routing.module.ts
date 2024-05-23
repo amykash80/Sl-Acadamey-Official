@@ -21,6 +21,7 @@ import { InstructorListComponent } from './pages/instructor-list/instructor-list
 import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
 import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
+import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 
 
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
     {path:"update-course-resource/:resourceId/:courseId",component:UpdateCorseResourceComponent},
     {path:"create-instructor",component:CreateInstructorComponent},
     {path:"instructor-list",component:InstructorListComponent},
-    {path:"batch-list/:courseId",component:BatchListComponent}
+    {path:"batch-list/:courseId",component:BatchListComponent},
+    {path:"myProfile",component:ProfileComponent}
   ]
   
   },

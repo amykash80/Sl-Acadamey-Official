@@ -155,6 +155,7 @@ namespace StreamlineAcademy.Application.Services
             var user = await userRepository.GetByIdAsync(x=>x.Id==request.Id);
             if (user is null)
                 return ApiResponse<InstructorResponseModel>.ErrorResponse(APIMessages.InstructorManagement.InstructorNotFound, HttpStatusCodes.NotFound);
+            user.Id = request.Id;
             user.Email= request.Email;
             user.PhoneNumber= request.PhoneNumber;
             user.Address=request.Address;
@@ -167,8 +168,9 @@ namespace StreamlineAcademy.Application.Services
 
             var instructor = await instructorRepository.GetByIdAsync(x=>x.Id==user.Id);
             instructor.DateOfBirth = request.DateOfBirth;
-            instructor.WorkExperiance = request.WorkExperience;
+            instructor.WorkExperiance = request.WorkExperiance;
             instructor.DateOfBirth=request.DateOfBirth;
+            instructor.Skill=request.Skill;
             instructor.CountryId= request.CountryId;
             instructor.StateId=request.StateId;
             instructor.CityId=request.CityId;

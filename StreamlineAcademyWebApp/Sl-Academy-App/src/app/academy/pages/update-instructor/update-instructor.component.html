@@ -83,6 +83,7 @@
                 id="skill"
                 name="skill"
                 #skill="ngModel"
+                (change)="onSkillChange($event)"
                 [(ngModel)]="instructor.skill"
                 required
               >

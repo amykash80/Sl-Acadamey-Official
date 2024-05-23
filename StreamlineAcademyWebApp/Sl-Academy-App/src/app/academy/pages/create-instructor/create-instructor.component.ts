@@ -80,7 +80,7 @@ export class CreateInstructorComponent {
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
-          this.router.navigate(['/instuctor-list'])
+          this.router.navigate(['/academy/instuctor-list'])
         }
         else{
           this.sharedService.showErrorToast(response.message)

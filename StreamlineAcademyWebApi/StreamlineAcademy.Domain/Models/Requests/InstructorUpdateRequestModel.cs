@@ -16,8 +16,8 @@ namespace StreamlineAcademy.Domain.Models.Requests
         public string? PostalCode { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }
-        public Skill Skill { get; set; }
-        public int WorkExperience { get; set; }
+        public Skill Skill { get; set; } 
+        public int WorkExperiance { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Guid CountryId { get; set; }
         public Guid StateId { get; set; }

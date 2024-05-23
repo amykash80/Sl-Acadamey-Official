@@ -134,7 +134,7 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<int> UpdateAsync(Instructor model)
         {
-            await context.Instructors.AddAsync(model);
+            await Task.Run(()=>context.Instructors.Update(model));
             return await context.SaveChangesAsync();
         }
 
