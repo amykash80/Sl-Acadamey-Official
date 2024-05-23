@@ -6,3 +6,32 @@ input:not([type="checkbox"]):not([type="radio"]),
 select {
   height: 45px !important;
 }
+
+.font-manrope {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* SET FOR ALL TABLES HEADERS */
+th {
+  font-weight: 600 !important;
+}
+
+.chip {
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 5px 8px;
+  color: black;
+  font-weight: 600;
+}
+
+.chip.chip-danger {
+  background-color: #ffbcbc;
+}
+.chip.chip-warning {
+  background-color: #fff9bc;
+}
+.chip.chip-success {
+  background-color: #bcffe0;
+}
