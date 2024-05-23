@@ -1,79 +1,82 @@
-<section class="py-3 py-md-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-9 col-xl-10">
-        <div class="card widget-card border-light shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-between mb-4">
-              <h5 class="card-title widget-card-title">Academy List</h5>
-              <div>
-                <a
-                  class="btn btn-info"
-                  routerLink="/admin/register-academy"
-                  data-toggle="modal"
-                >
-                  <span>Add Academy</span>
-                </a>
+<div class="app_inner">
+  <section class="py-3 py-md-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-9 col-xl-10">
+          <div class="card widget-card border-light shadow-sm">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between mb-4">
+                <h5 class="card-title widget-card-title">Academy List</h5>
+                <div>
+                  <a
+                    class="btn btn-info"
+                    routerLink="/admin/register-academy"
+                    data-toggle="modal"
+                  >
+                    <span>Add Academy</span>
+                  </a>
+                </div>
               </div>
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Search Academies"
-                [(ngModel)]="searchText"
-                (input)="filterAcademies()"
-              />
-            </div>
-            <div class="table-responsive">
-              <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
-                <thead>
-                  <tr>
-                    <th>Academy Admin</th>
-                    <th>Academy Name</th>
-                    <th>Address</th>
-                    <th>Phone Number</th>
-                    <th>Email</th>
-                    <th>Academy Type</th>
-                    <th>Country Name</th>
-                    <th>IsActive</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let academy of filteredAcademyList">
-                    <td>{{ academy.academyAdmin }}</td>
-                    <td>{{ academy.academyName }}</td>
-                    <td>{{ academy.address }}</td>
-                    <td>{{ academy.phoneNumber }}</td>
-                    <td>{{ academy.email }}</td>
-                    <td>{{ academy.academyType }}</td>
-                    <td>{{ academy.countryName }}</td>
-                    <td>{{ academy.isActive }}</td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-success btn-sm"
-                        [routerLink]="['/admin/update-academy', academy.id]"
-                      >
-                        <i class="fas fa-edit"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-danger btn-sm"
-                        (click)="deleteAcademy(academy.id)"
-                      >
-                        <i class="far fa-trash-alt"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search Academies"
+                  [(ngModel)]="searchText"
+                  (input)="filterAcademies()"
+                />
+              </div>
+              <div class="table-responsive">
+                <table
+                  class="table table-borderless bsb-table-xl text-nowrap align-middle m-0"
+                >
+                  <thead>
+                    <tr>
+                      <th>Academy Admin</th>
+                      <th>Academy Name</th>
+                      <th>Address</th>
+                      <th>Phone Number</th>
+                      <th>Email</th>
+                      <th>Academy Type</th>
+                      <th>Country Name</th>
+                      <th>IsActive</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let academy of filteredAcademyList">
+                      <td>{{ academy.academyAdmin }}</td>
+                      <td>{{ academy.academyName }}</td>
+                      <td>{{ academy.address }}</td>
+                      <td>{{ academy.phoneNumber }}</td>
+                      <td>{{ academy.email }}</td>
+                      <td>{{ academy.academyType }}</td>
+                      <td>{{ academy.countryName }}</td>
+                      <td>{{ academy.isActive }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                          [routerLink]="['/admin/update-academy', academy.id]"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                          (click)="deleteAcademy(academy.id)"
+                        >
+                          <i class="far fa-trash-alt"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
+</div>
