@@ -23,7 +23,11 @@ export class ProfileComponent {
   constructor(
     private profileService: ProfileService,
     private sharedService: SharedService
-  ) {}
+  ) {
+    this.getContactInfo();
+    this.getAddressInfo();
+    this.getPath();
+  }
 
   contactInfo: ContactResponse = new ContactResponse();
   addressInfo: AddressResponse = new AddressResponse();
@@ -33,21 +37,20 @@ export class ProfileComponent {
   contactModel: UpdateContact = new UpdateContact();
   addressModel: UpdateAddress = new UpdateAddress();
   file!: File;
-  fileId:string=''
+  changeProfile!:File
+  fileId: string = '';
   filePath: string = '';
   apiBaseUrl: string = 'http://localhost:5232';
   module!: AppModule;
 
-  ngOnInit() {
-    this.getContactInfo();
-    this.getAddressInfo();
-    this.getPath();
-  }
+  ngOnInit() {}
   getPath() {
     this.profileService.getImagePath().subscribe((response) => {
       this.filePath = response.result.filePath!;
-      this.fileId = response.result.id!
+      this.fileId = response.result.id!;
       console.log(this.filePath);
+      console.log(this.fileId);
+
     });
   }
   toggleContactEditMode() {
@@ -67,7 +70,6 @@ export class ProfileComponent {
     this.profileService.contactInfo().subscribe({
       next: (response) => {
         this.contactInfo = response.result;
-        console.log(this.contactInfo);
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.Unauthorized) {
@@ -80,11 +82,9 @@ export class ProfileComponent {
     this.profileService.addressInfo().subscribe({
       next: (response) => {
         this.addressInfo = response.result;
-        console.log(this.addressInfo);
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.Unauthorized) {
-          console.log(err.message);
         }
       },
     });
@@ -102,7 +102,6 @@ export class ProfileComponent {
         }
       },
       error: (err) => {
-        console.error(err);
       },
     });
   }
@@ -119,7 +118,6 @@ export class ProfileComponent {
         }
       },
       error: (err) => {
-        console.error(err);
       },
     });
   }
@@ -150,12 +148,13 @@ export class ProfileComponent {
       }
     });
   }
-  showFileInput() {
- this.filePath='';
+  showFileInput(event:any) {
+    this.changeProfile = event.target.files[0];
+    this.changeProfilePicture();
   }
-  changeProfilePicture(){
+  changeProfilePicture() {
     const form = new FormData();
-    form.append('File', this.file);
+    form.append('File', this.changeProfile);
     form.append('Id', this.fileId);
     if (this.contactInfo.userRole === UserRole.SuperAdmin) {
       form.append('Module', AppModule.SuperAdmin.toString());

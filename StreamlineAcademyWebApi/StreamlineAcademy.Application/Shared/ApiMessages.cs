@@ -162,7 +162,9 @@ public static class APIMessages
             public static readonly string ContactUpdated = "Contact Updated Successfully.";
             public static readonly string UserFound = "User found.";
             public static readonly string AddressUpdated = "Address Updated Successfully.";
-            public static readonly string PhotoUploaded = "Photo Uploaded Successfully."; 
+            public static readonly string PhotoUploaded = "Photo Uploaded Successfully.";
+            public static readonly string ProfileChanged = "Profile picture changed successfully.";
+
         }
 
         public static class Auth

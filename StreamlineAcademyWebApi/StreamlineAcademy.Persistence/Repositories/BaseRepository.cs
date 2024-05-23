@@ -64,7 +64,12 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<int> UpdateAsync(T model)
         {
-            await Task.Run (()=> context.Set<T>().Update(model));
+            var existingEntity = context.Set<T>().Local.FirstOrDefault(entry => entry.Id == model.Id);
+            if (existingEntity != null)
+            {
+                context.Entry(existingEntity).State = EntityState.Detached;
+            }
+            context.Set<T>().Update(model);
             return await context.SaveChangesAsync();
         }
     }

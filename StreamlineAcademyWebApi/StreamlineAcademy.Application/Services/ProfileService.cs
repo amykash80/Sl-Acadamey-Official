@@ -202,18 +202,23 @@ namespace StreamlineAcademy.Application.Services
             {
                 return ApiResponse<FileResponseModel>.ErrorResponse((APIMessages.ProfileManagement.UserNotFound));
             }
-            var filePath = await GetFilePath();
+            var uploadedPhoto = await UploadPhoto(model);
+            if (!uploadedPhoto.IsSuccess)
+            {
+                return ApiResponse<FileResponseModel>.ErrorResponse(uploadedPhoto.Message!);
+            }
+
             var appFiles = new AppFiles
             {
                 Id = model.Id,
                 Module = model.Module,
-                FilePath = filePath.Result!.FilePath,
+                FilePath = uploadedPhoto.Result!.FilePath,
                 EntityId = userId
             };
 
             var fileSave = await fileRepository.UpdateAsync(appFiles);
             if (fileSave > 0)
-                return ApiResponse<FileResponseModel>.SuccessResponse(new FileResponseModel() { Id = userId, FilePath = filePath.Result.FilePath }, APIMessages.ProfileManagement.PhotoUploaded);
+                return ApiResponse<FileResponseModel>.SuccessResponse(new FileResponseModel() { Id = userId, FilePath = uploadedPhoto.Result.FilePath }, APIMessages.ProfileManagement.ProfileChanged);
             return ApiResponse<FileResponseModel>.ErrorResponse(APIMessages.TechnicalError);
         }
     }
