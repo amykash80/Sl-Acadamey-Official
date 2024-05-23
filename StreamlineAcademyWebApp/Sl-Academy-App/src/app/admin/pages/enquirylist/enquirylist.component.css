@@ -22,3 +22,6 @@
 .table {
   border-collapse: separate;
 }
+.add-batch-btn {
+  border-radius: 5px;
+}

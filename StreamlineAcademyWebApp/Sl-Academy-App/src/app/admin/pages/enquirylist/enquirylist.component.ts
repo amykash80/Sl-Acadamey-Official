@@ -17,8 +17,8 @@ export class EnquirylistComponent {
   enquirylist: EnquiryResponse[] = [];
   filteredEnquiryList: EnquiryResponse[] = [];
   searchText: string = '';
-  pending:boolean=false;
-  registrationStatus=RegistrationStatus
+  pending: boolean = true;
+  registrationStatus = RegistrationStatus;
   ngOnInit() {
     this.loadAllEnquiries();
   }
