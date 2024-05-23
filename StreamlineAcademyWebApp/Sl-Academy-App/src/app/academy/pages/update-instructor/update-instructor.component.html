@@ -186,6 +186,7 @@
               lass="th-btn w-100" [disabled]="updateInstructorForm.invalid"
               (click)="updateInstructor()"
             >
+            <app-spinner *ngIf="loadSpinner"></app-spinner>
               Update Instructor
             </button>
           </div>

@@ -24,7 +24,8 @@ export class UpdateInstructorComponent {
   selectedCountryId: string = '';
   selectedStateId: string = '';
   previousPassword: string = '';
-  selectedSkill!:Skill
+  selectedSkill!:Skill;
+  loadSpinner:boolean=false
 
   constructor(
     private instructorService: InstructorService,
@@ -89,16 +90,20 @@ export class UpdateInstructorComponent {
     );
   }
   updateInstructor(): void {
+    this.loadSpinner=true;
     this.updateInstructorModel=this.instructor;
     this.updateInstructorModel.skill=this.selectedSkill;
   this.instructorService.updateInstructor(this.updateInstructorModel).subscribe({
     next:(response)=>{
       if(response.isSuccess){
         this.sharedService.showSuccessToast(response.message);
+        this.loadSpinner=false;
         this.router.navigate(['/academy/instructor-list'])
       }
       else{
         this.sharedService.showErrorToast(response.message)
+        this.loadSpinner=false;
+
       }
     },
     error:(err)=>{
