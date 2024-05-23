@@ -58,3 +58,19 @@ th {
 .nav-link.dangered:hover > i {
   color: rgb(173, 0, 0) !important;
 }
+
+.vertical-nav-menu a {
+  text-align: left !important;
+  padding-inline: 1rem !important;
+  font-size: 0.9rem !important;
+}
+
+.vertical-nav-menu a > i {
+  font-size: 1.2rem !important;
+  margin-right: 0.5rem !important;
+  width: 25px;
+}
+
+.vertical-nav-menu li:not(.mm-active) a > i {
+  color: #878787 !important;
+}
