@@ -17,6 +17,8 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public CourseResourceType? Type { get; set; }  
         public string? CourseName { get; set; }
         public Guid? CourseId { get; set;}
+        public bool? IsActive { get; set; }
+
 
     }
 }

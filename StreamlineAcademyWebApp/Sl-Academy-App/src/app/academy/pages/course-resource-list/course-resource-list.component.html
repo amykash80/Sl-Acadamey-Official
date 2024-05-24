@@ -1,32 +1,182 @@
-<div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h2>CourseResource List</h2>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Type</th>
-              <th scope="col">IsActive</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let courseResource of courseResourceList">
-              <td>{{courseResource.name}}</td>
-              <td>{{courseResource.description}}</td>
-              <td>{{courseResource.type}}</td>
-              <td>{{courseResource.isActive}}</td>
-                <td>
+<div class="app-inner">
+  <div class="container">
+    <div class="card custom-card overflow-auto">
+      <div class="card-body font-manrope">
+        <h4 class="card-title text-capitalize fs-5 mb-3">CourseResource List</h4>
+        <div class="row">
+          <div class="col-12">
+            <div id="resource-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <button class="btn btn-success bg-gradient" [routerLink]="['/academy/create-course-resource/:courseId']"><i class="fas fa-plus mr-2"></i> Add Resource</button>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div id="resource-listing_filter" class="dataTables_filter">
+                    <label>
+                      <input
+                        type="search"
+                        
+                        class="form-control"
+                        placeholder="Search resources"
+                        aria-controls="resource-listing"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
 
-<button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-course-resource',courseResource.id,courseId]"><i class="fas fa-edit"></i>Edit</button>
-                  <button type="button" class="btn btn-danger" (click)="deleteCourseResource(courseResource.id)"><i class="far fa-trash-alt"></i></button>
-                </td>
-            </tr>
-          </tbody>
-        </table>
+              <table
+                id="resource-listing"
+                class="table dataTable no-footer"
+                aria-describedby="resource-listing_info"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Name: activate to sort column descending"
+                      style="width: 100px;"
+                    >
+                      Name
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Description: activate to sort column descending"
+                      style="width: 200px;"
+                    >
+                      Description
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Type: activate to sort column descending"
+                      style="width: 100px;"
+                    >
+                      Type
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="IsActive: activate to sort column descending"
+                      style="width: 100px;"
+                    >
+                      IsActive
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Actions: activate to sort column descending"
+                      style="width: 100px;"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let courseResource of courseResourceList">
+                    <td>{{ courseResource.name }}</td>
+                    <td>{{ courseResource.description }}</td>
+                    <td>{{ courseResource.type }}</td>
+                    <td>
+                      <span [ngClass]="courseResource.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                        {{ courseResource.isActive }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="d-inline-block dropdown">
+                        <button
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          title="Row Options"
+                          class="dropdown-toggle btn btn-success after-none squared-btn"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div
+                          tabindex="-1"
+                          role="menu"
+                          aria-hidden="true"
+                          class="dropdown-menu dropdown-menu-left"
+                        >
+                          <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                [routerLink]="['/academy/update-course-resource', courseResource.id, courseId]"
+                              >
+                                <i class="nav-link-icon fas fa-pen"></i>
+                                <span> Edit</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link dangered fw-semibold"
+                                (click)="deleteCourseResource(courseResource.id)"
+                              >
+                                <i class="nav-link-icon fas fa-trash dangered"></i>
+                                <span> Delete</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-sm-12 col-md-7">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers"
+                    id="resource-listing_paginate"
+                  >
+                    <ul class="pagination">
+                      <li class="paginate_button page-item previous disabled" id="resource-listing_previous">
+                        <a
+                          aria-controls="resource-listing"
+                          aria-disabled="true"
+                          role="link"
+                          data-dt-idx="previous"
+                          tabindex="-1"
+                          class="page-link"
+                          >Previous</a
+                        >
+                      </li>
+                      <li class="paginate_button page-item active">
+                        <a
+                          href="#"
+                          aria-controls="resource-listing"
+                          role="link"
+                          aria-current="page"
+                          data-dt-idx="0"
+                          tabindex="0"
+                          class="page-link"
+                          >1</a
+                        >
+                      </li>
+                      <li class="paginate_button page-item next disabled" id="resource-listing_next">
+                        <a
+                          aria-controls="resource-listing"
+                          aria-disabled="true"
+                          role="link"
+                          data-dt-idx="next"
+                          tabindex="-1"
+                          class="page-link"
+                          >Next</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

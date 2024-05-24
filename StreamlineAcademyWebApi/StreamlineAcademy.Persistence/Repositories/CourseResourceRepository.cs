@@ -36,6 +36,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     FilePath = courseResource.FilePath,
                     CourseId = courseResource.Id,
                     CourseName = courseResource.Name,
+                    IsActive = courseResource.IsActive,  
                 };
 
                 return response;
@@ -60,6 +61,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Type = a.Type!,
                     FilePath = a.FilePath,
                     CourseName = a.Name,
+                    IsActive=a.IsActive,
                 })
                 .ToListAsync();
 
@@ -79,6 +81,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Type = b.Type!,
                     FilePath = b.FilePath,
                     CourseName = b.Name,
+                    IsActive = b.IsActive,
 
                 })
                 .ToListAsync();
