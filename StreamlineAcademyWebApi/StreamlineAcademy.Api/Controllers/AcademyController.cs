@@ -45,6 +45,7 @@ namespace StreamlineAcademy.Api.Controllers
 
         [HttpPut("update")]
         public async Task<ApiResponse<AcademyResponseModel>> UpdateAcademy(AcademyUpdateRequest model) => await academyService.UpdateAcademy(model);
+     
 
         [HttpGet("check-name/{academyName}")]
 

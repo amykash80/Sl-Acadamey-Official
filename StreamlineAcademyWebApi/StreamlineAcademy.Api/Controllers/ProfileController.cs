@@ -47,5 +47,6 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<List<StateResponse>>> GetAllStates() => await profileService.GetAllStates();
         [HttpGet("cities")]
         public async Task<ApiResponse<List<CityResponse>>> GetAllCities() => await profileService.GetAllCities();
+       
     }
 }

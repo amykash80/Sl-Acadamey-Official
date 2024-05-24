@@ -25,4 +25,7 @@ export class EnquiryService {
  getEnquiryById(id:string):Observable<ApiResponse<EnquiryResponse>>{
 return this.HttpClient.get<ApiResponse<EnquiryResponse>>(this.baseUrl+"Enquiry/getById/"+id)
  }
+ rejectEnquiry(id:string):Observable<ApiResponse<string>>{
+  return this.HttpClient.put<ApiResponse<string>>(this.baseUrl+"enquiry/rejectEnquiry/"+id,{})
+ }
 }

@@ -16,6 +16,8 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task <ApiResponse<EnquiryResponseModel>>DeleteEnquiry(Guid id);
         Task<ApiResponse<IEnumerable<EnquiryResponseModel>>>GetAllEnquiries();
         Task<ApiResponse<EnquiryResponseModel>>GetEnquiryById(Guid id);
-        Task<bool> IsEnquiryEmailUnique(string email); 
+        Task<bool> IsEnquiryEmailUnique(string email);
+        Task<ApiResponse<string>> RejectEnquiry(Guid? academyId);
+
     }
 }
