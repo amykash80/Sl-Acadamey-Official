@@ -18,6 +18,7 @@ constructor(private activatedRoute: ActivatedRoute,
           private sharedService:SharedService){
   this.activatedRoute.params.subscribe((paramVal) => {
     this.courseId = paramVal['courseId'];
+    
   });
 }
 ngOnInit(){
