@@ -33,7 +33,18 @@ export class EnquirylistComponent {
       },
     });
   }
-
+  getStatusClass(status: RegistrationStatus): string {
+    switch(status) {
+      case RegistrationStatus.Rejected:
+        return 'chip chip-danger';
+      case RegistrationStatus.Approved:
+        return 'chip chip-success';
+      case RegistrationStatus.Pending:
+        return 'chip chip-warning';
+      default:
+        return 'chip'; 
+    }
+  }
   filterEnquiries(): void {
     if (!this.searchText.trim()) {
       this.filteredEnquiryList = this.enquirylist.slice();

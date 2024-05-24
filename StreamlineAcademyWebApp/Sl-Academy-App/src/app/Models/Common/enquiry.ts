@@ -7,7 +7,7 @@ export class Enquiry {
 }
 export class EnquiryResponse {
     id?: string;
-    registrationStatus?: RegistrationOptions;
+    registrationStatus?: RegistrationStatus;
     isActive?: boolean;
     name?: string;
     email?: string;
