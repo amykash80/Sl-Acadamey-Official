@@ -120,7 +120,7 @@
                     <td>{{ academy.academyType }}</td>
                     <td>{{ academy.countryName }}</td>
                     <td>
-                      <span [ngClass]="{'chip.chip-success': academy.isActive, 'chip chip-danger': !academy.isActive}">
+                      <span [ngClass]="academy.isActive ? 'chip chip-success' : 'chip chip-danger'">
                         {{
                           academy.isActive
                         }}</span
