@@ -1,3 +1,26 @@
 :host{
     width: 100%;
 }
+.container {
+    padding: 25px; 
+  }
+  .custom-card {
+    border-radius: 15px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  
+  .custom-card .card-body {
+    border-radius: inherit;
+  }
+  
+  .custom-card .table {
+    border-radius: inherit;
+  }
+  .table {
+    border-collapse: separate;
+  }
+  .add-batch-btn {
+    border-radius: 5px;
+  }
