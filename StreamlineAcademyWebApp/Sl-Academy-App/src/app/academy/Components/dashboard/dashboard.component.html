@@ -1,12 +1,4 @@
-    <!-- <button class="btn btn-primary mt-2">
-      <span class="nav-link-text">Logout</span>
-    </button>
-    <button class="btn btn-danger mt-2" routerLink="/academy/add-location">
-      <span class="nav-link-text">Add Locations</span>
-    </button>
-    <button class="btn btn-success mt-2" routerLink="/academy/location-list">
-      <span class="nav-link-text">view Location</span>
-    </button> -->
+
     <div class="app-main__inner">
       <div class="app-page-title">
         <div class="page-title-wrapper">
@@ -21,21 +13,19 @@
               <div class="widget-chart-content">
                 <div class="icon-wrapper ml-0 rounded">
                   <div class="icon-wrapper-bg bg-invert"></div>
-                  <i class="lnr-laptop-phone text-white"></i>
+                  <i class="fas fa-book-reader text-white"></i>
                 </div>
                 <div class="widget-numbers text-white">
-                  <span>$15,000</span>
                 </div>
                 <div
                   class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
                 >
-                  Weekly Sales
+               Total courses
                 </div>
                 <div class="widget-description fw-bold opacity-8">
                   <span class="text-white pr-1">
-                    <span class="pl-1">54.1%</span>
                   </span>
-                  down last 30 days
+                {{coursesList.length}}
                 </div>
               </div>
             </div>
@@ -45,18 +35,17 @@
               <div class="widget-chart-content">
                 <div class="icon-wrapper ml-0 rounded">
                   <div class="icon-wrapper-bg bg-invert"></div>
-                  <i class="lnr-graduation-hat text-white"></i>
+                  <i class="fas fa-chalkboard-teacher text-white"></i>
                 </div>
-                <div class="widget-numbers text-white"><span>45,756</span></div>
+                <div class="widget-numbers text-white"><span></span></div>
                 <div
                   class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
                 >
-                  Weekly Orders
+                  Total Instructors
                 </div>
                 <div class="widget-description fw-bold opacity-8">
-                  Decreased by
                   <span class="text-white pr-1">
-                    <span class="pl-1">10%</span>
+                    <span class="pl-1">{{InstructorList.length}}</span>
                   </span>
                 </div>
               </div>
@@ -67,20 +56,18 @@
               <div class="widget-chart-content">
                 <div class="icon-wrapper ml-0 rounded">
                   <div class="icon-wrapper-bg bg-invert"></div>
-                  <i class="lnr-diamond text-white"></i>
+                  <i class="fas fa-user-graduate text-white"></i>
                 </div>
                 <div class="widget-numbers text-white">
-                  <span>1,456</span>
                 </div>
                 <div
                   class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
                 >
-                  Visitors Online
+                 Total Students
                 </div>
                 <div class="widget-description fw-bold opacity-8">
-                  Increased by
                   <span class="text-danger pr-1">
-                    <span class="pl-1 text-white">17%</span>
+                    <span class="pl-1 text-white">0</span>
                   </span>
                 </div>
               </div>

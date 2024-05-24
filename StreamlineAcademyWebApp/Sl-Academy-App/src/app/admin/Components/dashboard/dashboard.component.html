@@ -12,21 +12,19 @@
           <div class="widget-chart-content">
             <div class="icon-wrapper ml-0 rounded">
               <div class="icon-wrapper-bg bg-invert"></div>
-              <i class="lnr-laptop-phone text-white"></i>
+              <i class="fa fa-university text-white"></i>
             </div>
             <div class="widget-numbers text-white">
-              <span>$15,000</span>
             </div>
             <div
               class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
             >
-              Weekly Sales
+        Total academies
             </div>
             <div class="widget-description fw-bold opacity-8">
               <span class="text-white pr-1">
-                <span class="pl-1">54.1%</span>
               </span>
-              down last 30 days
+            {{academyList.length}}
             </div>
           </div>
         </div>
@@ -36,18 +34,17 @@
           <div class="widget-chart-content">
             <div class="icon-wrapper ml-0 rounded">
               <div class="icon-wrapper-bg bg-invert"></div>
-              <i class="lnr-graduation-hat text-white"></i>
+              <i class="fa fa-question-circle text-white"></i>
             </div>
-            <div class="widget-numbers text-white"><span>45,756</span></div>
+            <div class="widget-numbers text-white"></div>
             <div
               class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
             >
-              Weekly Orders
+             Total enquiries
             </div>
             <div class="widget-description fw-bold opacity-8">
-              Decreased by
               <span class="text-white pr-1">
-                <span class="pl-1">10%</span>
+                {{enquiryList.length}} 
               </span>
             </div>
           </div>
@@ -58,20 +55,20 @@
           <div class="widget-chart-content">
             <div class="icon-wrapper ml-0 rounded">
               <div class="icon-wrapper-bg bg-invert"></div>
-              <i class="lnr-diamond text-white"></i>
+              <i class="fas fa-list text-white"></i>
             </div>
             <div class="widget-numbers text-white">
-              <span>1,456</span>
             </div>
             <div
               class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
             >
-              Visitors Online
+             Total Academy Types
             </div>
             <div class="widget-description fw-bold opacity-8">
-              Increased by
               <span class="text-danger pr-1">
-                <span class="pl-1 text-white">17%</span>
+                <span class="pl-1 text-white">
+                  {{academyTypeList.length}}
+                </span>
               </span>
             </div>
           </div>
