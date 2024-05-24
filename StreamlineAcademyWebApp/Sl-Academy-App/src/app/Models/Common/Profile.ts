@@ -35,7 +35,8 @@ export class UpdateAddress {
 export class GetAddress {
     address?: string;
     postalCode?: string;
-    countryName?: string;
-    stateName?: string;
-    cityName?: string;
+    countryId?: string;
+    stateId?: string;
+    cityId?: string;
+    
 }
