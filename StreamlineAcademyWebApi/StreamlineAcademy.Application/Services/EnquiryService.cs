@@ -149,15 +149,30 @@ namespace StreamlineAcademy.Application.Services
             return await enquiryrepository.FirstOrDefaultAsync(x => x.Email == email) == null;
         }
 
-        public async Task<ApiResponse<string>> RejectEnquiry(Guid? academyId)
+        public async Task<ApiResponse<EnquiryResponseModel>> RejectEnquiry(EnquiryUpdateRequest model)
         {
-            var model = new Enquiry() { Id = academyId, RegistrationStatus = RegistrationStatus.Rejected };
-            var result = await enquiryrepository.UpdateAsync(model);
-            if (result > 0)
+            var updateModel = new Enquiry() { 
+            Id=model.Id,
+            Name=model.Name,
+            Email=model.Email,
+            PhoneNumber=model.PhoneNumber,
+            ModifiedDate=DateTime.Now,
+            RegistrationStatus=RegistrationStatus.Rejected
+            };
+
+            var result = await enquiryrepository.UpdateAsync(updateModel);
+            var enquiryResponse = await enquiryrepository.GetByIdAsync(x => x.Id == model.Id);
+            var response = new EnquiryResponseModel()
             {
-                return ApiResponse<string>.SuccessResponse(result.ToString(), "enquiry Rejected");
-            }
-            return ApiResponse<string>.ErrorResponse("something went wrong");
+                Id = enquiryResponse.Id,
+                Name = enquiryResponse.Name,
+                Email = enquiryResponse.Email,
+                PhoneNumber = enquiryResponse.PhoneNumber,
+                RegistrationStatus=enquiryResponse.RegistrationStatus,
+                IsActive = false,
+            };
+            return ApiResponse<EnquiryResponseModel>.SuccessResponse(response, APIMessages.EnquiryManagement.EnquiryUpdated, HttpStatusCodes.Created);
         }
+
     }
 }

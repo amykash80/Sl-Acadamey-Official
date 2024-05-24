@@ -32,8 +32,8 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpDelete("delete/{id:guid}")]
 
         public async Task<ApiResponse<EnquiryResponseModel>> DeleteEnquiry (Guid id) => await enquiryService.DeleteEnquiry(id);
-        [HttpPut("rejectEnquiry/{id:guid}")]
-        public async Task<ApiResponse<string>> RejectEnquiry(Guid? id) => await enquiryService.RejectEnquiry(id);
+        [HttpPut("rejectEnquiry")]
+        public async Task<ApiResponse<EnquiryResponseModel>> RejectEnquiry(EnquiryUpdateRequest model) => await enquiryService.RejectEnquiry(model);
 
         [HttpGet("getAll")]
 

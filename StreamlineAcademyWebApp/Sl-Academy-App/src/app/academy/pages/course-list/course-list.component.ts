@@ -17,6 +17,7 @@ export class CourseListComponent {
     private sharedService: SharedService
   ) {}
   courseList: CourseResponse[] = [];
+  searchText:string=''
  
   ngOnInit() {
     this.loadAllCourse();
@@ -35,6 +36,9 @@ export class CourseListComponent {
         }
       },
     });
+  }
+  filterCourses(){
+
   }
 
   deleteCourse(courseId: any) {

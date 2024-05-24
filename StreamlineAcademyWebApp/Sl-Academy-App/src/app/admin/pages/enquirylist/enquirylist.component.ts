@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EnquiryService } from '../../../Services/enquiry.service';
-import { Enquiry, EnquiryResponse } from '../../../Models/Common/enquiry';
+import { Enquiry, EnquiryResponse, EnquiryUpdate } from '../../../Models/Common/enquiry';
 import { SharedService } from '../../../Services/shared.service';
 import { RegistrationStatus } from '../../../Enums/RegistrationStatus';
 
@@ -82,13 +82,13 @@ export class EnquirylistComponent {
         }
       });
   }
-  rejectEnquiry(enquiryId: any) {
+  rejectEnquiry(enquiry:EnquiryUpdate) {
 
     this.sharedService
       .fireConfirmSwal('Are You sure you want to reject this Enquiry ')
       .then((result: any) => {
         if (result.isConfirmed) {
-          this.enquiryService.rejectEnquiry(enquiryId).subscribe({
+          this.enquiryService.rejectEnquiry(enquiry).subscribe({
             next: (response) => {
               console.log(response);
 
