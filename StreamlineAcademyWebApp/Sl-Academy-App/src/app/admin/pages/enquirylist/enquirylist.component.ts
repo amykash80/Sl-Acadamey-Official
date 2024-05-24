@@ -82,4 +82,16 @@ export class EnquirylistComponent {
         }
       });
   }
+  rejectEnquiry(enquiryId: any) {
+    console.log(enquiryId);
+
+    this.sharedService
+      .fireConfirmSwal('Are You sure you want to reject this Enquiry ')
+      .then((result: any) => {
+        if (result.isConfirmed) {
+         
+        }
+      });
+  }
+
 }
