@@ -18,7 +18,8 @@ export class InstructorListComponent {
     this.loadAllInstructors();
   }
   instructorList: InstructorResponseModel[] = [];
-
+  searchText=''
+  filterInstructors(){}
   loadAllInstructors() {
     this.instructorService.instructorList().subscribe({
       next: (response) => {

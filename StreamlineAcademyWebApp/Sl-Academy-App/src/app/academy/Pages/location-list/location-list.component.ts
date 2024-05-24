@@ -11,6 +11,7 @@ export class LocationListComponent {
   locationService=inject(LocationService)
   sharedService=inject(SharedService)
   locationList:any[]=[]
+  searchText=''
   ngOnInit(){
     this.getAllLocations()
   }
@@ -19,6 +20,9 @@ this.locationService.getAllLocations().subscribe(res=>{
   console.log(res)
   this.locationList=res.result
 })
+}
+filterLocations(){
+
 }
   deleteLocation(locationId:any){
     this.sharedService

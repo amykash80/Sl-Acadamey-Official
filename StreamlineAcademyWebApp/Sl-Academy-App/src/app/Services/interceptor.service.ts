@@ -19,6 +19,6 @@ export class InterceptorService implements HttpInterceptor {
       setHeaders: {
         Authorization: 'Bearer ' + this.jwt,
       },
-    }));
+    })).pipe();
   }
 }

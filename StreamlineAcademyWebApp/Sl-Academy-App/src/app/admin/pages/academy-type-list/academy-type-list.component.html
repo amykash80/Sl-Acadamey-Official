@@ -35,6 +35,14 @@
                   >
                     IsActive
                   </th>
+                  <th
+                  rowspan="1"
+                  colspan="1"
+                  aria-label="Order #: activate to sort column descending"
+                  style="width: 76.8375px"
+                >
+                  Actions
+                </th>
                   
                 
                   </tr>
@@ -49,21 +57,57 @@
                         }}</span
                       >
                     </td>
+                    <td>
+                      <div class="d-inline-block dropdown">
+                        <button
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          title="Row Options"
+                          class="dropdown-toggle btn btn-success after-none squared-btn"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div
+                          tabindex="-1"
+                          role="menu"
+                          aria-hidden="true"
+                          class="dropdown-menu dropdown-menu-left"
+                        >
+                          <ul class="nav flex-column">
+                          
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                              
+                              >
+                                <i class="nav-link-icon fas fa-pen"></i>
+                                <span> Edit</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link dangered fw-semibold"
+                                (click)="deleteType(academyType.id)"
+                                
+                              >
+                                <i
+                                  class="nav-link-icon fas fa-trash dangered"
+                                ></i>
+                                <span> Delete</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
                   
                   </tr>
                 </tbody>
               </table>
               <div class="row">
-                <div class="col-sm-12 col-md-5">
-                  <div
-                    class="dataTables_info"
-                    id="order-listing_info"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    Showing 1 to 10 of 10 entries
-                  </div>
-                </div>
+             
                 <div class="col-sm-12 col-md-7">
                   <div
                     class="dataTables_paginate paging_simple_numbers"
