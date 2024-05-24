@@ -148,5 +148,16 @@ namespace StreamlineAcademy.Application.Services
         {
             return await enquiryrepository.FirstOrDefaultAsync(x => x.Email == email) == null;
         }
+
+        public async Task<ApiResponse<string>> RejectEnquiry(Guid? academyId)
+        {
+            var model = new Enquiry() { Id = academyId, RegistrationStatus = RegistrationStatus.Rejected };
+            var result = await enquiryrepository.UpdateAsync(model);
+            if (result > 0)
+            {
+                return ApiResponse<string>.SuccessResponse(result.ToString(), "enquiry Rejected");
+            }
+            return ApiResponse<string>.ErrorResponse("something went wrong");
+        }
     }
 }

@@ -83,13 +83,23 @@ export class EnquirylistComponent {
       });
   }
   rejectEnquiry(enquiryId: any) {
-    console.log(enquiryId);
 
     this.sharedService
       .fireConfirmSwal('Are You sure you want to reject this Enquiry ')
       .then((result: any) => {
         if (result.isConfirmed) {
-         
+          this.enquiryService.rejectEnquiry(enquiryId).subscribe({
+            next: (response) => {
+              console.log(response);
+
+              if (response.isSuccess) {
+                this.sharedService.showSuccessToast(response.message);
+                this.loadAllEnquiries();
+              } else {
+                this.sharedService.showErrorToast(response.message);
+              }
+            },
+          });
         }
       });
   }

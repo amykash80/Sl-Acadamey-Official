@@ -243,6 +243,5 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<IEnumerable<AcademyTypeResponseModel>>.ErrorResponse(APIMessages.AcademyManagement.AcademyNotFound, HttpStatusCodes.NotFound);
         }
 
-
     }
 }
