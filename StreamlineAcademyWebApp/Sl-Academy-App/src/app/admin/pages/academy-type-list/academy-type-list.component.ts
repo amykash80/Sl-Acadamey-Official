@@ -23,5 +23,6 @@ export class AcademyTypeListComponent {
       },
     });
   }
+  deleteType(id:any){}
  
 }

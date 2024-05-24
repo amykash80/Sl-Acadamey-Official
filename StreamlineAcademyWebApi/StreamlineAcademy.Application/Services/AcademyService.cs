@@ -109,7 +109,11 @@ namespace StreamlineAcademy.Application.Services
                     if (await emailHelperService.SendRegistrationEmail(user.Email!, user.Name!, request.Password!))
                     {
                         var enquiry=await enquiryRepository.GetByIdAsync(enquiry=>enquiry.Name==request.Name);
-                        var updateStatusResponse = await academyRepository.UpdateRegistrationStatus(enquiry.Id, RegistrationStatus.Approved);
+                        if(enquiry is not null)
+                        {
+                            var updateStatusResponse = await academyRepository.UpdateRegistrationStatus(enquiry.Id, RegistrationStatus.Approved);
+
+                        }
                         var res = await academyRepository.GetAcademyById(academy.Id);
                         return ApiResponse<AcademyResponseModel>.SuccessResponse(res,"Academy Registered Successfully");
                     }
