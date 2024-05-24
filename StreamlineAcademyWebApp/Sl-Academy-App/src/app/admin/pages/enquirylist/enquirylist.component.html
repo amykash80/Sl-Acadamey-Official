@@ -71,6 +71,14 @@
                       aria-label="Ship to: activate to sort column ascending"
                       style="width: 75.0125px"
                     >
+                      IsActive
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Ship to: activate to sort column ascending"
+                      style="width: 75.0125px"
+                    >
                       Actions
                     </th>
                   </tr>
@@ -80,12 +88,25 @@
                     <td>{{ enquiry.name }}</td>
                     <td>{{ enquiry.email }}</td>
                     <td>{{ enquiry.phoneNumber }}</td>
+
                     <td>
-                      <!-- USE chip-danger chip-warning chip-success accordingly -->
-                      <span [ngClass]="getStatusClass(enquiry.registrationStatus!)">
+                      <span
+                        [ngClass]="getStatusClass(enquiry.registrationStatus!)"
+                      >
                         {{
                           enquiry.registrationStatus | registrationStatus
                         }}</span
+                      >
+                    </td>
+                    <td>
+                      <span
+                        [ngClass]="
+                          enquiry.isActive
+                            ? 'chip chip-success'
+                            : 'chip chip-danger'
+                        "
+                      >
+                        {{ enquiry.isActive }}</span
                       >
                     </td>
                     <td>
@@ -146,11 +167,9 @@
                             <li class="nav-item">
                               <a
                                 class="nav-link dangered fw-semibold"
-                                (click)="rejectEnquiry(enquiry.id)"
+                                (click)="rejectEnquiry(enquiry)"
                               >
-                                <i
-                                  class="nav-link-icon fa fa-ban dangered"
-                                ></i>
+                                <i class="nav-link-icon fa fa-ban dangered"></i>
                                 <span> Reject</span>
                               </a>
                             </li>
