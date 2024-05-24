@@ -13,6 +13,7 @@ import { AppModule } from '../../../Models/Common/AppModule';
 import { UserRole } from '../../../Enums/userrole';
 import { FileResponse } from '../../../Models/Common/fileResponse';
 import { environment } from '../../../../enviroments/enviroment';
+import { CountryService } from '../../../Services/country.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,8 @@ import { environment } from '../../../../enviroments/enviroment';
 export class ProfileComponent {
   constructor(
     private profileService: ProfileService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private countryService:CountryService
   ) {
     this.getContactInfo();
     this.getAddressInfo();
@@ -42,8 +44,51 @@ export class ProfileComponent {
   filePath: string = '';
   apiBaseUrl: string = 'http://localhost:5232';
   module!: AppModule;
+  countries: any[] = [];
+  states: any[] = [];
+  cities: any[] = [];
+  filteredStates: any[] = [];
+  filteredCitiesList: any[] = [];
+  selectedCountryId: string = '';
+  selectedStateId: string = '';
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.getAllCountries();
+    this.getAllStates();
+    this.getAllCities();
+   
+  }
+  getAllCountries() {
+    this.countryService.getCountries().subscribe((countries) => {
+      this.countries = countries.result;
+      console.log(this.countries);
+    });
+  }
+  getAllStates() {
+    this.countryService.getStates().subscribe((res) => {
+      this.states = res.result;
+    });
+  }
+  getAllCities() {
+    this.countryService.getCities().subscribe((res) => {
+      this.cities = res.result;
+      console.log(this.cities);
+    });
+  }
+  filterStates(event: any) {
+    this.selectedCountryId = event.target.value;
+    this.filteredStates = this.states.filter(
+      (state) => state.countryId === this.selectedCountryId
+    );
+    console.log(this.filteredStates);
+  }
+  filteredCities(event: any) {
+    this.selectedStateId = event.target.value;
+    this.filteredCitiesList = this.cities.filter(
+      (city) => city.sateId === this.selectedStateId
+    );
+    console.log(this.filteredCitiesList);
+  }
   getPath() {
     this.profileService.getImagePath().subscribe((response) => {
       this.filePath = response.result.filePath!;
