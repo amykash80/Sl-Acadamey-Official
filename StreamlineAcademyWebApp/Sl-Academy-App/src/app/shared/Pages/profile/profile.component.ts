@@ -127,6 +127,7 @@ export class ProfileComponent {
     this.profileService.addressInfo().subscribe({
       next: (response) => {
         this.addressInfo = response.result;
+        this.addressModel = response.result
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.Unauthorized) {
@@ -156,7 +157,7 @@ export class ProfileComponent {
       next: (response) => {
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message);
-          this.addressInfo = { ...this.addressModel };
+          this.addressModel = response.result;;
           this.isAddressEditMode = false;
         } else {
           this.sharedService.showErrorToast(response.message);
