@@ -33,19 +33,12 @@ export class AcademyListComponent {
       },
     });
   }
-  filterAcademies(): void {
-    if (!this.searchText.trim()) {
-      this.filteredAcademyList = this.academyList.slice();
-      return;
-    }
-
-    const searchTerm = this.searchText.toLowerCase();
-    this.filteredAcademyList = this.academyList.filter(
-      (academy) =>
-        academy.academyName!.toLowerCase().startsWith(searchTerm) ||
-        academy.email!.toLowerCase().startsWith(searchTerm) ||
-        academy.phoneNumber!.toLowerCase().startsWith(searchTerm)
+  filterAcademies(event:any): void {
+    const filterValue = event.target.value.toLowerCase();
+    this.filteredAcademyList = this.academyList.filter(academy => 
+      academy.academyName?.toLowerCase().startsWith(filterValue)
     );
+    console.log(this.filteredAcademyList);
   }
 
   deleteAcademy(academyId: any) {

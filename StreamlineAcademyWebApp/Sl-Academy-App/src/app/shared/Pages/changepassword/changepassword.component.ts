@@ -14,18 +14,25 @@ export class ChangepasswordComponent {
     private sharedService: SharedService
   ) {}
   changePasswordModel: ChangePassword = new ChangePassword();
+  loadSpinner=false;
   changeMyPassword() {
+    this.loadSpinner=true;
     this.authService.changePassword(this.changePasswordModel).subscribe({
       next: (response) => {
         console.log(response);
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.result);
+          this.loadSpinner=false;
         } else {
           this.sharedService.showErrorToast(response.message);
+          this.loadSpinner=false;
+
         }
       },
       error: (err) => {
         console.log(err);
+        this.loadSpinner=false;
+
       },
     });
   }

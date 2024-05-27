@@ -24,6 +24,7 @@ import { UpdateBatchComponent } from './Pages/update-batch/update-batch.componen
 import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 import { AddCourseCategoryComponent } from './Pages/add-course-category/add-course-category.component';
 import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
+import { ChangepasswordComponent } from '../shared/Pages/changepassword/changepassword.component';
 
 
 const routes: Routes = [
@@ -59,7 +60,8 @@ const routes: Routes = [
     {path:"batch-list/:courseId",component:BatchListComponent},
     {path:"myProfile",component:ProfileComponent},
     {path:"add-course-category",component:AddCourseCategoryComponent},
-    {path:"course-category-list",component:CourseCategoryListComponent}
+    {path:"course-category-list",component:CourseCategoryListComponent},
+    {path:"change-password",component:ChangepasswordComponent}
   ]
   
   },

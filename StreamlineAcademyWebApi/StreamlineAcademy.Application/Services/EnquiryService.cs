@@ -171,7 +171,7 @@ namespace StreamlineAcademy.Application.Services
                 RegistrationStatus=enquiryResponse.RegistrationStatus,
                 IsActive = false,
             };
-            return ApiResponse<EnquiryResponseModel>.SuccessResponse(response, APIMessages.EnquiryManagement.EnquiryUpdated, HttpStatusCodes.Created);
+            return ApiResponse<EnquiryResponseModel>.SuccessResponse(response,"Enquiry Rejected Successfully", HttpStatusCodes.Created);
         }
 
     }
