@@ -13,7 +13,7 @@ import { SharedService } from '../../../Services/shared.service';
 export class BatchListComponent {
   courseId!: string
   batchList:BatchResponseModel[]=[]
-  filteredList: BatchResponseModel[] = [];
+  filteredBatchList: BatchResponseModel[] = [];
   searchText: string = '';
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
@@ -26,29 +26,33 @@ constructor(private activatedRoute: ActivatedRoute,
 ngOnInit(){
   this.getAllBatchesByCourseId();
 }
-filterBatchList(): void {
-  if (!this.searchText.trim()) {
-    this.filteredList = this.batchList.slice();
-    return;
-  }
 
-  const searchTerm = this.searchText.toLowerCase();
-  this.filteredList = this.batchList.filter(
-    (batch) =>
-      batch.courseName!.toLowerCase().startsWith(searchTerm) ||
-      batch.locationName!.toLowerCase().startsWith(searchTerm) 
-  );
-}
 getAllBatchesByCourseId(){
   this.batchService.getAllBatchesByCourseId(this.courseId).subscribe({
     next: (response) => {
       this.batchList = response.result;
+      this.filteredBatchList = this.batchList;
       console.log(this.batchList);
     },
     error: (err: HttpErrorResponse) => {
       console.log(err);
     }
   });
+}
+filterBatches(): void {
+  if (!this.searchText.trim()) {
+    this.filteredBatchList = this.batchList.slice();
+    return;
+  }
+
+  const searchTerm = this.searchText.toLowerCase();
+  this.filteredBatchList = this.batchList.filter(
+    (batch) =>
+      batch.batchName!.toLowerCase().startsWith(searchTerm) ||
+      batch.courseName!.toLowerCase().startsWith(searchTerm) ||
+      batch.instructorName!.toLowerCase().startsWith(searchTerm)||
+      batch.batchSize!.toString().toLowerCase().startsWith(searchTerm)
+  );
 }
 deleteBatch(batchId:any){
   this.sharedService
