@@ -111,6 +111,7 @@ namespace StreamlineAcademy.Application.Services
             if(returnVal is not null)
                 returnVal.Address = request.Address;
                 returnVal!.PostalCode = request.PostalCode;
+            
                 var updatedUser = await userRepository.UpdateAsync(returnVal);
 
               if(updatedUser > 0)
@@ -130,6 +131,9 @@ namespace StreamlineAcademy.Application.Services
                     CountryName=result.CountryName,
                     StateName= result.StateName,
                     CityName= result.CityName,
+                    CountryId=result.CountryId,
+                    StateId=result.SateId,
+                    CityId=result.CityId
 
                     };
 

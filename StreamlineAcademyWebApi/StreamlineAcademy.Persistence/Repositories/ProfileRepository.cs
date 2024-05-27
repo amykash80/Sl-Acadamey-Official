@@ -47,6 +47,10 @@ namespace StreamlineAcademy.Persistence.Repositories
                 CountryName=academy.CountryName,
                 StateName=academy.StateName,
                 CityName=academy.CityName,
+                CountryId=academy.CountryId,
+                StateId=academy.SateId,
+                CityId=academy.CityId,
+                
                 };
                 return res;
             }

@@ -24,6 +24,9 @@ export class AddressResponse {
     countryName?: string;
     stateName?: string;
     cityName?: string;
+    countryId?: string='';
+    stateId?: string='';
+    cityId?: string=''
 }
 export class UpdateAddress {
     address?: string;
@@ -31,6 +34,9 @@ export class UpdateAddress {
     countryName?: string;
     stateName?: string;
     cityName?: string;
+    countryId?: string;
+    stateId?: string;
+    cityId?: string;
 }
 export class GetAddress {
     address?: string;

@@ -26,9 +26,9 @@
               
             </ng-container>
             <ng-template #showUploadOption>
-              <button class="btn btn-info" style="position: relative; overflow: hidden;">
+              <button class="btn btn-info custom-btn" style="position: relative; overflow: hidden;">
                 Change profile picture
-                <input type="file" (change)="showFileInput($event)" style="position: absolute; top: 0; left: 0; opacity: 0; width: 100%; height: 100%;">
+                <input type="file" (change)="showFileInput($event)" style="position: absolute; top: 0; left: 0; opacity: 0; width: 100%; height: 100%;cursor: pointer;">
             </button>
             </ng-template>
           
@@ -64,7 +64,7 @@
         <div class="card mb-4">
           <div class="card-body">
               <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-info" (click)="toggleContactEditMode()">
+                <button type="button" class="btn btn-info custom-btn" (click)="toggleContactEditMode()">
                   {{ isContactEditMode ? 'Cancel' : 'Edit' }}
                 </button>
                 <button
@@ -135,7 +135,7 @@
           <div class="card mb-4">
             <div class="card-body">
               <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-info" (click)="toggleAddressEditMode()">
+                <button type="button" class="btn btn-info custom-btn" (click)="toggleAddressEditMode()">
                   {{ isAddressEditMode ? 'Cancel' : 'Edit' }}
                 </button>
                 <button
@@ -152,7 +152,7 @@
                     <p class="mb-0">Address</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ addressInfo.address }}</p>
+                    <p class="text-muted mb-0">{{ addressModel.address }}</p>
                   </div>
                 </div>
                 <div class="row" *ngIf="isAddressEditMode">
@@ -160,7 +160,7 @@
                     <p class="mb-0">Address</p>
                   </div>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" [(ngModel)]="addressInfo.address" />
+                    <input type="text" class="form-control" [(ngModel)]="addressModel.address" />
                   </div>
                 </div>
               <hr>
@@ -169,7 +169,7 @@
                   <p class="mb-0">Postal Code</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ addressInfo.postalCode }}</p>
+                  <p class="text-muted mb-0">{{ addressModel.postalCode }}</p>
                 </div>
               </div>
               <div class="row" *ngIf="isAddressEditMode">
@@ -177,7 +177,7 @@
                   <p class="mb-0">Postal Code</p>
                 </div>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" [(ngModel)]="addressInfo.postalCode" />
+                  <input type="text" class="form-control" [(ngModel)]="addressModel.postalCode" />
                 </div>
               </div>
             <hr>
@@ -186,7 +186,7 @@
                 <p class="mb-0">Country</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ addressInfo.countryName }}</p>
+                <p class="text-muted mb-0">{{ addressModel.countryName }}</p>
               </div>
             </div>
             <div class="row" *ngIf="isAddressEditMode">
@@ -194,7 +194,12 @@
                 <p class="mb-0">Country</p>
               </div>
               <div class="col-sm-9">
-                <input type="text" class="form-control" [(ngModel)]="addressInfo.countryName" />
+                <span>
+                  <select name="countryId" id="" [(ngModel)]="addressModel.countryId">
+                    <option value=""> select Country</option>
+                    <option *ngFor="let country of countries" [value]="country.id">{{country.countryName}}</option>
+                  </select>
+                </span>
               </div>
             </div>
             <hr>
@@ -203,7 +208,7 @@
                 <p class="mb-0">State</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ addressInfo.stateName }}</p>
+                <p class="text-muted mb-0">{{ addressModel.stateName }}</p>
               </div>
             </div>
             <div class="row" *ngIf="isAddressEditMode">
@@ -211,7 +216,12 @@
                 <p class="mb-0">State</p>
               </div>
               <div class="col-sm-9">
-                <input type="text" class="form-control" [(ngModel)]="addressInfo.stateName" />
+                <span>
+                  <select name="stateId" id="" [(ngModel)]="addressModel.stateId">
+                    <option value=""> select State</option>
+                    <option *ngFor="let state of states" [value]="state.id">{{state.stateName}}</option>
+                  </select>
+                </span>
               </div>
             </div>
             <hr>
@@ -220,7 +230,7 @@
                 <p class="mb-0">City</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ addressInfo.cityName }}</p>
+                <p class="text-muted mb-0">{{ addressModel.cityName }}</p>
               </div>
             </div>
             <div class="row" *ngIf="isAddressEditMode">
@@ -228,7 +238,12 @@
                 <p class="mb-0">City</p>
               </div>
               <div class="col-sm-9">
-                <input type="text" class="form-control" [(ngModel)]="addressInfo.cityName" />
+                <span>
+                  <select name="cityId" id="" [(ngModel)]="addressModel.cityId">
+                    <option value=""> select City</option>
+                    <option *ngFor="let city of cities" [value]="city.id">{{city.cityName}}</option>
+                  </select>
+                </span>
               </div>
             </div>
         </div>
