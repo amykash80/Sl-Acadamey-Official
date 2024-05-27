@@ -25,6 +25,7 @@ import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 import { AddCourseCategoryComponent } from './Pages/add-course-category/add-course-category.component';
 import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
 import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
+import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,7 @@ const routes: Routes = [
     {path:"add-course-category",component:AddCourseCategoryComponent},
     {path:"course-category-list",component:CourseCategoryListComponent},
     {path:"add-batch-schedule/:id/:cId",component:AddBatchScheduleComponent},
+    {path:"batch-schedule-list/:id/:courseId",component:BatchScheduleListComponent},
   ]
   
   },

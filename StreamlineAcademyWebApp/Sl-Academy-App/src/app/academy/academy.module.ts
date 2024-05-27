@@ -30,6 +30,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AddCourseCategoryComponent } from './Pages/add-course-category/add-course-category.component';
 import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
 import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
+import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
+import { UpdateScheduleListComponent } from './pages/update-schedule-list/update-schedule-list.component';
 
 
 @NgModule({
@@ -63,6 +65,8 @@ import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-
     AddCourseCategoryComponent,
     CourseCategoryListComponent,
     AddBatchScheduleComponent,
+    BatchScheduleListComponent,
+    UpdateScheduleListComponent,
     
     
     

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>Batch Schedule List</h2>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search Batch Schedules"
+            [(ngModel)]="searchText"
+            (input)="filterBatchSchedule()"
+          />
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Batch Name</th>
+              <th scope="col">Content Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Duration</th>
+              <th scope="col">IsActive</th>
+              <th scope="col">Actions</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let batchSchedule of filterBatchSchedules">
+              <td>{{ batchSchedule.batchName }}</td>
+              <td>{{ batchSchedule.contentName }}</td>
+              <td>{{ batchSchedule.date | date: 'shortDate' }}</td>
+              <td>{{ batchSchedule.durationInHours | number: '1.0-0' }} hours</td>
+              <td>{{ batchSchedule.isActive }}</td>
+              <td>
+                <button type="button" class="btn btn-success" style="margin-right: 3px;" [routerLink]="['/academy/update-batch-schedule', batchSchedule.id,batchId,courseId]"><i class="fas fa-edit"></i>Edit</button>
+                <button type="button" class="btn btn-danger" (click)="deleteBatchSchedule(batchSchedule.id)"><i class="far fa-trash-alt"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

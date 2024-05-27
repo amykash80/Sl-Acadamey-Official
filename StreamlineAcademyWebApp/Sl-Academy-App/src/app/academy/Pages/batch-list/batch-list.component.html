@@ -152,7 +152,15 @@
                                 <span> Add Schedule</span>
                               </a>
                             </li>
-                            
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                [routerLink]="['/academy/batch-schedule-list', batch.id, courseId]"
+                              >
+                              <i class="fa fa-calendar"></i>
+                                <span> View Schedule</span>
+                              </a>
+                            </li>
                             <li class="nav-item">
                               <a
                                 class="nav-link dangered fw-semibold"
