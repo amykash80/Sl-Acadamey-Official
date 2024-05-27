@@ -29,6 +29,7 @@ import { UpdateBatchComponent } from './Pages/update-batch/update-batch.componen
 import { SharedModule } from '../shared/shared.module';
 import { AddCourseCategoryComponent } from './Pages/add-course-category/add-course-category.component';
 import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
+import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { CourseCategoryListComponent } from './Pages/course-category-list/course
     UpdateBatchComponent,
     AddCourseCategoryComponent,
     CourseCategoryListComponent,
+    AddBatchScheduleComponent,
     
     
     

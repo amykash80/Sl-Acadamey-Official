@@ -145,6 +145,15 @@
                             </li>
                             <li class="nav-item">
                               <a
+                                class="nav-link fw-semibold"
+                                [routerLink]="['/academy/add-batch-schedule/:id/:cId']"
+                              >
+                                <i class="nav-link-icon fas fa-pen"></i>
+                                <span> Add Schedule</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a
                                 class="nav-link dangered fw-semibold"
                                 (click)="deleteBatch(batch.id)"
                               >
