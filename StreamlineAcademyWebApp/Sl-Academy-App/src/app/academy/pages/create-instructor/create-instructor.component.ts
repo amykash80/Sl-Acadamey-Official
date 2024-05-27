@@ -26,6 +26,7 @@ export class CreateInstructorComponent {
   selectedStateId: string = '';
   instructorModel: InstructorRequestModel = new InstructorRequestModel();
   instructors:InstructorResponseModel[]=[];
+  loadSpinner=false;
 
   constructor(
   ) {}
@@ -73,17 +74,21 @@ export class CreateInstructorComponent {
     );
     console.log(this.filteredCitiesList);
   }
-  addInstructor() {    
+  addInstructor() {   
+    this.loadSpinner=true; 
     this.instructorModel.postalCode=this.instructorModel.postalCode?.toString();
     this.instructorModel.skill=this.selectedSkill
     this.instructorService.addinstructor(this.instructorModel).subscribe({
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
-          this.router.navigate(['/academy/instuctor-list'])
+          this.loadSpinner=false;
+          this.router.navigate(['/academy/instructor-list'])
         }
         else{
           this.sharedService.showErrorToast(response.message)
+          this.loadSpinner=false;
+
         }
       },
       error: (err: HttpErrorResponse) => {
