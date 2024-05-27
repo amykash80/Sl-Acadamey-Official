@@ -22,6 +22,8 @@ import { BatchListComponent } from './Pages/batch-list/batch-list.component';
 import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
 import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
 import { ProfileComponent } from '../shared/Pages/profile/profile.component';
+import { AddCourseCategoryComponent } from './Pages/add-course-category/add-course-category.component';
+import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
 
 
 const routes: Routes = [
@@ -55,7 +57,9 @@ const routes: Routes = [
     {path:"create-instructor",component:CreateInstructorComponent},
     {path:"instructor-list",component:InstructorListComponent},
     {path:"batch-list/:courseId",component:BatchListComponent},
-    {path:"myProfile",component:ProfileComponent}
+    {path:"myProfile",component:ProfileComponent},
+    {path:"add-course-category",component:AddCourseCategoryComponent},
+    {path:"course-category-list",component:CourseCategoryListComponent}
   ]
   
   },

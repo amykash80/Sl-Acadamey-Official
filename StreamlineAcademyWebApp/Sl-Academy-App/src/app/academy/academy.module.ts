@@ -27,6 +27,8 @@ import { UpdateCorseResourceComponent } from './pages/update-corse-resource/upda
 import { UpdateInstructorComponent } from './pages/update-instructor/update-instructor.component';
 import { UpdateBatchComponent } from './Pages/update-batch/update-batch.component';
 import { SharedModule } from '../shared/shared.module';
+import { AddCourseCategoryComponent } from './Pages/add-course-category/add-course-category.component';
+import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { SharedModule } from '../shared/shared.module';
     UpdateCorseResourceComponent,
     UpdateInstructorComponent,
     UpdateBatchComponent,
+    AddCourseCategoryComponent,
+    CourseCategoryListComponent,
     
     
     
