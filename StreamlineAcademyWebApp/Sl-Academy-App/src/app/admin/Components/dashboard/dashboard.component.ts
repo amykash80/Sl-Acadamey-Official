@@ -9,37 +9,31 @@ import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  constructor(public shared:SharedService,
-             private sharedService:SharedService,
-             private academyService:AcademyService,
-             private enquiryService:EnquiryService
-  ){}
-  academyList:AcademyResponse[] = [];
-  enquiryList:EnquiryResponse[] = [];
-  academyTypeList:AcademyTypeResponse[] = [];
+  constructor(
+    public shared: SharedService,
+    private sharedService: SharedService,
+    private academyService: AcademyService,
+    private enquiryService: EnquiryService
+  ) {
+    this.enquiryService.enquiryList().subscribe((response) => {
+      this.enquiryList = response.result;
+    });
+    this.academyService.academyList().subscribe((response) => {
+      this.academyList = response.result;
+    });
+    this.academyService.getAcademyTypes().subscribe((res) => {
+      this.academyTypeList = res.result;
+    });
+  }
+  academyList: AcademyResponse[] = [];
+  enquiryList: EnquiryResponse[] = [];
+  academyTypeList: AcademyTypeResponse[] = [];
   status = false;
-  addToggle()
-  {
-    this.status = !this.status;       
+  addToggle() {
+    this.status = !this.status;
   }
-  ngOnInit(){
-   this.enquiryService.enquiryList().subscribe(response=>{
-    this.enquiryList=response.result
-    
-   })
-   this.academyService.academyList().subscribe(response=>{
-    this.academyList=response.result
-    
-   })
-   this.academyService.getAcademyTypes().subscribe(res=>{
-    this.academyTypeList=res.result
-   })
-  }
-  
-
- 
-
+  ngOnInit() {}
 }

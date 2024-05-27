@@ -10,13 +10,16 @@ import { SharedService } from '../../../Services/shared.service';
   },
 })
 export class DashboardHeaderComponent {
+  constructor(){
+    this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
+    console.log(this.loggedInUserDetails);
+  }
   shared = inject(SharedService);
   loggedInUserDetails: any = {};
   onLogOut() {
     this.shared.logOutUser();
   }
   ngOnInit() {
-    this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
-    console.log(this.loggedInUserDetails);
-  }
+
+}
 }
