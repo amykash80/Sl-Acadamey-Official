@@ -82,8 +82,9 @@ namespace StreamlineAcademy.Application.Services
 
                     Id = courseCategoryModel.Id,
                     CategoryName = model.CategoryName,
+                    IsActive=courseCategoryModel.IsActive
                 };
-                return ApiResponse<CourseCategoryResponseModel>.SuccessResponse(returnModel);
+                return ApiResponse<CourseCategoryResponseModel>.SuccessResponse(returnModel,"Course Category Added Successfully");
             }
             return ApiResponse<CourseCategoryResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
@@ -121,6 +122,7 @@ namespace StreamlineAcademy.Application.Services
                     {
                         Id = item.Id,
                         CategoryName = item.CategoryName,
+                        IsActive=item .IsActive,
 
                     };
                     CourseCategoryResponseModels.Add(CourseCategoryResponseModel);
@@ -197,7 +199,48 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
 
+        public async Task<ApiResponse<CourseCategoryResponseModel>> DeleteCourseCategory(Guid id)
+        {
+            var existingCourseCategory = await courseRepository.GetCourseCategoryById(x => x.Id == id);
 
+            if (existingCourseCategory == null)
+                return ApiResponse<CourseCategoryResponseModel>.ErrorResponse(APIMessages.CourseCategoryManagement.CourseCategoryNotFound, HttpStatusCodes.NotFound);
+
+            var result = await courseRepository.GetCourseCategoryById(x => x.Id == existingCourseCategory.Id);
+            existingCourseCategory.IsActive = false;
+            existingCourseCategory.DeletedDate = DateTime.Now;
+            if (result is not null)
+            {
+                int isSoftDelted = await courseRepository.deleteCourseCategory(result!);
+                if (isSoftDelted > 0)
+                {
+                    return ApiResponse<CourseCategoryResponseModel>.SuccessResponse(null, APIMessages.CourseCategoryManagement.CourseCategoryDeleted);
+                }
+            }
+            return ApiResponse<CourseCategoryResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+        }
+
+        public async Task<ApiResponse<CourseCategoryResponseModel>> UpdateCourseCategory(CourseCategoryUpdateModel request)
+        {
+
+            var academyId = contextService.GetUserId();
+            var existingCourse = await courseRepository.GetCourseCategoryById(x => x.Id == request.Id);
+            if (existingCourse == null)
+                return ApiResponse<CourseCategoryResponseModel>.ErrorResponse(APIMessages.CourseManagement.CourseNotFound, HttpStatusCodes.NotFound);
+          var  courseCategory = new CourseCategory() { 
+          Id=request.Id,
+          CategoryName=request.CategoryName,
+          };
+
+
+            var returnVal = await courseRepository.updateCourseCategory(courseCategory);
+            if (returnVal > 0)
+            {
+                var responseModel = await courseRepository.GetCourseCategoryById(_=>_.Id==existingCourse.Id);
+                return ApiResponse<CourseCategoryResponseModel>.SuccessResponse(new CourseCategoryResponseModel() { Id=responseModel.Id,CategoryName=responseModel.CategoryName,IsActive=responseModel.IsActive}, APIMessages.CourseCategoryManagement.CourseCategoryUpdated, HttpStatusCodes.OK);
+            }
+            return ApiResponse<CourseCategoryResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+        }
     }
 }
 

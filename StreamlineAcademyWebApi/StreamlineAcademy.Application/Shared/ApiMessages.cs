@@ -89,8 +89,10 @@ public static class APIMessages
         {
             public static readonly string CourseCategoryNotFound = "CourseCategory not found.";
             public static readonly string CourseCategoryAdded = "CourseCategory Added Successfully.";
-            public static readonly string CourseUpdated = "Course Updated Successfully.";
+            public static readonly string CourseCategoryUpdated = "Course category Updated Successfully.";
             public static readonly string CourseCategoryAlreadyRegistered = "CourseCategory already Added";
+            public static readonly string CourseCategoryDeleted = "Course Category deleted.";
+
 
         }
         public static class LocationManagement

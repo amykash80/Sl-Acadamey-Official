@@ -5,6 +5,7 @@ import { SharedService } from '../../../Services/shared.service';
 import { CreateCourse } from '../../../Models/Academy/Course';
 import { JSDocComment } from '@angular/compiler';
 import { Router } from '@angular/router';
+import { CourseCategoryResponse } from '../../../Models/CourseCategory/CourseCategory';
 
 @Component({
   selector: 'app-createcourse',
@@ -16,7 +17,7 @@ export class CreateCourseComponent {
   sharedService = inject(SharedService);
 
   courseModel: CreateCourse = new CreateCourse();
-  categories: any[] = [];
+  categories: CourseCategoryResponse[] = [];
   academyId: string = '';
   loadSpinner = false;
   constructor(private router: Router) {}
@@ -27,9 +28,8 @@ export class CreateCourseComponent {
     console.log(this.academyId);
   }
   getAllCategory() {
-    this.courseService.getCategories().subscribe((categories) => {
+    this.courseService.getAllCourseCategories().subscribe((categories) => {
       this.categories = categories.result;
-      console.log(this.categories);
     });
   }
 

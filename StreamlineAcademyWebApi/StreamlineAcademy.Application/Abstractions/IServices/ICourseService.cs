@@ -18,7 +18,11 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<IEnumerable<CourseCategoryResponseModel>>> GetAllCourseCategories();
         Task<ApiResponse<CourseResponseModel>> GetCourseById(Guid id);
         Task<ApiResponse<CourseResponseModel>> UpdateCourse(CourseUpdateRequest request);
+        Task<ApiResponse<CourseCategoryResponseModel>> UpdateCourseCategory(CourseCategoryUpdateModel request);
+
         Task<ApiResponse<CourseResponseModel>> DeleteCourse(Guid id);
+        Task<ApiResponse<CourseCategoryResponseModel>> DeleteCourseCategory(Guid id);
+
         Task<ApiResponse<CourseCategoryResponseModel>> GetCourseCategoryById(Guid id);
         Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesByAcademyId();
     }

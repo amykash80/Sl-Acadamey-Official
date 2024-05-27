@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace StreamlineAcademy.Persistence.Repositories
 {
-    public class CourseRepository:BaseRepository<Course>,ICourseRepository
+    public class CourseRepository : BaseRepository<Course>, ICourseRepository
     {
         private readonly StreamlineDbContet context;
 
-        public CourseRepository(StreamlineDbContet context):base(context)
+        public CourseRepository(StreamlineDbContet context) : base(context)
         {
             this.context = context;
         }
@@ -42,19 +42,19 @@ namespace StreamlineAcademy.Persistence.Repositories
             .FirstOrDefaultAsync(a => a.Id == id);
 
             if (course is not null)
-            { 
+            {
                 var response = new CourseResponseModel
                 {
                     Id = course.Id,
                     Name = course.Name,
                     Description = course.Description,
-                    DurationInWeeks = course.DurationInWeeks, 
+                    DurationInWeeks = course.DurationInWeeks,
                     CategoryName = course.CourseCategory!.CategoryName,
-                    AcademyName=course.Academy!.AcademyName,
+                    AcademyName = course.Academy!.AcademyName,
                     IsActive = course.IsActive,
                     Fee = course.Fee,
                     CategoryId = course.CategoryId,
-                    
+
                 };
 
                 return response;
@@ -64,7 +64,7 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<List<CourseResponseModel>> GetAllCourses()
         {
-            var course = await context.Courses                    
+            var course = await context.Courses
                 .Include(a => a.CourseCategory)
                  .Include(a => a.Academy)
                 .Select(a => new CourseResponseModel
@@ -72,7 +72,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Id = a.Id,
                     Name = a.Name,
                     Description = a.Description,
-                    DurationInWeeks = a.DurationInWeeks, 
+                    DurationInWeeks = a.DurationInWeeks,
                     CategoryName = a.CourseCategory!.CategoryName,
                     AcademyName = a.Academy!.AcademyName,
                     IsActive = a.IsActive,
@@ -111,7 +111,26 @@ namespace StreamlineAcademy.Persistence.Repositories
             return courses;
         }
 
+        public async Task<int> deleteCourseCategory(CourseCategory model)
+        {
+            await Task.Run(() => context.Set<CourseCategory>().Update(model));
+            return await context.SaveChangesAsync();
+        }
 
+        public async Task<int> updateCourseCategory(CourseCategory model)
+        {
+            var existingEntity = context.ChangeTracker.Entries<CourseCategory>()
+                               .FirstOrDefault(e => e.Entity.Id == model.Id);
 
+            if (existingEntity != null)
+            {
+                context.Entry(existingEntity.Entity).State = EntityState.Detached;
+            }
+
+            context.Set<CourseCategory>().Attach(model);
+            context.Entry(model).State = EntityState.Modified;
+
+            return await context.SaveChangesAsync();
+        }
     }
 }

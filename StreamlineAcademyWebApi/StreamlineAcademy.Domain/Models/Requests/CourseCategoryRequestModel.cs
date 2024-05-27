@@ -11,4 +11,11 @@ namespace StreamlineAcademy.Domain.Models.Requests
         public string? CategoryName { get; set; }
 
     }
+
+    public class CourseCategoryUpdateModel
+    {
+        public Guid? Id { get; set; }
+        public string? CategoryName { get; set; }
+
+    }
 }
