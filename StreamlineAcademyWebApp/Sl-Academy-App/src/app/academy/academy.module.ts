@@ -31,7 +31,7 @@ import { AddCourseCategoryComponent } from './Pages/add-course-category/add-cour
 import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
 import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
 import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
-import { UpdateScheduleListComponent } from './pages/update-schedule-list/update-schedule-list.component';
+import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
 
 
 @NgModule({
@@ -66,7 +66,7 @@ import { UpdateScheduleListComponent } from './pages/update-schedule-list/update
     CourseCategoryListComponent,
     AddBatchScheduleComponent,
     BatchScheduleListComponent,
-    UpdateScheduleListComponent,
+    UpdateBatchScheduleComponent,
     
     
     

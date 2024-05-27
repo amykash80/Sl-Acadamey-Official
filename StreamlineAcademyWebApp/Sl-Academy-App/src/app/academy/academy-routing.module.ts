@@ -26,6 +26,7 @@ import { AddCourseCategoryComponent } from './Pages/add-course-category/add-cour
 import { CourseCategoryListComponent } from './Pages/course-category-list/course-category-list.component';
 import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
 import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
+import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
 
 
 const routes: Routes = [
@@ -64,6 +65,7 @@ const routes: Routes = [
     {path:"course-category-list",component:CourseCategoryListComponent},
     {path:"add-batch-schedule/:id/:cId",component:AddBatchScheduleComponent},
     {path:"batch-schedule-list/:id/:courseId",component:BatchScheduleListComponent},
+    {path:"update-batch-schedule/:id/:batchId/:courseId",component:UpdateBatchScheduleComponent},
   ]
   
   },

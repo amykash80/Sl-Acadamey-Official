@@ -43,13 +43,15 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Id = schedule.Id,
                     Date = schedule.Date,
                     DurationInHours = schedule.DurationInHours,
-                    BatchName = schedule.Batch!.BatchName, 
-                    ContentName = schedule.CourseContent!.TaskName, 
+                    BatchName = schedule.Batch!.BatchName,
+                    ContentName = schedule.CourseContent!.TaskName,
+                    IsActive = schedule.IsActive,
+                    CourseContentId = schedule.CourseContentId,
                 };
 
                 return response;
             }
-            return new ScheduleResponseModel(); 
+            return new ScheduleResponseModel();
         }
 
 
@@ -64,7 +66,8 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Date = s.Date,
                     DurationInHours = s.DurationInHours,
                     BatchName = s.Batch!.BatchName,
-                    ContentName=s.CourseContent!.TaskName
+                    ContentName=s.CourseContent!.TaskName,
+                    IsActive = s.IsActive
                 })
                 .ToListAsync();
 
@@ -83,7 +86,8 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Date = s.Date,
                     DurationInHours = s.DurationInHours,
                     BatchName = s.Batch!.BatchName, 
-                    ContentName = s.CourseContent!.TaskName, 
+                    ContentName = s.CourseContent!.TaskName,
+                    IsActive = s.IsActive,
                 })
                 .ToListAsync();
 
