@@ -69,8 +69,12 @@
                 [(ngModel)]="instructorModel.phoneNumber"
                 placeholder="Enter your phone number"
                 required
+                minlength="10"
+                maxlength="10"
               />
               <div *ngIf="phoneNumber.touched && phoneNumber.errors?.['required']" class="error-message">Phone number is required</div>
+              <div *ngIf="phoneNumber.touched && phoneNumber.errors?.['minlength'] && phoneNumber.errors?.['maxlength']" class="error-message">phone Number should be of 10 digits</div>
+
             </div>
             <div class="form-group col-md-6">
               <label><i class="far fa-envelope"></i> Email*</label>
@@ -195,6 +199,7 @@
               [disabled]="instructorRegistrationForm.invalid"
               (click)="addInstructor()"
             >
+            <app-spinner *ngIf="loadSpinner"></app-spinner>
               Register Now
             </button>
           </div>

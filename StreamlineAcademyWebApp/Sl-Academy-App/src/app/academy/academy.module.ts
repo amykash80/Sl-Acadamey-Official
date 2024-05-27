@@ -32,10 +32,12 @@ import { CourseCategoryListComponent } from './Pages/course-category-list/course
 import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
 import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
 import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
+import { SkillPipe } from '../Pipes/skill.pipe';
 
 
 @NgModule({
   declarations: [
+
     AcademyComponent,
     DashboardComponent,
     CreateCourseComponent,
@@ -67,6 +69,8 @@ import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/upda
     AddBatchScheduleComponent,
     BatchScheduleListComponent,
     UpdateBatchScheduleComponent,
+    SkillPipe
+
     
     
     
@@ -75,7 +79,7 @@ import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/upda
     CommonModule,
     AcademyRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   
   ]
 })

@@ -7,6 +7,7 @@ import {
 } from '../../../Models/Academy/Course';
 import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CourseCategoryResponse } from '../../../Models/CourseCategory/CourseCategory';
 
 @Component({
   selector: 'app-update-course',
@@ -23,7 +24,7 @@ export class UpdateCourseComponent {
 
   courseId: string = '';
   loadSpinner = false;
-  categories: any[] = [];
+  categories: CourseCategoryResponse[] = [];
   academyId: string = '';
   course: CourseResponse = new CourseResponse();
   updateCourseModel: UpdateCourse = new UpdateCourse();
@@ -42,8 +43,8 @@ export class UpdateCourseComponent {
   }
 
   getAllCategory() {
-    this.courseService.getCategories().subscribe((categories) => {
-      this.categories = categories.result;
+    this.courseService.getAllCourseCategories().subscribe((categories) => {
+      this.categories = categories.result
       console.log(this.categories);
     });
   }
