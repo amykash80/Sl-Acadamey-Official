@@ -119,7 +119,7 @@ namespace StreamlineAcademy.Application.Services
 
             existingSchedule.Date =request.Date!;
             existingSchedule.BatchId = request.BatchId!.Value;
-            existingSchedule.CourseContentId = request.CourseContentId!.Value;
+            existingSchedule.DurationInHours = request.DurationInHours;
             existingSchedule.CourseContentId = request.CourseContentId!.Value;
             existingSchedule.ModifiedDate = DateTime.Now;
 
@@ -132,12 +132,23 @@ namespace StreamlineAcademy.Application.Services
                     Id = existingSchedule.Id,
                     Date = existingSchedule.Date,
                     BatchName = existingBatch.BatchName,
-                    ContentName=existingSchedule.CourseContent!.TaskName
+                    ContentName=existingSchedule.CourseContent!.TaskName,
+                    DurationInHours = existingSchedule.DurationInHours,
                 };
                 return ApiResponse<ScheduleResponseModel>.SuccessResponse(scheduleResponse, APIMessages.ScheduleManagement.ScheduleUpdated, HttpStatusCodes.OK);
             }
             return ApiResponse<ScheduleResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError); 
         }
-         
+        public async Task<ApiResponse<ScheduleResponseModel>> GetScheduleById(Guid id)
+        {
+            var course = await scheduleRepository.GetByIdAsync(x => x.Id == id);
+            if (course is null)
+                return ApiResponse<ScheduleResponseModel>.ErrorResponse(APIMessages.ScheduleManagement.AllScheduleNotFound, HttpStatusCodes.NotFound);
+
+            var responseModel = await scheduleRepository.GetScheduleById(id);
+
+            return ApiResponse<ScheduleResponseModel>.SuccessResponse(responseModel);
+        }
+
     }
 }

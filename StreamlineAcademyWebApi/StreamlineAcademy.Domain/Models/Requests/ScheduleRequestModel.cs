@@ -28,5 +28,6 @@ namespace StreamlineAcademy.Domain.Models.Requests
     public class ScheduleUpdateRequest : ScheduleRequestModel  // to update  response 
     {
         public Guid Id { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

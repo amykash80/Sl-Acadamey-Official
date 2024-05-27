@@ -13,6 +13,8 @@ import { SharedService } from '../../../Services/shared.service';
 export class BatchListComponent {
   courseId!: string
   batchList:BatchResponseModel[]=[]
+  filteredList: BatchResponseModel[] = [];
+  searchText: string = '';
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
           private sharedService:SharedService){
@@ -23,6 +25,19 @@ constructor(private activatedRoute: ActivatedRoute,
 }
 ngOnInit(){
   this.getAllBatchesByCourseId();
+}
+filterBatchList(): void {
+  if (!this.searchText.trim()) {
+    this.filteredList = this.batchList.slice();
+    return;
+  }
+
+  const searchTerm = this.searchText.toLowerCase();
+  this.filteredList = this.batchList.filter(
+    (batch) =>
+      batch.courseName!.toLowerCase().startsWith(searchTerm) ||
+      batch.locationName!.toLowerCase().startsWith(searchTerm) 
+  );
 }
 getAllBatchesByCourseId(){
   this.batchService.getAllBatchesByCourseId(this.courseId).subscribe({

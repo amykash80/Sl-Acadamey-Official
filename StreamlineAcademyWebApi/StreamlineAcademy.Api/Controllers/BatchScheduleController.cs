@@ -36,5 +36,7 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpDelete("deleteSchedule/{id:guid}")]
        
         public async Task<ApiResponse<ScheduleResponseModel>> DeleteSchedule(Guid id) => await scheduleService.DeleteSchedule(id);
+        [HttpGet("getScheduleById/{id:guid}")]
+        public async Task<ApiResponse<ScheduleResponseModel>> GetScheduleById(Guid id) => await scheduleService.GetScheduleById(id);
     }
 }

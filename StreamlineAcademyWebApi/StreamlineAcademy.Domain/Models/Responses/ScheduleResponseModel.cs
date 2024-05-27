@@ -13,5 +13,7 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public int DurationInHours { get; set; }
         public string? BatchName { get; set; }
         public string? ContentName { get; set; }
+        public bool IsActive { get; set; }
+        public Guid? CourseContentId { get; set; }
     }
 }

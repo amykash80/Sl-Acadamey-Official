@@ -1,0 +1,69 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-xl-9">
+        <form #batchScheduleForm="ngForm" method="POST" class="register-form ajax-contact">
+          <h5 class="form-title">Schedule Batch</h5>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Date*</label>
+              <input
+                type="date"
+                class="form-control"
+                name="date"
+                ngModel
+                #date="ngModel"
+                [(ngModel)]="batchScheduleModel.date"
+                [class.is-invalid]="date.touched && date.invalid"
+                required
+                placeholder="Select date"
+              />
+              <div *ngIf="date.touched && date.errors?.['required']" class="error-message">Date is required</div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label><i class="far fa-clock"></i>Duration in Hours*</label>
+              <input
+                type="number"
+                class="form-control"
+                name="durationInHours"
+                ngModel
+                #durationInHours="ngModel"
+                [(ngModel)]="batchScheduleModel.durationInHours"
+                [class.is-invalid]="durationInHours.touched && durationInHours.invalid"
+                required
+                min="1"
+                placeholder="Enter duration in hours"
+              />
+              <div *ngIf="durationInHours.touched && durationInHours.errors?.['required']" class="error-message">Duration is required</div>
+              <div *ngIf="durationInHours.touched && durationInHours.errors?.['min']" class="error-message">Duration must be at least 1 hour</div>
+            </div>
+            
+            <div class="form-group col-md-6">
+              <label><i class="fas fa-list-alt"></i> Course Content*</label>
+              <select
+                class="form-control"
+                name="courseContentId"
+                ngModel
+                #courseContentId="ngModel"
+                [(ngModel)]="batchScheduleModel.courseContentId"
+                [class.is-invalid]="courseContentId.touched && courseContentId.invalid"
+                required
+                placeholder="Select Content"
+              >
+                <option value="">Select Content</option>
+                <option *ngFor="let content of contents" [value]="content.id">{{ content.taskName }}</option>
+              </select>
+              <div *ngIf="courseContentId.touched && courseContentId.errors?.['required']" class="error-message">Course Content is required</div>
+            </div>
+          </div>
+          
+          <div class="form-btn col-12 text-center">
+            <button class="th-btn black-btn-2 w-100" [disabled]="batchScheduleForm.invalid" (click)="addBatchSchedule()">
+              <app-spinner *ngIf="loadSpinner"></app-spinner>
+              Schedule Batch
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

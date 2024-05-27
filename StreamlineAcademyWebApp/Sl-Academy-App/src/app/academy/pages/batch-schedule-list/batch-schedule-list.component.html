@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="card custom-card overflow-auto">
+    <div class="card-body font-manrope">
+      <h4 class="card-title text-capitalize fs-5 mb-3">Batch Schedule List</h4>
+      <div class="row">
+        <div class="col-12">
+          <div id="batch-schedule-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <button class="btn btn-success bg-gradient" [routerLink]="['/academy/add-batch-schedule/:batchId/:courseId']"><i class="fas fa-plus mr-2"></i> Add Schedule</button>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <div id="batch-schedule-listing_filter" class="dataTables_filter">
+                  <label>
+                    <input
+                      type="search"
+                      [(ngModel)]="searchText"
+                      (input)="filterBatchSchedule()"
+                      class="form-control"
+                      placeholder="Search batch schedules"
+                      aria-controls="batch-schedule-listing"
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <table id="batch-schedule-listing" class="table dataTable no-footer" aria-describedby="batch-schedule-listing_info">
+              <thead>
+                <tr>
+                  <th rowspan="1" colspan="1" aria-label="Batch Name: activate to sort column ascending" style="width: 76.8375px">Batch Name</th>
+                  <th rowspan="1" colspan="1" aria-label="Content Name: activate to sort column ascending" style="width: 76.8375px">Content Name</th>
+                  <th rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 76.8375px">Date</th>
+                  <th rowspan="1" colspan="1" aria-label="Duration: activate to sort column ascending" style="width: 76.8375px">Duration</th>
+                  <th rowspan="1" colspan="1" aria-label="IsActive: activate to sort column ascending" style="width: 76.8375px">IsActive</th>
+                  <th rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 76.8375px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let batchSchedule of filterBatchSchedules">
+                  <td>{{ batchSchedule.batchName }}</td>
+                  <td>{{ batchSchedule.contentName }}</td>
+                  <td>{{ batchSchedule.date | date: 'shortDate' }}</td>
+                  <td>{{ batchSchedule.durationInHours | number: '1.0-0' }} hours</td>
+                  <td>
+                    <span [ngClass]="batchSchedule.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                      {{ batchSchedule.isActive }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="d-inline-block dropdown">
+                      <button
+                        type="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        title="Row Options"
+                        class="dropdown-toggle btn btn-success after-none squared-btn"
+                      >
+                        <i class="fas fa-ellipsis-v"></i>
+                      </button>
+                      <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-left">
+                        <ul class="nav flex-column">
+                          <li class="nav-item">
+                            <a class="nav-link fw-semibold" [routerLink]="['/academy/update-batch-schedule', batchSchedule.id, batchId, courseId]">
+                              <i class="nav-link-icon fas fa-pen"></i>
+                              <span> Edit</span>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link dangered fw-semibold" (click)="deleteBatchSchedule(batchSchedule.id)">
+                              <i class="nav-link-icon fas fa-trash dangered"></i>
+                              <span> Delete</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="batch-schedule-listing_paginate">
+                  <ul class="pagination">
+                    <li class="paginate_button page-item previous disabled" id="batch-schedule-listing_previous">
+                      <a aria-controls="batch-schedule-listing" aria-disabled="true" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a>
+                    </li>
+                    <li class="paginate_button page-item active">
+                      <a href="#" aria-controls="batch-schedule-listing" role="link" aria-current="page" data-dt-idx="0" tabindex="0" class="page-link">1</a>
+                    </li>
+                    <li class="paginate_button page-item next disabled" id="batch-schedule-listing_next">
+                      <a aria-controls="batch-schedule-listing" aria-disabled="true" role="link" data-dt-idx="next" tabindex="-1" class="page-link">Next</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
