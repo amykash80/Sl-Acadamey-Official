@@ -7,18 +7,19 @@ import { AddStudent } from '../../../Models/student/students';
 import { Skill } from '../../../Enums/skill';
 import { CourseService } from '../../../Services/course.service';
 import { CourseResponse } from '../../../Models/Academy/Course';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register-student',
   templateUrl: './register-student.component.html',
-  styleUrl: './register-student.component.css'
+  styleUrl: './register-student.component.css',
 })
 export class RegisterStudentComponent {
-  studentService=inject(StudentService)
+  studentService = inject(StudentService);
   countryService = inject(CountryService);
-  courseService=inject(CourseService)
-  router=inject(Router)
-  sharedService=inject(SharedService)
+  courseService = inject(CourseService);
+  router = inject(Router);
+  sharedService = inject(SharedService);
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
@@ -26,12 +27,11 @@ export class RegisterStudentComponent {
   filteredCitiesList: any[] = [];
   selectedCountryId: string = '';
   selectedStateId: string = '';
-  studentModel: AddStudent=new AddStudent()
-  loadSpinner=false;
-  courses:CourseResponse[]=[]
+  studentModel: AddStudent = new AddStudent();
+  loadSpinner = false;
+  courses: CourseResponse[] = [];
 
-  constructor(
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.getAllCountries();
@@ -40,11 +40,11 @@ export class RegisterStudentComponent {
     this.getAllCourses();
   }
 
-getAllCourses(){
-  this.courseService.courseList().subscribe(courses =>{
-  this.courses=courses.result;
-  })
-}
+  getAllCourses() {
+    this.courseService.courseList().subscribe((courses) => {
+      this.courses = courses.result;
+    });
+  }
   getAllCountries() {
     this.countryService.getCountries().subscribe((countries) => {
       this.countries = countries.result;
@@ -76,28 +76,22 @@ getAllCourses(){
     );
     console.log(this.filteredCitiesList);
   }
-  // addInstructor() {   
-  //   this.loadSpinner=true; 
-  //   this.instructorModel.postalCode=this.instructorModel.postalCode?.toString();
-  //   this.instructorModel.skill=this.selectedSkill
-  //   this.instructorService.addinstructor(this.instructorModel).subscribe({
-  //     next: (response) => {
-  //       if(response.isSuccess){
-  //         this.sharedService.showSuccessToast(response.message)
-  //         this.loadSpinner=false;
-  //         this.router.navigate(['/academy/instructor-list'])
-  //       }
-  //       else{
-  //         this.sharedService.showErrorToast(response.message)
-  //         this.loadSpinner=false;
-
-  //       }
-  //     },
-  //     error: (err: HttpErrorResponse) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
-
-  addStudent(){}
+ 
+  addStudent() {
+    this.studentService.saveStudent(this.studentModel).subscribe({
+      next: (data) => {
+        if (data.isSuccess) {
+          this.sharedService.showSuccessToast(data.message);
+          this.loadSpinner = false;
+          this.router.navigate(['/academy/student-list']);
+        } else {
+          this.sharedService.showErrorToast(data.message);
+          this.loadSpinner = false;
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
+    });
+  }
 }

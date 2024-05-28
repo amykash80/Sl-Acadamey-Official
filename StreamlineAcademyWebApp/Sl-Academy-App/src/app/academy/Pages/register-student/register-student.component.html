@@ -197,10 +197,10 @@
                 Date of birth is required
               </div>
             </div>
-            <div class="form-group col-md-6">
+            <!-- <div class="form-group col-md-6">
                 <label for="courseId">Courses*</label>
                 <select
-                  class="form-control "
+                  class="form-control selectpicker"
                   id="courseId"
                   name="courseId"
                   multiple
@@ -208,7 +208,6 @@
                   required
                   #courseId="ngModel"
                 >
-                <option value="">select courses</option>
                   <option *ngFor="let course of courses" [value]="course.id">
                     {{ course.name }}
                   </option>
@@ -216,7 +215,7 @@
                 <div *ngIf="courseId.touched && courseId.errors?.['required']" class="error-message">
                   At least one course is required
                 </div>
-              </div>
+              </div> -->
     
             <div class="form-group col-md-6">
               <label><i class="fas fa-globe"></i> Country*</label>
