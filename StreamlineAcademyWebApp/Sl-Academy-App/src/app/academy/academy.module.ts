@@ -33,6 +33,7 @@ import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-
 import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
 import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
 import { SkillPipe } from '../Pipes/skill.pipe';
+import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { SkillPipe } from '../Pipes/skill.pipe';
     AddBatchScheduleComponent,
     BatchScheduleListComponent,
     UpdateBatchScheduleComponent,
-    SkillPipe
+    SkillPipe,
+    RegisterStudentComponent
 
     
     
@@ -80,6 +82,7 @@ import { SkillPipe } from '../Pipes/skill.pipe';
     AcademyRoutingModule,
     FormsModule,
     SharedModule,
+    
   
   ]
 })

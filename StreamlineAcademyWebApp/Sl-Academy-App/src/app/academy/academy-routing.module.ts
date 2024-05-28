@@ -28,6 +28,7 @@ import { ChangepasswordComponent } from '../shared/Pages/changepassword/changepa
 import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
 import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
 import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
+import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
 
 
 const routes: Routes = [
@@ -68,6 +69,7 @@ const routes: Routes = [
     {path:"add-batch-schedule/:id/:cId",component:AddBatchScheduleComponent},
     {path:"batch-schedule-list/:id/:courseId",component:BatchScheduleListComponent},
     {path:"update-batch-schedule/:id/:batchId/:courseId",component:UpdateBatchScheduleComponent},
+    {path:"register-student",component:RegisterStudentComponent}
   ]
   
   },
