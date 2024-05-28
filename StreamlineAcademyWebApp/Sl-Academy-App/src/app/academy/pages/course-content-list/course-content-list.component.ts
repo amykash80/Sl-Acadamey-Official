@@ -16,6 +16,8 @@ export class CourseContentListComponent {
   sharedService=inject(SharedService)
   courseId:string=''
   courseContentList:CourseContentResponse[]=[];
+  filteredContentList: CourseContentResponse[] = [];
+  searchText: string = '';
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.courseId=paramVal['id']
@@ -27,6 +29,7 @@ loadAllCourseContents(){
   this.courseService.getCourseContentsByCourseId(this.courseId).subscribe({
     next: (response) => {
       this.courseContentList = response.result;
+      this.filteredContentList = this.courseContentList;
       console.log(this.courseContentList)
     },
     error: (err: HttpErrorResponse) => {
@@ -35,6 +38,20 @@ loadAllCourseContents(){
       }
     },
   });
+}
+filterContents(): void {
+  if (!this.searchText.trim()) {
+    this.filteredContentList = this.courseContentList.slice();
+    return;
+  }
+
+  const searchTerm = this.searchText.toLowerCase();
+  this.filteredContentList = this.courseContentList.filter(
+    (content) =>
+      content.taskName!.toLowerCase().startsWith(searchTerm) ||
+      content.description!.toLowerCase().startsWith(searchTerm) ||
+      content.duration!.toString().toLowerCase().startsWith(searchTerm)
+  );
 }
 deleteCourseContent(courseContentId: any) {
   this.sharedService

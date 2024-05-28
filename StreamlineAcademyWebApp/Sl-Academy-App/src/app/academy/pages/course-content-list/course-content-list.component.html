@@ -15,7 +15,8 @@
                     <label>
                       <input
                         type="search"
-                       
+                        [(ngModel)]="searchText"
+                        (input)="filterContents()"
                         class="form-control"
                         placeholder="Search content"
                         aria-controls="content-listing"
@@ -93,6 +94,7 @@
                   </tr>
                 </tbody>
               </table>
+              
               <div class="row">
                 <div class="col-sm-12 col-md-7">
                   <div
