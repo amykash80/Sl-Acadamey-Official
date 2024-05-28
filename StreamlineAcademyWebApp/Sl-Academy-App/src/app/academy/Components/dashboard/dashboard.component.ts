@@ -8,31 +8,29 @@ import { InstructorService } from '../../../Services/instructor.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  shared=inject(SharedService)
-  courseService=inject(CourseService)
-  instructorService=inject(InstructorService)
-
-
-  coursesList:CourseResponse[]=[];
-  InstructorList:InstructorResponseModel[]=[];
-  StudentList:any
-  
-  addLocation(){
-
+  constructor(){
+    this.courseList();
+    this.InstructorListItems()
   }
-  viewLocations(){
-    
-  }
-  ngOnInit(){
-this.courseService.courseList().subscribe(d=>{
-  this.coursesList=d.result;
-})
-this.instructorService.instructorList().subscribe(i=>{
-  this.InstructorList=i.result;
-})
-  }
+  shared = inject(SharedService);
+  courseService = inject(CourseService);
+  instructorService = inject(InstructorService);
 
+  coursesList: CourseResponse[] = [];
+  InstructorList: InstructorResponseModel[] = [];
+  StudentList: any;
+
+  courseList() {
+    this.courseService.courseList().subscribe((d) => {
+      this.coursesList = d.result;
+    });
+  }
+  InstructorListItems() {
+    this.instructorService.instructorList().subscribe((i) => {
+      this.InstructorList = i.result;
+    });
+  }
 }

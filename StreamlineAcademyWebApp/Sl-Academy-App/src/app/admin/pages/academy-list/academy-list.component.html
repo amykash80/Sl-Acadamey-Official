@@ -20,7 +20,7 @@
                       <input
                         type="search"
                         [(ngModel)]="searchText"
-                        (input)="filterAcademies()"
+                        (input)="filterAcademies($event)"
                         class="form-control"
                         placeholder="Search academies"
                         aria-controls="order-listing"

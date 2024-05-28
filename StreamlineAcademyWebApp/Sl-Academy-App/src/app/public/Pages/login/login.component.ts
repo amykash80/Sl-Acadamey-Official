@@ -16,23 +16,29 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private sharedService: SharedService,
-    private router:Router
+    private router: Router
   ) {}
   loginModel: Login = new Login();
   loadSpinner = false;
   onLogIn() {
-    this.loadSpinner=true;
+    this.loadSpinner = true;
     this.authService.login(this.loginModel).subscribe({
       next: (response) => {
         if (response.isSuccess) {
-          localStorage.setItem("streamlineToken", JSON.stringify(response.result.token));
-          localStorage.setItem("responseObj", JSON.stringify(response.result))
-        } 
-        else {
+
+          localStorage.setItem(
+            'streamlineToken',
+            JSON.stringify(response.result.token)
+          );
+          localStorage.setItem('responseObj', JSON.stringify(response.result));
+        this.router.navigate(['change-password']);
+
+        } else {
           this.sharedService.showErrorToast(response.message);
-          this.loadSpinner=false;
+          this.loadSpinner = false;
         }
-        switch(response.result.userRole){
+
+        switch (response.result.userRole) {
           case UserRole.SuperAdmin:
             this.router.navigate(['/admin/dashboard']);
             break;
@@ -53,7 +59,7 @@ export class LoginComponent {
         if (err.status == HttpStatusCode.InternalServerError) {
           console.log(err.message);
           this.sharedService.showErrorToast(err.message);
-          this.loadSpinner=false;
+          this.loadSpinner = false;
         }
       },
     });

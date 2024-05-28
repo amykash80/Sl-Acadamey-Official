@@ -27,7 +27,9 @@ const routes: Routes = [
     {path:"create-academyType",component:CreateAcademyTypeComponent},
     {path:"academy-type-list",component:AcademyTypeListComponent},
     {path:"profile",component:ProfileComponent},
-    {path:"register-enquiry/:id",component:RegisterEnquiryComponent}
+    {path:"register-enquiry/:id",component:RegisterEnquiryComponent},
+    {path:"change-password",component:ChangepasswordComponent}
+
 
   ]},
 
