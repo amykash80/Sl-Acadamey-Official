@@ -43,6 +43,7 @@
               "src/assets/css/datatable.css",
               "src/assets/css/main.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
               "node_modules/@ngneat/hot-toast/src/styles/styles.css"
             ],
             "scripts": [
@@ -57,7 +58,8 @@
               "src/assets/js/imagesloaded.pkgd.min.js",
               "src/assets/js/isotope.pkgd.min.js",
               "src/assets/js/main.js",
-              "src/assets/js/datatable.js"
+              "src/assets/js/datatable.js",
+              "node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"
             ]
           },
           "configurations": {

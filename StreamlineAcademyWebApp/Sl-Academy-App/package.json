@@ -24,6 +24,7 @@
     "@ngxpert/hot-toast": "^2.0.0",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^5.3.3",
+    "bootstrap-select": "^1.13.18",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.11.0",
     "tslib": "^2.3.0",
