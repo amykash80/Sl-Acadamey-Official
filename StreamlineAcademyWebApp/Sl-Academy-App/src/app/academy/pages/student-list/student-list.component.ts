@@ -41,7 +41,7 @@ export class StudentListComponent {
   loadAllStudents() {
     this.studentService.studentList().subscribe({
       next: (response) => {
-      
+      console.log(response);
         if(response.result.length>0){
           this.studentList = response.result;
           this.filteredStudentList = this.studentList;

@@ -78,6 +78,7 @@ export class RegisterStudentComponent {
   }
  
   addStudent() {
+    this.loadSpinner = true;
     this.studentService.saveStudent(this.studentModel).subscribe({
       next: (data) => {
         if (data.isSuccess) {
@@ -90,6 +91,7 @@ export class RegisterStudentComponent {
         }
       },
       error: (err: HttpErrorResponse) => {
+        this.loadSpinner=false
         console.log(err);
       },
     });

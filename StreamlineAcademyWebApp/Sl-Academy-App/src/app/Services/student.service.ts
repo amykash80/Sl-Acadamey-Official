@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
-import { StudentResponseModel } from '../Models/student/students';
+import { StudentResponseModel, UpdateStudentModel } from '../Models/student/students';
 import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
 import { AddStudent } from '../Models/student/students';
@@ -18,7 +18,14 @@ export class StudentService {
     return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/getAll-Students")
   }
   saveStudent(studentModel:AddStudent):Observable<any>{
-    return this.http.post<any>(environment.apiUrl+"Student/register-student",studentModel)
+    return this.http.post<any>(this.baseUrl+"Student/register-student",studentModel)
+  }
+  getStudentById(id:string):Observable<ApiResponse<StudentResponseModel>>{
+    return this.http.get<ApiResponse<StudentResponseModel>>(this.baseUrl+"Student/getStudentById/"+id)
+  
+  }
+  updateStudent(stdModel:UpdateStudentModel):Observable<ApiResponse<StudentResponseModel>>{
+return this.http.put<ApiResponse<StudentResponseModel>>(this.baseUrl + "Student/updateStudent",stdModel)
   }
   deleteStudent(id:string):Observable<ApiResponse<string>>{
     return this.http.delete<ApiResponse<string>>(this.baseUrl+"Student/delete/"+id)

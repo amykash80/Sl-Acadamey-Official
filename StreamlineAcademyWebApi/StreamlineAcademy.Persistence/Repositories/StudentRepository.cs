@@ -71,6 +71,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Name = student.User!.Name,
                     Email = student.User!.Email,
                     PhoneNumber = student.User.PhoneNumber,
+                    EmergencyContactNo=student.EmergencyContactNo,
                     PostalCode = student.User.PostalCode,
                     Address = student.User.Address,
                     DateOfBirth = student.DateOfBirth,
@@ -81,6 +82,9 @@ namespace StreamlineAcademy.Persistence.Repositories
                     CityName = student.City!.CityName,
                     IsActive = student.User.IsActive,
                     UserRole = student.User.UserRole,
+                    CountryId=student.Country.Id,
+                    StateId=student.State.Id,
+                    CityId=student.City.Id,
 
                 };
 
@@ -106,6 +110,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Name = a.User!.Name,
                     Email = a.User!.Email,
                     PhoneNumber = a.User.PhoneNumber,
+                    EmergencyContactNo=a.EmergencyContactNo,
                     PostalCode = a.User.PostalCode,
                     Address = a.User.Address,
                     DateOfBirth = a.DateOfBirth,
