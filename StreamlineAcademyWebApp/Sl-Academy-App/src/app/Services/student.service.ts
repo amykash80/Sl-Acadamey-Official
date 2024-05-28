@@ -4,6 +4,7 @@ import { environment } from '../../enviroments/enviroment';
 import { StudentResponseModel } from '../Models/student/students';
 import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
+import { AddStudent } from '../Models/student/students';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,8 @@ export class StudentService {
 
   studentList():Observable<ApiResponse<StudentResponseModel[]>>{
     return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/getAll-Students")
+  }
+  saveStudent(studentModel:AddStudent):Observable<any>{
+    return this.http.post<any>(environment.apiUrl+"Student/register-student",studentModel)
   }
 }
