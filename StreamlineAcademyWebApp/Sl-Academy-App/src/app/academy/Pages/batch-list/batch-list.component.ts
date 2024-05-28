@@ -15,6 +15,8 @@ export class BatchListComponent {
   batchList:BatchResponseModel[]=[]
   filteredBatchList: BatchResponseModel[] = [];
   searchText: string = '';
+  showNoContent=false;
+  showTable=false;
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
           private sharedService:SharedService){
@@ -32,7 +34,12 @@ getAllBatchesByCourseId(){
     next: (response) => {
       this.batchList = response.result;
       this.filteredBatchList = this.batchList;
-      console.log(this.batchList);
+      if(response.result.length>0){
+        this.showTable=true;
+        this.showNoContent=false
+
+      }
+     
     },
     error: (err: HttpErrorResponse) => {
       console.log(err);

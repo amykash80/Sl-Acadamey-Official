@@ -53,12 +53,12 @@ export class StudentListComponent {
       },
     });
   }
-  deleteStudent(courseId: any) {
+  deleteStudent(studentId: any) {
     this.sharedService
       .fireConfirmSwal('Are You sure you want to delete this Student ')
       .then((result:any) => {
         if (result.isConfirmed) {
-          this.studentService.deleteStudent(courseId).subscribe({
+          this.studentService.deleteStudent(studentId).subscribe({
             next: (response) => {
               if (response.isSuccess) {
                 this.sharedService.showSuccessToast(response.message);

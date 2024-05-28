@@ -17,7 +17,10 @@ export class CourseListComponent {
     private sharedService: SharedService
   ) {}
   courseList: CourseResponse[] = [];
+  filteredCourseList:CourseResponse[]=[]
   searchText:string=''
+  showNoContent=false;
+  showTable=false;
  
   ngOnInit() {
     this.loadAllCourse();
@@ -28,7 +31,14 @@ export class CourseListComponent {
     this.courseServices.courseList().subscribe({
       next: (response) => {
         this.courseList = response.result;
-        console.log(this.courseList);
+        this.filteredCourseList=this.courseList;
+        if(response.result.length>0){
+          this.showTable=true;
+        }
+        else{
+          this.showNoContent=true;
+          
+        }
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.Unauthorized) {
@@ -37,9 +47,15 @@ export class CourseListComponent {
       },
     });
   }
-  filterCourses(){
-
+ 
+  filterCourses(event:any){
+    const filterValue = event.target.value.toLowerCase();
+    this.filteredCourseList = this.courseList.filter(course => 
+      course.name?.toLowerCase().startsWith(filterValue)
+    );
+    console.log(this.filteredCourseList);
   }
+
 
   deleteCourse(courseId: any) {
     this.sharedService
