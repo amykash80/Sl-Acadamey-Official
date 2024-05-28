@@ -26,13 +26,16 @@ export class StudentListComponent {
   loadAllStudents() {
     this.studentService.studentList().subscribe({
       next: (response) => {
-        this.studentList = response.result;
+      
         if(response.result.length>0){
+          this.studentList = response.result;
           this.showStdList=true;
-          this.showNoContent=false;
+          this.showNoContent=false
         }
-        this.showNoContent=true
-        console.log(this.studentList);
+        else if(response.result.length==0){
+          this.showStdList=false;
+          this.showNoContent=true
+        }
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.Unauthorized) {

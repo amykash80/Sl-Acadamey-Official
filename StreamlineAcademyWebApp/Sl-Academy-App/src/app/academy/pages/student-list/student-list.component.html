@@ -31,7 +31,7 @@
                 id="student-listing"
                 class="table dataTable no-footer"
                 aria-describedby="student-listing_info"
-                *ngIf="filteredStudentList.length > 0"
+                
               >
                 <thead>
                   <tr>
@@ -94,7 +94,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let student of filteredStudentList">
+                  <tr *ngFor="let student of studentList">
                     <td>{{ student.name }}</td>
                     <td>{{ student.email }}</td>
                     <td>{{ student.phoneNumber }}</td>
