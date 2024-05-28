@@ -22,20 +22,13 @@ export class StudentListComponent {
   showStdList=false;
   showNoContent=false;
 
-  filterBatches(): void {
-    if (!this.searchText.trim()) {
-      this.filteredStudentList = this.studentList.slice();
-      return;
-    }
-  
-    const searchTerm = this.searchText.toLowerCase();
-    this.filteredStudentList = this.studentList.filter(
-      (student) =>
-        student.name!.toLowerCase().startsWith(searchTerm) ||
-        student.email!.toLowerCase().startsWith(searchTerm) ||
-        student.cityName!.toLowerCase().startsWith(searchTerm)||
-        student.phoneNumber!.toString().toLowerCase().startsWith(searchTerm)
+
+  filterStudents(event:any){
+    const filterValue = event.target.value.toLowerCase();
+    this.filteredStudentList = this.studentList.filter(stuudent => 
+      stuudent.name?.toLowerCase().startsWith(filterValue)
     );
+    console.log(this.filteredStudentList);
   }
 
   loadAllStudents() {

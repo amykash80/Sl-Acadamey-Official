@@ -18,7 +18,7 @@
                       <input
                         type="search"
                         [(ngModel)]="searchText"
-                        (input)="filterBatches()"
+                        (input)="filterStudents($event)"
                         class="form-control"
                         placeholder="Search students"
                         aria-controls="student-listing"
@@ -112,7 +112,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let student of studentList">
+                  <tr *ngFor="let student of filteredStudentList">
                     <td>{{ student.name }}</td>
                     <td>{{ student.email }}</td>
                     <td>{{ student.phoneNumber }}</td>
