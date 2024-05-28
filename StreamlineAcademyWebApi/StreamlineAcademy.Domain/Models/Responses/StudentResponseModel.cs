@@ -23,6 +23,6 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? CityName { get; set; }
         public string? AcademyName { get; set; }
         public UserRole UserRole { get; set; }
-        public bool IsActive { get; set; }
+       public bool? IsActive { get; set; }
     }
 }

@@ -20,4 +20,7 @@ export class StudentService {
   saveStudent(studentModel:AddStudent):Observable<any>{
     return this.http.post<any>(environment.apiUrl+"Student/register-student",studentModel)
   }
+  deleteStudent(id:string):Observable<ApiResponse<string>>{
+    return this.http.delete<ApiResponse<string>>(this.baseUrl+"Student/delete/"+id)
+   }
 }

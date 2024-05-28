@@ -21,7 +21,22 @@ export class StudentListComponent {
   searchText: string = '';
   showStdList=false;
   showNoContent=false;
+
+  filterBatches(): void {
+    if (!this.searchText.trim()) {
+      this.filteredStudentList = this.studentList.slice();
+      return;
+    }
   
+    const searchTerm = this.searchText.toLowerCase();
+    this.filteredStudentList = this.studentList.filter(
+      (student) =>
+        student.name!.toLowerCase().startsWith(searchTerm) ||
+        student.email!.toLowerCase().startsWith(searchTerm) ||
+        student.cityName!.toLowerCase().startsWith(searchTerm)||
+        student.phoneNumber!.toString().toLowerCase().startsWith(searchTerm)
+    );
+  }
 
   loadAllStudents() {
     this.studentService.studentList().subscribe({
@@ -29,6 +44,7 @@ export class StudentListComponent {
       
         if(response.result.length>0){
           this.studentList = response.result;
+          this.filteredStudentList = this.studentList;
           this.showStdList=true;
           this.showNoContent=false
         }
@@ -44,7 +60,24 @@ export class StudentListComponent {
       },
     });
   }
-
+  deleteStudent(courseId: any) {
+    this.sharedService
+      .fireConfirmSwal('Are You sure you want to delete this Student ')
+      .then((result:any) => {
+        if (result.isConfirmed) {
+          this.studentService.deleteStudent(courseId).subscribe({
+            next: (response) => {
+              if (response.isSuccess) {
+                this.sharedService.showSuccessToast(response.message);
+                this.loadAllStudents();
+              } else {
+                this.sharedService.showErrorToast(response.message);
+              }
+            },
+          });
+        }
+      });
+  }
   
 }
 

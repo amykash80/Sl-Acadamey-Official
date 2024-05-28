@@ -298,6 +298,29 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.SuccessResponse(schdeulesFordate, HttpStatusCodes.OK.ToString());
             return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse("There are No Schedules for given date You provided");
         }
+
+        public async Task<ApiResponse<StudentResponseModel>> DeleteStudent(Guid id)
+        {
+            var existingStudent = await studentRepository.GetStudentById(id);
+
+            if (existingStudent == null)
+                return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
+
+            var result = await userRepository.FirstOrDefaultAsync(x => x.Id == existingStudent.Id);
+            result.IsActive = false;
+            result.DeletedDate = DateTime.Now;
+            if (result is not null)
+            {
+                int isSoftDelted = await studentRepository.Delete(result!);
+                if (isSoftDelted > 0)
+                {
+                    var returnVal = await studentRepository.GetStudentById(existingStudent.Id);
+                    return ApiResponse<StudentResponseModel>.SuccessResponse(null, APIMessages.StudentManagement.StudentDeleted);
+                }
+            }
+            return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+        }
+       
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StreamlineAcademy.Application.Abstractions.IServices;
@@ -46,6 +47,8 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpGet("check-my-attendence")]
         [Authorize(Roles = nameof(UserRole.Student))]
         public async Task<ApiResponse<IEnumerable<AttendenceResponseModel>>> CheckMyattendence() => await studentService.CheckMyAttendence();
+        [HttpDelete("delete/{id:guid}")]
+        public async Task<ApiResponse<StudentResponseModel>> DeleteStudent(Guid id) => await studentService.DeleteStudent(id);
 
     }
 }
