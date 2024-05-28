@@ -15,6 +15,7 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? Address { get; set; }
         public string? PostalCode { get; set; }
         public string? PhoneNumber { get; set; }
+        public string? EmergencyContactNo { get; set; }
         public string? Email { get; set; }
         public List<string>? IntrestedIn {  get; set; }
         public DateTimeOffset DateOfBirth { get; set; }
@@ -24,5 +25,9 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? AcademyName { get; set; }
         public UserRole UserRole { get; set; }
         public bool IsActive { get; set; }
+        public Guid? CountryId { get; set; }
+        public Guid? StateId { get; set; }
+        public Guid? CityId { get; set; }
+
     }
 }

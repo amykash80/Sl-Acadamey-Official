@@ -30,6 +30,7 @@ import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-sc
 import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
 import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
 import { StudentListComponent } from './pages/student-list/student-list.component';
+import { UpdateStudentComponent } from './Pages/update-student/update-student.component';
 
 
 const routes: Routes = [
@@ -72,6 +73,7 @@ const routes: Routes = [
     {path:"update-batch-schedule/:id/:batchId/:courseId",component:UpdateBatchScheduleComponent},
     {path:"register-student",component:RegisterStudentComponent},
     {path:"student-list",component:StudentListComponent},
+    {path:"update-student/:id",component:UpdateStudentComponent}
   ]
   
   },

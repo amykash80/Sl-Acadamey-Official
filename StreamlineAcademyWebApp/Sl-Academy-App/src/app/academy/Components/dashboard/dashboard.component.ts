@@ -4,6 +4,8 @@ import { CourseResponse } from '../../../Models/Academy/Course';
 import { InstructorResponseModel } from '../../../Models/Instructor/Instructor';
 import { CourseService } from '../../../Services/course.service';
 import { InstructorService } from '../../../Services/instructor.service';
+import { StudentResponseModel } from '../../../Models/student/students';
+import { StudentService } from '../../../Services/student.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,15 +15,17 @@ import { InstructorService } from '../../../Services/instructor.service';
 export class DashboardComponent {
   constructor(){
     this.courseList();
-    this.InstructorListItems()
+    this.InstructorListItems();
+    this.stdList()
   }
   shared = inject(SharedService);
   courseService = inject(CourseService);
+  studentService = inject(StudentService);
   instructorService = inject(InstructorService);
 
   coursesList: CourseResponse[] = [];
   InstructorList: InstructorResponseModel[] = [];
-  StudentList: any;
+  StudentList: StudentResponseModel[]=[];
 
   courseList() {
     this.courseService.courseList().subscribe((d) => {
@@ -32,5 +36,10 @@ export class DashboardComponent {
     this.instructorService.instructorList().subscribe((i) => {
       this.InstructorList = i.result;
     });
+  }
+  stdList(){
+    this.studentService.studentList().subscribe(res=>{
+      this.StudentList=res.result
+    })
   }
 }

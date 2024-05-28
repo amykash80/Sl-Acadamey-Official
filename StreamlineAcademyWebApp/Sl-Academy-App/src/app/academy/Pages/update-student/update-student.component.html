@@ -1,0 +1,92 @@
+<div class="container my-5">
+    <div class="row mb-4">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 custom-breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">academy</li>
+            <li class="breadcrumb-item active" aria-current="page">update-instructor</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-xl-9">
+        <form method="PUT" #updateStudentForm="ngForm" class="register-form ajax-contact">
+          <h5 class="form-title">Update Student</h5>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label><i class="far fa-user"></i> Name*</label>
+              <input type="text" class="form-control form-control-lg" name="name" #name="ngModel" [(ngModel)]="student.name" placeholder="  name" required />
+              <div *ngIf="name.touched && name.errors?.['required']" class="error-message">Name is required</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label><i class="fas fa-map-marker-alt"></i> Address*</label>
+              <input type="text" class="form-control form-control-lg" name="address" #address="ngModel" [(ngModel)]="student.address" placeholder="  address" required />
+              <div *ngIf="address.touched && address.errors?.['required']" class="error-message">Address is required</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label><i class="fas fa-map-pin"></i> Postal Code*</label>
+              <input type="text" class="form-control form-control-lg" name="postalCode" #postalCode="ngModel" [(ngModel)]="student.postalCode" placeholder="  postal code" required minlength="6" />
+              <div *ngIf="postalCode.touched && postalCode.errors?.['required']" class="error-message">Postal code is required</div>
+              <div *ngIf="postalCode.touched && postalCode.errors?.['minlength']" class="error-message">Postal code must be at least 6 characters</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label><i class="fas fa-phone"></i> Phone Number*</label>
+              <input type="text" class="form-control form-control-lg" name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="student.phoneNumber" placeholder="  phone number" required />
+              <div *ngIf="phoneNumber.touched && phoneNumber.errors?.['required']" class="error-message">Phone number is required</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label><i class="fas fa-phone"></i> Emergency Contact Number*</label>
+              <input type="text" class="form-control form-control-lg" name="emergencyContactNo" #emergencyphoneNumber="ngModel" [(ngModel)]="student.emergencyContactNo" placeholder="  phone number" required />
+              <div *ngIf="emergencyphoneNumber.touched && emergencyphoneNumber.errors?.['required']" class="error-message">Phone number is required</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label><i class="far fa-envelope"></i> Email*</label>
+              <input type="email" class="form-control form-control-lg" name="email" #email="ngModel" [(ngModel)]="student.email" placeholder="  email" required />
+              <div *ngIf="email.touched && email.errors?.['required']" class="error-message">Email is required</div>
+              <div *ngIf="email.touched && email.errors?.['email']" class="error-message">Invalid email format</div>
+            </div>
+          
+           
+            <div class="form-group col-md-6">
+              <label><i class="far fa-calendar-alt"></i> Date of Birth*</label>
+              <input type="date" class="form-control form-control-lg" name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="student.dateOfBirth" required />
+              <div *ngIf="dateOfBirth.touched && dateOfBirth.errors?.['required']" class="error-message">Date of birth is required</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Country*</label>
+              <select class="form-control form-control-lg" name="countryId" #countryId="ngModel" (change)="filterStates($event)" [(ngModel)]="student.countryId" [class.is-invalid]="countryId.touched && countryId.invalid" required>
+                <option value="">Select Country</option>
+                <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
+              </select>
+              <div *ngIf="countryId.touched && countryId.errors?.['required']" class="error-message">Country is required</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label>State*</label>
+              <select class="form-control form-control-lg" name="stateId" ngModel #stateId="ngModel" [(ngModel)]="student.stateId" (change)="filteredCities($event)" [class.is-invalid]="stateId.touched && stateId.invalid" required>
+                <option value="">Select state</option>
+                <option *ngFor="let state of states" [value]="state.id">{{ state.stateName }}</option>
+              </select>
+              <div *ngIf="stateId.touched && stateId.errors?.['required']" class="error-message">State is required</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label>City*</label>
+              <select class="form-control form-control-lg" name="cityId" ngModel #cityId="ngModel" [(ngModel)]="student.cityId" [class.is-invalid]="cityId.touched && cityId.invalid" required>
+                <option value="">Select City</option>
+                <option *ngFor="let city of cities" [value]="city.id">{{ city.cityName }}</option>
+              </select>
+              <div *ngIf="cityId.touched && cityId.invalid && cityId.errors?.['required']" class="error-message">City required</div>
+            </div>
+          </div>
+          <div class="form-btn col-12 text-center">
+            <button class="th-btn w-100" [disabled]="updateStudentForm.invalid" (click)="updateInstructor()">
+              <app-spinner *ngIf="loadSpinner"></app-spinner>
+              Update Instructor
+            </button>
+          </div>
+          <p class="form-messages mb-0 mt-3"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  
