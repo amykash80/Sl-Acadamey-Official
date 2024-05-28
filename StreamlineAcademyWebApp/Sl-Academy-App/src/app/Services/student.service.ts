@@ -25,8 +25,9 @@ export class StudentService {
   
   }
   updateStudent(stdModel:UpdateStudentModel):Observable<ApiResponse<StudentResponseModel>>{
-return this.http.put<ApiResponse<StudentResponseModel>>(this.baseUrl + "Student/updateStudent",stdModel)
+  return this.http.put<ApiResponse<StudentResponseModel>>(this.baseUrl + "Student/updateStudent",stdModel)
   }
+
   deleteStudent(id:string):Observable<ApiResponse<string>>{
     return this.http.delete<ApiResponse<string>>(this.baseUrl+"Student/delete/"+id)
    }
