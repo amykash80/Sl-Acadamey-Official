@@ -12,3 +12,21 @@ export class AddStudent {
   stateId?: string = '';
   cityId?: string = '';
 }
+export class StudentResponseModel{
+  id?:string;
+  name?: string;
+  address?: string;
+  postalCode?: string;
+  phoneNumber?: string;
+  email?: string;
+  dateOfBirth?: string;
+  countryId?: string = '';
+  stateId?: string = '';
+  cityId?: string = '';
+  countryName?:string;
+  stateName?:string;
+  cityName?:string;
+  academyName?:string;
+  isActive?: boolean;
+  
+}

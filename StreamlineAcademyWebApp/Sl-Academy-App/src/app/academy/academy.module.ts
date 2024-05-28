@@ -34,6 +34,7 @@ import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-sc
 import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
 import { SkillPipe } from '../Pipes/skill.pipe';
 import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
+import { StudentListComponent } from './pages/student-list/student-list.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { RegisterStudentComponent } from './Pages/register-student/register-stud
     BatchScheduleListComponent,
     UpdateBatchScheduleComponent,
     SkillPipe,
-    RegisterStudentComponent
+    RegisterStudentComponent,
+    StudentListComponent
 
     
     
