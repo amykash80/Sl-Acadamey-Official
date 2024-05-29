@@ -87,7 +87,7 @@
                           <i class="fa fa-file-pdf-o" style="font-size:58px;color:red"></i>
                         </a>
                         <a *ngSwitchCase="3" [href]="apiBaseUrl + courseResource.filePath" target="_blank">View Document</a>
-                        <video *ngSwitchCase="4" controls style="width: 100px;">
+                        <video *ngSwitchCase="4" controls  style="width: 100px; height: auto; border-radius: 10px;" title="Open/Download image">
                           <source [src]="apiBaseUrl + courseResource.filePath" type="video/mp4">
                           Your browser does not support the video tag.
                         </video>
@@ -119,15 +119,7 @@
                           class="dropdown-menu dropdown-menu-left"
                         >
                           <ul class="nav flex-column">
-                            <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                
-                              >
-                                <i class="nav-link-icon fa fa-eye"></i>
-                                <span> view</span>
-                              </a>
-                            </li>
+                        
                             <li class="nav-item">
                               <a
                                 class="nav-link fw-semibold"

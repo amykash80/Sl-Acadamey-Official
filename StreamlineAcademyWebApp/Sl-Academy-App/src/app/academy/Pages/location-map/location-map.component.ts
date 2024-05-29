@@ -23,7 +23,7 @@ export class LocationMapComponent {
   })
 }
 getMapUrl(): SafeResourceUrl {
-  const url = `https://www.openstreetmap.org/export/embed.html?bbox=68.0,6.75,97.5,35.5&marker=${this.delhiLat},${this.delhiLng}`;
+  const url = `https://www.openstreetmap.org/export/embed.html?${this.lat},${this.lng}&marker=${this.lat},${this.lng}`;
   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 }
