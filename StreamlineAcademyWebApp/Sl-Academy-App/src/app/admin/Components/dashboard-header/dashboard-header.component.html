@@ -310,7 +310,7 @@
                      <a routerLink="/admin/profile">
                       <li class="nav-item-header nav-item">view profile</li>
                     </a>
-                    <a routerLink="/admin/change-password">
+                    <a [routerLink]="['/admin/change-password',userRole]">
                       <li class="nav-item-header nav-item">change passsword</li>
                     </a>     
                     
