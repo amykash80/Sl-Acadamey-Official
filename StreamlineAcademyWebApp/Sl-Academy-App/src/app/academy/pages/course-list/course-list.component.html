@@ -1,4 +1,4 @@
-<div class="app-inner">
+<div class="app-inner" *ngIf="showTable">
   <div class="container">
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
@@ -24,9 +24,9 @@
                       <input
                         type="search"
                         [(ngModel)]="searchText"
-                        (input)="filterCourses()"
+                        (input)="filterCourses($event)"
                         class="form-control"
-                        placeholder="Search academies"
+                        placeholder="Search courses"
                         aria-controls="order-listing"
                       />
                     </label>
@@ -100,7 +100,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let course of courseList">
+                  <tr *ngFor="let course of filteredCourseList">
                     <td>{{ course.name }}</td>
                     <td>{{ course.description }}</td>
                     <td>{{ course.durationInWeeks }}</td>
@@ -310,3 +310,4 @@
     </div>
   </div>
 </div>
+<app-no-content *ngIf="showNoContent"></app-no-content>

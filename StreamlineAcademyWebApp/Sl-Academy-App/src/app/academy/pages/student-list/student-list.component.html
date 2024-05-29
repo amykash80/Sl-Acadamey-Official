@@ -18,7 +18,7 @@
                       <input
                         type="search"
                         [(ngModel)]="searchText"
-                        (input)="filterBatches()"
+                        (input)="filterStudents($event)"
                         class="form-control"
                         placeholder="Search students"
                         aria-controls="student-listing"
@@ -69,6 +69,15 @@
                     >
                     Address
                     </th>
+                      
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Email: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                    DOB
+                    </th>
                     <th
                       rowspan="1"
                       colspan="1"
@@ -112,11 +121,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let student of studentList">
+                  <tr *ngFor="let student of filteredStudentList">
                     <td>{{ student.name }}</td>
                     <td>{{ student.email }}</td>
                     <td>{{ student.phoneNumber }}</td>
                     <td>{{ student.address}}</td>
+                    <td>{{ student.dateOfBirth | date }}</td>
                     <td>{{ student.cityName }}</td>
                     <td>{{ student.stateName }}</td>
                     <td>{{ student.countryName }}</td>

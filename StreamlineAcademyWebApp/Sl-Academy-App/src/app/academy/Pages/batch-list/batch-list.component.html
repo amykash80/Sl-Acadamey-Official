@@ -1,4 +1,4 @@
-<div class="app-inner">
+<div class="app-inner" *ngIf="showTable">
   <div class="container">
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
@@ -106,8 +106,8 @@
                   <tr *ngFor="let batch of filteredBatchList">
                     <td>{{ batch.batchName }}</td>
                     <td>{{ batch.batchSize }}</td>
-                    <td>{{ batch.startDate }}</td>
-                    <td>{{ batch.endDate }}</td>
+                    <td>{{ batch.startDate | date }}</td>
+                    <td>{{ batch.endDate | date}}</td>
                     <td>{{ batch.instructorName }}</td>
                     <td>{{ batch.locationName }}</td>
                     <td>
@@ -230,3 +230,4 @@
     </div>
   </div>
 </div>
+<app-no-content *ngIf="showNoContent"></app-no-content>
