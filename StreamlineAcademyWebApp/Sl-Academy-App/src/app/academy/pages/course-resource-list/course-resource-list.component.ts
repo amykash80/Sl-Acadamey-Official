@@ -15,6 +15,7 @@ export class CourseResourceListComponent {
   courseResourceService=inject(CourseresourceService);
   sharedService=inject(SharedService)
   courseId:string=''
+  apiBaseUrl: string = 'http://localhost:5232';
   courseResourceList:CourseResourceResponse[]=[];
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{

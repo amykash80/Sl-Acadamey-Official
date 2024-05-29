@@ -36,6 +36,7 @@ import { SkillPipe } from '../Pipes/skill.pipe';
 import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { UpdateStudentComponent } from './Pages/update-student/update-student.component';
+import { ResourceTypePipe } from '../Pipes/resource-type.pipe';
 
 
 @NgModule({
@@ -75,7 +76,9 @@ import { UpdateStudentComponent } from './Pages/update-student/update-student.co
     SkillPipe,
     RegisterStudentComponent,
     StudentListComponent,
-    UpdateStudentComponent
+    UpdateStudentComponent,
+    ResourceTypePipe
+
 
     
     
