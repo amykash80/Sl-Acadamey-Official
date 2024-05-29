@@ -157,7 +157,7 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<StudentByBatchResponseModel>>.ErrorResponse(APIMessages.BatchManagement.BatchNotFound, HttpStatusCodes.NotFound);
             }
             var students = await batchRepository.GetAllStudentsByBatchId(batchId);
-          if(students == null)
+          if(students != null)
               return ApiResponse<IEnumerable<StudentByBatchResponseModel>>.SuccessResponse(students, $"Found {students!.Count()} students in the batch.");
     
              return ApiResponse<IEnumerable<StudentByBatchResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);

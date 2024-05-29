@@ -31,3 +31,7 @@ export class UpdateBatchModel{
     instructorId?:string=''
     locationId?:string=''
 }
+export class AssignStudent{
+    studentId?:string;
+    batchId?:string;
+}

@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
 import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
-import { BatchRequestModel, BatchResponseModel, UpdateBatchModel } from '../Models/Batch/Batch';
+import { AssignStudent, BatchRequestModel, BatchResponseModel, UpdateBatchModel } from '../Models/Batch/Batch';
+import { StudentResponseModel } from '../Models/student/students';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,12 @@ export class BatchService {
   }
   updateBatch(batchUpdateModel:UpdateBatchModel):Observable<ApiResponse<BatchResponseModel>>{
     return this.http.put<ApiResponse<BatchResponseModel>>(this.baseUrl+"Batch/updateBatch",batchUpdateModel)
+  }
+  assignStudentToBatch(model:AssignStudent):Observable<ApiResponse<string>>{
+return this.http.post<ApiResponse<string>>(this.baseUrl+"Student/assign-to-Batch",model)
+  }
+  getAllStudentsByBatchId(batchId:string):Observable<ApiResponse<StudentResponseModel>>{
+    return this.http.get<ApiResponse<StudentResponseModel>>(this.baseUrl+"Batch/getAllStudentsByBatchId/"+batchId)
+
   }
 }

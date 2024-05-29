@@ -137,6 +137,24 @@
                             <li class="nav-item">
                               <a
                                 class="nav-link fw-semibold"
+                                [routerLink]="['/academy/student-list', batch.id]"
+                              >
+                                <i class="nav-link-icon fa fa-graduation-cap"></i>
+                                <span> students</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                [routerLink]="['/academy/student-list',batch.id]"
+                              >
+                                <i class="nav-link-icon fa fa-user"></i>
+                                <span> Assign</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
                                 [routerLink]="['/academy/update-batch', batch.id, courseId]"
                               >
                                 <i class="nav-link-icon fas fa-pen"></i>

@@ -72,7 +72,7 @@ const routes: Routes = [
     {path:"batch-schedule-list/:id/:courseId",component:BatchScheduleListComponent},
     {path:"update-batch-schedule/:id/:batchId/:courseId",component:UpdateBatchScheduleComponent},
     {path:"register-student",component:RegisterStudentComponent},
-    {path:"student-list",component:StudentListComponent},
+    {path:"student-list/:batchId",component:StudentListComponent},
     {path:"update-student/:id",component:UpdateStudentComponent}
   ]
   
