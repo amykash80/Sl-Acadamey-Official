@@ -45,19 +45,15 @@ export class EnquirylistComponent {
         return 'chip'; 
     }
   }
-  filterEnquiries(): void {
-    if (!this.searchText.trim()) {
-      this.filteredEnquiryList = this.enquirylist.slice();
-      return;
-    }
-
-    const searchTerm = this.searchText.toLowerCase();
-    this.filteredEnquiryList = this.enquirylist.filter(
-      (enquiry) =>
-        enquiry.name!.toLowerCase().startsWith(searchTerm) ||
-        enquiry.email!.toLowerCase().startsWith(searchTerm) ||
-        enquiry.phoneNumber!.toLowerCase().startsWith(searchTerm)
+  filterEnquiries(event: any){
+    const enteredValue=event!.target!.value;
+    console.log(enteredValue);
+    this.filteredEnquiryList = this.enquirylist.filter(enquiry => 
+      enquiry.name?.toLowerCase().startsWith(enteredValue) 
+      || enquiry.phoneNumber?.toLowerCase().startsWith(enteredValue)
+      || enquiry.email?.toLowerCase().startsWith(enteredValue)
     );
+  
   }
 
   deleteEnquiry(enquiryId: any) {

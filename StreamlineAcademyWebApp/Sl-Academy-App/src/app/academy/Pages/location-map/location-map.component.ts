@@ -11,8 +11,7 @@ export class LocationMapComponent {
   lng: number=0
   lat: number=0
   mapUrl:string=''
-  delhiLat = 28.7041;
-  delhiLng = 77.1025;
+ 
   constructor(private activatedRoute:ActivatedRoute,
     private sanitizer:DomSanitizer ){
   }
