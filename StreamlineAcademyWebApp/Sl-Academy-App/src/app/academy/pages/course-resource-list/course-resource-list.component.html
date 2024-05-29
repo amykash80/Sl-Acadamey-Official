@@ -8,7 +8,7 @@
             <div id="resource-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
               <div class="row">
                 <div class="col-sm-12 col-md-6">
-                  <button class="btn btn-success bg-gradient" [routerLink]="['/academy/create-course-resource/:courseId']"><i class="fas fa-plus mr-2"></i> Add Resource</button>
+                  <button class="btn btn-success bg-gradient" [routerLink]="['/academy/create-course-resource',courseId]"><i class="fas fa-plus mr-2"></i> Add Resource</button>
                 </div>
                 <div class="col-sm-12 col-md-6">
                   <div id="resource-listing_filter" class="dataTables_filter">
@@ -54,7 +54,7 @@
                       aria-label="Type: activate to sort column descending"
                       style="width: 100px;"
                     >
-                      Type
+                      Resource
                     </th>
                     <th
                       rowspan="1"
@@ -78,7 +78,23 @@
                   <tr *ngFor="let courseResource of courseResourceList">
                     <td>{{ courseResource.name }}</td>
                     <td>{{ courseResource.description }}</td>
-                    <td>{{ courseResource.type }}</td>
+                    <td>
+                      <ng-container [ngSwitch]="courseResource.type">
+                        <a *ngSwitchCase="5" [href]="apiBaseUrl + courseResource.filePath" download>
+                          <img [src]="apiBaseUrl + courseResource.filePath" alt="" style="width: 100px; height: auto; border-radius: 10px;" title="Open/Download image">
+                        </a>
+                        <a *ngSwitchCase="2" [href]="apiBaseUrl + courseResource.filePath" target="_blank" data-bs-toggle="tooltip" title="Open/Download PDF">
+                          <i class="fa fa-file-pdf-o" style="font-size:58px;color:red"></i>
+                        </a>
+                        <a *ngSwitchCase="3" [href]="apiBaseUrl + courseResource.filePath" target="_blank">View Document</a>
+                        <video *ngSwitchCase="4" controls style="width: 100px;">
+                          <source [src]="apiBaseUrl + courseResource.filePath" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                        <iframe *ngSwitchCase="1" [src]="courseResource.filePath" frameborder="0" allowfullscreen style="width: 100px; height: auto;"></iframe>
+                        <span *ngSwitchDefault>Unsupported resource type</span>
+                      </ng-container>
+                    </td>
                     <td>
                       <span [ngClass]="courseResource.isActive ? 'chip chip-success' : 'chip chip-danger'">
                         {{ courseResource.isActive }}
@@ -103,6 +119,15 @@
                           class="dropdown-menu dropdown-menu-left"
                         >
                           <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                
+                              >
+                                <i class="nav-link-icon fa fa-eye"></i>
+                                <span> view</span>
+                              </a>
+                            </li>
                             <li class="nav-item">
                               <a
                                 class="nav-link fw-semibold"

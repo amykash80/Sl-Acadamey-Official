@@ -15,7 +15,7 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img  src="{{apiBaseUrl+ filePath}}"  alt="avatar"
+            <img  src="{{apiBaseUrl+ filePath}}" class="rounded-circle img-fluid" style="width: 200px"  alt="avatar"
               class="rounded-circle img-fluid" style="width: 200px;">
             <h5 class="my-3"><p>{{ contactInfo.name }}</p></h5>
             <ng-container *ngIf="!filePath; else showUploadOption">

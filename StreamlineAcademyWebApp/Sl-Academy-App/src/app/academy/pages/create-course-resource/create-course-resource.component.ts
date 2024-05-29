@@ -29,6 +29,7 @@ export class CreateCourseResourceComponent {
   ngOnInit() {
     this.activatedRoute.params.subscribe((paramVal) => {
       this.courseId = paramVal['id'];
+      console.log(this.courseId)
     });
   }
 

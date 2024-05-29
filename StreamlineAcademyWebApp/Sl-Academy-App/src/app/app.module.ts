@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './Services/interceptor.service';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 import { SkillPipe } from './Pipes/skill.pipe';
+import { ResourceTypePipe } from './Pipes/resource-type.pipe';
 
 @NgModule({
   declarations: [
