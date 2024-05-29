@@ -179,60 +179,32 @@
               </table>
               <div class="row">
                 <div class="col-sm-12 col-md-5">
-                  <div
-                    class="dataTables_info"
-                    id="order-listing_info"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    Showing 1 to 10 of 10 entries
+                  <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
+                    Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+                    {{ currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }}
+                    of {{ totalItems }} enquiries
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
-                  <div
-                    class="dataTables_paginate paging_simple_numbers"
-                    id="order-listing_paginate"
-                  >
+                  <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
                     <ul class="pagination">
-                      <li
-                        class="paginate_button page-item previous disabled"
-                        id="order-listing_previous"
-                      >
-                        <a
-                          aria-controls="order-listing"
-                          aria-disabled="true"
-                          role="link"
-                          data-dt-idx="previous"
-                          tabindex="-1"
-                          class="page-link"
-                          >Previous</a
-                        >
+                      <!-- Previous Button -->
+                      <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
+                        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
+                          Previous
+                        </button>
                       </li>
-                      <li class="paginate_button page-item active">
-                        <a
-                          href="#"
-                          aria-controls="order-listing"
-                          role="link"
-                          aria-current="page"
-                          data-dt-idx="0"
-                          tabindex="0"
-                          class="page-link"
-                          >1</a
-                        >
+                      <!-- Page Numbers -->
+                      <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
+                        <button (click)="goToPage(page)" class="page-link">
+                          {{ page }}
+                        </button>
                       </li>
-                      <li
-                        class="paginate_button page-item next disabled"
-                        id="order-listing_next"
-                      >
-                        <a
-                          aria-controls="order-listing"
-                          aria-disabled="true"
-                          role="link"
-                          data-dt-idx="next"
-                          tabindex="-1"
-                          class="page-link"
-                          >Next</a
-                        >
+                      <!-- Next Button -->
+                      <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
+                        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
+                          Next
+                        </button>
                       </li>
                     </ul>
                   </div>

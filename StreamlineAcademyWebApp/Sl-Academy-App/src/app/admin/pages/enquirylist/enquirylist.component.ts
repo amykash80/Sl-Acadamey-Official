@@ -19,6 +19,10 @@ export class EnquirylistComponent {
   searchText: string = '';
   pending: boolean = true;
   registrationStatus = RegistrationStatus;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
   ngOnInit() {
     this.loadAllEnquiries();
   }
@@ -27,12 +31,17 @@ export class EnquirylistComponent {
       next: (response) => {
         this.enquirylist = response.result;
         this.filteredEnquiryList = this.enquirylist;
+        this.totalItems = this.filteredEnquiryList.length;
+        this.currentPage = 1; 
+        this.updatePagination();
+       
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
+
   getStatusClass(status: RegistrationStatus): string {
     switch(status) {
       case RegistrationStatus.Rejected:
@@ -47,17 +56,36 @@ export class EnquirylistComponent {
   }
   filterEnquiries(): void {
     if (!this.searchText.trim()) {
-      this.filteredEnquiryList = this.enquirylist.slice();
+      this.filteredEnquiryList = [...this.enquirylist];
+    } else {
+      const searchTerm = this.searchText.toLowerCase();
+      this.filteredEnquiryList = this.enquirylist.filter(
+        (enquiry) =>
+          enquiry.name!.toLowerCase().includes(searchTerm) ||
+          enquiry.email!.toLowerCase().includes(searchTerm) ||
+          enquiry.phoneNumber!.toLowerCase().includes(searchTerm)
+      );
+    }
+    this.totalItems = this.filteredEnquiryList.length;
+    this.currentPage = 1;
+    this.updatePagination();
+    
+  }
+  updatePagination(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+    this.filteredEnquiryList = this.enquirylist.slice(startIndex, endIndex);
+    this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.pages.length) {
       return;
     }
-
-    const searchTerm = this.searchText.toLowerCase();
-    this.filteredEnquiryList = this.enquirylist.filter(
-      (enquiry) =>
-        enquiry.name!.toLowerCase().startsWith(searchTerm) ||
-        enquiry.email!.toLowerCase().startsWith(searchTerm) ||
-        enquiry.phoneNumber!.toLowerCase().startsWith(searchTerm)
-    );
+    this.currentPage = page;
+    this.updatePagination();
   }
 
   deleteEnquiry(enquiryId: any) {

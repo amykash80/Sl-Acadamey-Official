@@ -17,6 +17,10 @@ export class BatchListComponent {
   searchText: string = '';
   showNoContent=false;
   showTable=false;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
           private sharedService:SharedService){
@@ -34,6 +38,9 @@ getAllBatchesByCourseId(){
     next: (response) => {
       this.batchList = response.result;
       this.filteredBatchList = this.batchList;
+      this.totalItems = this.filteredBatchList.length;
+      this.currentPage = 1; 
+      this.updatePagination();
       if(response.result.length>0){
         this.showTable=true;
         this.showNoContent=false
@@ -49,17 +56,36 @@ getAllBatchesByCourseId(){
 filterBatches(): void {
   if (!this.searchText.trim()) {
     this.filteredBatchList = this.batchList.slice();
-    return;
+  } else {
+    const searchTerm = this.searchText.toLowerCase();
+    this.filteredBatchList = this.batchList.filter(
+      (batch) =>
+        batch.batchName!.toLowerCase().startsWith(searchTerm) ||
+        batch.courseName!.toLowerCase().startsWith(searchTerm) ||
+        batch.instructorName!.toLowerCase().startsWith(searchTerm) ||
+        batch.batchSize!.toString().toLowerCase().startsWith(searchTerm)
+    );
   }
 
-  const searchTerm = this.searchText.toLowerCase();
-  this.filteredBatchList = this.batchList.filter(
-    (batch) =>
-      batch.batchName!.toLowerCase().startsWith(searchTerm) ||
-      batch.courseName!.toLowerCase().startsWith(searchTerm) ||
-      batch.instructorName!.toLowerCase().startsWith(searchTerm)||
-      batch.batchSize!.toString().toLowerCase().startsWith(searchTerm)
-  );
+  // Reset pagination to the first page after filtering
+  this.totalItems = this.filteredBatchList.length;
+  this.currentPage = 1;
+  this.updatePagination();
+}
+
+
+updatePagination(): void {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+  this.filteredBatchList = this.filteredBatchList.slice(startIndex, endIndex);
+}
+
+goToPage(page: number): void {
+  if (page < 1 || page > this.pages.length) {
+    return;
+  }
+  this.currentPage = page;
+  this.updatePagination();
 }
 deleteBatch(batchId:any){
   this.sharedService
