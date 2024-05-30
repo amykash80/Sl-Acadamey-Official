@@ -13,36 +13,39 @@ import { StudentService } from '../../../Services/student.service';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  constructor(){
-   
+  constructor(
+    private shared: SharedService,
+    private courseService: CourseService,
+    private studentService: StudentService,
+    private instructorService: InstructorService
+  ) {
+    
   }
   ngOnInit(){
     this.courseList();
     this.InstructorListItems();
-    this.stdList()
+    this.stdList();
   }
-  shared = inject(SharedService);
-  courseService = inject(CourseService);
-  studentService = inject(StudentService);
-  instructorService = inject(InstructorService);
+
+   
 
   coursesList: CourseResponse[] = [];
   InstructorList: InstructorResponseModel[] = [];
-  StudentList: StudentResponseModel[]=[];
+  StudentList: StudentResponseModel[] = [];
 
   courseList() {
     this.courseService.courseList().subscribe((d) => {
       this.coursesList = d.result;
     });
   }
-  InstructorListItems() {
+   InstructorListItems() {
     this.instructorService.instructorList().subscribe((i) => {
       this.InstructorList = i.result;
     });
   }
-  stdList(){
-    this.studentService.studentList().subscribe(res=>{
-      this.StudentList=res.result
-    })
+  stdList() {
+    this.studentService.studentList().subscribe((res) => {
+      this.StudentList = res.result;
+    });
   }
 }

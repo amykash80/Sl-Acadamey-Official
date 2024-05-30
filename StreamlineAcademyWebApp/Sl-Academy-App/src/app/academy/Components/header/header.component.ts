@@ -10,7 +10,7 @@ import { SharedService } from '../../../Services/shared.service';
   },
 })
 export class HeaderComponent {
-  shared = inject(SharedService);
+  constructor(private shared:SharedService){}
   loggedInUserDetails:any = {};
   onLogOut() {
     this.shared.logOutUser();
