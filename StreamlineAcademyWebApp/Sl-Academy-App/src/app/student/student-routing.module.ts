@@ -2,9 +2,10 @@
 import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from './student.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { AuthGuard } from '../shared/auth.guard';
 
 const routes: Routes = [
-  {path:"",component:StudentComponent,
+  {path:"",component:StudentComponent,canActivate:[AuthGuard],
   children:[
     {path:"",redirectTo:"dashboard",pathMatch:"full"},
     {path:"dashboard",component:DashboardComponent},

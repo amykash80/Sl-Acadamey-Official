@@ -33,10 +33,11 @@ import { StudentListComponent } from './pages/student-list/student-list.componen
 import { UpdateStudentComponent } from './Pages/update-student/update-student.component';
 import { AssignedStudentsComponent } from './Pages/assigned-students/assigned-students.component';
 import { AssinStudentBatchComponent } from './Pages/assin-student-batch/assin-student-batch.component';
+import { AuthGuard } from '../shared/auth.guard';
 
 
 const routes: Routes = [
-  {path:"",component:AcademyComponent,
+  {path:"",component:AcademyComponent,canActivate:[AuthGuard],
   children:[
     {path:"",redirectTo:"dashboard",pathMatch:"full"},
     {path:"dashboard",component:DashboardComponent},

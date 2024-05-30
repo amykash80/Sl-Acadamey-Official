@@ -12,9 +12,10 @@ import { CreateAcademyTypeComponent } from './pages/create-academy-type/create-a
 import { AcademyTypeListComponent } from './pages/academy-type-list/academy-type-list.component';
 import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enquiry.component';
+import { AuthGuard } from '../shared/auth.guard';
 
 const routes: Routes = [
-  {path:"",component:AdminComponent,
+  {path:"",component:AdminComponent,canActivate:[AuthGuard],
   children:[
     {path:"",redirectTo:"dashboard",pathMatch:"full"},
     {path:"dashboard",component:DashboardComponent},
