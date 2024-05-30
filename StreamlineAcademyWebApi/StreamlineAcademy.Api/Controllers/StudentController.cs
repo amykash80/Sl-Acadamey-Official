@@ -25,7 +25,7 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpPost("register-student")]
         public async Task<ApiResponse<StudentResponseModel>> AddStudent(StudentRequestModel model) => await studentService.AddStudent(model);
         [HttpPost("assign-to-Batch")]
-        public async Task<ApiResponse<string>> AddStudentToSchedule(StudentBatchRequestModel model)=>await studentService.AssignStudentToBatch(model);
+        public async Task<ApiResponse<StudentResponseModel>> AddStudentToSchedule(StudentBatchRequestModel model)=>await studentService.AssignStudentToBatch(model);
         [HttpGet("check-my-Batches")]
         [Authorize(Roles =nameof(UserRole.Student))]
         public async Task<ApiResponse<IEnumerable<StudentBatchResponseModel>>> GetAllStudentBatches() => await studentService.GetStudentBatches();

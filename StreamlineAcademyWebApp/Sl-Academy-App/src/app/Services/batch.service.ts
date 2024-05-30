@@ -28,11 +28,11 @@ export class BatchService {
   updateBatch(batchUpdateModel:UpdateBatchModel):Observable<ApiResponse<BatchResponseModel>>{
     return this.http.put<ApiResponse<BatchResponseModel>>(this.baseUrl+"Batch/updateBatch",batchUpdateModel)
   }
-  assignStudentToBatch(model:AssignStudent):Observable<ApiResponse<string>>{
-return this.http.post<ApiResponse<string>>(this.baseUrl+"Student/assign-to-Batch",model)
+  assignStudentToBatch(model:AssignStudent):Observable<ApiResponse<StudentResponseModel>>{
+return this.http.post<ApiResponse<StudentResponseModel>>(this.baseUrl+"Student/assign-to-Batch",model)
   }
-  getAllStudentsByBatchId(batchId:string):Observable<ApiResponse<StudentResponseModel>>{
-    return this.http.get<ApiResponse<StudentResponseModel>>(this.baseUrl+"Batch/getAllStudentsByBatchId/"+batchId)
+  getAllStudentsByBatchId(batchId:string):Observable<ApiResponse<StudentResponseModel[]>>{
+    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Batch/getAllStudentsByBatchId/"+batchId)
 
   }
 }

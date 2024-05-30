@@ -1,3 +1,5 @@
+import { BatchStatus } from "../../Enums/Batchstatus";
+
 export class AddStudent {
   name?: string;
   address?: string;
@@ -29,6 +31,7 @@ export class StudentResponseModel{
   cityName?:string;
   academyName?:string;
   isActive?: boolean;
+  batchStatus?:BatchStatus
   
 }
 export class UpdateStudentModel {

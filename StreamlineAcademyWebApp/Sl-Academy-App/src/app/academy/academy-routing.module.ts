@@ -31,6 +31,8 @@ import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/upda
 import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { UpdateStudentComponent } from './Pages/update-student/update-student.component';
+import { AssignedStudentsComponent } from './Pages/assigned-students/assigned-students.component';
+import { AssinStudentBatchComponent } from './Pages/assin-student-batch/assin-student-batch.component';
 
 
 const routes: Routes = [
@@ -72,8 +74,10 @@ const routes: Routes = [
     {path:"batch-schedule-list/:id/:courseId",component:BatchScheduleListComponent},
     {path:"update-batch-schedule/:id/:batchId/:courseId",component:UpdateBatchScheduleComponent},
     {path:"register-student",component:RegisterStudentComponent},
-    {path:"student-list/:batchId",component:StudentListComponent},
-    {path:"update-student/:id",component:UpdateStudentComponent}
+    {path:"student-list",component:StudentListComponent},
+    {path:"update-student/:id",component:UpdateStudentComponent},
+    {path:"assigned-students/:batchId",component:AssignedStudentsComponent},
+    {path:"assign-batch/:batchId",component:AssinStudentBatchComponent}
   ]
   
   },

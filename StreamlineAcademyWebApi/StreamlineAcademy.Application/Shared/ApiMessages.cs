@@ -143,6 +143,8 @@ public static class APIMessages
             public static readonly string StudentDeleted = "Student Deleted Successfully.";
             public static readonly string StudentAlreadyRegistered = "Student with this email already registered";
             public static readonly string BatchAssigned = "batch Assigned";
+            public static readonly string BatchAlreadyAssigned = "student assigned to other batch";
+
 
 
         }

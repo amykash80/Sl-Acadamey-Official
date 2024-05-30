@@ -17,7 +17,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<int> UpdateAsync(Student model);
         Task<int> DeleteAsync(Student model);
         Task<IEnumerable<Student>> GetAllAsync();
-        Task<IEnumerable<Student>> FindByAsync(Expression<Func<Student, bool>> expression);
+        Task<StudentBatch> FindByAsync(Expression<Func<StudentBatch, bool>> expression);
         Task<Student> GetByIdAsync(Expression<Func<Student, bool>> expression);
         Task<Student> FirstOrDefaultAsync(Expression<Func<Student, bool>> expression);
         #endregion
@@ -31,5 +31,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<int> SaveStudentAttendence(Attendance attendance);
         Task<IEnumerable<Attendance>> checkMyAttendences(Guid? StudentId);
         Task<ScheduleResponseModel> CheckMyTodaysSchedule(Guid? StudentId);
+         Task<List<Guid?>> GetStudentIdsInBatches();
+       
     }
 }

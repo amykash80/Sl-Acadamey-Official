@@ -131,15 +131,19 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest);
         }
 
-        public async Task<ApiResponse<string>> AssignStudentToBatch(StudentBatchRequestModel model)
+        public async Task<ApiResponse<StudentResponseModel>> AssignStudentToBatch(StudentBatchRequestModel model)
         {
             var student = await studentRepository.GetByIdAsync(x => x.Id == model.StudentId);
             if (student is null)
-                return ApiResponse<string>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
+             return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
 
+            var isAssigned = await studentRepository.FindByAsync(x => x.StudentId == model.StudentId);
+            if (isAssigned is not null)
+
+                return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.StudentManagement.BatchAlreadyAssigned, HttpStatusCodes.NotFound);
             var Batch = await batchRepository.GetByIdAsync(x => x.Id == model.BatchId);
             if (Batch is null)
-                return ApiResponse<string>.ErrorResponse(APIMessages.BatchManagement.BatchNotFound, HttpStatusCodes.NotFound);
+                return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.BatchManagement.BatchNotFound, HttpStatusCodes.NotFound);
 
             var userId = contextService.GetUserId();
             var studentBatch = new StudentBatch()
@@ -155,8 +159,16 @@ namespace StreamlineAcademy.Application.Services
             };
             var res = await studentRepository.AddStudentBatch(studentBatch);
             if (res > 0)
-                return ApiResponse<string>.SuccessResponse(APIMessages.StudentManagement.BatchAssigned, HttpStatusCodes.OK.ToString());
-            return ApiResponse<string>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest);
+            {
+                var studentRes = new StudentResponseModel()
+                {
+                    BatchStatus = BatchStatus.Assigned,
+                };
+                return ApiResponse<StudentResponseModel>.SuccessResponse(studentRes,APIMessages.StudentManagement.BatchAssigned, HttpStatusCodes.OK);
+
+            }
+
+            return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest);
 
 
         }
@@ -164,8 +176,26 @@ namespace StreamlineAcademy.Application.Services
         {
             var academyId = contextService.GetUserId();
             var returnVal = await studentRepository.GetAllStudents(academyId);
+
             if (returnVal is not null)
-                return ApiResponse<IEnumerable<StudentResponseModel>>.SuccessResponse(returnVal.OrderBy(_ => _.Name), $"Found {returnVal.Count()} Students");
+            {
+                var studentIdsInBatches = await studentRepository.GetStudentIdsInBatches();
+                var studentList = returnVal.Select(student =>
+                {
+                    if (studentIdsInBatches.Contains(student.Id))
+                    {
+                        student.BatchStatus = BatchStatus.Assigned;
+                    }
+                    else
+                    {
+                        student.BatchStatus = BatchStatus.NotAssigned;
+                    }
+                    return student;
+                }).OrderBy(_ => _.Name);
+
+                return ApiResponse<IEnumerable<StudentResponseModel>>.SuccessResponse(studentList, $"Found {returnVal.Count()} Students");
+            }
+
             return ApiResponse<IEnumerable<StudentResponseModel>>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
         }
 
