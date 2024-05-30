@@ -15,29 +15,30 @@ import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enqu
 import { AuthGuard } from '../shared/auth.guard';
 
 const routes: Routes = [
-  {path:"",component:AdminComponent,canActivate:[AuthGuard],
-  children:[
-    {path:"",redirectTo:"dashboard",pathMatch:"full"},
-    {path:"dashboard",component:DashboardComponent},
-    {path:"enquirylist",component:EnquirylistComponent},
-    {path:"updateenquiry/:id",component:UpdateEnquiryComponent},
-    {path:"change-Password",component:ChangepasswordComponent},
-    {path:"academylist",component:AcademyListComponent},
-    {path:"register-academy",component:RegisterAcademyComponent},
-    {path:"update-academy/:id",component:UpdateAcademyyComponent},
-    {path:"create-academyType",component:CreateAcademyTypeComponent},
-    {path:"academy-type-list",component:AcademyTypeListComponent},
-    {path:"profile",component:ProfileComponent},
-    {path:"register-enquiry/:id",component:RegisterEnquiryComponent},
-    {path:"change-password/:userRole",component:ChangepasswordComponent}
-
-
-  ]},
-
+  {
+    path: '',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'enquirylist', component: EnquirylistComponent },
+      { path: 'updateenquiry/:id', component: UpdateEnquiryComponent },
+      { path: 'change-Password', component: ChangepasswordComponent },
+      { path: 'academylist', component: AcademyListComponent },
+      { path: 'register-academy', component: RegisterAcademyComponent },
+      { path: 'update-academy/:id', component: UpdateAcademyyComponent },
+      { path: 'create-academyType', component: CreateAcademyTypeComponent },
+      { path: 'academy-type-list', component: AcademyTypeListComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'register-enquiry/:id', component: RegisterEnquiryComponent },
+      { path: 'change-password/:userRole', component: ChangepasswordComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
