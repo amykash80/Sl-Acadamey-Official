@@ -54,17 +54,17 @@ export class EnquirylistComponent {
         return 'chip'; 
     }
   }
-  filterEnquiries(): void {
+  filterEnquiries(event: any): void {
     if (!this.searchText.trim()) {
       this.filteredEnquiryList = [...this.enquirylist];
     } else {
-      const searchTerm = this.searchText.toLowerCase();
-      this.filteredEnquiryList = this.enquirylist.filter(
-        (enquiry) =>
-          enquiry.name!.toLowerCase().includes(searchTerm) ||
-          enquiry.email!.toLowerCase().includes(searchTerm) ||
-          enquiry.phoneNumber!.toLowerCase().includes(searchTerm)
-      );
+      const enteredValue=event!.target!.value;
+    console.log(enteredValue);
+    this.filteredEnquiryList = this.enquirylist.filter(enquiry => 
+      enquiry.name?.toLowerCase().startsWith(enteredValue) 
+      || enquiry.phoneNumber?.toLowerCase().startsWith(enteredValue)
+      || enquiry.email?.toLowerCase().startsWith(enteredValue)
+    );
     }
     this.totalItems = this.filteredEnquiryList.length;
     this.currentPage = 1;
@@ -86,7 +86,8 @@ export class EnquirylistComponent {
     }
     this.currentPage = page;
     this.updatePagination();
-  }
+    }
+  
 
   deleteEnquiry(enquiryId: any) {
     console.log(enquiryId);

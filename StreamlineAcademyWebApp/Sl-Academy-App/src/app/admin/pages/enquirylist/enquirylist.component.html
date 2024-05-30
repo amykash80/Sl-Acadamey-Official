@@ -17,7 +17,7 @@
                       <input
                         type="search"
                         [(ngModel)]="searchText"
-                        (input)="filterEnquiries()"
+                        (input)="filterEnquiries($event)"
                         class="form-control"
                         placeholder="Search enquiries"
                         aria-controls="order-listing"
