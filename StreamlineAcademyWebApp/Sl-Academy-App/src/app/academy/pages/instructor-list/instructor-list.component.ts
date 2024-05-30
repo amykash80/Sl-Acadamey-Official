@@ -21,7 +21,7 @@ export class InstructorListComponent {
   searchText=''
   filteredInstructorList: InstructorResponseModel[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
   displayedInstructorList: InstructorResponseModel[] = [];
@@ -66,9 +66,10 @@ export class InstructorListComponent {
     this.instructorService.instructorList().subscribe({
       next: (response) => {
         this.instructorList = response.result;
+        this.filteredInstructorList = this.instructorList;
         this.totalItems = this.filteredInstructorList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
+        this.currentPage = 1; 
+        this.updatePagination();
         console.log(this.instructorList);
       },
       error: (err: HttpErrorResponse) => {
