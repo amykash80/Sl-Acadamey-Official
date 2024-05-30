@@ -23,7 +23,7 @@ export class StudentListComponent {
       this.batchId = val['batchId'];
     });
     this.loadAllStudents();
-    this.getstudentsByBatchId();
+
   }
   studentList: StudentResponseModel[] = [];
   filteredStudentList: StudentResponseModel[] = [];
@@ -43,20 +43,7 @@ export class StudentListComponent {
     );
     console.log(this.filteredStudentList);
   }
-  getstudentsByBatchId() {
-    this.batchService.getAllStudentsByBatchId(this.batchId).subscribe({
-      next: (data) => {
-        if (data.isSuccess) {
-          this.studentListByBatch = data.result;
-          this.filteredStudentBatchList = this.studentListByBatch;
 
-          console.log(this.filteredStudentBatchList);
-        } else {
-          this.sharedService.showErrorToast(data.message);
-        }
-      },
-    });
-  }
   loadAllStudents() {
     this.studentService.studentList().subscribe({
       next: (response) => {
@@ -78,21 +65,7 @@ export class StudentListComponent {
       },
     });
   }
-  assignStudentToBatch(batchId: any, studentId: any) {
-    this.studentBatchAssignmentModel.studentId = studentId;
-    this.studentBatchAssignmentModel.batchId = batchId;
-    this.batchService
-      .assignStudentToBatch(this.studentBatchAssignmentModel)
-      .subscribe({
-        next: (result) => {
-          if (result.isSuccess) {
-            this.sharedService.showSuccessToast(result.result);
-          } else {
-            this.sharedService.showErrorToast(result.message);
-          }
-        },
-      });
-  }
+  
   deleteStudent(studentId: any) {
     this.sharedService
       .fireConfirmSwal('Are You sure you want to delete this Student ')

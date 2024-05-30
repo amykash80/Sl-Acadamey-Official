@@ -113,7 +113,9 @@ namespace StreamlineAcademy.Persistence.Repositories
             Address=sb.Student.User!.Address,
             PhoneNumber=sb.Student.User!.PhoneNumber,
             Email=sb.Student.User!.Email,
-            AcademyName=sb.Student!.Academy!.AcademyName
+            AcademyName=sb.Student!.Academy!.AcademyName,
+            IsActive=sb.Student.User.IsActive
+            
 
          })
         .ToListAsync(); 

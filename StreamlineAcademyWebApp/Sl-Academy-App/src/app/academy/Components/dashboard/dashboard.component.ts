@@ -14,6 +14,9 @@ import { StudentService } from '../../../Services/student.service';
 })
 export class DashboardComponent {
   constructor(){
+   
+  }
+  ngOnInit(){
     this.courseList();
     this.InstructorListItems();
     this.stdList()

@@ -37,6 +37,9 @@ import { RegisterStudentComponent } from './Pages/register-student/register-stud
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { UpdateStudentComponent } from './Pages/update-student/update-student.component';
 import { ResourceTypePipe } from '../Pipes/resource-type.pipe';
+import { AssignedStudentsComponent } from './Pages/assigned-students/assigned-students.component';
+import { AssinStudentBatchComponent } from './Pages/assin-student-batch/assin-student-batch.component';
+import { BatchStatusPipe } from '../Pipes/batch-status.pipe';
 
 
 @NgModule({
@@ -77,7 +80,10 @@ import { ResourceTypePipe } from '../Pipes/resource-type.pipe';
     RegisterStudentComponent,
     StudentListComponent,
     UpdateStudentComponent,
-    ResourceTypePipe
+    ResourceTypePipe,
+    AssignedStudentsComponent,
+    AssinStudentBatchComponent,
+    BatchStatusPipe
 
 
     

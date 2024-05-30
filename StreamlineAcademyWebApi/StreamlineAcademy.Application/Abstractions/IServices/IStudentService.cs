@@ -15,7 +15,7 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<IEnumerable<StudentResponseModel>>> GetallStudents();
         Task<ApiResponse<StudentResponseModel>> GetStudentById(Guid id);
         Task<ApiResponse<StudentResponseModel>> UpdateStudent(StudentUpdateRequestModel model);
-        Task<ApiResponse<string>> AssignStudentToBatch(StudentBatchRequestModel model);
+        Task<ApiResponse<StudentResponseModel>> AssignStudentToBatch(StudentBatchRequestModel model);
         Task<ApiResponse<IEnumerable<StudentBatchResponseModel>>> GetStudentBatches();
         Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> CheckMySchedule();
         Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> checkMyTodaysSchedule();

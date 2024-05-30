@@ -26,9 +26,10 @@ namespace StreamlineAcademy.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Student>> FindByAsync(Expression<Func<Student, bool>> expression)
+        public async Task<StudentBatch> FindByAsync(Expression<Func<StudentBatch, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await context.StudentBatches.FirstOrDefaultAsync(expression);
+
         }
 
         public Task<Student> FirstOrDefaultAsync(Expression<Func<Student, bool>> expression)
@@ -120,6 +121,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     CityName = a.City!.CityName,
                     UserRole = a.User.UserRole,
                     IsActive = a.User.IsActive,
+                   
 
                 })
                 .ToListAsync();
@@ -249,5 +251,9 @@ namespace StreamlineAcademy.Persistence.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<List<Guid?>> GetStudentIdsInBatches()
+        {
+            return await context.StudentBatches.Select(sb => sb.StudentId).ToListAsync();
+        }
     }
 }
