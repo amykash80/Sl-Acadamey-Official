@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LocationService } from '../../../Services/location.service';
 import { SharedService } from '../../../Services/shared.service';
+import { LocationResponseModel } from '../../../Models/Location/Location';
 
 @Component({
   selector: 'app-location-list',
@@ -12,6 +13,11 @@ export class LocationListComponent {
   sharedService=inject(SharedService)
   locationList:any[]=[]
   searchText=''
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayedBatchList: LocationResponseModel[] = [];
   ngOnInit(){
     this.getAllLocations()
   }

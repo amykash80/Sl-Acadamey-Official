@@ -20,10 +20,10 @@ export class AcademyListComponent {
   filteredAcademyList: AcademyResponse[] = [];
   searchText: string = '';
   currentPage: number = 1;
-  itemsPerPage: number = 3;
+  itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
-
+  displayedAcademyList: AcademyResponse[] = [];
   loadAllAcademies() {
     this.academyService.academyList().subscribe({
       next: (response) => {
@@ -55,7 +55,7 @@ export class AcademyListComponent {
   updatePagination(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
-    this.filteredAcademyList = this.filteredAcademyList.slice(startIndex, endIndex);
+    this.displayedAcademyList = this.filteredAcademyList.slice(startIndex, endIndex);
     this.pages = Array.from({ length: Math.ceil(this.totalItems / this.itemsPerPage) }, (_, i) => i + 1);
   }
   
