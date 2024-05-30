@@ -13,11 +13,16 @@ import { SharedService } from '../../../Services/shared.service';
 export class CourseContentListComponent {
   activatedRoute=inject(ActivatedRoute);
   courseService=inject(CourseService);
-  sharedService=inject(SharedService)
+  sharedService=inject(SharedService);
   courseId:string=''
   courseContentList:CourseContentResponse[]=[];
   filteredContentList: CourseContentResponse[] = [];
   searchText: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayecontentList: CourseContentResponse[] = [];
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.courseId=paramVal['id']
@@ -30,6 +35,9 @@ loadAllCourseContents(){
     next: (response) => {
       this.courseContentList = response.result;
       this.filteredContentList = this.courseContentList;
+      this.totalItems = this.courseContentList.length;
+      this.currentPage = 1; 
+      this.updatePagination();
       console.log(this.courseContentList)
     },
     error: (err: HttpErrorResponse) => {
@@ -42,17 +50,37 @@ loadAllCourseContents(){
 filterContents(): void {
   if (!this.searchText.trim()) {
     this.filteredContentList = this.courseContentList.slice();
+  } else {
+    const searchTerm = this.searchText.toLowerCase();
+    this.filteredContentList = this.courseContentList.filter(
+      (content) =>
+        content.taskName!.toLowerCase().startsWith(searchTerm) ||
+        content.description!.toLowerCase().startsWith(searchTerm) ||
+        content.duration!.toString().toLowerCase().startsWith(searchTerm)
+    );
+  }
+  this.totalItems = this.filteredContentList.length;
+  this.currentPage = 1;
+  this.updatePagination();
+}
+
+updatePagination(): void {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+  this.displayecontentList = this.filteredContentList.slice(startIndex, endIndex);
+  this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+    .fill(0)
+    .map((x, i) => i + 1);
+}
+
+goToPage(page: number): void {
+  if (page < 1 || page > this.pages.length) {
     return;
   }
-
-  const searchTerm = this.searchText.toLowerCase();
-  this.filteredContentList = this.courseContentList.filter(
-    (content) =>
-      content.taskName!.toLowerCase().startsWith(searchTerm) ||
-      content.description!.toLowerCase().startsWith(searchTerm) ||
-      content.duration!.toString().toLowerCase().startsWith(searchTerm)
-  );
+  this.currentPage = page;
+  this.updatePagination();
 }
+
 deleteCourseContent(courseContentId: any) {
   this.sharedService
     .fireConfirmSwal('Are You sure you want to delete this Content ')

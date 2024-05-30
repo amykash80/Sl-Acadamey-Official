@@ -75,7 +75,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let courseResource of courseResourceList">
+                  <tr *ngFor="let courseResource of displayedResourceList">
                     <td>{{ courseResource.name }}</td>
                     <td>{{ courseResource.description }}</td>
                     <td>
@@ -145,46 +145,38 @@
                   </tr>
                 </tbody>
               </table>
+              <div *ngIf="filteredResourceList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+                <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No data found</h4>
+              </div>
               <div class="row">
+                <div class="col-sm-12 col-md-5">
+                  <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
+                    Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+                    {{ currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }}
+                    of {{ totalItems }} enquiries
+                  </div>
+                </div>
                 <div class="col-sm-12 col-md-7">
-                  <div
-                    class="dataTables_paginate paging_simple_numbers"
-                    id="resource-listing_paginate"
-                  >
+                  <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
                     <ul class="pagination">
-                      <li class="paginate_button page-item previous disabled" id="resource-listing_previous">
-                        <a
-                          aria-controls="resource-listing"
-                          aria-disabled="true"
-                          role="link"
-                          data-dt-idx="previous"
-                          tabindex="-1"
-                          class="page-link"
-                          >Previous</a
-                        >
+                      <!-- Previous Button -->
+                      <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
+                        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
+                          Previous
+                        </button>
                       </li>
-                      <li class="paginate_button page-item active">
-                        <a
-                          href="#"
-                          aria-controls="resource-listing"
-                          role="link"
-                          aria-current="page"
-                          data-dt-idx="0"
-                          tabindex="0"
-                          class="page-link"
-                          >1</a
-                        >
+                      <!-- Page Numbers -->
+                      <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
+                        <button (click)="goToPage(page)" class="page-link">
+                          {{ page }}
+                        </button>
                       </li>
-                      <li class="paginate_button page-item next disabled" id="resource-listing_next">
-                        <a
-                          aria-controls="resource-listing"
-                          aria-disabled="true"
-                          role="link"
-                          data-dt-idx="next"
-                          tabindex="-1"
-                          class="page-link"
-                          >Next</a
-                        >
+                      <!-- Next Button -->
+                      <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
+                        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
+                          Next
+                        </button>
                       </li>
                     </ul>
                   </div>

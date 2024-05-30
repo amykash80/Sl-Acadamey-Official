@@ -22,7 +22,11 @@ export class CourseCategoryListComponent {
   showList=true;
   categoryId=''
   loadSpinner=false;
-
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayedcategoryList: CourseCategoryResponse[] = [];
   constructor() {
     this.getAllCourseCategories();
   }
@@ -50,14 +54,38 @@ export class CourseCategoryListComponent {
       category.categoryName?.toLowerCase().startsWith(filterValue)
     );
     console.log(this.filteredCategoryList);
+    this.totalItems = this.filteredCategoryList.length;
+    this.currentPage = 1;
+    this.updatePagination();
   }
 
   getAllCourseCategories() {
     this.courseService.getAllCourseCategories().subscribe((categories) => {
       this.categoryList = categories.result;
-      this.filteredCategoryList=this.categoryList
+      this.filteredCategoryList=this.categoryList;
+      this.totalItems = this.filteredCategoryList.length;
+      this.currentPage = 1; 
+      this.updatePagination();
     });
   }
+
+  updatePagination(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+    this.displayedcategoryList = this.filteredCategoryList.slice(startIndex, endIndex);
+    this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+  
+  goToPage(page: number): void {
+    if (page < 1 || page > this.pages.length) {
+      return;
+    }
+    this.currentPage = page;
+    this.updatePagination();
+  }
+
   getCourseCategoryById(){
 this.courseService.getCourseCategoryById(this.categoryId).subscribe(res=>{
   this.updateCourseCategoryModel=res.result;

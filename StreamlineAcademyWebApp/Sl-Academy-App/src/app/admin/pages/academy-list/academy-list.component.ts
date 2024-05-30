@@ -54,7 +54,7 @@ export class AcademyListComponent {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
     this.filteredAcademyList = this.filteredAcademyList.slice(startIndex, endIndex);
-     this.pages = Array.from({ length: Math.ceil(this.totalItems / this.itemsPerPage) }, (_, i) => i + 1);
+    this.pages = Array.from({ length: Math.ceil(this.totalItems / this.itemsPerPage) }, (_, i) => i + 1);
   }
   
   goToPage(page: number): void {

@@ -21,7 +21,11 @@ export class CourseListComponent {
   searchText:string=''
   showNoContent=false;
   showTable=false;
- 
+  currentPage: number = 1;
+  itemsPerPage: number = 2;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayedCourseList: CourseResponse[] = [];
   ngOnInit() {
     this.loadAllCourse();
   }
@@ -32,6 +36,9 @@ export class CourseListComponent {
       next: (response) => {
         this.courseList = response.result;
         this.filteredCourseList=this.courseList;
+        this.totalItems = this.filteredCourseList.length;
+      this.currentPage = 1; 
+      this.updatePagination();
         if(response.result.length>0){
           this.showTable=true;
         }
@@ -54,8 +61,26 @@ export class CourseListComponent {
       course.name?.toLowerCase().startsWith(filterValue)
     );
     console.log(this.filteredCourseList);
+    this.totalItems = this.filteredCourseList.length;
+  this.currentPage = 1;
+  this.updatePagination();
   }
-
+  updatePagination(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+    this.displayedCourseList = this.filteredCourseList.slice(startIndex, endIndex);
+    this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+  
+  goToPage(page: number): void {
+    if (page < 1 || page > this.pages.length) {
+      return;
+    }
+    this.currentPage = page;
+    this.updatePagination();
+  }
 
   deleteCourse(courseId: any) {
     this.sharedService

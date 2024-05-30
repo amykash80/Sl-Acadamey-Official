@@ -21,6 +21,7 @@ export class BatchListComponent {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
+  displayedBatchList: BatchResponseModel[] = [];
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
           private sharedService:SharedService){
@@ -77,7 +78,10 @@ filterBatches(): void {
 updatePagination(): void {
   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
   const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
-  this.filteredBatchList = this.filteredBatchList.slice(startIndex, endIndex);
+  this.displayedBatchList = this.filteredBatchList.slice(startIndex, endIndex);
+  this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+    .fill(0)
+    .map((x, i) => i + 1);
 }
 
 goToPage(page: number): void {

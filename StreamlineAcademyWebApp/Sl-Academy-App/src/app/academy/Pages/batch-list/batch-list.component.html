@@ -103,7 +103,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let batch of filteredBatchList">
+                  <tr *ngFor="let batch of displayedBatchList">
                     <td>{{ batch.batchName }}</td>
                     <td>{{ batch.batchSize }}</td>
                     <td>{{ batch.startDate | date }}</td>

@@ -20,6 +20,12 @@ export class BatchScheduleListComponent {
   batchScheduleList:BatchScheduleResponseModel[]=[];
   filterBatchSchedules: BatchScheduleResponseModel[] = [];
   searchText: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 2;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayedBatchScheduleList: BatchScheduleResponseModel[] = [];
+
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.batchId=paramVal['id']
@@ -30,15 +36,17 @@ ngOnInit(){
 filterBatchSchedule(): void {
   if (!this.searchText.trim()) {
     this.filterBatchSchedules = this.batchScheduleList.slice();
-    return;
+  } else {
+    const searchTerm = this.searchText.toLowerCase();
+    this.filterBatchSchedules = this.batchScheduleList.filter(
+      (schedule) =>
+        schedule.contentName!.toLowerCase().startsWith(searchTerm) ||
+        schedule.date!.toLowerCase().startsWith(searchTerm)
+    );
   }
-
-  const searchTerm = this.searchText.toLowerCase();
-  this.filterBatchSchedules = this.batchScheduleList.filter(
-    (schedule) =>
-      schedule.contentName!.toLowerCase().startsWith(searchTerm) ||
-      schedule.date!.toLowerCase().startsWith(searchTerm)
-  );
+  this.totalItems = this.filterBatchSchedules.length;
+  this.currentPage = 1;
+  this.updatePagination();
 }
 
 loadAllBatchSchedules(){
@@ -46,6 +54,9 @@ loadAllBatchSchedules(){
     next: (response) => {
       this.batchScheduleList = response.result;
       this.filterBatchSchedules=this.batchScheduleList;
+      this.totalItems = this.filterBatchSchedules.length;
+      this.currentPage = 1; 
+      this.updatePagination();
       console.log(this.batchScheduleList)
     },
     error: (err: HttpErrorResponse) => {
@@ -55,6 +66,24 @@ loadAllBatchSchedules(){
     },
   });
 }
+
+updatePagination(): void {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+  this.displayedBatchScheduleList = this.filterBatchSchedules.slice(startIndex, endIndex);
+  this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+    .fill(0)
+    .map((x, i) => i + 1);
+}
+
+goToPage(page: number): void {
+  if (page < 1 || page > this.pages.length) {
+    return;
+  }
+  this.currentPage = page;
+  this.updatePagination();
+}
+
 deleteBatchSchedule(batchScheduleId: any) {
   this.sharedService
     .fireConfirmSwal('Are You sure you want to delete this Content ')
