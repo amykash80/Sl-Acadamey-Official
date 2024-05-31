@@ -15,6 +15,8 @@ export class CourseContentListComponent {
   courseService=inject(CourseService);
   sharedService=inject(SharedService);
   courseId:string=''
+  showSpinner=true;
+  showTable=false;
   courseContentList:CourseContentResponse[]=[];
   filteredContentList: CourseContentResponse[] = [];
   searchText: string = '';
@@ -33,6 +35,8 @@ ngOnInit(){
 loadAllCourseContents(){
   this.courseService.getCourseContentsByCourseId(this.courseId).subscribe({
     next: (response) => {
+      this.showSpinner=false;
+      this.showTable=true
       this.courseContentList = response.result;
       this.filteredContentList = this.courseContentList;
       this.totalItems = this.courseContentList.length;

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="showTable">
   <div class="card custom-card overflow-auto">
     <div class="card-body font-manrope">
       <h4 class="card-title text-capitalize fs-5 mb-3">Batch Schedule List</h4>
@@ -123,4 +123,7 @@
       </div>
     </div>
   </div>
+</div>
+<div>
+  <app-spinner *ngIf="showSpinner"></app-spinner>
 </div>

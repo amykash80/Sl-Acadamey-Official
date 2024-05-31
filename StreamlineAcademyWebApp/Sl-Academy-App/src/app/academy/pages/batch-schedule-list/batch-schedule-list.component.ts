@@ -24,6 +24,8 @@ export class BatchScheduleListComponent {
   itemsPerPage: number = 2;
   totalItems: number = 0;
   pages: number[] = [];
+  showSpinner=true
+  showTable=false
   displayedBatchScheduleList: BatchScheduleResponseModel[] = [];
 
 ngOnInit(){
@@ -52,6 +54,8 @@ filterBatchSchedule(): void {
 loadAllBatchSchedules(){
   this.batchScheduleService.getAllSchedulesByBatchId(this.batchId).subscribe({
     next: (response) => {
+      this.showSpinner=false;
+      this.showTable=true
       this.batchScheduleList = response.result;
       this.filterBatchSchedules=this.batchScheduleList;
       this.totalItems = this.filterBatchSchedules.length;
