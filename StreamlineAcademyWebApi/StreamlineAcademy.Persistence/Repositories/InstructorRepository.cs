@@ -78,9 +78,6 @@ namespace StreamlineAcademy.Persistence.Repositories
                     CityName = instructor.City!.CityName,
                     IsActive=instructor.User.IsActive,
                     UserRole = instructor.User.UserRole,  
-                    CountryId=instructor.Country.Id,
-                    StateId=instructor.State.Id,
-                    CityId=instructor.City.Id
 
                 };
 

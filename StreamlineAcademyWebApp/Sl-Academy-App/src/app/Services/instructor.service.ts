@@ -4,6 +4,8 @@ import { environment } from '../../enviroments/enviroment';
 import { InstructorRequestModel, InstructorResponseModel, InstructorUpdateModel } from '../Models/Instructor/Instructor';
 import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
+import { CourseResponse } from '../Models/Academy/Course';
+import { BatchResponseModel } from '../Models/Batch/Batch';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +31,10 @@ export class InstructorService {
   deleteInstructor(id:string):Observable<ApiResponse<string>>{
     return this.http.delete<ApiResponse<string>>(this.baseUrl+"Instructor/deleteInstructor/"+id)
    }
-
+   checkMyCourses(): Observable<ApiResponse<CourseResponse[]>> {  
+    return this.http.get<ApiResponse<CourseResponse[]>>(this.baseUrl + "Instructor/Check-my-courses");
+  } 
+  checkMyBatches(): Observable<ApiResponse<BatchResponseModel[]>> {
+    return this.http.get<ApiResponse<BatchResponseModel[]>>(this.baseUrl+"Instructor/Check-my-batches");
+  }
 }

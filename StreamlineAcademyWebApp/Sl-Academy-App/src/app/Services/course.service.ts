@@ -63,4 +63,5 @@ export class CourseService {
    updateCourseCategory(courseCategoryUpdateModel:CourseCategoryRequestModel):Observable<ApiResponse<CourseCategoryResponse>>{
     return this.http.put<ApiResponse<CourseCategoryResponse>>(this.baseUrl+"Course/updateCourseCategory",courseCategoryUpdateModel)
   }
+ 
 }
