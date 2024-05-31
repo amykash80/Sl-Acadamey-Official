@@ -15489,7 +15489,7 @@
   }
   .dropdown-menu-header .dropdown-menu-header-inner {
     margin: -1px -1px 0;
-    padding: 1.5rem 0.5rem;
+    padding: 0.8rem 0.5rem;
     position: relative;
   }
   .dropdown-menu-header .menu-header-image {
@@ -15632,13 +15632,21 @@
   .nav-link.disabled .nav-link-icon {
     opacity: 0.3;
   }
+
   .nav-item.nav-item-header {
-    text-transform: uppercase;
-    font-size: 0.73333rem;
+    text-transform: capitalize;
+    font-size: 0.8rem;
     color: #6c757d;
+    font-family: "Manrope";
     font-weight: 700;
     padding: 0.5rem 1rem;
   }
+  
+  .nav-item.nav-item-header:hover{
+  background-color:#ececec;
+  color: black;
+}
+
   .nav-item.nav-item-btn {
     padding: 0.5rem 1rem;
   }
@@ -18884,11 +18892,13 @@
     align-items: center;
   }
   .widget-content .widget-content-left .widget-heading {
-    opacity: 0.8;
     font-weight: 700;
   }
   .widget-content .widget-content-left .widget-subheading {
-    opacity: 0.5;
+    opacity: 0.8;
+    font-size:0.8rem;
+    font-weight:600;
+    font-family: "Manrope";
   }
   .widget-content .widget-content-right {
     margin-left: auto;

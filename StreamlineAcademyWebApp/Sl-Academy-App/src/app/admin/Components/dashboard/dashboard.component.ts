@@ -18,6 +18,16 @@ export class DashboardComponent {
     private academyService: AcademyService,
     private enquiryService: EnquiryService
   ) {
+ 
+  }
+  academyList: AcademyResponse[] = [];
+  enquiryList: EnquiryResponse[] = [];
+  academyTypeList: AcademyTypeResponse[] = [];
+  status = false;
+  addToggle() {
+    this.status = !this.status;
+  }
+  ngOnInit() {
     this.enquiryService.enquiryList().subscribe((response) => {
       this.enquiryList = response.result;
     });
@@ -28,12 +38,4 @@ export class DashboardComponent {
       this.academyTypeList = res.result;
     });
   }
-  academyList: AcademyResponse[] = [];
-  enquiryList: EnquiryResponse[] = [];
-  academyTypeList: AcademyTypeResponse[] = [];
-  status = false;
-  addToggle() {
-    this.status = !this.status;
-  }
-  ngOnInit() {}
 }

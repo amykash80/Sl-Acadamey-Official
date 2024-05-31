@@ -28,8 +28,8 @@ export class AuthService {
    resetPassword(resetPasswordModel:ResetPasswordModel):Observable<ApiResponse<string>>{
     return this.httpCleint.post<ApiResponse<string>>(this.baseUrl+"Auth/resetpassword",resetPasswordModel)
    }
-   isLoggedIn(): boolean {
-    return localStorage.getItem("streamlineToken") !== null;
+   isUserAuthenticated(): boolean {
+    return !!localStorage.getItem('streamlineToken');
   }
   forgotPassword(model:ForgotPasswordModel):Observable<ApiResponse<string>>{
    return this.httpCleint.post<ApiResponse<string>>(this.baseUrl+"Auth/forgotPassword",model)

@@ -75,7 +75,8 @@ th {
   color: #878787 !important;
 }
 .container {
-  padding: 25px; 
+  /* remove and apply only to forms */
+  /* padding: 25px;  */
 }
 .custom-card {
   border-radius: 15px; 
