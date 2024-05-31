@@ -78,6 +78,7 @@ export class RegisterStudentComponent {
   }
  
   addStudent() {
+    this.studentModel.courseId=["8b4e75b6-2e01-49fc-e13e-08dc807e2aba"]
     this.loadSpinner = true;
     this.studentService.saveStudent(this.studentModel).subscribe({
       next: (data) => {

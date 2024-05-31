@@ -4,6 +4,7 @@ using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Application.Abstractions.IServices;
 using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using System;
@@ -18,12 +19,15 @@ namespace StreamlineAcademy.Application.Services
     {
         private readonly IBatchRepository batchRepository;
         private readonly IContextService contextService;
+        private readonly IStudentRepository studentRepository;
 
         public BatchService(IBatchRepository batchRepository,
-                            IContextService contextService)
+                            IContextService contextService,
+                            IStudentRepository studentRepository)
         {
             this.batchRepository = batchRepository;
             this.contextService = contextService;
+            this.studentRepository = studentRepository;
         }
         public async Task<ApiResponse<BatchResponseModel>> CreateBatch(BatchRequestModel request)
         {
@@ -163,9 +167,37 @@ namespace StreamlineAcademy.Application.Services
              return ApiResponse<IEnumerable<StudentByBatchResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
 
         }
-      
 
-        
+        public async Task<ApiResponse<IEnumerable<StudentCourseResponseModel>>> GetAllStudentsByCourseId(Guid? courseId)
+        {
+            if (courseId == null)
+            {
+                return ApiResponse<IEnumerable<StudentCourseResponseModel>>.ErrorResponse("Invalid Course ID.", HttpStatusCodes.BadRequest);
+            }
+
+            var students = await batchRepository.GetAllStudentsByCourseId(courseId);
+            if (students is not null)
+            {
+                var studentIdsInBatches = await studentRepository.GetStudentIdsInBatches();
+                var studentList = students.Select(student =>
+                {
+                    if (studentIdsInBatches.Contains(student.Id))
+                    {
+                        student.BatchStatus = BatchStatus.Assigned;
+                    }
+                    else
+                    {
+                        student.BatchStatus = BatchStatus.NotAssigned;
+                    }
+                    return student;
+                }).OrderBy(_ => _.Name);
+
+                return ApiResponse<IEnumerable<StudentCourseResponseModel>>.SuccessResponse(studentList, $"Found {students.Count()} Students");
+            }
+
+
+            return ApiResponse<IEnumerable<StudentCourseResponseModel>>.ErrorResponse("No students found for the provided course.", HttpStatusCodes.NotFound);
+        }
     }
 
 

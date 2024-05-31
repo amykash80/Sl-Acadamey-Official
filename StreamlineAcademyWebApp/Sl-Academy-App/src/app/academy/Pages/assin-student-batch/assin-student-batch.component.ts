@@ -22,6 +22,7 @@ export class AssinStudentBatchComponent {
   ){
     this.route.params.subscribe((val) => {
       this.batchId = val['batchId'];
+      this.courseId=val['courseId']
     });
     this.loadAllStudents();
 
@@ -31,6 +32,7 @@ export class AssinStudentBatchComponent {
   studentBatchAssignmentModel: AssignStudent = new AssignStudent();
   searchText: string = '';
   batchId:string=''
+  courseId=''
 
 
   filterStudents(event: any) {
@@ -75,13 +77,16 @@ export class AssinStudentBatchComponent {
       });
   }
   loadAllStudents() {
-    this.studentService.studentList().subscribe({
+    this.studentService.studentListByCourseId(this.courseId).subscribe({
       next: (response) => {
         console.log(response);
         if (response.result.length > 0) {
           this.studentList = response.result;
           this.filteredStudentList = this.studentList;
         } else if (response.result.length == 0) {
+        }
+        else{
+          this.sharedService.showErrorToast(response.message)
         }
       },
       error: (err: HttpErrorResponse) => {

@@ -16,6 +16,8 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? Email { get; set; }
         public string? AcademyName { get; set; }
         public bool IsActive { get; set; }
+        public string? BatchName { get ; set; }
+        public string? CourseName { get; set; }
         
 
     }

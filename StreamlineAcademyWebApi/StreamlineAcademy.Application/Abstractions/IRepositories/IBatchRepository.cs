@@ -14,6 +14,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         public Task<List<BatchResponseModel>> GetAllBatches();
         public Task<List<BatchResponseModel>> GetAllBatchByCourseId(Guid? courseId);
         Task<List<StudentByBatchResponseModel>> GetAllStudentsByBatchId(Guid? batchId);
+        Task<List<StudentCourseResponseModel>> GetAllStudentsByCourseId(Guid? courseId);
         
 
     }

@@ -31,4 +31,7 @@ export class StudentService {
   deleteStudent(id:string):Observable<ApiResponse<string>>{
     return this.http.delete<ApiResponse<string>>(this.baseUrl+"Student/delete/"+id)
    }
+   studentListByCourseId(courseId:string):Observable<ApiResponse<StudentResponseModel[]>>{
+    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Batch/getAllStudentsByCourseId/"+courseId)
+  }
 }
