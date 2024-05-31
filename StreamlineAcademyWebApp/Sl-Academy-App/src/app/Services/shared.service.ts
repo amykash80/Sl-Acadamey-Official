@@ -49,7 +49,6 @@ export class SharedService {
     return Swal.fire({
       title: message,
       text: "You won't be able to revert this!",
-      icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -59,7 +58,7 @@ export class SharedService {
       },
       didOpen: () => {
         const modal = Swal.getPopup();
-        modal!.style.maxWidth = '400px'; // Adjust the max-width to make the modal smaller
+        modal!.style.maxWidth = '320px'; // Adjust the max-width to make the modal smaller
       },
     });
   }

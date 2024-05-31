@@ -21,6 +21,7 @@ export class CourseListComponent {
   searchText:string=''
   showNoContent=false;
   showTable=false;
+  showSpinner=true;
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalItems: number = 0;
@@ -34,6 +35,8 @@ export class CourseListComponent {
   loadAllCourse() {
     this.courseServices.courseList().subscribe({
       next: (response) => {
+        this.showSpinner=false;
+        this.showTable=true
         this.courseList = response.result;
         this.filteredCourseList=this.courseList;
         this.totalItems = this.filteredCourseList.length;
