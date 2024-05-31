@@ -35,15 +35,13 @@ export class StudentListComponent {
   showAssignList = true;
   filteredStudentBatchList: any;
   studentListByBatch: any;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayedStudentList: StudentResponseModel[] = [];
 
-  filterStudents(event: any) {
-    const filterValue = event.target.value.toLowerCase();
-    this.filteredStudentList = this.studentList.filter((stuudent) =>
-      stuudent.name?.toLowerCase().startsWith(filterValue)
-    );
-    console.log(this.filteredStudentList);
-  }
-
+  
   loadAllStudents() {
     this.studentService.studentList().subscribe({
       next: (response) => {
@@ -51,6 +49,9 @@ export class StudentListComponent {
         if (response.result.length > 0) {
           this.studentList = response.result;
           this.filteredStudentList = this.studentList;
+          this.totalItems = this.filteredStudentList.length;
+          this.currentPage = 1; 
+          this.updatePagination();
           this.showStdList = true;
           this.showNoContent = false;
         } else if (response.result.length == 0) {
@@ -65,7 +66,43 @@ export class StudentListComponent {
       },
     });
   }
+  filterStudents(): void {
+    if (!this.searchText.trim()) {
+      this.filteredStudentList = this.studentList.slice();
+    } else {
+      const searchTerm = this.searchText.toLowerCase();
+      this.filteredStudentList = this.studentList.filter(
+        (student) =>
+          student.name!.toLowerCase().startsWith(searchTerm) ||
+          student.address!.toLowerCase().startsWith(searchTerm) ||
+          student.email!.toLowerCase().startsWith(searchTerm) ||
+          student.phoneNumber!.toString().toLowerCase().startsWith(searchTerm)
+      );
+    }
   
+    // Reset pagination to the first page after filtering
+    this.totalItems = this.filteredStudentList.length;
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+  
+  
+  updatePagination(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+    this.displayedStudentList = this.filteredStudentList.slice(startIndex, endIndex);
+    this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+  
+  goToPage(page: number): void {
+    if (page < 1 || page > this.pages.length) {
+      return;
+    }
+    this.currentPage = page;
+    this.updatePagination();
+  }
   deleteStudent(studentId: any) {
     this.sharedService
       .fireConfirmSwal('Are You sure you want to delete this Student ')

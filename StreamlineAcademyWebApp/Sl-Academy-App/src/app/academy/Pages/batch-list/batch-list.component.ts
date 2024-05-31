@@ -54,6 +54,7 @@ getAllBatchesByCourseId(){
     }
   });
 }
+
 filterBatches(): void {
   if (!this.searchText.trim()) {
     this.filteredBatchList = this.batchList.slice();

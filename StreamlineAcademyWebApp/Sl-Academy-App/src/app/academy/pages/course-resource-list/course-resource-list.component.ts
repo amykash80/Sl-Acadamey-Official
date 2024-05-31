@@ -35,6 +35,7 @@ loadAllCourseResource(){
   this.courseResourceService.getCourseResourceByCourseId(this.courseId).subscribe({
     next: (response) => {
       this.courseResourceList = response.result;
+      this.filteredResourceList = this.courseResourceList;
       this.totalItems = this.filteredResourceList.length;
       this.currentPage = 1; 
       this.updatePagination();
@@ -48,7 +49,7 @@ loadAllCourseResource(){
   });
 }
 
-filterBatches(): void {
+filterResources(): void {
   if (!this.searchText.trim()) {
     this.filteredResourceList = this.courseResourceList.slice();
   } else {
@@ -56,8 +57,7 @@ filterBatches(): void {
     this.filteredResourceList = this.courseResourceList.filter(
       (resource) =>
         resource.name!.toLowerCase().startsWith(searchTerm) ||
-      resource.description!.toLowerCase().startsWith(searchTerm) 
-       
+        resource.description!.toLowerCase().startsWith(searchTerm)
     );
   }
 
@@ -66,6 +66,7 @@ filterBatches(): void {
   this.currentPage = 1;
   this.updatePagination();
 }
+
 
 
 updatePagination(): void {

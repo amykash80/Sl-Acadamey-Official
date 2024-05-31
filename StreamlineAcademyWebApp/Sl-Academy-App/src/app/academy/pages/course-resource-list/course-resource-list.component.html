@@ -15,7 +15,8 @@
                     <label>
                       <input
                         type="search"
-                        
+                        [(ngModel)]="searchText"
+                        (input)="filterResources()"
                         class="form-control"
                         placeholder="Search resources"
                         aria-controls="resource-listing"

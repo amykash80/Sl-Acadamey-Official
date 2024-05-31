@@ -22,7 +22,7 @@ export class CourseListComponent {
   showNoContent=false;
   showTable=false;
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
   displayedCourseList: CourseResponse[] = [];
