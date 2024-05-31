@@ -12,12 +12,16 @@ export class LocationListComponent {
   sharedService=inject(SharedService)
   locationList:any[]=[]
   searchText=''
+  showTable=false;
+  showSpinner=true
   ngOnInit(){
     this.getAllLocations()
   }
 getAllLocations(){
 this.locationService.getAllLocations().subscribe(res=>{
   console.log(res)
+  this.showSpinner=false;
+  this.showTable=true
   this.locationList=res.result
 })
 }

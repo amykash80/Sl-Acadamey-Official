@@ -19,7 +19,8 @@ export class CourseCategoryListComponent {
   updateCourseCategoryModel:CourseCategoryUpdateModel=new CourseCategoryUpdateModel()
   loadspinner=false;
   showUpdateForm=false;
-  showList=true;
+  showList=false;
+  showSpinner=true
   categoryId=''
   loadSpinner=false;
   currentPage: number = 1;
@@ -61,6 +62,8 @@ export class CourseCategoryListComponent {
 
   getAllCourseCategories() {
     this.courseService.getAllCourseCategories().subscribe((categories) => {
+      this.showSpinner=false
+      this.showList=true
       this.categoryList = categories.result;
       this.filteredCategoryList=this.categoryList;
       this.totalItems = this.filteredCategoryList.length;
