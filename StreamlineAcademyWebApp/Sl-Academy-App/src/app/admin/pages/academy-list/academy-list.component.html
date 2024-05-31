@@ -1,5 +1,5 @@
 
-<div class="app-inner">
+<div class="app-inner" *ngIf="showTable">
   <div class="container">
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
@@ -218,3 +218,6 @@
   </div>
   </div>
 
+<div>
+  <app-spinner *ngIf="showSpinner"></app-spinner>
+</div>

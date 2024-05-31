@@ -23,10 +23,14 @@ export class AcademyListComponent {
   itemsPerPage: number = 3;
   totalItems: number = 0;
   pages: number[] = [];
+  showSpinner=true;
+  showTable=false
 
   loadAllAcademies() {
     this.academyService.academyList().subscribe({
       next: (response) => {
+        this.showSpinner=false;
+        this.showTable=true
         this.academyList = response.result;
      this.filteredAcademyList=this.academyList;
      this.totalItems = this.filteredAcademyList.length;

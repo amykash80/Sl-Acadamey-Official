@@ -23,12 +23,16 @@ export class EnquirylistComponent {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
+  showSpinner=true;
+  showTable=false
   ngOnInit() {
     this.loadAllEnquiries();
   }
   loadAllEnquiries() {
     this.enquiryService.enquiryList().subscribe({
       next: (response) => {
+        this.showSpinner=false;
+        this.showTable=true
         this.enquirylist = response.result;
         this.filteredEnquiryList = this.enquirylist;
         this.totalItems = this.filteredEnquiryList.length;
