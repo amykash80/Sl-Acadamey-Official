@@ -12,7 +12,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
 {
     public interface IAuthRepository:IBaseRepository<User>
     {
-       
 
+        Task<string> getProfilePhoto(Guid? id);
     }
 }

@@ -26,18 +26,21 @@ namespace StreamlineAcademy.Application.Services
         private readonly IUserRepository userRepository;
         private readonly IContextService contextService;
         private readonly IEmailHelperService emailHelperService;
+        private readonly IProfileService profileService;
         private readonly IJwtProvider jwtProvider;
 
         public AuthService(IAuthRepository authRepository,
                            IUserRepository userRepository,
                            IContextService contextService,
                            IEmailHelperService emailHelperService,
+                           IProfileService profileService,
                            IJwtProvider jwtProvider)
         {
             this.authRepository = authRepository;
             this.userRepository = userRepository;
             this.contextService = contextService;
             this.emailHelperService = emailHelperService;
+            this.profileService = profileService;
             this.jwtProvider = jwtProvider;
         }
 
@@ -69,13 +72,14 @@ namespace StreamlineAcademy.Application.Services
             var res = AppEncryption.ComparePassword(user.Password!, request.Password!, user.Salt!);
             if(!res)
                 return ApiResponse<LoginResponseModel>.ErrorResponse(APIMessages.Auth.InvalidCredential, HttpStatusCodes.BadRequest);
-
+            var filePath = await authRepository.getProfilePhoto(user.Id);
             var response = new LoginResponseModel()
             {
                 FullName = user.Name,
                 UserRole = user.UserRole,
                 UserId = user.Id,
-                Token = jwtProvider.GenerateToken(user) 
+                Token = jwtProvider.GenerateToken(user),
+                FilePath = filePath,
             };
 
             return ApiResponse<LoginResponseModel>.SuccessResponse(response,APIMessages.Auth.LoggedIn);

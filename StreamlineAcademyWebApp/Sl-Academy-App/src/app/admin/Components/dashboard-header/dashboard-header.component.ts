@@ -12,10 +12,14 @@ import { UserRole } from '../../../Enums/userrole';
 })
 export class DashboardHeaderComponent {
   userRole!:UserRole
+  filePath!:string
+  apiBaseUrl: string = 'http://localhost:5232';
+
   constructor(){
     this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
     console.log(this.loggedInUserDetails);
     this.userRole = this.loggedInUserDetails.userRole;
+    this.filePath=this.loggedInUserDetails.filePath;
     console.log(this.userRole);
     
   }
