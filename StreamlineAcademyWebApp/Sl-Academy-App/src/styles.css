@@ -75,13 +75,11 @@ th {
   color: #878787 !important;
 }
 
-
 .custom-card {
-  border-radius: 15px; 
-  overflow: hidden; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .custom-card .card-body {
   border-radius: inherit;
@@ -95,4 +93,27 @@ th {
 }
 .add-batch-btn {
   border-radius: 5px;
+}
+
+/* BREADCRUMB */
+li.breadcrumb-item {
+  background: white;
+  margin-right: 0.2rem;
+  padding: 0.2rem 0.6rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-family: "Manrope";
+  font-weight: 600;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+}
+
+li.breadcrumb-item.active {
+  background: #ff001324;
+  color: #e82130;
+  font-weight: 700;
+  border-color: #f3000042;
+}
+li.breadcrumb-item.active::before {
+  color: inherit;
 }

@@ -1,7 +1,3 @@
-.btn {
-    color: #eb0000;
-    background: #e0c6cb;
-    font-weight: 700;
-    font-family: sans-serif;
-
+.chip.button {
+    border: 0px;
 }

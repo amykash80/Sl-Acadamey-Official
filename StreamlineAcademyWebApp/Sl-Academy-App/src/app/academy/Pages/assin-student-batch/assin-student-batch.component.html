@@ -119,7 +119,7 @@
                     <td>
                       <div *ngIf="!isBatchStatusAssigned(student.batchStatus)">
                         <button
-                          class="btn"
+                          class="chip button bg-danger text-white"
                           (click)="assignStudentToBatch(batchId, student.id)"
                         >
                           Assign

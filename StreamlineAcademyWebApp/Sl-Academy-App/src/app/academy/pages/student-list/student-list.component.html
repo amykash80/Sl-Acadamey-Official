@@ -1,14 +1,30 @@
 <div class="app-inner" *ngIf="showTable">
   <div class="container">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">academy</li>
+            <li class="breadcrumb-item active" aria-current="page">student-list</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
         <h4 class="card-title text-capitalize fs-5 mb-3">Academy Students</h4>
         <div class="row">
           <div class="col-12">
-            <div id="student-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div
+              id="student-listing_wrapper"
+              class="dataTables_wrapper dt-bootstrap4 no-footer"
+            >
               <div class="row">
                 <div class="col-sm-12 col-md-6">
-                  <button class="btn btn-success bg-gradient" [routerLink]="['/academy/register-student']">
+                  <button
+                    class="btn btn-success bg-gradient"
+                    [routerLink]="['/academy/register-student']"
+                  >
                     <i class="fas fa-plus mr-2"></i> Add Student
                   </button>
                 </div>
@@ -16,12 +32,12 @@
                   <div id="student-listing_filter" class="dataTables_filter">
                     <label>
                       <input
-                      type="search"
-                      [(ngModel)]="searchText"
-                      (input)="filterStudents()"
-                      class="form-control"
-                      placeholder="Search batches"
-                      aria-controls="batch-listing"
+                        type="search"
+                        [(ngModel)]="searchText"
+                        (input)="filterStudents()"
+                        class="form-control"
+                        placeholder="Search batches"
+                        aria-controls="batch-listing"
                       />
                     </label>
                   </div>
@@ -32,7 +48,6 @@
                 id="student-listing"
                 class="table dataTable no-footer"
                 aria-describedby="student-listing_info"
-                
               >
                 <thead>
                   <tr>
@@ -60,23 +75,23 @@
                     >
                       Phone Number
                     </th>
-                  
+
                     <th
                       rowspan="1"
                       colspan="1"
                       aria-label="Email: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                    Address
+                      Address
                     </th>
-                      
+
                     <th
                       rowspan="1"
                       colspan="1"
                       aria-label="Email: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                    DOB
+                      DOB
                     </th>
                     <th
                       rowspan="1"
@@ -92,7 +107,7 @@
                       aria-label="IsActive: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                    State
+                      State
                     </th>
                     <th
                       rowspan="1"
@@ -100,7 +115,7 @@
                       aria-label="Email: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                    Country
+                      Country
                     </th>
                     <th
                       rowspan="1"
@@ -125,14 +140,20 @@
                     <td>{{ student.name }}</td>
                     <td>{{ student.email }}</td>
                     <td>{{ student.phoneNumber }}</td>
-                    <td>{{ student.address}}</td>
+                    <td>{{ student.address }}</td>
                     <td>{{ student.dateOfBirth | date }}</td>
                     <td>{{ student.cityName }}</td>
                     <td>{{ student.stateName }}</td>
                     <td>{{ student.countryName }}</td>
                     <td>
-                      <span [ngClass]="student.isActive ? 'chip chip-success' : 'chip chip-danger'">
-                        {{ student.isActive ? 'Active' : 'Inactive' }}
+                      <span
+                        [ngClass]="
+                          student.isActive
+                            ? 'chip chip-success'
+                            : 'chip chip-danger'
+                        "
+                      >
+                        {{ student.isActive ? "Active" : "Inactive" }}
                       </span>
                     </td>
                     <td>
@@ -154,11 +175,13 @@
                           class="dropdown-menu dropdown-menu-left"
                         >
                           <ul class="nav flex-column">
-                         
                             <li class="nav-item">
                               <a
                                 class="nav-link fw-semibold"
-                                [routerLink]="['/academy/update-student', student.id]"
+                                [routerLink]="[
+                                  '/academy/update-student',
+                                  student.id
+                                ]"
                               >
                                 <i class="nav-link-icon fas fa-pen"></i>
                                 <span> Edit</span>
@@ -169,7 +192,9 @@
                                 class="nav-link dangered fw-semibold"
                                 (click)="deleteStudent(student.id)"
                               >
-                                <i class="nav-link-icon fas fa-trash dangered"></i>
+                                <i
+                                  class="nav-link-icon fas fa-trash dangered"
+                                ></i>
                                 <span> Delete</span>
                               </a>
                             </li>
@@ -179,36 +204,71 @@
                     </td>
                   </tr>
                 </tbody>
-              </table><div *ngIf="filteredStudentList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+              </table>
+              <div
+                *ngIf="filteredStudentList.length === 0"
+                class="text-center my-5 p-5 border rounded"
+                style="background-color: #f8f9fa"
+              >
                 <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
                 <h4 class="text-muted">No data found</h4>
               </div>
               <div class="row">
                 <div class="col-sm-12 col-md-5">
-                  <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
+                  <div
+                    class="dataTables_info"
+                    id="order-listing_info"
+                    role="status"
+                    aria-live="polite"
+                  >
                     Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
-                    {{ currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }}
+                    {{
+                      currentPage * itemsPerPage > totalItems
+                        ? totalItems
+                        : currentPage * itemsPerPage
+                    }}
                     of {{ totalItems }} enquiries
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
-                  <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers"
+                    id="order-listing_paginate"
+                  >
                     <ul class="pagination">
                       <!-- Previous Button -->
-                      <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
-                        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
+                      <li
+                        class="paginate_button page-item previous"
+                        [class.disabled]="currentPage === 1"
+                      >
+                        <button
+                          (click)="goToPage(currentPage - 1)"
+                          [disabled]="currentPage === 1"
+                          class="page-link"
+                        >
                           Previous
                         </button>
                       </li>
                       <!-- Page Numbers -->
-                      <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
+                      <li
+                        *ngFor="let page of pages"
+                        class="paginate_button page-item"
+                        [class.active]="currentPage === page"
+                      >
                         <button (click)="goToPage(page)" class="page-link">
                           {{ page }}
                         </button>
                       </li>
                       <!-- Next Button -->
-                      <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
-                        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
+                      <li
+                        class="paginate_button page-item next"
+                        [class.disabled]="currentPage === pages.length"
+                      >
+                        <button
+                          (click)="goToPage(currentPage + 1)"
+                          [disabled]="currentPage === pages.length"
+                          class="page-link"
+                        >
                           Next
                         </button>
                       </li>
@@ -228,7 +288,11 @@
   <app-spinner *ngIf="showSpinner"></app-spinner>
 </div>
 <div class="container py-5">
-<div *ngIf="showNoContent" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+  <div
+    *ngIf="showNoContent"
+    class="text-center my-5 p-5 border rounded"
+    style="background-color: #f8f9fa"
+  >
     <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
     <h4 class="text-muted">No data found</h4>
   </div>
