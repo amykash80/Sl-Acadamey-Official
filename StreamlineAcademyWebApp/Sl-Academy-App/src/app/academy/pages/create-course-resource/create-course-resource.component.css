@@ -1,1 +1,8 @@
 
+.custom-file-label::after {
+    content: "Browse";
+}
+.custom-file-input{
+    border-radius: 10px;
+
+}

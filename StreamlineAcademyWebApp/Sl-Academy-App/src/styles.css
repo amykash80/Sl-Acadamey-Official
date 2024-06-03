@@ -74,10 +74,8 @@ th {
 .vertical-nav-menu li:not(.mm-active) a > i {
   color: #878787 !important;
 }
-.container {
-  /* remove and apply only to forms */
-  /* padding: 25px;  */
-}
+
+
 .custom-card {
   border-radius: 15px; 
   overflow: hidden; 

@@ -17,6 +17,7 @@ export class BatchListComponent {
   searchText: string = '';
   showNoContent=false;
   showTable=false;
+  showSpinner=true
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
@@ -37,6 +38,8 @@ ngOnInit(){
 getAllBatchesByCourseId(){
   this.batchService.getAllBatchesByCourseId(this.courseId).subscribe({
     next: (response) => {
+      this.showSpinner=false;
+      this.showTable=true
       this.batchList = response.result;
       this.filteredBatchList = this.batchList;
       this.totalItems = this.filteredBatchList.length;

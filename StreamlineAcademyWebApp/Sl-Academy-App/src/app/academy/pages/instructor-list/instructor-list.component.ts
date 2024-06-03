@@ -19,6 +19,8 @@ export class InstructorListComponent {
   }
   instructorList: InstructorResponseModel[] = [];
   searchText=''
+  showSpinner=true;
+  showTable=false;
   filteredInstructorList: InstructorResponseModel[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10;
@@ -65,6 +67,8 @@ export class InstructorListComponent {
   loadAllInstructors() {
     this.instructorService.instructorList().subscribe({
       next: (response) => {
+        this.showSpinner=false;
+        this.showTable=true
         this.instructorList = response.result;
         this.filteredInstructorList = this.instructorList;
         this.totalItems = this.filteredInstructorList.length;

@@ -21,6 +21,8 @@ export class AssignedStudentsComponent {
   }
   searchText=''
   batchId=''
+  showSpinner=true
+  showTable=false
   filteredStudentList:StudentResponseModel[] = [];
   studentList:StudentResponseModel[]=[];
   filterStudents(event: any) {
@@ -34,6 +36,8 @@ export class AssignedStudentsComponent {
     this.batchService.getAllStudentsByBatchId(this.batchId).subscribe({
       next: (data) => {
         if (data.isSuccess) {
+          this.showSpinner=false;
+          this.showTable=true
           this.studentList = data.result;
           this.filteredStudentList = this.studentList;
 

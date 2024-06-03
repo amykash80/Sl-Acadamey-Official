@@ -19,12 +19,16 @@ export class LocationListComponent {
   pages: number[] = [];
   displayedBatchList: LocationResponseModel[] = [];
   filteredLocationList: LocationResponseModel[] = [];
+  showTable=false;
+  showSpinner=true
   ngOnInit(){
     this.getAllLocations()
   }
 getAllLocations(){
 this.locationService.getAllLocations().subscribe(res=>{
   console.log(res)
+  this.showSpinner=false;
+  this.showTable=true
   this.locationList=res.result
   this.filteredLocationList = this.locationList;
   this.totalItems = this.filteredLocationList.length;

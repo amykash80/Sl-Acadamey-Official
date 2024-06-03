@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Responses;
 using StreamlineAcademy.Persistence.Data;
 using System;
@@ -144,5 +145,24 @@ namespace StreamlineAcademy.Persistence.Repositories
             }).ToList();
         }
 
+        public  async Task<List<StudentCourseResponseModel>> GetAllStudentsByCourseId(Guid? courseId)
+        {
+            var students = await context.StudentInterests
+        .Where(si => si.CourseId == courseId)
+        .Select(si => new StudentCourseResponseModel
+        {
+            Id = si.Student!.Id,
+            Name = si.Student.User!.Name,
+            Email = si.Student.User!.Email,
+            Address = si.Student.User.Address,
+            PostalCode = si.Student.User.PostalCode,
+            PhoneNumber = si.Student.User.PhoneNumber,
+            IsActive = si.Student.User.IsActive,
+            CourseName = si.Course!.Name,
+        })
+        .ToListAsync();
+
+            return students;
+        }
     }
 }

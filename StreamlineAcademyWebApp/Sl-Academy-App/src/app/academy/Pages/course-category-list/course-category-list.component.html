@@ -13,7 +13,7 @@
                   <div class="col-sm-12 col-md-6">
                     <button class="btn btn-success bg-gradient" [routerLink]="['/academy/add-course-category']"><i class="fas fa-plus mr-2"></i> Add Category</button>
                   </div>
-                  <div class="col-sm-12 col-md-6">
+                  <div class="col-sm-12 col-md-6 search">
                     <div id="batch-listing_filter" class="dataTables_filter">
                       <label>
                         <input
@@ -197,4 +197,7 @@
         </form>
       </div>
     </div>
+  </div>
+  <div>
+    <app-spinner *ngIf="showSpinner"></app-spinner>
   </div>

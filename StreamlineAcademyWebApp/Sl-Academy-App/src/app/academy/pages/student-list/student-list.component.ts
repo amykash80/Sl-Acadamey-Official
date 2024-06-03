@@ -31,6 +31,8 @@ export class StudentListComponent {
   searchText: string = '';
   batchId: string = '';
   showStdList = false;
+  showSpinner=true;
+  showTable=false;
   showNoContent = false;
   showAssignList = true;
   filteredStudentBatchList: any;
@@ -53,6 +55,9 @@ export class StudentListComponent {
           this.currentPage = 1; 
           this.updatePagination();
           this.showStdList = true;
+          this.showSpinner=false
+          this.showTable=true;
+
           this.showNoContent = false;
         } else if (response.result.length == 0) {
           this.showStdList = false;

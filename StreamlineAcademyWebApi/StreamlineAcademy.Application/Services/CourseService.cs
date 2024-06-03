@@ -241,6 +241,8 @@ namespace StreamlineAcademy.Application.Services
             }
             return ApiResponse<CourseCategoryResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
+
+        
     }
 }
 

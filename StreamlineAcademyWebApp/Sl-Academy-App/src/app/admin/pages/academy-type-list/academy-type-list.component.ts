@@ -13,10 +13,14 @@ export class AcademyTypeListComponent {
               private sharedService:SharedService
   ) {}
   academyTypeList: AcademyTypeResponse[] = [];
+  loadSpinner=true;
+  showTable=false
   ngOnInit() {
     this.loadAllAcademyTypes();
   }
   loadAllAcademyTypes() {
+    this.loadSpinner=false;
+    this.showTable=true
     this.academyService.getAcademyTypes().subscribe({
       next: (response) => {
         this.academyTypeList = response.result;

@@ -146,7 +146,7 @@
                             <li class="nav-item">
                               <a
                                 class="nav-link fw-semibold"
-                                [routerLink]="['/academy/student-list',batch.id]"
+                                [routerLink]="['/academy/assign-batch',batch.id,courseId]"
                               >
                                 <i class="nav-link-icon fa fa-user"></i>
                                 <span> Assign</span>
@@ -238,5 +238,8 @@
       </div>
     </div>
   </div>
+</div>
+<div>
+  <app-spinner *ngIf="showSpinner"></app-spinner>
 </div>
 <app-no-content *ngIf="showNoContent"></app-no-content>
