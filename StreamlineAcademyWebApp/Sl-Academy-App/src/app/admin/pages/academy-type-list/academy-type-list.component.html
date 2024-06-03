@@ -53,7 +53,7 @@
                     <td>
                       <span [ngClass]="academyType.isActive ? 'chip chip-success' : 'chip chip-danger'">
                         {{
-                          academyType.isActive
+                          academyType.isActive | isActive
                         }}</span
                       >
                     </td>

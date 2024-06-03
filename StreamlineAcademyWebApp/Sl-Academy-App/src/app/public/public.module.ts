@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
 
+
 @NgModule({
   declarations: [
     PublicComponent,
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     LoginComponent,
     NavbarComponent,
     FotterComponent,
+    
   ],
   imports: [
     CommonModule,

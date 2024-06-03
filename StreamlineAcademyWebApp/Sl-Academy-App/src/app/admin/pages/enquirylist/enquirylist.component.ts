@@ -31,6 +31,8 @@ export class EnquirylistComponent {
   loadAllEnquiries() {
     this.enquiryService.enquiryList().subscribe({
       next: (response) => {
+        console.log(response);
+        
         this.showSpinner=false;
         this.showTable=true
         this.enquirylist = response.result;

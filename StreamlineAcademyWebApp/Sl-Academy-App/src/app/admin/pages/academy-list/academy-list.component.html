@@ -122,7 +122,7 @@
                     <td>
                       <span [ngClass]="academy.isActive ? 'chip chip-success' : 'chip chip-danger'">
                         {{
-                          academy.isActive
+                          academy.isActive | isActive
                         }}</span
                       >
                     </td>
@@ -188,7 +188,6 @@
                 <div class="col-sm-12 col-md-7">
                   <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
                     <ul class="pagination">
-                      <!-- Previous Button -->
                       <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
                         <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
                           Previous

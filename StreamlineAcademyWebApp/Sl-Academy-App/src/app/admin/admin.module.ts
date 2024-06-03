@@ -17,6 +17,7 @@ import { DashboardHeaderComponent } from './Components/dashboard-header/dashboar
 import { RegistrationStatusPipe } from '../Pipes/registration-status.pipe';
 import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enquiry.component';
 import { SharedModule } from '../shared/shared.module';
+import { IsActivePipe } from '../Pipes/is-active.pipe';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { SharedModule } from '../shared/shared.module';
     UpdateAcademyyComponent,
     DashboardHeaderComponent,
     RegistrationStatusPipe,
-    RegisterEnquiryComponent
+    RegisterEnquiryComponent,
+    IsActivePipe
+
   ],
   imports: [
     CommonModule,
