@@ -1,6 +1,6 @@
 <div class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-lg-6 col-xl-9">
+    <div>
       <form
         #academyRegistrationForm="ngForm"
         method="PUT"
@@ -20,9 +20,11 @@
               placeholder=""
               required
             />
-            <div *ngIf="name.errors?.['required']" class="text-danger">Admin Name is required.</div>
+            <div *ngIf="name.errors?.['required']" class="text-danger">
+              Admin Name is required.
+            </div>
           </div>
-          
+
           <!-- Academy Name -->
           <div class="form-group col-md-6">
             <label><i class="far fa-user"></i> Academy Name</label>
@@ -35,7 +37,9 @@
               placeholder=""
               required
             />
-            <div *ngIf="academyName.errors?.['required']" class="text-danger">Academy Name is required.</div>
+            <div *ngIf="academyName.errors?.['required']" class="text-danger">
+              Academy Name is required.
+            </div>
           </div>
 
           <!-- Email address -->
@@ -51,8 +55,12 @@
               required
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
             />
-            <div *ngIf="email.errors?.['required']" class="text-danger">Email address is required.</div>
-            <div *ngIf="email.errors?.['pattern']" class="text-danger">Invalid email format.</div>
+            <div *ngIf="email.errors?.['required']" class="text-danger">
+              Email address is required.
+            </div>
+            <div *ngIf="email.errors?.['pattern']" class="text-danger">
+              Invalid email format.
+            </div>
           </div>
 
           <!-- Phone Number -->
@@ -68,8 +76,12 @@
               required
               pattern="[0-9]{10}"
             />
-            <div *ngIf="phoneNumber.errors?.['required']" class="text-danger">Phone Number is required.</div>
-            <div *ngIf="phoneNumber.errors?.['pattern']" class="text-danger">Phone Number must be 10 digits.</div>
+            <div *ngIf="phoneNumber.errors?.['required']" class="text-danger">
+              Phone Number is required.
+            </div>
+            <div *ngIf="phoneNumber.errors?.['pattern']" class="text-danger">
+              Phone Number must be 10 digits.
+            </div>
           </div>
 
           <!-- Address -->
@@ -84,7 +96,9 @@
               placeholder=""
               required
             />
-            <div *ngIf="address.errors?.['required']" class="text-danger">Address is required.</div>
+            <div *ngIf="address.errors?.['required']" class="text-danger">
+              Address is required.
+            </div>
           </div>
 
           <!-- Postal Code -->
@@ -100,8 +114,12 @@
               required
               pattern="[0-9]{6}"
             />
-            <div *ngIf="postalCode.errors?.['required']" class="text-danger">Postal Code is required.</div>
-            <div *ngIf="postalCode.errors?.['pattern']" class="text-danger">Postal Code must be 6 digits.</div>
+            <div *ngIf="postalCode.errors?.['required']" class="text-danger">
+              Postal Code is required.
+            </div>
+            <div *ngIf="postalCode.errors?.['pattern']" class="text-danger">
+              Postal Code must be 6 digits.
+            </div>
           </div>
 
           <!-- Academy Type -->
@@ -115,9 +133,16 @@
               required
             >
               <option value="">Select Academy Type</option>
-              <option *ngFor="let academyType of academyTypeList" [value]="academyType.id">{{ academyType.academyTypeName }}</option>
+              <option
+                *ngFor="let academyType of academyTypeList"
+                [value]="academyType.id"
+              >
+                {{ academyType.academyTypeName }}
+              </option>
             </select>
-            <div *ngIf="academyTypeId.errors?.['required']" class="text-danger">Academy Type is required.</div>
+            <div *ngIf="academyTypeId.errors?.['required']" class="text-danger">
+              Academy Type is required.
+            </div>
           </div>
 
           <!-- Country -->
@@ -131,9 +156,13 @@
               required
             >
               <option value="">Select Country</option>
-              <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
+              <option *ngFor="let country of countries" [value]="country.id">
+                {{ country.countryName }}
+              </option>
             </select>
-            <div *ngIf="countryId.errors?.['required']" class="text-danger">Country is required.</div>
+            <div *ngIf="countryId.errors?.['required']" class="text-danger">
+              Country is required.
+            </div>
           </div>
 
           <!-- State -->
@@ -147,9 +176,13 @@
               required
             >
               <option value="">Select state</option>
-              <option *ngFor="let state of states" [value]="state.id">{{ state.stateName }}</option>
+              <option *ngFor="let state of states" [value]="state.id">
+                {{ state.stateName }}
+              </option>
             </select>
-            <div *ngIf="stateId.errors?.['required']" class="text-danger">State is required.</div>
+            <div *ngIf="stateId.errors?.['required']" class="text-danger">
+              State is required.
+            </div>
           </div>
 
           <!-- City -->
@@ -163,20 +196,35 @@
               required
             >
               <option value="">Select city</option>
-              <option *ngFor="let city of cities" [value]="city.id">{{ city.cityName }}</option>
+              <option *ngFor="let city of cities" [value]="city.id">
+                {{ city.cityName }}
+              </option>
             </select>
-            <div *ngIf="cityId.errors?.['required']" class="text-danger">City is required.</div>
+            <div *ngIf="cityId.errors?.['required']" class="text-danger">
+              City is required.
+            </div>
           </div>
 
           <!-- Form Button -->
-          <div class="form-btn col-12 text-center">
-            <button
-              class="th-btn black-btn-2 w-100"
-              [disabled]="academyRegistrationForm.invalid"
-              (click)="updateAcademy()"
-            >
-            <app-spinner *ngIf="loadSpinner"></app-spinner>
-              Update Now
-            </button>
+          <div class="form-btn row p-0 col-12 text-center">
+            <div class="col-md-6 ps-4 p-0">
+              <button
+                class="th-btn mb-2 md-mb-0 black-btn-1 w-full"
+                [disabled]="academyRegistrationForm.invalid"
+                (click)="updateAcademy()"
+              >
+                <app-spinner *ngIf="loadSpinner"></app-spinner>
+                Update Now
+              </button>
+            </div>
+            <div class="col-md-6 ps-4 p-0">
+              <button type="reset" class="th-btn black-btn-2 w-full">
+                Reset Form
+              </button>
+            </div>
           </div>
-       
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
