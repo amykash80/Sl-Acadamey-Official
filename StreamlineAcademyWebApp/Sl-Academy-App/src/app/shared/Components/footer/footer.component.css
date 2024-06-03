@@ -1,0 +1,9 @@
+:host {
+    display: block;
+    width: 100%;
+    background: #f8f9fa; /* Example background color */
+    padding: 10px 0; /* Example padding */
+    text-align: center; /* Example text alignment */
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Example shadow effect */
+    margin-top: auto; /* Ensures the footer is pushed to the bottom */
+  }
