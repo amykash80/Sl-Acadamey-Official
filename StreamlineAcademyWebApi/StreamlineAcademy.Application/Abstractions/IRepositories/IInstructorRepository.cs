@@ -25,8 +25,10 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<List<InstructorResponseModel>> GetAllInstructors(Guid? id);
         Task<IEnumerable<CourseResponseModel>> GetAllIntructorCourses(Guid? id);
         Task<int> Delete(User model);
-        Task<InstructorBatchResponseModel> GetInstructorBatch(Guid? id);
+        Task<List<InstructorBatchResponseModel>> GetInstructorBatches(Guid? id);
+        Task<InstructorBatchResponseModel> GetInstructionBatchByCourseId(Guid? instructorId);
         Task<InstructorResponseModel> GetInstructorAcademy(Guid? id);
+        Task<List<StudentResponseModel>> GetAllStudentsForInstructorAsync(Guid? instructorId);
 
     }
 

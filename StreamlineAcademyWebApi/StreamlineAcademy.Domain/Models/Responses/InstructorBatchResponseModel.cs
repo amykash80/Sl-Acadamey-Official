@@ -15,6 +15,7 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public DateTimeOffset EndDate { get; set; }
         public string? CourseName { get; set; }
         public string? LocationName { get; set; }
+        public bool? IsActive { get; set; }
 
     }
 }

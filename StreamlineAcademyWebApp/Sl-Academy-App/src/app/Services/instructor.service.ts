@@ -6,6 +6,7 @@ import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
 import { CourseResponse } from '../Models/Academy/Course';
 import { BatchResponseModel } from '../Models/Batch/Batch';
+import { StudentResponseModel } from '../Models/student/students';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,9 @@ export class InstructorService {
     return this.http.get<ApiResponse<CourseResponse[]>>(this.baseUrl + "Instructor/Check-my-courses");
   } 
   checkMyBatches(): Observable<ApiResponse<BatchResponseModel[]>> {
-    return this.http.get<ApiResponse<BatchResponseModel[]>>(this.baseUrl+"Instructor/Check-my-batches");
+    return this.http.get<ApiResponse<BatchResponseModel[]>>(this.baseUrl+"Instructor/Check-my-all-batches");
+  }
+  checkMyAllBatchesStudents(instructorId:string): Observable<ApiResponse<StudentResponseModel[]>> {
+    return this.http.get<ApiResponse<BatchResponseModel[]>>(this.baseUrl+"Instructor/Check-my-all-batches-students/"+instructorId);
   }
 }

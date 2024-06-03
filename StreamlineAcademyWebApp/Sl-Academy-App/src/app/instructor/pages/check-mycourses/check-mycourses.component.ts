@@ -9,20 +9,21 @@ import { InstructorService } from '../../../Services/instructor.service';
 @Component({
   selector: 'app-check-mycourses',
   templateUrl: './check-mycourses.component.html',
-  styleUrl: './check-mycourses.component.css'
+  styleUrl: './check-mycourses.component.css',
 })
 export class CheckMycoursesComponent {
   constructor(
     private router: Router,
     private courseServices: CourseService,
     private sharedService: SharedService,
-    private instructorServices:InstructorService
+    private instructorServices: InstructorService
   ) {}
   courseList: CourseResponse[] = [];
-  filteredCourseList:CourseResponse[]=[]
-  searchText:string=''
-  showNoContent=false;
-  showTable=false;
+  filteredCourseList: CourseResponse[] = [];
+  searchText: string = '';
+  showNoContent = false;
+  showTable = false;
+  loadSpinner = true;
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
@@ -32,22 +33,22 @@ export class CheckMycoursesComponent {
     this.loadAllCourse();
   }
 
-  
   loadAllCourse() {
     this.instructorServices.checkMyCourses().subscribe({
       next: (response) => {
+        console.log(response);
+        this.loadSpinner = false;
+        this.showTable = true;
         this.courseList = response.result;
-        this.filteredCourseList=this.courseList;
+        this.filteredCourseList = this.courseList;
         this.totalItems = this.filteredCourseList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
-        if(response.result.length>0){
-          this.showTable=true;
-        }
-        else{
-          this.showNoContent=true;
-          
-        }
+        this.currentPage = 1;
+        this.updatePagination();
+        // if (response.result.length==0) {
+        //   this.showTable = true;
+        // } else {
+        //   this.showNoContent = true;
+        // }
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == HttpStatusCode.Unauthorized) {
@@ -56,26 +57,29 @@ export class CheckMycoursesComponent {
       },
     });
   }
- 
-  filterCourses(event:any){
+
+  filterCourses(event: any) {
     const filterValue = event.target.value.toLowerCase();
-    this.filteredCourseList = this.courseList.filter(course => 
+    this.filteredCourseList = this.courseList.filter((course) =>
       course.name?.toLowerCase().startsWith(filterValue)
     );
     console.log(this.filteredCourseList);
     this.totalItems = this.filteredCourseList.length;
-  this.currentPage = 1;
-  this.updatePagination();
+    this.currentPage = 1;
+    this.updatePagination();
   }
   updatePagination(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
-    this.displayedCourseList = this.filteredCourseList.slice(startIndex, endIndex);
+    this.displayedCourseList = this.filteredCourseList.slice(
+      startIndex,
+      endIndex
+    );
     this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
       .fill(0)
       .map((x, i) => i + 1);
   }
-  
+
   goToPage(page: number): void {
     if (page < 1 || page > this.pages.length) {
       return;
@@ -87,7 +91,7 @@ export class CheckMycoursesComponent {
   deleteCourse(courseId: any) {
     this.sharedService
       .fireConfirmSwal('Are You sure you want to delete this Course ')
-      .then((result:any) => {
+      .then((result: any) => {
         if (result.isConfirmed) {
           this.courseServices.deleteCourse(courseId).subscribe({
             next: (response) => {
@@ -103,4 +107,3 @@ export class CheckMycoursesComponent {
       });
   }
 }
-

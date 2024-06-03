@@ -32,7 +32,7 @@ namespace StreamlineAcademy.Domain.Entities
         public Academy? Academy { get; set; }
 
         #region navigation
-        public Batch? Batch { get; set; }
+        public ICollection<Batch>? Batches { get; set; }
 
         #endregion
     }

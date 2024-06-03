@@ -43,7 +43,7 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<Instructor> GetByIdAsync(Expression<Func<Instructor, bool>> expression)
         {
-			return await context.Instructors.FirstOrDefaultAsync(expression);
+            return await context.Instructors.FirstOrDefaultAsync(expression);
 
         }
 
@@ -52,7 +52,7 @@ namespace StreamlineAcademy.Persistence.Repositories
 
             var instructor = await context.Instructors
               .Include(a => a.User)
-              .Include(a=>a.Academy)
+              .Include(a => a.Academy)
               .Include(a => a.Country)
               .Include(a => a.State)
               .Include(a => a.City)
@@ -76,8 +76,8 @@ namespace StreamlineAcademy.Persistence.Repositories
                     CountryName = instructor.Country!.CountryName,
                     StateName = instructor.State!.StateName,
                     CityName = instructor.City!.CityName,
-                    IsActive=instructor.User.IsActive,
-                    UserRole = instructor.User.UserRole,  
+                    IsActive = instructor.User.IsActive,
+                    UserRole = instructor.User.UserRole,
 
                 };
 
@@ -93,28 +93,28 @@ namespace StreamlineAcademy.Persistence.Repositories
             var instructors = await context.Instructors
                  .Where(a => a.AcademyId == id)
                 .Include(a => a.User)
-                .Include(a=>a.Academy)
+                .Include(a => a.Academy)
                 .Include(a => a.Country)
                 .Include(a => a.State)
                 .Include(a => a.City)
                 .Select(a => new InstructorResponseModel
                 {
                     Id = a.Id,
-                    Name=a.User!.Name,
+                    Name = a.User!.Name,
                     Email = a.User!.Email,
                     PhoneNumber = a.User.PhoneNumber,
                     PostalCode = a.User.PostalCode,
                     Address = a.User.Address,
                     WorkExperiance = a.WorkExperiance,
-                    DateOfBirth= a.DateOfBirth,
-                    Skill=a.Skill,
-                    AcademyName=a.Academy!.AcademyName,
+                    DateOfBirth = a.DateOfBirth,
+                    Skill = a.Skill,
+                    AcademyName = a.Academy!.AcademyName,
                     CountryName = a.Country!.CountryName,
                     StateName = a.State!.StateName,
                     CityName = a.City!.CityName,
                     UserRole = a.User.UserRole,
-                    IsActive=a.User.IsActive
-                    
+                    IsActive = a.User.IsActive
+
                 })
                 .ToListAsync();
 
@@ -146,51 +146,56 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<IEnumerable<CourseResponseModel>> GetAllIntructorCourses(Guid? id)
         {
-           var courses = await context.Courses
-         .Join(context.Batches,
-         course => course.Id,
-        batch => batch.CourseId,
-        (course, batch) => new { Course = course, Batch = batch })
-       .Where(x => x.Batch.InstructorId == id)
-       .Select(x => new CourseResponseModel
-    {
-        Id = x.Course.Id,
-        Name = x.Course.Name,
-        Description = x.Course.Description,
-        DurationInWeeks = x.Course.DurationInWeeks,
-        AcademyName = x.Course.Academy!.AcademyName, 
-        CategoryName = x.Course.CourseCategory!.CategoryName, 
-        Fee = x.Course.Fee,
-        IsActive = x.Course.IsActive,
-       
-    })
-    .ToListAsync();
+            var courses = await context.Courses
+          .Join(context.Batches,
+          course => course.Id,
+         batch => batch.CourseId,
+         (course, batch) => new { Course = course, Batch = batch })
+        .Where(x => x.Batch.InstructorId == id)
+        .Select(x => new CourseResponseModel
+        {
+            Id = x.Course.Id,
+            Name = x.Course.Name,
+            Description = x.Course.Description,
+            DurationInWeeks = x.Course.DurationInWeeks,
+            AcademyName = x.Course.Academy!.AcademyName,
+            CategoryName = x.Course.CourseCategory!.CategoryName,
+            Fee = x.Course.Fee,
+            IsActive = x.Course.IsActive,
+
+        })
+     .ToListAsync();
 
             return courses;
 
         }
 
-        public async Task<InstructorBatchResponseModel> GetInstructorBatch(Guid? instructorId)
+        public async Task<List<InstructorBatchResponseModel>> GetInstructorBatches(Guid? instructorId)
         {
-            var batch = await context.Batches
-                .Include(a => a.Course)
-                .Include(a=>a.Location)
-               .FirstOrDefaultAsync(a => a.InstructorId == instructorId);
-              
-            if(batch is not null)
+            var batches = await context.Batches
+      .Include(a => a.Course)
+      .Include(a => a.Location)
+      .Where(a => a.InstructorId == instructorId)
+      .ToListAsync();
+
+            if (batches.Any())
             {
-                var resBatch = new InstructorBatchResponseModel() {
-                Id=batch.Id,
-                BatchName=batch.BatchName,
-                BatchSize=batch.BatchSize,
-                StartDate=batch.StartDate,  
-                EndDate=batch.EndDate,
-                CourseName=batch!.Course!.Name,
-                LocationName=batch.Location!.Address
-                };
-                return resBatch;
+                var resBatches = batches.Select(batch => new InstructorBatchResponseModel()
+                {
+                    Id = batch.Id,
+                    BatchName = batch.BatchName,
+                    BatchSize = batch.BatchSize,
+                    StartDate = batch.StartDate,
+                    EndDate = batch.EndDate,
+                    IsActive= batch.IsActive,
+                   
+                    CourseName = batch.Course != null ? batch.Course.Name : string.Empty,
+                    LocationName = batch.Location != null ? batch.Location.Address : string.Empty
+                }).ToList();
+
+                return resBatches;
             }
-            return new InstructorBatchResponseModel() { };
+            return new List<InstructorBatchResponseModel>() { };
         }
         public async Task<InstructorResponseModel> GetInstructorAcademy(Guid? academyId)
         {
@@ -223,7 +228,55 @@ namespace StreamlineAcademy.Persistence.Repositories
                 };
             }
 
-            return new InstructorResponseModel(); 
+            return new InstructorResponseModel();
+        }
+
+        public async Task<InstructorBatchResponseModel> GetInstructionBatchByCourseId(Guid? instructorId)
+        {
+            var batch = await context.Batches
+     .Include(a => a.Course)
+     .Include(a => a.Location)
+    .FirstOrDefaultAsync(a => a.InstructorId == instructorId);
+
+            if (batch is not null)
+            {
+                var resBatch = new InstructorBatchResponseModel()
+                {
+                    Id = batch.Id,
+                    BatchName = batch.BatchName,
+                    BatchSize = batch.BatchSize,
+                    StartDate = batch.StartDate,
+                    EndDate = batch.EndDate,
+                    CourseName = batch!.Course!.Name,
+                    LocationName = batch.Location!.Address
+                };
+                return resBatch;
+            }
+            return new InstructorBatchResponseModel() { };
+        }
+
+        public async Task<List<StudentResponseModel>> GetAllStudentsForInstructorAsync(Guid? instructorId)
+        {
+            var batches = await context.Batches
+             .Include(b => b.Students!)
+                 .ThenInclude(s => s.User) // Ensure the User entity is also included
+             .Where(b => b.InstructorId == instructorId)
+             .ToListAsync();
+
+            var students = batches.SelectMany(b => b.Students!).ToList();
+
+            var studentResponseList = students.Select(s => new StudentResponseModel
+            {
+                Name = s.User!.Name,
+                Address = s.User!.Address,
+                PostalCode = s.User!.PostalCode,
+                PhoneNumber = s.User!.PhoneNumber,
+                EmergencyContactNo = s.EmergencyContactNo,
+                Email = s.User!.Email,
+                IsActive = s.User!.IsActive
+            }).ToList();
+
+            return studentResponseList;
         }
     }
 }

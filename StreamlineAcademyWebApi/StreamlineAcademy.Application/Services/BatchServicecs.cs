@@ -35,7 +35,7 @@ namespace StreamlineAcademy.Application.Services
             var existingBatch = await batchRepository.GetByIdAsync(x => x.BatchName == request.BatchName);
             if (existingBatch != null)
                 return ApiResponse<BatchResponseModel>.ErrorResponse(APIMessages.BatchManagement.BatchAlreadyExists, HttpStatusCodes.Conflict);
-
+            
             var batch = new Batch()
             {
                 BatchName = request.BatchName,

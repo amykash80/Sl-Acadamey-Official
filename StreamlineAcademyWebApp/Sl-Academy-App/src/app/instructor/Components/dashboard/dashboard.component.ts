@@ -22,8 +22,16 @@ export class DashboardComponent {
   ) {
     
   }
+  loggedInUserDetails!:any
+  instructorId:string=''
   ngOnInit(){
+    this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!) 
+    console.log(this.loggedInUserDetails)
+    this.instructorId=this.loggedInUserDetails.userId
+
     this.loadCourses();
+    this.loadBatches();
+    this.loadAllStudents()
    
   }
   coursesList: CourseResponse[] = [];
@@ -37,9 +45,15 @@ export class DashboardComponent {
     });
   }
    
-  loadBatches(courseId: string) {
+  loadBatches() {
     this.instructorService.checkMyBatches().subscribe((data) => {
       this.batchList = data.result;
+    });
+  }
+  loadAllStudents() {
+    this.instructorService.checkMyAllBatchesStudents(this.instructorId).subscribe((data) => {
+      this.StudentList = data.result;
+      console.log(this.StudentList)
     });
   }
   

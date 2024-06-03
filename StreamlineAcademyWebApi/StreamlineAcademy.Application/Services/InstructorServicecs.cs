@@ -184,16 +184,16 @@ namespace StreamlineAcademy.Application.Services
             }
             return ApiResponse<InstructorResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
-        public async Task<ApiResponse<InstructorBatchResponseModel>> GetInstructorBatch()
+        public async Task<ApiResponse<List<InstructorBatchResponseModel>>> GetAllInstructorBatches()
         {
             var instructorId = contextService.GetUserId();
             var instructor = await instructorRepository.GetByIdAsync(_ => _.Id ==instructorId);
             if (instructor is null)
-                return ApiResponse<InstructorBatchResponseModel>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
-            var returnVal = await instructorRepository.GetInstructorBatch(instructorId);
+                return ApiResponse<List<InstructorBatchResponseModel>>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
+            var returnVal = await instructorRepository.GetInstructorBatches(instructorId);
             if (returnVal is not null)
-                return ApiResponse<InstructorBatchResponseModel>.SuccessResponse(returnVal);
-            return ApiResponse<InstructorBatchResponseModel>.ErrorResponse(APIMessages.TechnicalError);
+                return ApiResponse<List<InstructorBatchResponseModel>>.SuccessResponse(returnVal);
+            return ApiResponse<List<InstructorBatchResponseModel>>.ErrorResponse(APIMessages.TechnicalError);
         }
 
         public async Task<ApiResponse<AttendenceResponseModel>> SaveStudentAttendance(AttendenceRequestModel model)
@@ -228,12 +228,12 @@ namespace StreamlineAcademy.Application.Services
         public async Task<bool> SendNotification(NotificationRequestModel request)
         {
             var instructorId = contextService.GetUserId();
-            var batch = await instructorRepository.GetInstructorBatch(instructorId);
+            var batch = await instructorRepository.GetInstructionBatchByCourseId(instructorId);
             var students = await batchRepository.GetAllStudentsByBatchId(batch.Id);
             var batchSchedule = await scheduleRepository.GetAllSchedulesByBatchId(batch.Id);
             var today = DateTimeOffset.UtcNow.Date;
             List<DateTimeOffset>? ScheduleDates = new List<DateTimeOffset>();
-            foreach (var schedule in batchSchedule)
+            foreach (var schedule in batchSchedule) 
             {
                 ScheduleDates.Add((DateTimeOffset)schedule.Date!);
             }
@@ -264,5 +264,17 @@ namespace StreamlineAcademy.Application.Services
 
         }
 
+
+        public async Task<ApiResponse<InstructorBatchResponseModel>> GetInstructorBatchByCourseId()
+        {
+            var instructorId = contextService.GetUserId();
+            var instructor = await instructorRepository.GetByIdAsync(_ => _.Id == instructorId);
+            if (instructor is null)
+                return ApiResponse<InstructorBatchResponseModel>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
+            var returnVal = await instructorRepository.GetInstructionBatchByCourseId(instructorId);
+            if (returnVal is not null)
+                return ApiResponse<InstructorBatchResponseModel>.SuccessResponse(returnVal);
+            return ApiResponse<InstructorBatchResponseModel>.ErrorResponse(APIMessages.TechnicalError);
+        }
     }
 }

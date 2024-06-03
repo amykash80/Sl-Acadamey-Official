@@ -1,277 +1,221 @@
 <div class="app-inner" *ngIf="showTable">
-    <div class="container">
-      <div class="card custom-card overflow-auto">
-        <div class="card-body font-manrope">
-          <h4 class="card-title text-capitalize fs-5 mb-3">Courses</h4>
-          <div class="row">
-            <div class="col-12">
-              <div
-                id="order-listing_wrapper"
-                class="dataTables_wrapper dt-bootstrap4 no-footer"
+  <div class="container">
+    <div class="card custom-card overflow-auto">
+      <div class="card-body font-manrope">
+        <h4 class="card-title text-capitalize fs-5 mb-3">My Courses</h4>
+        <div class="row">
+          <div class="col-12">
+            <div
+              id="order-listing_wrapper"
+              class="dataTables_wrapper dt-bootstrap4 no-footer"
+            >
+              <div class="row">
+                <div class="col-sm-12 col-md-6"></div>
+                <div class="col-sm-12 col-md-6">
+                  <div id="order-listing_filter" class="dataTables_filter">
+                    <label>
+                      <input
+                        type="search"
+                        [(ngModel)]="searchText"
+                        (input)="filterCourses($event)"
+                        class="form-control"
+                        placeholder="Search courses"
+                        aria-controls="order-listing"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <table
+                id="order-listing"
+                class="table dataTable no-footer"
+                aria-describedby="order-listing_info"
               >
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    
-                  </div>
-                  <div class="col-sm-12 col-md-6">
-                    <div id="order-listing_filter" class="dataTables_filter">
-                      <label>
-                        <input
-                          type="search"
-                          [(ngModel)]="searchText"
-                          (input)="filterCourses($event)"
-                          class="form-control"
-                          placeholder="Search courses"
-                          aria-controls="order-listing"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <table
-                  id="order-listing"
-                  class="table dataTable no-footer"
-                  aria-describedby="order-listing_info"
-                >
-                  <thead>
-                    <tr>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Order #: activate to sort column descending"
-                        style="width: 76.8375px"
+                <thead>
+                  <tr>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Order #: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Name
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Customer: activate to sort column ascending"
+                      style="width: 91.9375px"
+                    >
+                      Description
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Ship to: activate to sort column ascending"
+                      style="width: 75.0125px"
+                    >
+                      Duration(Weeks)
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Ship to: activate to sort column ascending"
+                      style="width: 75.0125px"
+                    >
+                      Fee
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Ship to: activate to sort column ascending"
+                      style="width: 75.0125px"
+                    >
+                      Category
+                    </th>
+
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Ship to: activate to sort column ascending"
+                      style="width: 75.0125px"
+                    >
+                      IsActive
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Ship to: activate to sort column ascending"
+                      style="width: 75.0125px"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let course of displayedCourseList">
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.description }}</td>
+                    <td>{{ course.durationInWeeks }}</td>
+                    <td>{{ course.fee | currency : "₹" }}</td>
+                    <td>{{ course.categoryName }}</td>
+                    <td>
+                      <span
+                        [ngClass]="
+                          course.isActive
+                            ? 'chip chip-success'
+                            : 'chip chip-danger'
+                        "
                       >
-                        Name
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Customer: activate to sort column ascending"
-                        style="width: 91.9375px"
+                        {{ course.isActive }}</span
                       >
-                        Description
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Ship to: activate to sort column ascending"
-                        style="width: 75.0125px"
-                      >
-                        Duration(Weeks)
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Ship to: activate to sort column ascending"
-                        style="width: 75.0125px"
-                      >
-                        Fee
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Ship to: activate to sort column ascending"
-                        style="width: 75.0125px"
-                      >
-                        Category
-                      </th>
-  
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Ship to: activate to sort column ascending"
-                        style="width: 75.0125px"
-                      >
-                        IsActive
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Ship to: activate to sort column ascending"
-                        style="width: 75.0125px"
-                      >
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let course of displayedCourseList">
-                      <td>{{ course.name }}</td>
-                      <td>{{ course.description }}</td>
-                      <td>{{ course.durationInWeeks }}</td>
-                      <td>{{ course.fee | currency:"₹" }}</td>
-                      <td>{{ course.categoryName }}</td>
-                      <td>
-                        <span
-                          [ngClass]="
-                            course.isActive
-                              ? 'chip chip-success'
-                              : 'chip chip-danger'
-                          "
+                    </td>
+                    <td>
+                      <div class="d-inline-block dropdown">
+                        <button
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          title="Row Options"
+                          class="dropdown-toggle btn btn-success after-none squared-btn"
                         >
-                          {{ course.isActive }}</span
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div
+                          tabindex="-1"
+                          role="menu"
+                          aria-hidden="true"
+                          class="dropdown-menu dropdown-menu-left"
                         >
-                      </td>
-                      <td>
-                        <div class="d-inline-block dropdown">
-                          <button
-                            type="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            title="Row Options"
-                            class="dropdown-toggle btn btn-success after-none squared-btn"
-                          >
-                            <i class="fas fa-ellipsis-v"></i>
-                          </button>
-                          <div
-                            tabindex="-1"
-                            role="menu"
-                            aria-hidden="true"
-                            class="dropdown-menu dropdown-menu-left"
-                          >
-                            <ul class="nav flex-column">
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="[
-                                    '/academy/create-course-content',
-                                    course.id
-                                  ]"
-                                >
-                                  <i class="nav-link-icon fas fa-pen"></i>
-                                  <span> Add Content</span>
-                                </a>
-                              </li>
-  
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="[
-                                    '/academy/course-content-list',
-                                    course.id
-                                  ]"
-                                >
-                                  <i class="nav-link-icon fas fa-pen"></i>
-                                  <span> Contents</span>
-                                </a>
-                              </li>
-  
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="[
-                                    '/academy/create-batch',
-                                    course.id
-                                  ]"
-                                >
-                                  <i class="nav-link-icon fas fa-boxes"></i>
-                                  <span> Add Batch</span>
-                                </a>
-                              </li>
-  
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="[
-                                    '/academy/batch-list',
-                                    course.id
-                                  ]"
-                                >
-                                  <i class="nav-link-icon fas fa-boxes"></i>
-                                  <span> Batches</span>
-                                </a>
-                              </li>
-  
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="[
-                                    '/academy/create-course-resource',
-                                    course.id
-                                  ]"
-                                >
-                                  <i class="nav-link-icon fas fa-file"></i>
-                                  <span> Add Resorce</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="[
-                                    '/academy/course-resource-list',
-                                    course.id
-                                  ]"
-                                >
-                                  <i class="nav-link-icon fa fa-upload"></i>
-                                  <span> Resources</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="[
-                                    '/academy/update-course',
-                                    course.id
-                                  ]"
-                                >
-                                  <i class="nav-link-icon fas fa-pen"></i>
-                                  <span> Edit</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link dangered fw-semibold"
-                                  (click)="deleteCourse(course.id)"
-                                >
-                                  <i
-                                    class="nav-link-icon fas fa-trash dangered"
-                                  ></i>
-                                  <span> Delete</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
+                          <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                [routerLink]="[
+                                  '/academy/batch-list',
+                                  course.id
+                                ]"
+                              >
+                                <i class="nav-link-icon fas fa-boxes"></i>
+                                <span> Batch</span>
+                              </a>
+                            </li>
+                          </ul>
                         </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div *ngIf="filteredCourseList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
-                  <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
-                  <h4 class="text-muted">No data found</h4>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
-                      Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
-                      {{ currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }}
-                      of {{ totalItems }} enquiries
-                    </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div
+                *ngIf="filteredCourseList.length === 0"
+                class="text-center my-5 p-5 border rounded"
+                style="background-color: #f8f9fa"
+              >
+                <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No data found</h4>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-5">
+                  <div
+                    class="dataTables_info"
+                    id="order-listing_info"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+                    {{
+                      currentPage * itemsPerPage > totalItems
+                        ? totalItems
+                        : currentPage * itemsPerPage
+                    }}
+                    of {{ totalItems }} enquiries
                   </div>
-                  <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
-                      <ul class="pagination">
-                        <!-- Previous Button -->
-                        <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
-                          <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
-                            Previous
-                          </button>
-                        </li>
-                        <!-- Page Numbers -->
-                        <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
-                          <button (click)="goToPage(page)" class="page-link">
-                            {{ page }}
-                          </button>
-                        </li>
-                        <!-- Next Button -->
-                        <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
-                          <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
-                            Next
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers"
+                    id="order-listing_paginate"
+                  >
+                    <ul class="pagination">
+                      <!-- Previous Button -->
+                      <li
+                        class="paginate_button page-item previous"
+                        [class.disabled]="currentPage === 1"
+                      >
+                        <button
+                          (click)="goToPage(currentPage - 1)"
+                          [disabled]="currentPage === 1"
+                          class="page-link"
+                        >
+                          Previous
+                        </button>
+                      </li>
+                      <!-- Page Numbers -->
+                      <li
+                        *ngFor="let page of pages"
+                        class="paginate_button page-item"
+                        [class.active]="currentPage === page"
+                      >
+                        <button (click)="goToPage(page)" class="page-link">
+                          {{ page }}
+                        </button>
+                      </li>
+                      <!-- Next Button -->
+                      <li
+                        class="paginate_button page-item next"
+                        [class.disabled]="currentPage === pages.length"
+                      >
+                        <button
+                          (click)="goToPage(currentPage + 1)"
+                          [disabled]="currentPage === pages.length"
+                          class="page-link"
+                        >
+                          Next
+                        </button>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -281,5 +225,8 @@
       </div>
     </div>
   </div>
-  
-  
+</div>
+
+<div *ngIf="loadSpinner">
+  <app-spinner></app-spinner>
+</div>

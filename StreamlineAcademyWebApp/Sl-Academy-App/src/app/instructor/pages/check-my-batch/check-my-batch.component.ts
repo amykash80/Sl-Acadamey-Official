@@ -3,8 +3,9 @@ import { BatchResponseModel } from '../../../Models/Batch/Batch';
 import { ActivatedRoute } from '@angular/router';
 import { BatchService } from '../../../Services/batch.service';
 import { SharedService } from '../../../Services/shared.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { InstructorService } from '../../../Services/instructor.service';
+import { StudentResponseModel } from '../../../Models/student/students';
 
 @Component({
   selector: 'app-check-my-batch',
@@ -15,6 +16,10 @@ export class CheckMyBatchComponent {
   courseId!: string
   batchList:BatchResponseModel[] = [];
   filteredList:BatchResponseModel[] = [];
+  studentList:StudentResponseModel[]=[];
+  showTable=false;
+  showTable2=false
+  loadSpinner=true;
   
   
 constructor(private activatedRoute: ActivatedRoute,
@@ -33,7 +38,11 @@ ngOnInit(){
 getAllBatches() {
   this.instructorService.checkMyBatches().subscribe({
     next: (response) => {
+      this.loadSpinner=false;
+      this.showTable=true
       this.batchList = response.result;
+      console.log(this.batchList);
+      
       this.filteredList = this.batchList;
       console.log(this.batchList);
       
@@ -42,6 +51,27 @@ getAllBatches() {
       console.log(err);
     }
   });
+}
+getAllStudentsByBatchId(batchId:any){
+  this.batchService.getAllStudentsByBatchId(batchId).subscribe({
+    next: (data) => {
+      if (data.isSuccess) {
+        this.loadSpinner=false;
+        this.showTable2=true
+        this.showTable=false
+        this.studentList = data.result;
+        console.log(this.studentList);
+      } else {
+        this.loadSpinner=false;
+
+      }
+    },
+    error: (err: HttpErrorResponse) => {
+      if (err.status == HttpStatusCode.Unauthorized) {
+        console.log(err.message);
+      }
+    },
+  })
 }
 
 // filterBatches(): void {

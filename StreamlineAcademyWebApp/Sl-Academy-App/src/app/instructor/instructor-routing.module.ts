@@ -5,6 +5,8 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AuthGuard } from '../shared/auth.guard';
 import { CheckMycoursesComponent } from './pages/check-mycourses/check-mycourses.component';
 import { CheckMyBatchComponent } from './pages/check-my-batch/check-my-batch.component';
+import { ProfileComponent } from '../shared/Pages/profile/profile.component';
+import { CheckMyStudentListComponent } from './Pages/check-my-student-list/check-my-student-list.component';
 
 const routes: Routes = [
   {path:"",component:InstructorComponent,canActivate:[AuthGuard],
@@ -13,6 +15,8 @@ const routes: Routes = [
     {path:"dashboard",component:DashboardComponent},
     {path:"check-mycourses",component:CheckMycoursesComponent},
     {path:"check-my-batch",component:CheckMyBatchComponent},
+    {path:"profile",component:ProfileComponent},
+    {path:"student-list",component:CheckMyStudentListComponent}
   ]
   }
 ];

@@ -9,6 +9,8 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { CheckMycoursesComponent } from './pages/check-mycourses/check-mycourses.component';
 import { FormsModule } from '@angular/forms';
 import { CheckMyBatchComponent } from './pages/check-my-batch/check-my-batch.component';
+import { SharedModule } from '../shared/shared.module';
+import { CheckMyStudentListComponent } from './Pages/check-my-student-list/check-my-student-list.component';
 
 
 @NgModule({
@@ -18,12 +20,15 @@ import { CheckMyBatchComponent } from './pages/check-my-batch/check-my-batch.com
     HeaderComponent,
     SidebarComponent,
     CheckMycoursesComponent,
-    CheckMyBatchComponent
+    CheckMyBatchComponent,
+    CheckMyStudentListComponent,
+    
   ],
   imports: [
     CommonModule,
     InstructorRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
     
   ]
 })

@@ -1,204 +1,338 @@
-<div class="app-inner" >
-    <div class="container">
-      <div class="card custom-card overflow-auto">
-        <div class="card-body font-manrope">
-          <h4 class="card-title text-capitalize fs-5 mb-3">Batches</h4>
-          <div class="row">
-            <div class="col-12">
-              <div id="batch-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <button class="btn btn-success bg-gradient" [routerLink]="['/academy/create-batch', courseId]">
-                      <i class="fas fa-plus mr-2"></i> Add Batch
-                    </button>
-                  </div>
-                  <div class="col-sm-12 col-md-6">
-                    <div id="batch-listing_filter" class="dataTables_filter">
-                      <label>
-                        <input
-                          type="search"
-                          
-                          class="form-control"
-                          placeholder="Search batches"
-                          aria-controls="batch-listing"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-  
-                <table
-                  id="batch-listing"
-                  class="table dataTable no-footer"
-                  aria-describedby="batch-listing_info"
-                  *ngIf="filteredList.length > 0"
-                >
-                  <thead>
-                    <tr>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Batch Name: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        Batch Name
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Batch Size: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        Batch Size
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Start Date: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        Start Date
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="End Date: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        End Date
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Instructor Name: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        Instructor Name
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Location Name: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        Location Name
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="IsActive: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        IsActive
-                      </th>
-                      <th
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Actions: activate to sort column descending"
-                        style="width: 76.8375px"
-                      >
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let batch of filteredList">
-                      <td>{{ batch.batchName }}</td>
-                      <td>{{ batch.batchSize }}</td>
-                      <td>{{ batch.startDate | date }}</td>
-                      <td>{{ batch.endDate | date}}</td>
-                      <td>{{ batch.instructorName }}</td>
-                      <td>{{ batch.locationName }}</td>
-                      <td>
-                        <span [ngClass]="batch.isActive ? 'chip chip-success' : 'chip chip-danger'">
-                          {{ batch.isActive }}
-                        </span>
-                      </td>
-                      <td>
-                        <div class="d-inline-block dropdown">
-                          <button
-                            type="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            title="Row Options"
-                            class="dropdown-toggle btn btn-success after-none squared-btn"
-                          >
-                            <i class="fas fa-ellipsis-v"></i>
-                          </button>
-                          <div
-                            tabindex="-1"
-                            role="menu"
-                            aria-hidden="true"
-                            class="dropdown-menu dropdown-menu-left"
-                          >
-                            <ul class="nav flex-column">
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="['/academy/student-list', batch.id]"
-                                >
-                                  <i class="nav-link-icon fa fa-graduation-cap"></i>
-                                  <span> students</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="['/academy/student-list',batch.id]"
-                                >
-                                  <i class="nav-link-icon fa fa-user"></i>
-                                  <span> Assign</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="['/academy/update-batch', batch.id, courseId]"
-                                >
-                                  <i class="nav-link-icon fas fa-pen"></i>
-                                  <span> Edit</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="['/academy/add-batch-schedule', batch.id, courseId]"
-                                >
-                                <i class="nav-link-icon fa fa-calendar"></i>
-                                  <span> Add Schedul</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  [routerLink]="['/academy/batch-schedule-list', batch.id, courseId]"
-                                >
-                                  <i class="nav-link-icon fa fa-calendar"></i>
-                                  <span> Schedules</span>
-                                </a>
-                              </li>
-                              
-                            </ul>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div *ngIf="filteredList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
-                  <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
-                  <h4 class="text-muted">No data found</h4>
-                </div>
-                
-                  
-                    </div>
+<div class="app-inner" *ngIf="showTable">
+  <div class="container">
+    <div class="card custom-card overflow-auto">
+      <div class="card-body font-manrope">
+        <h4 class="card-title text-capitalize fs-5 mb-3">My Batches</h4>
+        <div class="row">
+          <div class="col-12">
+            <div
+              id="batch-listing_wrapper"
+              class="dataTables_wrapper dt-bootstrap4 no-footer"
+            >
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div id="batch-listing_filter" class="dataTables_filter">
+                    <label>
+                      <input
+                        type="search"
+                        class="form-control"
+                        placeholder="Search batches"
+                        aria-controls="batch-listing"
+                      />
+                    </label>
                   </div>
                 </div>
               </div>
+
+              <table
+                id="batch-listing"
+                class="table dataTable no-footer"
+                aria-describedby="batch-listing_info"
+                *ngIf="filteredList.length > 0"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Batch Name: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Batch Name
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Batch Size: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Batch Size
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Start Date: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Start Date
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="End Date: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      End Date
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Location Name: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Course Name
+                    </th>
+
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Location Name: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Location Name
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="IsActive: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      IsActive
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Actions: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let batch of filteredList">
+                    <td>{{ batch.batchName }}</td>
+                    <td>{{ batch.batchSize }}</td>
+                    <td>{{ batch.startDate | date }}</td>
+                    <td>{{ batch.endDate | date }}</td>
+                    <td>{{ batch.courseName }}</td>
+
+                    <td>{{ batch.locationName }}</td>
+                    <td>
+                      <span
+                        [ngClass]="
+                          batch.isActive
+                            ? 'chip chip-success'
+                            : 'chip chip-danger'
+                        "
+                      >
+                        {{ batch.isActive }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="d-inline-block dropdown">
+                        <button
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          title="Row Options"
+                          class="dropdown-toggle btn btn-success after-none squared-btn"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div
+                          tabindex="-1"
+                          role="menu"
+                          aria-hidden="true"
+                          class="dropdown-menu dropdown-menu-left"
+                        >
+                          <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                (click)="getAllStudentsByBatchId(batch.id)"
+                                >
+                                <i
+                                  class="nav-link-icon fa fa-graduation-cap"
+                                ></i>
+                                <span> students</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+             
             </div>
           </div>
         </div>
-      
-  <!-- <app-no-content *ngIf="showNoContent"></app-no-content> -->
-  
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div
+*ngIf="filteredList.length === 0"
+class="text-center my-5 p-5 border rounded"
+style="background-color: #f8f9fa"
+>
+<i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+<h4 class="text-muted">No data found</h4>
+</div> -->
+
+<div>
+  <app-spinner *ngIf="loadSpinner"></app-spinner>
+</div>
+<!-- <app-no-content *ngIf="showNoContent"></app-no-content> -->
+<div class="app-inner" *ngIf="showTable2">
+  <div class="container">
+    <div class="card custom-card overflow-auto">
+      <div class="card-body font-manrope">
+        <h4 class="card-title text-capitalize fs-5 mb-3">Students</h4>
+        <div class="row">
+          <div class="col-12">
+            <div
+              id="batch-listing_wrapper"
+              class="dataTables_wrapper dt-bootstrap4 no-footer"
+            >
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div id="batch-listing_filter" class="dataTables_filter">
+                    <label>
+                      <input
+                        type="search"
+                        class="form-control"
+                        placeholder="Search students"
+                        aria-controls="batch-listing"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <table
+                id="batch-listing"
+                class="table dataTable no-footer"
+                aria-describedby="batch-listing_info"
+                *ngIf="filteredList.length > 0"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Batch Name: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                       Name
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Batch Size: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                  Email
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Start Date: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                 Phone Number
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="End Date: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                  Dob
+                    </th>
+                    
+
+                   
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="IsActive: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      IsActive
+                    </th>
+                    <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Actions: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let student of studentList">
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.phoneNumber }}</td>
+                    <td>{{ student.dateOfBirth | date }}</td>
+
+                    <td>
+                      <span
+                        [ngClass]="
+                          student.isActive
+                            ? 'chip chip-success'
+                            : 'chip chip-danger'
+                        "
+                      >
+                        {{ student.isActive }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="d-inline-block dropdown">
+                        <button
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          title="Row Options"
+                          class="dropdown-toggle btn btn-success after-none squared-btn"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div
+                          tabindex="-1"
+                          role="menu"
+                          aria-hidden="true"
+                          class="dropdown-menu dropdown-menu-left"
+                        >
+                          <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                >
+                                <i
+                                  class="nav-link-icon fa fa-envelope"
+                                ></i>
+                                <span> Notify</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                                >
+                                <i
+                                  class="nav-link-icon fa fa-clock-o"
+                                ></i>
+                                <span> Attendence</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

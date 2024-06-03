@@ -40,7 +40,7 @@ public static class APIMessages
             public static readonly string BatchNotFound = "Batch not found.";
             public static readonly string BatchUpdated = "Batch Updated Successfully.";
             public static readonly string BatchnotFound = "Batch not found.";
-            public static readonly string BatchAlreadyExists = "Batch already Exists";
+            public static readonly string BatchAlreadyExists = "Batch Name already Exists,choose another";
             public static readonly string BatchAdded = "Batch Added Successfully.";
             public static readonly string BatchDeleted = "Batch deleted Successfully";
            

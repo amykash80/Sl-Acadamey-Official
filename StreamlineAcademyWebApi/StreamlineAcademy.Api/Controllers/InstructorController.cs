@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Application.Abstractions.IServices;
 using StreamlineAcademy.Application.Services;
 using StreamlineAcademy.Application.Shared;
@@ -16,10 +17,12 @@ namespace StreamlineAcademy.Api.Controllers
     public class InstructorController : ControllerBase
     {
         private readonly IInstructorService instructorService;
+        private readonly IInstructorReository instructorRepository;
 
-        public InstructorController(IInstructorService instructorService)
+        public InstructorController(IInstructorService instructorService, IInstructorReository instructorRepository)
         {
             this.instructorService = instructorService;
+            this.instructorRepository = instructorRepository;
         }
         [HttpPost("register-instructor")]
         [Authorize(Roles = nameof(UserRole.AcademyAdmin))]
@@ -42,10 +45,13 @@ namespace StreamlineAcademy.Api.Controllers
 
         [HttpGet("Check-my-courses")]
         [Authorize(Roles = nameof(UserRole.Instructor))]
-        public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetInstructorCourses()=>await instructorService.GetAllInstructorCourses();
-        [HttpGet("Check-my-batches")]
+        public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetInstructorCourses() => await instructorService.GetAllInstructorCourses();
+        [HttpGet("Check-my-all-batches")]
         [Authorize(Roles = nameof(UserRole.Instructor))]
-        public async Task<ApiResponse<InstructorBatchResponseModel>> GetAllBatches() => await instructorService.GetInstructorBatch();
+        public async Task<ApiResponse<List<InstructorBatchResponseModel>>> GetAllBatches() => await instructorService.GetAllInstructorBatches();
+        [HttpGet("Check-my-Course-batch")]
+        [Authorize(Roles = nameof(UserRole.Instructor))]
+        public async Task<ApiResponse<InstructorBatchResponseModel>> GetMyCoursebatch() => await instructorService.GetInstructorBatchByCourseId();
         [HttpPost("save-student-attendence")]
         [Authorize(Roles = nameof(UserRole.Instructor))]
         public async Task<ApiResponse<AttendenceResponseModel>> SaveAttendence(AttendenceRequestModel model) => await instructorService.SaveStudentAttendance(model);
@@ -54,5 +60,16 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<bool> SendNotification(NotificationRequestModel model) => await instructorService.SendNotification(model);
         [HttpGet("Check-my-academy")]
         public async Task<ApiResponse<InstructorResponseModel>> GetInstructorAcademy() => await instructorService.GetInstructorAcademy();
+        [HttpGet("Check-my-all-batches-students/{instructorId:guid}")]
+        public async Task<ApiResponse<List<StudentResponseModel>>> GetStudentsofMyAllBatches(Guid? instructorId)
+        {
+            var res = await instructorRepository.GetAllStudentsForInstructorAsync(instructorId);
+            if (res is not null)
+            {
+                return ApiResponse<List<StudentResponseModel>>.SuccessResponse(res);
+            }
+            return ApiResponse<List<StudentResponseModel>>.ErrorResponse("something Went Wrong");
+
+        }
     }
 }
