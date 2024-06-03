@@ -11,7 +11,7 @@ import { BatchResponseModel } from '../../../Models/Batch/Batch';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
   constructor(
@@ -19,20 +19,17 @@ export class DashboardComponent {
     private courseService: CourseService,
     private studentService: StudentService,
     private instructorService: InstructorService
-  ) {
-    
-  }
-  loggedInUserDetails!:any
-  instructorId:string=''
-  ngOnInit(){
-    this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!) 
-    console.log(this.loggedInUserDetails)
-    this.instructorId=this.loggedInUserDetails.userId
+  ) {}
+  loggedInUserDetails!: any;
+  instructorId: string = '';
+  ngOnInit() {
+    this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
+    console.log(this.loggedInUserDetails);
+    this.instructorId = this.loggedInUserDetails.userId;
 
     this.loadCourses();
     this.loadBatches();
-    this.loadAllStudents()
-   
+    this.loadAllStudents();
   }
   coursesList: CourseResponse[] = [];
   batchList: BatchResponseModel[] = [];
@@ -44,19 +41,18 @@ export class DashboardComponent {
       this.coursesList = d.result;
     });
   }
-   
+
   loadBatches() {
     this.instructorService.checkMyBatches().subscribe((data) => {
       this.batchList = data.result;
     });
   }
   loadAllStudents() {
-    this.instructorService.checkMyAllBatchesStudents(this.instructorId).subscribe((data) => {
-      this.StudentList = data.result;
-      console.log(this.StudentList)
-    });
+    this.instructorService
+      .checkMyAllBatchesStudents(this.instructorId)
+      .subscribe((data) => {
+        this.StudentList = data.result;
+        console.log(this.StudentList);
+      });
   }
-  
 }
-
-
