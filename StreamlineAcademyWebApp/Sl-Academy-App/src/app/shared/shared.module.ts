@@ -11,7 +11,6 @@ import { ProfileComponent } from './Pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { NoContentComponent } from './Pages/no-content/no-content.component';
-import { IsActivePipe } from '../Pipes/is-active.pipe';
 
 
 @NgModule({
@@ -24,7 +23,6 @@ import { IsActivePipe } from '../Pipes/is-active.pipe';
     NotFoundComponent,
     FooterComponent,
     NoContentComponent,
-    // IsActivePipe
   ],
   imports: [
     CommonModule,
