@@ -2,6 +2,14 @@
 
   <div class="app-inner" *ngIf="showTable">
     <div class="container">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/academy/dashboard">academy</li>
+            <li class="breadcrumb-item active" aria-current="page">location-list</li>
+          </ol>
+        </nav>
+      </div>
       <div class="card custom-card overflow-auto">
         <div class="card-body font-manrope">
           <h4 class="card-title text-capitalize fs-5 mb-3">Locations</h4>
