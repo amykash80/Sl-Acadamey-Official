@@ -1,1 +1,115 @@
-<p>my-schedules works!</p>
+<div class="app-inner" *ngIf="showTable">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/student/my-batches">my batches</li>
+            <li class="breadcrumb-item active" aria-current="page">my-schedule</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="card custom-card overflow-auto">
+      <div class="card-body font-manrope">
+        <h4 class="card-title text-capitalize fs-5 mb-3">My Schedules</h4>
+        <div class="row">
+          <div class="col-12">
+            <div id="schedule-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <!-- <button class="btn btn-success bg-gradient" [routerLink]="['/academy/create-batch-schedule']">
+                    <i class="fas fa-plus mr-2"></i> Add Batch Schedule
+                  </button> -->
+                </div>
+                <div class="col-sm-12 col-md-6 search">
+                  <div id="order-listing_filter" class="dataTables_filter">
+                    <label>
+                      <input
+                        type="search"
+                        [(ngModel)]="searchText"
+                        (input)="filterSchedules()"
+                        class="form-control"
+                        placeholder="Search courses"
+                        aria-controls="order-listing"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <table id="schedule-listing" class="table dataTable no-footer" aria-describedby="schedule-listing_info">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Duration (Hours)</th>
+                    <th>Batch Name</th>
+                    <th>Content Name</th>
+                    <th>IsActive</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let schedule of displayedScheduleList">
+                    <td>{{ schedule.date | date }}</td>
+                    <td>{{ schedule.durationInHours }}</td>
+                    <td>{{ schedule.batchName }}</td>
+                    <td>{{ schedule.contentName }}</td>
+                    <td>
+                      <span [ngClass]="schedule.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                        {{ schedule.isActive }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- No Data Found Message -->
+              <div *ngIf="!showSpinner && displayedScheduleList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+                <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No data found</h4>
+              </div>
+              <!-- Pagination -->
+              <div class="row">
+                <div class="col-sm-12 col-md-5">
+                  <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
+                    Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+                    {{ currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }}
+                    of {{ totalItems }} schedules
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                  <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                    <ul class="pagination">
+                      <!-- Previous Button -->
+                      <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
+                        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
+                          Previous
+                        </button>
+                      </li>
+                      <!-- Page Numbers -->
+                      <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
+                        <button (click)="goToPage(page)" class="page-link">
+                          {{ page }}
+                        </button>
+                      </li>
+                      <!-- Next Button -->
+                      <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
+                        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
+                          Next
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <!-- Spinner -->
+  <app-spinner *ngIf="showSpinner"></app-spinner>
+</div>
+<!-- No Content Message -->
+<app-no-content *ngIf="showNoContent"></app-no-content>

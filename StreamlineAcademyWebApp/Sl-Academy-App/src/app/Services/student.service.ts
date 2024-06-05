@@ -5,6 +5,7 @@ import { StudentResponseModel, StudentScheduleResponseModel, UpdateStudentModel 
 import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
 import { AddStudent } from '../Models/student/students';
+import { BatchScheduleResponseModel } from '../Models/BatchSchedule/BatchSchedule';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class StudentService {
 
   }
   getAllMySchedules(){
-    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/check-my-all-Schedules")
+    return this.http.get<ApiResponse<BatchScheduleResponseModel[]>>(this.baseUrl+"Student/check-my-all-Schedules")
 
   }
   checkMyTodaysSchedule(){
