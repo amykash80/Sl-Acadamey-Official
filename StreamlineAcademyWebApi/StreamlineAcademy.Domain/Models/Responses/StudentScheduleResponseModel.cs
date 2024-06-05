@@ -17,6 +17,7 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public string? CourseName { get; set; }
         public string? InstructorName { get; set; }
         public string? LocationName { get; set; }
+        public bool IsActive { get; set; }  
         public IEnumerable<ScheduleResponseModel>? Schedules { get; set; }
     }
     public class StudentCourseResponseModel

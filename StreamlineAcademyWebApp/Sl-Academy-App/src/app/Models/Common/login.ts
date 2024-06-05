@@ -1,13 +1,13 @@
-import { UserRole } from "../../Enums/userrole";
+import { UserRole } from '../../Enums/userrole';
 
 export class Login {
-    email?:string;
-    password?:string
+  email?: string;
+  password?: string;
 }
-export class LoginResponse{
-    fullName?:string;
-    userRole?:UserRole;
-    userId?:string;
-    token?:string
-
+export class LoginResponse {
+  fullName?: string;
+  userRole?: UserRole;
+  userId?: string;
+  token?: string;
+  isPasswordTemporary?: boolean;
 }

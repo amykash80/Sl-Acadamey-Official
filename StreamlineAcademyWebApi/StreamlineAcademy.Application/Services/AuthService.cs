@@ -80,6 +80,7 @@ namespace StreamlineAcademy.Application.Services
                 UserId = user.Id,
                 Token = jwtProvider.GenerateToken(user),
                 FilePath = filePath,
+                IsPasswordTemporary=user.IsPasswordTemporary,
             };
 
             return ApiResponse<LoginResponseModel>.SuccessResponse(response,APIMessages.Auth.LoggedIn);

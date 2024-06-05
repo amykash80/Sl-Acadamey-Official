@@ -19,6 +19,7 @@ namespace StreamlineAcademy.Domain.Entities
         public string? Salt { get; set; } 
         public UserRole UserRole { get; set; }
         public string? ResetCode { get; set; }
+        public bool IsPasswordTemporary { get; set; } = true;
         public DateTimeOffset? ResetExpiry { get; set; }
 
         #region navigation

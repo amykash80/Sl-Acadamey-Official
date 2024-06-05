@@ -1,0 +1,204 @@
+<div class="app-inner" *ngIf="showTable">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item">academy</li>
+              <li class="breadcrumb-item active" aria-current="page">my-batch-list</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="card custom-card overflow-auto">
+        <div class="card-body font-manrope">
+          <h4 class="card-title text-capitalize fs-5 mb-3">Batches</h4>
+          <div class="row">
+            <div class="col-12">
+              <div id="batch-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row">
+                 
+                  <div class="col-sm-12 col-md-6">
+                    <div id="batch-listing_filter" class="dataTables_filter">
+                      <label>
+                        <input
+                          type="search"
+                          [(ngModel)]="searchText"
+                          (input)="filterBatches()"
+                          class="form-control"
+                          placeholder="Search batches"
+                          aria-controls="batch-listing"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+  
+                <table
+                  id="batch-listing"
+                  class="table dataTable no-footer"
+                  aria-describedby="batch-listing_info"
+                  *ngIf="filteredBatchList.length > 0"
+                >
+                  <thead>
+                    <tr>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Batch Name: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Batch Name
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Batch Size: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Batch Size
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Start Date: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Start Date
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="End Date: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        End Date
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Instructor Name: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Instructor Name
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Location Name: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Location Name
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="IsActive: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        IsActive
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Actions: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let batch of displayedBatchList">
+                      <td>{{ batch.batchName }}</td>
+                      <td>{{ batch.batchSize }}</td>
+                      <td>{{ batch.startDate | date }}</td>
+                      <td>{{ batch.endDate | date}}</td>
+                      <td>{{ batch.instructorName }}</td>
+                      <td>{{ batch.locationName }}</td>
+                      <td>
+                        <span [ngClass]="batch.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                          {{ batch.isActive }}
+                        </span>
+                      </td>
+                      <td>
+                        <div class="d-inline-block dropdown">
+                          <button
+                            type="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            title="Row Options"
+                            class="dropdown-toggle btn btn-success after-none squared-btn"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                          <div
+                            tabindex="-1"
+                            role="menu"
+                            aria-hidden="true"
+                            class="dropdown-menu dropdown-menu-left"
+                          >
+                          <li class="nav-item">
+                            <a
+                              class="nav-link fw-semibold"
+                            >
+                              <i class="nav-link-icon fa fa-calendar mx-1"></i>
+                              <span> schedules</span>
+                            </a>
+                          </li>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="filteredBatchList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+                  <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+                  <h4 class="text-muted">No data found</h4>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
+                      Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+                      {{ currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }}
+                      of {{ totalItems }} enquiries
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                      <ul class="pagination">
+                        <!-- Previous Button -->
+                        <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
+                          <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
+                            Previous
+                          </button>
+                        </li>
+                        <!-- Page Numbers -->
+                        <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
+                          <button (click)="goToPage(page)" class="page-link">
+                            {{ page }}
+                          </button>
+                        </li>
+                        <!-- Next Button -->
+                        <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
+                          <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
+                            Next
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <app-spinner *ngIf="showSpinner"></app-spinner>
+  </div>
+  <app-no-content *ngIf="showNoContent"></app-no-content>
+  

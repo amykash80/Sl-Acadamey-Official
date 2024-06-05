@@ -198,6 +198,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                         BatchSize = batchDetails.BatchSize,
                         StartDate = batchDetails.StartDate,
                         EndDate = batchDetails.EndDate,
+                        IsActive=batchDetails.IsActive,
                         CourseName = batchDetails!.Course!.Name,
                         InstructorName = batchDetails!.Instructor!.User!.Name,
                         LocationName = batchDetails!.Location!.Address,

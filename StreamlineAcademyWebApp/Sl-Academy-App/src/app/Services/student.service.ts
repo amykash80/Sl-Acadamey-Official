@@ -34,4 +34,12 @@ export class StudentService {
    studentListByCourseId(courseId:string):Observable<ApiResponse<StudentResponseModel[]>>{
     return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Batch/getAllStudentsByCourseId/"+courseId)
   }
+  getAllMybatches(){
+    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/check-my-Batches")
+
+  }
+  getAllMySchedules(){
+    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/check-my-all-Schedules")
+
+  }
 }

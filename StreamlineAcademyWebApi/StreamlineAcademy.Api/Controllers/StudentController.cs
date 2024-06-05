@@ -8,12 +8,12 @@ using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
+using System.Data;
 
 namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = nameof(UserRole.Instructor) + "," + nameof(UserRole.AcademyAdmin))]
     public class StudentController : ControllerBase
     {
         private readonly IStudentService studentService;
@@ -22,10 +22,15 @@ namespace StreamlineAcademy.Api.Controllers
         {
             this.studentService = studentService;
         }
+
         [HttpPost("register-student")]
+        [Authorize(Roles = nameof(UserRole.Instructor) + "," + nameof(UserRole.AcademyAdmin) + ",")]
+
         public async Task<ApiResponse<StudentResponseModel>> AddStudent(StudentRequestModel model) => await studentService.AddStudent(model);
         [HttpPost("assign-to-Batch")]
-        public async Task<ApiResponse<StudentResponseModel>> AddStudentToSchedule(StudentBatchRequestModel model)=>await studentService.AssignStudentToBatch(model);
+        [Authorize(Roles = nameof(UserRole.Instructor) + "," + nameof(UserRole.AcademyAdmin) + ",")]
+
+        public async Task<ApiResponse<StudentResponseModel>> AddStudentToSchedule(StudentBatchRequestModel model) => await studentService.AssignStudentToBatch(model);
         [HttpGet("check-my-Batches")]
         [Authorize(Roles =nameof(UserRole.Student))]
         public async Task<ApiResponse<IEnumerable<StudentBatchResponseModel>>> GetAllStudentBatches() => await studentService.GetStudentBatches();

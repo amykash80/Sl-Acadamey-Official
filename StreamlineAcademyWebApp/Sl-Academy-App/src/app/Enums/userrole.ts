@@ -3,4 +3,5 @@ export enum UserRole {
     AcademyAdmin = 2,
     Instructor = 3,
     Student = 4,
+    other=8,
 }
