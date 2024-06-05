@@ -32,6 +32,7 @@ export class DashboardComponent {
   scheduleList: BatchScheduleResponseModel[] = []; 
   batchList:BatchResponseModel[]=[]
   status = false;
+  resultSet:any
   addToggle() {
     this.status = !this.status;
   }
@@ -56,11 +57,12 @@ export class DashboardComponent {
     this.std.checkMyTodaysSchedule().subscribe(res => {
       if (res.isSuccess) {
         console.log(res)
-        const { date, durationInHours, batchName, contentName } = res.result; // Assuming res.data contains the required fields
-  
+        const { date, durationInHours, batchName, contentName } = res.result[0]; 
+        const formattedDate = new Date(date!).toLocaleDateString();
         Swal.fire({
           title: "schedule Information",
           html: `
+          <p><strong>Date:</strong> ${formattedDate}</p>
             <p><strong>Duration in Hours:</strong> ${durationInHours}</p>
             <p><strong>Batch Name:</strong> ${batchName}</p>
             <p><strong>Content Name:</strong> ${contentName}</p>

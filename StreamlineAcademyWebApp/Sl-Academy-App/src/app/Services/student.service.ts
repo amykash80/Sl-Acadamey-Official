@@ -44,7 +44,7 @@ export class StudentService {
 
   }
   checkMyTodaysSchedule(){
-    return this.http.get<ApiResponse<StudentScheduleResponseModel>>(this.baseUrl+"Student/check-my-todays-Schedule")
+    return this.http.get<ApiResponse<StudentScheduleResponseModel[]>>(this.baseUrl+"Student/check-my-todays-Schedule")
 
   }
 }

@@ -309,13 +309,13 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
 
             var schedules = await studentRepository.GetStudentSchedules(studentId);
-            var TodaysStudentSchedule= schedules.Where(schedule => schedule.Date == DateTimeOffset.UtcNow.Date);
+            DateTimeOffset todayLocal = DateTimeOffset.Now.Date;
+            var TodaysStudentSchedule= schedules.Where(schedule => schedule.Date == todayLocal);
             if(TodaysStudentSchedule.Any())
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.SuccessResponse(TodaysStudentSchedule, HttpStatusCodes.OK.ToString());
                return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse("There are No Schedules Today");
         }
-
-        public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> checkScheduleByDate(DateTimeOffset slectedDate)
+    public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> checkScheduleByDate(DateTimeOffset slectedDate)
         {
             var studentId = contextService.GetUserId();
             var student = await studentRepository.GetByIdAsync(_ => _.Id == studentId);

@@ -52,22 +52,31 @@ namespace StreamlineAcademy.Application.Services
                 DeletedBy = Guid.Empty,
                 DeletedDate = DateTime.Now,
             };
-            var batchSchedules = existingBatch.Schedules;
-            foreach (var item in batchSchedules!)
+            var batchSchedules = await scheduleRepository.GetAllSchedulesByBatchId(existingBatch.Id);
+            if(batchSchedules is not null)
             {
-                if (item.Date == DateTime.Today)
+                foreach (var item in batchSchedules)
                 {
-                    return ApiResponse<ScheduleResponseModel>.ErrorResponse("schedule already added for this batch for today");
+                    if (item.Date == DateTime.Today)
+                    {
+                        return ApiResponse<ScheduleResponseModel>.ErrorResponse("schedule already added for this batch for today");
+                    }
+                 
+
                 }
-            var res = await scheduleRepository.InsertAsync(schedule);
+                var res = await scheduleRepository.InsertAsync(schedule);
+
                 if (res > 0)
                 {
                     var scheduleResponse = await scheduleRepository.GetScheduleById(schedule.Id);
                     return ApiResponse<ScheduleResponseModel>.SuccessResponse(scheduleResponse, APIMessages.ScheduleManagement.ScheduleAdded, HttpStatusCodes.Created);
                 }
+                return ApiResponse<ScheduleResponseModel>.ErrorResponse("something went wrong");
+
             }
-           
             return ApiResponse<ScheduleResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+
+
         }
 
         public async Task<ApiResponse<ScheduleResponseModel>> DeleteSchedule(Guid id)
