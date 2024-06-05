@@ -32,20 +32,16 @@ export class DashboardComponent {
   scheduleList: BatchScheduleResponseModel[] = []; 
   batchList:BatchResponseModel[]=[]
   status = false;
+  todaysSchedule!:any
+  showNoSchedule=false
+  showCard=true
   resultSet:any
   addToggle() {
     this.status = !this.status;
   }
   ngOnInit() {
-    this.enquiryService.enquiryList().subscribe((response) => {
-      this.enquiryList = response.result;
-    });
-    this.academyService.academyList().subscribe((response) => {
-      this.academyList = response.result;
-    });
-    this.academyService.getAcademyTypes().subscribe((res) => {
-      this.academyTypeList = res.result;
-    });
+    this.getSchedule()
+  
     this.studentService.getAllMySchedules().subscribe((res) => {
       this.scheduleList = res.result;
     });
@@ -53,40 +49,13 @@ export class DashboardComponent {
       this.batchList = res.result;
     });
   }
-  showPopup(){
-    this.std.checkMyTodaysSchedule().subscribe(res => {
-      if (res.isSuccess) {
-        console.log(res)
-        const { date, durationInHours, batchName, contentName } = res.result[0]; 
-        const formattedDate = new Date(date!).toLocaleDateString();
-        Swal.fire({
-          title: "schedule Information",
-          html: `
-          <p><strong>Date:</strong> ${formattedDate}</p>
-            <p><strong>Duration in Hours:</strong> ${durationInHours}</p>
-            <p><strong>Batch Name:</strong> ${batchName}</p>
-            <p><strong>Content Name:</strong> ${contentName}</p>
-          `,
-          showClass: {
-            popup: `
-              animate__animated
-              animate__fadeInUp
-              animate__faster
-            `
-          },
-          hideClass: {
-            popup: `
-              animate__animated
-              animate__fadeOutDown
-              animate__faster
-            `
-          }
-        });
-      }
-      else{
-        Swal.fire(res.message);
-      }
-    });
-  
+  getSchedule(){
+    this.studentService.checkMyTodaysSchedule().subscribe(res=>{
+  this.todaysSchedule=res.result;
+  console.log(this.todaysSchedule);
+  if(res.result.length==0)
+{
+  this.showNoSchedule=true
+}    })
   }
 }
