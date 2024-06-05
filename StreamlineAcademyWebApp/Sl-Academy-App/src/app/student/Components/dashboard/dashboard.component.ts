@@ -7,6 +7,8 @@ import { EnquiryService } from '../../../Services/enquiry.service';
 import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
 import Swal from 'sweetalert2';
 import { StudentService } from '../../../Services/student.service';
+import { BatchScheduleResponseModel } from '../../../Models/BatchSchedule/BatchSchedule';
+import { BatchResponseModel } from '../../../Models/Batch/Batch';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +21,7 @@ export class DashboardComponent {
     private sharedService: SharedService,
     private academyService: AcademyService,
     private enquiryService: EnquiryService,
+    private studentService: StudentService,
     private std:StudentService
   ) {
  
@@ -26,6 +29,8 @@ export class DashboardComponent {
   academyList: AcademyResponse[] = [];
   enquiryList: EnquiryResponse[] = [];
   academyTypeList: AcademyTypeResponse[] = [];
+  scheduleList: BatchScheduleResponseModel[] = []; 
+  batchList:BatchResponseModel[]=[]
   status = false;
   addToggle() {
     this.status = !this.status;
@@ -39,6 +44,12 @@ export class DashboardComponent {
     });
     this.academyService.getAcademyTypes().subscribe((res) => {
       this.academyTypeList = res.result;
+    });
+    this.studentService.getAllMySchedules().subscribe((res) => {
+      this.scheduleList = res.result;
+    });
+    this.studentService.getAllMybatches().subscribe((res) => {
+      this.batchList = res.result;
     });
   }
   showPopup(){
