@@ -32,6 +32,7 @@ export class DashboardComponent {
   scheduleList: BatchScheduleResponseModel[] = []; 
   batchList:BatchResponseModel[]=[]
   status = false;
+  resultSet:any
   addToggle() {
     this.status = !this.status;
   }
@@ -53,27 +54,39 @@ export class DashboardComponent {
     });
   }
   showPopup(){
-    this.std.getStudentById("233").subscribe(res=>{
-    if(res.isSuccess){
-      Swal.fire({
-        title: "Custom animation with Animate.css",
-        showClass: {
-          popup: `
-            animate__animated
-            animate__fadeInUp
-            animate__faster
-          `
-        },
-        hideClass: {
-          popup: `
-            animate__animated
-            animate__fadeOutDown
-            animate__faster
-          `
-        }
-      });
-    }
-    })
+    this.std.checkMyTodaysSchedule().subscribe(res => {
+      if (res.isSuccess) {
+        console.log(res)
+        const { date, durationInHours, batchName, contentName } = res.result[0]; 
+        const formattedDate = new Date(date!).toLocaleDateString();
+        Swal.fire({
+          title: "schedule Information",
+          html: `
+          <p><strong>Date:</strong> ${formattedDate}</p>
+            <p><strong>Duration in Hours:</strong> ${durationInHours}</p>
+            <p><strong>Batch Name:</strong> ${batchName}</p>
+            <p><strong>Content Name:</strong> ${contentName}</p>
+          `,
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `
+          }
+        });
+      }
+      else{
+        Swal.fire(res.message);
+      }
+    });
   
   }
 }

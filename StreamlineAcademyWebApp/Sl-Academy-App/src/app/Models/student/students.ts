@@ -49,3 +49,11 @@ export class UpdateStudentModel {
     stateId?: string = '';
     cityId?: string = '';
   }
+  export class StudentScheduleResponseModel{
+    id?:string ;
+    date?:Date 
+    durationInHours?:number
+    batchName?: string;
+    contentName?: string;
+   
+  }
