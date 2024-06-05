@@ -38,6 +38,7 @@ export class ChangepasswordComponent {
           this.loadSpinner=false;
 
         }
+       
         if(this.userRole==UserRole.SuperAdmin){
           this.router.navigate(['/admin/dashboard']);
         }
@@ -54,7 +55,8 @@ export class ChangepasswordComponent {
 
         }
         else{
-          return;
+          this.router.navigate(['/login']);
+          ;
         }
 
       },

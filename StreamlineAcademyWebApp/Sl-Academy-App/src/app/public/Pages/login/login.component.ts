@@ -22,22 +22,17 @@ export class LoginComponent {
   loadSpinner = false;
   onLogIn() {
     this.loadSpinner = true;
-    this.authService.login(this.loginModel).subscribe({
-      next: (response) => {
-        if (response.isSuccess) {
+this.authService.login(this.loginModel).subscribe({
+  next: (response) => {
+    if (response.isSuccess) {
+      localStorage.setItem('streamlineToken', JSON.stringify(response.result.token));
+      localStorage.setItem('responseObj', JSON.stringify(response.result));
 
-          localStorage.setItem(
-            'streamlineToken',
-            JSON.stringify(response.result.token)
-          );
-          localStorage.setItem('responseObj', JSON.stringify(response.result));
+      if (response.result.isPasswordTemporary
+      ) {
+        this.sharedService.showErrorToast("please chnage your temporary password")
         this.router.navigate(['change-password']);
-
-        } else {
-          this.sharedService.showErrorToast(response.message);
-          this.loadSpinner = false;
-        }
-
+      } else {
         switch (response.result.userRole) {
           case UserRole.SuperAdmin:
             this.router.navigate(['/admin/dashboard']);
@@ -54,14 +49,19 @@ export class LoginComponent {
           default:
             break;
         }
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.InternalServerError) {
-          console.log(err.message);
-          this.sharedService.showErrorToast(err.message);
-          this.loadSpinner = false;
-        }
-      },
-    });
-  }
+      }
+    } else {
+      this.sharedService.showErrorToast(response.message);
+      this.loadSpinner = false;
+    }
+  },
+  error: (err: HttpErrorResponse) => {
+    if (err.status == HttpStatusCode.InternalServerError) {
+      console.log(err.message);
+      this.sharedService.showErrorToast(err.message);
+      this.loadSpinner = false;
+    }
+  },
+});
+}
 }

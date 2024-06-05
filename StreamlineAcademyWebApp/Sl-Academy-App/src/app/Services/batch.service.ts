@@ -35,4 +35,5 @@ return this.http.post<ApiResponse<StudentResponseModel>>(this.baseUrl+"Student/a
     return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Batch/getAllStudentsByBatchId/"+batchId)
 
   }
+  
 }

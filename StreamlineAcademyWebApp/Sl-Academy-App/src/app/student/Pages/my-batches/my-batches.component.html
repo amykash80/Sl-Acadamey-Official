@@ -1,34 +1,32 @@
-<div class="app-inner" *ngIf="showList">
+<div class="app-inner" *ngIf="showTable">
     <div class="container">
-      <div class="col">
-        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/academy/dashboard">academy</li>
-            <li class="breadcrumb-item active" aria-current="page">course-category-list</li>
-          </ol>
-        </nav>
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item">academy</li>
+              <li class="breadcrumb-item active" aria-current="page">my-batch-list</li>
+            </ol>
+          </nav>
+        </div>
       </div>
       <div class="card custom-card overflow-auto">
         <div class="card-body font-manrope">
-          <h4 class="card-title text-capitalize fs-5 mb-3">Course Categories</h4>
+          <h4 class="card-title text-capitalize fs-5 mb-3">Batches</h4>
           <div class="row">
             <div class="col-12">
-              <div
-                id="batch-listing_wrapper"
-                class="dataTables_wrapper dt-bootstrap4 no-footer"
-              >
+              <div id="batch-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">
+                 
                   <div class="col-sm-12 col-md-6">
-                    <button class="btn btn-success bg-gradient" [routerLink]="['/academy/add-course-category']"><i class="fas fa-plus mr-2"></i> Add Category</button>
-                  </div>
-                  <div class="col-sm-12 col-md-6 search">
                     <div id="batch-listing_filter" class="dataTables_filter">
                       <label>
                         <input
                           type="search"
-                         (input)="filterCategories($event)"
+                          [(ngModel)]="searchText"
+                          (input)="filterBatches()"
                           class="form-control"
-                          placeholder="Search categories"
+                          placeholder="Search batches"
                           aria-controls="batch-listing"
                         />
                       </label>
@@ -40,18 +38,57 @@
                   id="batch-listing"
                   class="table dataTable no-footer"
                   aria-describedby="batch-listing_info"
-                  *ngIf="filteredCategoryList.length > 0"
+                  *ngIf="filteredBatchList.length > 0"
                 >
                   <thead>
                     <tr>
-                    
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Batch Name: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Batch Name
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Batch Size: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Batch Size
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Start Date: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Start Date
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="End Date: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        End Date
+                      </th>
+                      <th
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Instructor Name: activate to sort column descending"
+                        style="width: 76.8375px"
+                      >
+                        Instructor Name
+                      </th>
                       <th
                         rowspan="1"
                         colspan="1"
                         aria-label="Location Name: activate to sort column descending"
                         style="width: 76.8375px"
                       >
-                      Category Name
+                        Location Name
                       </th>
                       <th
                         rowspan="1"
@@ -72,11 +109,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let category of displayedcategoryList">
-                      <td>{{ category.categoryName }}</td>
+                    <tr *ngFor="let batch of displayedBatchList">
+                      <td>{{ batch.batchName }}</td>
+                      <td>{{ batch.batchSize }}</td>
+                      <td>{{ batch.startDate | date }}</td>
+                      <td>{{ batch.endDate | date}}</td>
+                      <td>{{ batch.instructorName }}</td>
+                      <td>{{ batch.locationName }}</td>
                       <td>
-                        <span [ngClass]="category.isActive ? 'chip chip-success' : 'chip chip-danger'">
-                          {{ category.isActive }}
+                        <span [ngClass]="batch.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                          {{ batch.isActive }}
                         </span>
                       </td>
                       <td>
@@ -97,33 +139,21 @@
                             aria-hidden="true"
                             class="dropdown-menu dropdown-menu-left"
                           >
-                            <ul class="nav flex-column">
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link fw-semibold"
-                                  (click)="updateCourseCategory(category.id)"
-                                >
-                                  <i class="nav-link-icon fas fa-pen"></i>
-                                  <span> Edit</span>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a
-                                  class="nav-link dangered fw-semibold"
-                                  (click)="deleteCategory(category.id)"
-                                >
-                                  <i class="nav-link-icon fas fa-trash dangered"></i>
-                                  <span> Delete</span>
-                                </a>
-                              </li>
-                            </ul>
+                          <li class="nav-item">
+                            <a
+                              class="nav-link fw-semibold"
+                            >
+                              <i class="nav-link-icon fa fa-calendar mx-1"></i>
+                              <span> schedules</span>
+                            </a>
+                          </li>
                           </div>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <div *ngIf="filteredCategoryList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+                <div *ngIf="filteredBatchList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
                   <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
                   <h4 class="text-muted">No data found</h4>
                 </div>
@@ -167,45 +197,8 @@
       </div>
     </div>
   </div>
-
-  <div class="container my-5" *ngIf="showUpdateForm">
-    <div class="row justify-content-center">
-      <div class="col-lg-6 col-xl-6">
-        <form 
-          #updateCourseCategoryForm="ngForm"
-          method="PUT"
-          class="register-form ajax-contact"
-        >
-          <h5 class="form-title">Update Course Category</h5>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label><i class="fa fa-list alt"></i> Category Name</label>
-              <input
-                type="text"
-                class="form-control"
-                name="categoryName"
-                #name="ngModel"
-                [(ngModel)]="updateCourseCategoryModel.categoryName"
-                placeholder="category name"
-                required
-              />
-              <div *ngIf="name.invalid && name.touched" class="error-message">
-                Category Name is required.
-              </div>
-            </div>
-  
-            <div class="form-btn col-12 text-center">
-              <button [disabled]="updateCourseCategoryForm.invalid" (click)="update()" class="th-btn black-btn-2 w-100" style="cursor:pointer">
-                <app-spinner *ngIf="loadSpinner"></app-spinner>
-                update Category
-              </button>
-            </div>
-          </div>
-          <p class="form-messages mb-0 mt-3"></p>
-        </form>
-      </div>
-    </div>
-  </div>
   <div>
     <app-spinner *ngIf="showSpinner"></app-spinner>
   </div>
+  <app-no-content *ngIf="showNoContent"></app-no-content>
+  
