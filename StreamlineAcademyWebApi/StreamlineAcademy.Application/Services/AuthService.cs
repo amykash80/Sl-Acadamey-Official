@@ -57,9 +57,16 @@ namespace StreamlineAcademy.Application.Services
 
             user.Salt = AppEncryption.GenerateSalt();
             user.Password = AppEncryption.CreatePassword(model.NewPassword!, user.Salt);
+            
+
             int returnVal = await authRepository.UpdateAsync(user);
             if (returnVal > 0)
+            {
+                user.IsPasswordTemporary = false;
+                await authRepository.UpdateAsync(user);
                 return ApiResponse<string>.SuccessResponse(APIMessages.Auth.PasswordChangedSuccess, HttpStatusCodes.OK.ToString());
+            }
+               
             return ApiResponse<string>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);   
         }
 

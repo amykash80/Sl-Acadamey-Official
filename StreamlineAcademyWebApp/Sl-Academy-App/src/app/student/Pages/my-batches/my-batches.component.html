@@ -75,6 +75,14 @@
                         End Date
                       </th>
                       <th
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="End Date: activate to sort column descending"
+                      style="width: 76.8375px"
+                    >
+                      Course Name
+                    </th>
+                      <th
                         rowspan="1"
                         colspan="1"
                         aria-label="Instructor Name: activate to sort column descending"
@@ -114,6 +122,7 @@
                       <td>{{ batch.batchSize }}</td>
                       <td>{{ batch.startDate | date }}</td>
                       <td>{{ batch.endDate | date}}</td>
+                      <td>{{ batch.courseName }}</td>
                       <td>{{ batch.instructorName }}</td>
                       <td>{{ batch.locationName }}</td>
                       <td>

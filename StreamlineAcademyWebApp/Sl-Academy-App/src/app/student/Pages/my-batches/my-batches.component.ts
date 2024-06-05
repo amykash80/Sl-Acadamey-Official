@@ -40,6 +40,7 @@ ngOnInit(){
 getAllBatchesByCourseId(){
   this.studentService.getAllMybatches().subscribe({
     next: (response) => {
+      console.log(response)
       this.showSpinner=false;
       this.showTable=true
       this.batchList = response.result;

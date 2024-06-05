@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
-import { StudentResponseModel, UpdateStudentModel } from '../Models/student/students';
+import { StudentResponseModel, StudentScheduleResponseModel, UpdateStudentModel } from '../Models/student/students';
 import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
 import { AddStudent } from '../Models/student/students';
@@ -40,6 +40,10 @@ export class StudentService {
   }
   getAllMySchedules(){
     return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/check-my-all-Schedules")
+
+  }
+  checkMyTodaysSchedule(){
+    return this.http.get<ApiResponse<StudentScheduleResponseModel>>(this.baseUrl+"Student/check-my-todays-Schedule")
 
   }
 }
