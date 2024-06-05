@@ -52,12 +52,21 @@ namespace StreamlineAcademy.Application.Services
                 DeletedBy = Guid.Empty,
                 DeletedDate = DateTime.Now,
             };
-            var res = await scheduleRepository.InsertAsync(schedule);
-            if (res > 0)
+            var batchSchedules = existingBatch.Schedules;
+            foreach (var item in batchSchedules!)
             {
-                var scheduleResponse = await scheduleRepository.GetScheduleById(schedule.Id);
-                return ApiResponse<ScheduleResponseModel>.SuccessResponse(scheduleResponse, APIMessages.ScheduleManagement.ScheduleAdded, HttpStatusCodes.Created);
+                if (item.Date == DateTime.Today)
+                {
+                    return ApiResponse<ScheduleResponseModel>.ErrorResponse("schedule already added for this batch for today");
+                }
+            var res = await scheduleRepository.InsertAsync(schedule);
+                if (res > 0)
+                {
+                    var scheduleResponse = await scheduleRepository.GetScheduleById(schedule.Id);
+                    return ApiResponse<ScheduleResponseModel>.SuccessResponse(scheduleResponse, APIMessages.ScheduleManagement.ScheduleAdded, HttpStatusCodes.Created);
+                }
             }
+           
             return ApiResponse<ScheduleResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
 
