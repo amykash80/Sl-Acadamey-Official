@@ -83,6 +83,9 @@ export class DashboardComponent {
           }
         });
       }
+      else{
+        Swal.fire(res.message);
+      }
     });
   
   }
