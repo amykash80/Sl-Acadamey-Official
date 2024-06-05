@@ -19,11 +19,19 @@ courseContentModel:CourseContent=new CourseContent();
 courses:CourseResponse[]=[];
 courseId:string=''
 loadSpinner=false;
+courseRes:CourseResponse=new CourseResponse()
+
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
     this.courseId=paramVal['id'];
+    this.getcourseById()
   })
 }
+getcourseById(){
+  this.courseService.getCourseById(this.courseId).subscribe(data =>{
+   this.courseRes=data.result
+  })
+  }
 
 createCourseContent(){
   this.loadSpinner=true;

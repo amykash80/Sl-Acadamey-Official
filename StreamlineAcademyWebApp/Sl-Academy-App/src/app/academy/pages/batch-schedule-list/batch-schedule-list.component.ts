@@ -4,6 +4,10 @@ import { BatchscheduleService } from '../../../Services/batchschedule.service';
 import { SharedService } from '../../../Services/shared.service';
 import { BatchScheduleResponseModel } from '../../../Models/BatchSchedule/BatchSchedule';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { BatchService } from '../../../Services/batch.service';
+import { BatchResponseModel } from '../../../Models/Batch/Batch';
+import { CourseService } from '../../../Services/course.service';
+import { CourseResponse } from '../../../Models/Academy/Course';
 
 @Component({
   selector: 'app-batch-schedule-list',
@@ -14,6 +18,9 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 export class BatchScheduleListComponent {
   activatedRoute=inject(ActivatedRoute);
   batchScheduleService=inject(BatchscheduleService);
+  batchService=inject(BatchService)
+  courseService=inject(CourseService)
+
   sharedService=inject(SharedService)
   batchId:string=''
   courseId:string=''
@@ -27,14 +34,31 @@ export class BatchScheduleListComponent {
   showSpinner=true
   showTable=false
   displayedBatchScheduleList: BatchScheduleResponseModel[] = [];
+  courseRes:BatchResponseModel=new BatchResponseModel()
+  courseResponse:CourseResponse=new CourseResponse()
+
 
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.batchId=paramVal['id']
   this.courseId=paramVal['courseId']
   this.loadAllBatchSchedules(); 
+  this.getBatchById()
+  this.getCourseById()
   })
 }
+getBatchById(){
+  this.batchService.getBatchById(this.batchId).subscribe(data =>{
+   this.courseRes=data.result
+   console.log(this.courseRes)
+  })
+  }
+  getCourseById(){
+    this.courseService.getCourseById(this.courseId).subscribe(data =>{
+     this.courseResponse=data.result
+     console.log(this.courseResponse)
+    })
+    }
 filterBatchSchedule(): void {
   if (!this.searchText.trim()) {
     this.filterBatchSchedules = this.batchScheduleList.slice();

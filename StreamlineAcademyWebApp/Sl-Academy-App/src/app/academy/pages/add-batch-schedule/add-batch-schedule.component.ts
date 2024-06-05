@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BatchScheduleRequestModel } from '../../../Models/BatchSchedule/BatchSchedule';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { BatchService } from '../../../Services/batch.service';
 
 @Component({
   selector: 'app-add-batch-schedule',
@@ -14,7 +15,8 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 export class AddBatchScheduleComponent {
   batchScheduleService=inject(BatchscheduleService)
-  sharedService=inject(SharedService)
+  sharedService=inject(SharedService);
+  batchService=inject(BatchService)
   router=inject(Router)
   activatedRoute=inject(ActivatedRoute)
   batchScheduleModel:BatchScheduleRequestModel=new BatchScheduleRequestModel();
@@ -23,16 +25,25 @@ export class AddBatchScheduleComponent {
   courseId:string=''
   contents: any[] = [];
   loadSpinner: boolean = false;
+  courseRes:BatchResponseModel=new BatchResponseModel()
+
 
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
     this.batchId=paramVal['id'];
     this.courseId=paramVal['cId']
+    this.getBatchById()
     
   })
   this.getAllContents();
 
 }
+getBatchById(){
+  this.batchService.getBatchById(this.batchId).subscribe(data =>{
+   this.courseRes=data.result
+   console.log(this.courseRes)
+  })
+  }
 getAllContents() {
   this.batchScheduleService.getContents(this.courseId).subscribe((contents) => {
     this.contents = contents.result;
