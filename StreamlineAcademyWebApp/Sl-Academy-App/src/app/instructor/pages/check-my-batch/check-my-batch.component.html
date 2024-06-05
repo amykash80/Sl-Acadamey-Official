@@ -1,12 +1,22 @@
 <div class="app-inner" *ngIf="showTable">
   <div class="container">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">instructor</li>
+            <li class="breadcrumb-item active" aria-current="page">batch-list</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
-        <h4 class="card-title text-capitalize fs-5 mb-3">My Batches</h4>
+        <h4 class="card-title text-capitalize fs-5 mb-3">Batches</h4>
         <div class="row">
           <div class="col-12">
             <div
-              id="batch-listing_wrapper"
+              id="order-listing_wrapper"
               class="dataTables_wrapper dt-bootstrap4 no-footer"
             >
               <div class="row">

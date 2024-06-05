@@ -1,11 +1,25 @@
 <div class="app-inner" *ngIf="showTable">
   <div class="container">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">academy</li>
+            <li class="breadcrumb-item " >course-list</li>
+            <li class="breadcrumb-item active" aria-current="page">content-list</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
-        <h4 class="card-title text-capitalize fs-5 mb-3">Content List</h4>
+        <h4 class="card-title text-capitalize fs-5 mb-3">Contents</h4>
         <div class="row">
           <div class="col-12">
-            <div id="content-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div
+              id="order-listing_wrapper"
+              class="dataTables_wrapper dt-bootstrap4 no-footer"
+            >
               <div class="row">
                 <div class="col-sm-12 col-md-6">
                   <button class="btn btn-success bg-gradient" [routerLink]="['/academy/create-course-content',courseId]"><i class="fas fa-plus mr-2"></i> Add Content</button>

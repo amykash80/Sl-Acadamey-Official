@@ -258,10 +258,10 @@ namespace StreamlineAcademy.Persistence.Repositories
         public async Task<List<StudentResponseModel>> GetAllStudentsForInstructorAsync(Guid? instructorId)
         {
             var batches = await context.Batches
-             .Include(b => b.Students!)
-                 .ThenInclude(s => s.User) // Ensure the User entity is also included
-             .Where(b => b.InstructorId == instructorId)
-             .ToListAsync();
+       .Include(b => b.Students!)
+           .ThenInclude(s => s.User) // Ensure the User entity is also included
+       .Where(b => b.InstructorId == instructorId)
+       .ToListAsync();
 
             var students = batches.SelectMany(b => b.Students!).ToList();
 

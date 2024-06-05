@@ -24,6 +24,8 @@ export class CourseResourceListComponent {
   totalItems: number = 0;
   pages: number[] = [];
   displayedResourceList: CourseResourceResponse[] = [];
+  showSpinner=true;
+  showTable=false;
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.courseId=paramVal['id']
@@ -34,6 +36,8 @@ ngOnInit(){
 loadAllCourseResource(){
   this.courseResourceService.getCourseResourceByCourseId(this.courseId).subscribe({
     next: (response) => {
+      this.showSpinner=false;
+      this.showTable=true
       this.courseResourceList = response.result;
       this.filteredResourceList = this.courseResourceList;
       this.totalItems = this.filteredResourceList.length;
