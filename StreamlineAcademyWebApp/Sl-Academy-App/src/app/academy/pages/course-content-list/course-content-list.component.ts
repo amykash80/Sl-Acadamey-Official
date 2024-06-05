@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseService } from '../../../Services/course.service';
-import { CourseContentResponse } from '../../../Models/Academy/Course';
+import { CourseContentResponse, CourseResponse } from '../../../Models/Academy/Course';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { SharedService } from '../../../Services/shared.service';
 
@@ -24,14 +24,23 @@ export class CourseContentListComponent {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
+  courseRes: CourseResponse = new CourseResponse();
+
   displayecontentList: CourseContentResponse[] = [];
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.courseId=paramVal['id']
   this.loadAllCourseContents();
+  this.getcourseById()
   
   })
 }
+getcourseById(){
+  this.courseService.getCourseById(this.courseId).subscribe(data =>{
+   console.log(data)
+   this.courseRes=data.result
+  })
+  }
 loadAllCourseContents(){
   this.courseService.getCourseContentsByCourseId(this.courseId).subscribe({
     next: (response) => {

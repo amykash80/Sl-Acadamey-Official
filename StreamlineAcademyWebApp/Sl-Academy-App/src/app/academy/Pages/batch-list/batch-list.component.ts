@@ -4,6 +4,8 @@ import { BatchService } from '../../../Services/batch.service';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SharedService } from '../../../Services/shared.service';
+import { CourseService } from '../../../Services/course.service';
+import { CourseResponse } from '../../../Models/Academy/Course';
 
 @Component({
   selector: 'app-batch-list',
@@ -22,9 +24,12 @@ export class BatchListComponent {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
+  flag:string=''
+  courseRes:CourseResponse=new CourseResponse()
   displayedBatchList: BatchResponseModel[] = [];
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
+           private courseService: CourseService,
           private sharedService:SharedService){
   this.activatedRoute.params.subscribe((paramVal) => {
     this.courseId = paramVal['courseId'];
@@ -33,6 +38,13 @@ constructor(private activatedRoute: ActivatedRoute,
 }
 ngOnInit(){
   this.getAllBatchesByCourseId();
+  this.getcourseById()
+}
+getcourseById(){
+this.courseService.getCourseById(this.courseId).subscribe(data =>{
+ this.courseRes=data.result
+ console.log(this.courseRes)
+})
 }
 
 getAllBatchesByCourseId(){

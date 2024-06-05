@@ -4,6 +4,8 @@ import { CourseresourceService } from '../../../Services/courseresource.service'
 import { SharedService } from '../../../Services/shared.service';
 import { CourseResourceResponse } from '../../../Models/CourseResource/CourseResource';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { CourseResponse } from '../../../Models/Academy/Course';
+import { CourseService } from '../../../Services/course.service';
 
 @Component({
   selector: 'app-course-resource-list',
@@ -13,6 +15,7 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 export class CourseResourceListComponent {
   activatedRoute=inject(ActivatedRoute);
   courseResourceService=inject(CourseresourceService);
+  courseService=inject(CourseService)
   sharedService=inject(SharedService)
   courseId:string=''
   apiBaseUrl: string = 'http://localhost:5232';
@@ -26,13 +29,22 @@ export class CourseResourceListComponent {
   displayedResourceList: CourseResourceResponse[] = [];
   showSpinner=true;
   showTable=false;
+  courseRes: CourseResponse = new CourseResponse();
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
   this.courseId=paramVal['id']
   this.loadAllCourseResource();
+  this.getcourseById()
+  
   
   })
 }
+getcourseById(){
+  this.courseService.getCourseById(this.courseId).subscribe(data =>{
+   console.log(data)
+   this.courseRes=data.result
+  })
+  }
 loadAllCourseResource(){
   this.courseResourceService.getCourseResourceByCourseId(this.courseId).subscribe({
     next: (response) => {

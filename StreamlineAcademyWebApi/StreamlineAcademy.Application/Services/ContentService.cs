@@ -28,6 +28,9 @@ namespace StreamlineAcademy.Application.Services
 
         public async Task<ApiResponse<CourseContentResponseModel>> CreateContent(CourseContentRequestModel request)
         {
+            var task = await contentRepository.GetByIdAsync(x => x.TaskName == request.TaskName);
+            if (task is not null)
+                return ApiResponse<CourseContentResponseModel>.ErrorResponse("contentName alraedy taken.choose another name");
             var courseId = await courseRepository.GetByIdAsync(x => x.Id == request.CourseId);
             if (courseId == null)
                 return ApiResponse<CourseContentResponseModel>.ErrorResponse(APIMessages.CourseManagement.CourseNotFound, HttpStatusCodes.Conflict);

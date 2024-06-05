@@ -60,7 +60,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                     Description = a.Description,
                     Type = a.Type!,
                     FilePath = a.FilePath,
-                    CourseName = a.Name,
+                    CourseName = a.Course!.Name,
                     IsActive=a.IsActive,
                 })
                 .ToListAsync();

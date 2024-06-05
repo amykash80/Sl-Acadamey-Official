@@ -117,3 +117,6 @@ li.breadcrumb-item.active {
 li.breadcrumb-item.active::before {
   color: inherit;
 }
+.breadcrumb-item{
+  cursor:pointer
+}
