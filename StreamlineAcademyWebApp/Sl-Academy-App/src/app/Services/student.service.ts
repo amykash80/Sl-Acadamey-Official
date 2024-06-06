@@ -47,4 +47,8 @@ export class StudentService {
     return this.http.get<ApiResponse<StudentScheduleResponseModel[]>>(this.baseUrl+"Student/check-my-todays-Schedule")
 
   }
+  getSchedule(date: string): Observable<any> {
+    const url = `${this.baseUrl}/check-Schedule-by-date/${date}`;
+    return this.http.get<any>(url);
+  }
 }

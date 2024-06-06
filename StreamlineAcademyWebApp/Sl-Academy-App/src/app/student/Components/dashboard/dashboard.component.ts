@@ -24,16 +24,20 @@ export class DashboardComponent {
     private studentService: StudentService,
     private std: StudentService
   ) {}
+  model!: { year: number, month: number, day: number };
+
   academyList: AcademyResponse[] = [];
   enquiryList: EnquiryResponse[] = [];
   academyTypeList: AcademyTypeResponse[] = [];
   scheduleList: BatchScheduleResponseModel[] = [];
   batchList: BatchResponseModel[] = [];
   status = false;
+  selectedDate!: string;
   todaysSchedule!: any;
   showNoSchedule = false;
   showCard = true;
   resultSet: any;
+ 
   addToggle() {
     this.status = !this.status;
   }
@@ -55,5 +59,22 @@ export class DashboardComponent {
         this.showNoSchedule = true;
       }
     });
+  }
+  fetchSchedule(): void {
+    if (this.selectedDate) {
+      const formattedDate = new Date(this.selectedDate).toISOString();
+      console.log(formattedDate);
+      
+      this.studentService.getSchedule(formattedDate).subscribe(
+        response => {
+       console.log(response)
+        },
+        error => {
+          console.error('Error fetching schedule:', error);
+        }
+      );
+    } else {
+      console.error('No date selected');
+    }
   }
 }

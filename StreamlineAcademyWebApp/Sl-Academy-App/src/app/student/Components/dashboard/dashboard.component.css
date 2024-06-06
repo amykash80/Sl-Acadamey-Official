@@ -687,3 +687,14 @@ footer.sticky-footer {
   color: black;
   font-weight: 700;
 }
+.widget-chart input[type="date"] {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.widget-chart button {
+  width: 100%;
+}
