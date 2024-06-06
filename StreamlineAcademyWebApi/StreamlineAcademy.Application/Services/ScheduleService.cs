@@ -114,10 +114,6 @@ namespace StreamlineAcademy.Application.Services
         public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> GetAllSchedulesByBatchId(Guid? batchId)
         {
             var scheduleId = await scheduleRepository.GetAsync(x => x.BatchId == batchId);
-            if (scheduleId == null)
-            {
-                return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse(APIMessages.ScheduleManagement.Schedulesnotfound, HttpStatusCodes.NotFound);
-            }
             var schedule = await scheduleRepository.GetAllSchedulesByBatchId(batchId);
             if (schedule != null && schedule.Any())
             {

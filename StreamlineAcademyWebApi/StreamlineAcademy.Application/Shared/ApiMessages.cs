@@ -37,7 +37,7 @@ public static class APIMessages
     }
         public static class BatchManagement
         {
-            public static readonly string BatchNotFound = "No Batches Found.";
+            public static readonly string BatchNotFound = "Batch not found.";
             public static readonly string BatchUpdated = "Batch Updated Successfully.";
             public static readonly string BatchnotFound = "Batch not found.";
             public static readonly string BatchAlreadyExists = "Batch Name already Exists,choose another";
@@ -62,7 +62,7 @@ public static class APIMessages
             public static readonly string ContentAdded = "Content Added Successfully.";
             public static readonly string ContentUpdated = "Content Updated Successfully.";
             public static readonly string ContentDeleted = "Content deleted Successfully";
-            public static readonly string CourseContentNotFound = "No Contents found";
+            public static readonly string CourseContentNotFound = "CourseContent not Found";
 
         }
         public static class ScheduleManagement
@@ -73,7 +73,6 @@ public static class APIMessages
             public static readonly string AllScheduleNotFound = "Schedule not found.";
             public static readonly string ScheduleUpdated = "Schedule Updated Successfully.";
             public static readonly string StartTimeMustbebeforeEndtime = "Start time must be before end time.";
-            public static readonly string Schedulesnotfound = "No Schedules Found";
         }
 
         public static class CourseManagement
@@ -93,7 +92,6 @@ public static class APIMessages
             public static readonly string CourseCategoryUpdated = "Course category Updated Successfully.";
             public static readonly string CourseCategoryAlreadyRegistered = "CourseCategory already Added";
             public static readonly string CourseCategoryDeleted = "Course Category deleted.";
-            public static readonly string CourseCategoriesNotFound = "No CourseCategories found.";
 
 
         }
