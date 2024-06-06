@@ -138,11 +138,7 @@ namespace StreamlineAcademy.Application.Services
 
         public async Task<ApiResponse<IEnumerable<BatchResponseModel>>> GetAllBatchesByCourseId(Guid? courseId)
         {
-            var batch = await batchRepository.GetByIdAsync(b => b.CourseId == courseId);
-            if (batch == null)
-            {
-                return ApiResponse<IEnumerable<BatchResponseModel>>.ErrorResponse(APIMessages.BatchManagement.BatchNotFound, HttpStatusCodes.NotFound);
-            }
+           
             var batches = await batchRepository.GetAllBatchByCourseId(courseId);
             if (batches != null && batches.Any())
             {
@@ -150,7 +146,7 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<BatchResponseModel>>.SuccessResponse(sortedBatches, $"Found {batches.Count()} Batches");
             }
 
-            return ApiResponse<IEnumerable<BatchResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+            return ApiResponse<IEnumerable<BatchResponseModel>>.ErrorResponse("No Batches Found", HttpStatusCodes.InternalServerError);
         }
 
         public async Task<ApiResponse<IEnumerable<StudentByBatchResponseModel>>> GetAllStudentsByBatchId(Guid? batchId)

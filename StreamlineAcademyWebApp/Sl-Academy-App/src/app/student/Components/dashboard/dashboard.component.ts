@@ -22,26 +22,24 @@ export class DashboardComponent {
     private academyService: AcademyService,
     private enquiryService: EnquiryService,
     private studentService: StudentService,
-    private std:StudentService
-  ) {
- 
-  }
+    private std: StudentService
+  ) {}
   academyList: AcademyResponse[] = [];
   enquiryList: EnquiryResponse[] = [];
   academyTypeList: AcademyTypeResponse[] = [];
-  scheduleList: BatchScheduleResponseModel[] = []; 
-  batchList:BatchResponseModel[]=[]
+  scheduleList: BatchScheduleResponseModel[] = [];
+  batchList: BatchResponseModel[] = [];
   status = false;
-  todaysSchedule!:any
-  showNoSchedule=false
-  showCard=true
-  resultSet:any
+  todaysSchedule!: any;
+  showNoSchedule = false;
+  showCard = true;
+  resultSet: any;
   addToggle() {
     this.status = !this.status;
   }
   ngOnInit() {
-    this.getSchedule()
-  
+    this.getSchedule();
+
     this.studentService.getAllMySchedules().subscribe((res) => {
       this.scheduleList = res.result;
     });
@@ -49,16 +47,13 @@ export class DashboardComponent {
       this.batchList = res.result;
     });
   }
-  getSchedule(){
-    this.studentService.checkMyTodaysSchedule().subscribe(res=>{
-      if(res.isSuccess){
-        this.todaysSchedule=res.result;
-
+  getSchedule() {
+    this.studentService.checkMyTodaysSchedule().subscribe((res) => {
+      if (res.isSuccess) {
+        this.todaysSchedule = res.result;
+      } else {
+        this.showNoSchedule = true;
       }
-      else{
-  this.showNoSchedule=true
-        
-      }
-   })
+    });
   }
 }
