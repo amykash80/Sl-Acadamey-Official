@@ -120,3 +120,7 @@ li.breadcrumb-item.active::before {
 .breadcrumb-item{
   cursor:pointer
 }
+.custom-class .swal2-popup {
+  font-size: 14px; 
+  width: 100px;
+}

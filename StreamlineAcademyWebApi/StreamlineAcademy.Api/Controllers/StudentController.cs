@@ -48,7 +48,7 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> CheckMyTodaysSchedule() => await studentService.checkMyTodaysSchedule();
         [HttpGet("check-Schedule-by-date/{selectDate:datetime}")]
         [Authorize(Roles = nameof(UserRole.Student))]
-        public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> CheckScheduleVyDate(DateTimeOffset selectDate) => await studentService.checkScheduleByDate(selectDate);
+        public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> CheckScheduleVyDate(DateTime selectDate) => await studentService.checkScheduleByDate(selectDate);
         [HttpGet("check-my-attendence")]
         [Authorize(Roles = nameof(UserRole.Student))]
         public async Task<ApiResponse<IEnumerable<AttendenceResponseModel>>> CheckMyattendence() => await studentService.CheckMyAttendence();

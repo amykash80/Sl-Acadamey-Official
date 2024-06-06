@@ -1,4 +1,4 @@
-<div class="app-main__inner">
+<div class="app-main__inner ml-1">
   <div class="app-page-title">
     <div class="page-title-wrapper">
       <div class="col">
@@ -25,9 +25,7 @@
               <i class="fa fa-boxes text-white"></i>
             </div>
             <div class="widget-numbers text-white"></div>
-            <div
-              class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
-            >
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
               Total Batches
             </div>
             <div class="widget-description fw-bold opacity-8">
@@ -44,9 +42,7 @@
               <i class="fa fa-calendar text-white"></i>
             </div>
             <div class="widget-numbers text-white"></div>
-            <div
-              class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
-            >
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
               Total Schedules
             </div>
             <div class="widget-description fw-bold opacity-8">
@@ -66,28 +62,16 @@
               <i class="fa fa-calendar text-white"></i>
             </div>
             <div class="widget-numbers text-white"></div>
-            <div
-              class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold"
-            >
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
               Today's Schedule
             </div>
             <div class="widget-description fw-bold opacity-8">
               <div *ngIf="!showNoSchedule">
                 <div *ngFor="let schedule of todaysSchedule">
-                  <p class="text-white">
-                    <strong>Date:</strong>
-                    {{ schedule.date | date : "shortDate" }}
-                  </p>
-                  <p class="text-white">
-                    <strong>Duration in Hours:</strong>
-                    {{ schedule.durationInHours }}
-                  </p>
-                  <p class="text-white">
-                    <strong>Batch Name:</strong> {{ schedule.batchName }}
-                  </p>
-                  <p class="text-white">
-                    <strong>Content Name:</strong> {{ schedule.contentName }}
-                  </p>
+                  <p class="text-white"><strong>Date:</strong> {{ schedule.date | date : "shortDate" }}</p>
+                  <p class="text-white"><strong>Duration in Hours:</strong> {{ schedule.durationInHours }}</p>
+                  <p class="text-white"><strong>Batch Name:</strong> {{ schedule.batchName }}</p>
+                  <p class="text-white"><strong>Content Name:</strong> {{ schedule.contentName }}</p>
                 </div>
               </div>
               <div *ngIf="showNoSchedule">
@@ -97,7 +81,21 @@
           </div>
         </div>
       </div>
+
+      <div class="col-sm-12 col-md-6 col-xl-4">
+        <div class="card mb-3 widget-chart gradient-ww">
+          <div class="card-body">
+            <div class="text-center mb-3">
+              <i class="fa fa-arrow-down text-primary"></i>
+              <span class="text-primary"> Check Schedule by Date </span>
+            </div>
+            <input type="date" class="form-control mb-3" [(ngModel)]="selectedDate">
+            <button class="btn btn-primary" (click)="fetchSchedule()">
+              <app-spinner *ngIf="showSpinner"></app-spinner>
+              See Schedule</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
