@@ -1,4 +1,4 @@
-<div class="app-main__inner">
+<div class="app-main__inner ml-1">
   <div class="app-page-title">
     <div class="page-title-wrapper">
       <div class="col">
@@ -90,7 +90,9 @@
               <span class="text-primary"> Check Schedule by Date </span>
             </div>
             <input type="date" class="form-control mb-3" [(ngModel)]="selectedDate">
-            <button class="btn btn-primary" (click)="fetchSchedule()">See Schedule</button>
+            <button class="btn btn-primary" (click)="fetchSchedule()">
+              <app-spinner *ngIf="showSpinner"></app-spinner>
+              See Schedule</button>
           </div>
         </div>
       </div>

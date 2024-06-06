@@ -30,6 +30,7 @@ export class DashboardComponent {
   enquiryList: EnquiryResponse[] = [];
   academyTypeList: AcademyTypeResponse[] = [];
   scheduleList: BatchScheduleResponseModel[] = [];
+  scheduleResponse:any
   batchList: BatchResponseModel[] = [];
   status = false;
   selectedDate!: string;
@@ -37,6 +38,7 @@ export class DashboardComponent {
   showNoSchedule = false;
   showCard = true;
   resultSet: any;
+  showSpinner=false;
  
   addToggle() {
     this.status = !this.status;
@@ -60,21 +62,60 @@ export class DashboardComponent {
       }
     });
   }
-  fetchSchedule(): void {
-    if (this.selectedDate) {
-      const formattedDate = new Date(this.selectedDate).toISOString();
-      console.log(formattedDate);
-      
-      this.studentService.getSchedule(formattedDate).subscribe(
-        response => {
-       console.log(response)
-        },
-        error => {
-          console.error('Error fetching schedule:', error);
-        }
-      );
-    } else {
-      console.error('No date selected');
+
+   
+    fetchSchedule(): void {
+      this.showSpinner=true
+      if (this.selectedDate) {
+        const selectedDateUTC = new Date(this.selectedDate);
+        selectedDateUTC.setMinutes(selectedDateUTC.getMinutes() - selectedDateUTC.getTimezoneOffset());
+        const formattedDate = selectedDateUTC.toISOString();
+    
+        this.studentService.getSchedule(formattedDate).subscribe(
+          response => {
+            if (response.isSuccess) {
+              this.showSpinner=false
+              this.scheduleResponse=response.result;
+              console.log(this.scheduleResponse)
+    
+              Swal.fire({
+                title: "Schedule Information",
+                html: `
+                  <p><strong>Date:</strong> ${new Date(this.scheduleResponse[0].date).toLocaleDateString()}</p>
+                  <p><strong>Duaration(In Hours):</strong> ${this.scheduleResponse[0].durationInHours}</p>
+                  <p><strong>Batch Name:</strong> ${this.scheduleResponse[0].batchName}</p>
+                  <p><strong>Content Name:</strong> ${this.scheduleResponse[0].contentName}</p>
+                `,
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `
+                }
+              });
+            }
+            else{
+              this.sharedService.NoDataSwal(response.message)
+              this.showSpinner=false
+            }
+          },
+          error => {
+            console.error('Error fetching schedule:', error);
+          }
+        );
+      }
+      else{
+        this.sharedService.showErrorToast("please select date");
+        this.showSpinner=false
+      }
     }
+    
   }
-}

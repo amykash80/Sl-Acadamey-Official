@@ -48,7 +48,7 @@ export class StudentService {
 
   }
   getSchedule(date: string): Observable<any> {
-    const url = `${this.baseUrl}/check-Schedule-by-date/${date}`;
+    const url = `${this.baseUrl}Student/check-Schedule-by-date/${date}`;
     return this.http.get<any>(url);
   }
 }

@@ -48,8 +48,10 @@ export class SharedService {
   NoDataSwal(message: string) {
     Swal.fire({
       icon: "error",
-      title: "Oops...",
+      title: "sorry...",
       text: message,
+       heightAuto: false, 
+    width: '400px'
     });
   }
   fireConfirmSwal(message: string) {

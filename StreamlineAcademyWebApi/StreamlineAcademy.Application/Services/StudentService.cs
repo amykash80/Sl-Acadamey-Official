@@ -323,7 +323,7 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
 
             var schedules = await studentRepository.GetStudentSchedules(studentId);
-            var schdeulesFordate = schedules.Where(schedule => schedule.Date == slectedDate);
+            var schdeulesFordate = schedules.Where(schedule => schedule.Date == slectedDate.Date);
             if (schdeulesFordate.Any())
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.SuccessResponse(schdeulesFordate, HttpStatusCodes.OK.ToString());
             return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse("There are No Schedules for given date You provided");
