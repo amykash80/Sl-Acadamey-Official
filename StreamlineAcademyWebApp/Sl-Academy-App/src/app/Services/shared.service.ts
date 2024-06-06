@@ -45,6 +45,13 @@ export class SharedService {
   showErrorToast(message: string) {
     this.toast.error(message);
   }
+  NoDataSwal(message: string) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: message,
+    });
+  }
   fireConfirmSwal(message: string) {
     return Swal.fire({
       title: message,
