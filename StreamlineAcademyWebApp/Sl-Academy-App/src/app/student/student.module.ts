@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MyBatchesComponent } from './Pages/my-batches/my-batches.component';
 import { FormsModule } from '@angular/forms';
 import { MySchedulesComponent } from './Pages/my-schedules/my-schedules.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MySchedulesComponent } from './Pages/my-schedules/my-schedules.componen
     CommonModule,
     StudentRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ]
 })
 export class StudentModule { }

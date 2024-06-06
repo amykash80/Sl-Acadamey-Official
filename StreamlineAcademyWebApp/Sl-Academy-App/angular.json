@@ -44,6 +44,7 @@
               "src/assets/css/main.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@ngneat/hot-toast/src/styles/styles.css"
+              
             ],
             "scripts": [
               "src/assets/js/jquery-3.6.0.min.js",
