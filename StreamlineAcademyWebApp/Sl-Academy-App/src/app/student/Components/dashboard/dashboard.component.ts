@@ -51,11 +51,14 @@ export class DashboardComponent {
   }
   getSchedule(){
     this.studentService.checkMyTodaysSchedule().subscribe(res=>{
-  this.todaysSchedule=res.result;
-  console.log(this.todaysSchedule);
-  if(res.result.length==0)
-{
+      if(res.isSuccess){
+        this.todaysSchedule=res.result;
+
+      }
+      else{
   this.showNoSchedule=true
-}    })
+        
+      }
+   })
   }
 }
