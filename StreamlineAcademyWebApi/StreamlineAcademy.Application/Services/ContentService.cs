@@ -84,10 +84,11 @@ namespace StreamlineAcademy.Application.Services
 
         public async Task<ApiResponse<IEnumerable<CourseContentResponseModel>>>GetContentByCourseId(Guid courseId)
         {
-            var existingcCourse = await courseRepository.GetByIdAsync(x=>x.Id==courseId);
+            var existingcCourse = await contentRepository.GetByIdAsync(x=>x.CourseId == courseId);
             if (existingcCourse == null)
-                return ApiResponse<IEnumerable<CourseContentResponseModel>>.ErrorResponse(APIMessages.ContentManagement.ContentNotFound, HttpStatusCodes.NotFound);
-
+            {
+                return ApiResponse<IEnumerable<CourseContentResponseModel>>.ErrorResponse(APIMessages.ContentManagement.CourseContentNotFound, HttpStatusCodes.NotFound);
+            }
             var contents = await contentRepository.GetAllContentByCourseId(courseId);
             if (contents != null && contents.Any())
             {
