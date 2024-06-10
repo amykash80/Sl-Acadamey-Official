@@ -30,9 +30,11 @@ export class RegisterStudentComponent {
   studentModel: AddStudent = new AddStudent();
   loadSpinner = false;
   courses: CourseResponse[] = [];
-
-  constructor() {}
-
+  selectedCourses: any[] = [];
+  constructor() {
+    
+  }
+ 
   ngOnInit(): void {
     this.getAllCountries();
     this.getAllStates();
@@ -40,6 +42,14 @@ export class RegisterStudentComponent {
     this.getAllCourses();
   }
 
+  toggleSelection(course: any) {
+    debugger;
+    if (course.selected) {
+      this.selectedCourses.push(course);
+    } else {
+      this.selectedCourses = this.selectedCourses.filter(selectedCourse => selectedCourse.id !== course.id);
+    }
+  }
   getAllCourses() {
     this.courseService.courseList().subscribe((courses) => {
       this.courses = courses.result;

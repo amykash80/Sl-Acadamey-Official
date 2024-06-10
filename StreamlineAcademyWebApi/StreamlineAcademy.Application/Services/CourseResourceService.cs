@@ -166,7 +166,7 @@ namespace StreamlineAcademy.Application.Services
             var resource = await courseResourceRepository.GetByIdAsync(b => b.CourseId == courseId);
             if (resource == null)
             {
-                return ApiResponse<IEnumerable<CourseResourceResponseModel>>.ErrorResponse(APIMessages.CourseResourceManagement.CourseResourcenotFound, HttpStatusCodes.NotFound);
+                return ApiResponse<IEnumerable<CourseResourceResponseModel>>.ErrorResponse(APIMessages.CourseResourceManagement.CourseResourcesnotFound, HttpStatusCodes.NotFound);
             }
             var courseResource = await courseResourceRepository.GetCourseResourseByCourseId(courseId);
             if (courseResource != null && courseResource.Any())

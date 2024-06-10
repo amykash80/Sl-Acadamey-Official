@@ -4,6 +4,7 @@ import { CourseService } from '../../../Services/course.service';
 import { SharedService } from '../../../Services/shared.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-course-category-list',
@@ -20,7 +21,8 @@ export class CourseCategoryListComponent {
   loadspinner=false;
   showUpdateForm=false;
   showList=false;
-  showSpinner=true
+  showSpinner=true;
+  showNoContent = false;
   categoryId=''
   loadSpinner=false;
   currentPage: number = 1;
@@ -61,16 +63,33 @@ export class CourseCategoryListComponent {
   }
 
   getAllCourseCategories() {
-    this.courseService.getAllCourseCategories().subscribe((categories) => {
-      this.showSpinner=false
-      this.showList=true
-      this.categoryList = categories.result;
-      this.filteredCategoryList=this.categoryList;
-      this.totalItems = this.filteredCategoryList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
+    this.courseService.getAllCourseCategories().subscribe({
+      next: (response) => {
+        if (response.isSuccess) {
+          this.showSpinner = false;
+          this.showList = true;
+          this.categoryList = response.result;
+          this.filteredCategoryList = this.categoryList;
+          this.totalItems = this.filteredCategoryList.length;
+          this.currentPage = 1;
+          this.updatePagination();
+          if (response.result.length > 0) {
+            this.showList = true;
+            this.showNoContent = false;
+          }
+        } else {
+          this.sharedService.NoDataSwal(response.message);
+          setTimeout(()=>{
+            this.router.navigate(['/academy/course-list']);
+          }, 2000);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
     });
   }
+
 
   updatePagination(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;

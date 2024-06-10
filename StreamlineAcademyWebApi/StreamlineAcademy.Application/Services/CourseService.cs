@@ -130,7 +130,7 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<CourseCategoryResponseModel>>.SuccessResponse(CourseCategoryResponseModels.ToList().OrderBy(_ => _.CategoryName), $"Found {CourseCategoryResponseModels.Count()} CourseCategories");
             }
 
-            return ApiResponse<IEnumerable<CourseCategoryResponseModel>>.ErrorResponse(APIMessages.CourseCategoryManagement.CourseCategoryNotFound, HttpStatusCodes.NotFound);
+            return ApiResponse<IEnumerable<CourseCategoryResponseModel>>.ErrorResponse("No CourseCategories Found", HttpStatusCodes.InternalServerError);
         }
 
         public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCourses()
@@ -196,7 +196,7 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<CourseResponseModel>>.SuccessResponse(sortedCourses, $"Found {courses.Count()} Courses");
             }
 
-            return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+            return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse("No Courses Found", HttpStatusCodes.InternalServerError);
         }
 
         public async Task<ApiResponse<CourseCategoryResponseModel>> DeleteCourseCategory(Guid id)

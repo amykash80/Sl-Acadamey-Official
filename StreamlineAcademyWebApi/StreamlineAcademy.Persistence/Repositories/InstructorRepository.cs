@@ -257,27 +257,29 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<List<StudentResponseModel>> GetAllStudentsForInstructorAsync(Guid? instructorId)
         {
-            var batches = await context.Batches
-       .Include(b => b.Students!)
-           .ThenInclude(s => s.User) // Ensure the User entity is also included
-       .Where(b => b.InstructorId == instructorId)
-       .ToListAsync();
+            var students = await context.Batches
+          .Where(b => b.InstructorId == instructorId)
+          .SelectMany(b => b.StudentBatches!)
+          .Include(sb => sb.Student)
+          .ThenInclude(s => s.User)
+          .Include(sb => sb.Student!.Academy)
+          .Select(sb => new StudentResponseModel
+          {
+              Id = sb.Id,
+              Name = sb.Student!.User!.Name,
+              Address = sb.Student.User!.Address,
+              PhoneNumber = sb.Student.User!.PhoneNumber,
+              Email = sb.Student.User!.Email,
+              AcademyName = sb.Student!.Academy!.AcademyName,
+              IsActive = sb.Student.User.IsActive,
+              BatchName=sb.Batch!.BatchName
+              
+          })
+          .ToListAsync();
 
-            var students = batches.SelectMany(b => b.Students!).ToList();
-
-            var studentResponseList = students.Select(s => new StudentResponseModel
-            {
-                Name = s.User!.Name,
-                Address = s.User!.Address,
-                PostalCode = s.User!.PostalCode,
-                PhoneNumber = s.User!.PhoneNumber,
-                EmergencyContactNo = s.EmergencyContactNo,
-                Email = s.User!.Email,
-                IsActive = s.User!.IsActive
-            }).ToList();
-
-            return studentResponseList;
+            return students!;
         }
+
     }
 }
 

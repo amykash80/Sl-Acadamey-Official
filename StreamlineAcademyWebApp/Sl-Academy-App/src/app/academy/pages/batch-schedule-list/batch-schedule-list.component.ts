@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BatchscheduleService } from '../../../Services/batchschedule.service';
 import { SharedService } from '../../../Services/shared.service';
 import { BatchScheduleResponseModel } from '../../../Models/BatchSchedule/BatchSchedule';
@@ -16,11 +16,14 @@ import { CourseResponse } from '../../../Models/Academy/Course';
 })
 
 export class BatchScheduleListComponent {
+  constructor(
+    private router: Router
+  ) {}
+    
   activatedRoute=inject(ActivatedRoute);
   batchScheduleService=inject(BatchscheduleService);
   batchService=inject(BatchService)
   courseService=inject(CourseService)
-
   sharedService=inject(SharedService)
   batchId:string=''
   courseId:string=''
@@ -28,11 +31,13 @@ export class BatchScheduleListComponent {
   filterBatchSchedules: BatchScheduleResponseModel[] = [];
   searchText: string = '';
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
   showSpinner=true
   showTable=false
+  showNoContent = false;
+  flag: string = '';
   displayedBatchScheduleList: BatchScheduleResponseModel[] = [];
   courseRes:BatchResponseModel=new BatchResponseModel()
   courseResponse:CourseResponse=new CourseResponse()
@@ -76,8 +81,10 @@ filterBatchSchedule(): void {
 }
 
 loadAllBatchSchedules(){
+  
   this.batchScheduleService.getAllSchedulesByBatchId(this.batchId).subscribe({
     next: (response) => {
+      if(response.isSuccess){
       this.showSpinner=false;
       this.showTable=true
       this.batchScheduleList = response.result;
@@ -85,7 +92,16 @@ loadAllBatchSchedules(){
       this.totalItems = this.filterBatchSchedules.length;
       this.currentPage = 1; 
       this.updatePagination();
-      console.log(this.batchScheduleList)
+      if (response.result.length > 0) {
+        this.showTable = true;
+        this.showNoContent = false;
+      }}else {
+        this.sharedService.NoDataSwal(response.message);
+        setTimeout(()=>{
+          this.router.navigate(['/academy/course-list'])
+
+        },2000)
+      }
     },
     error: (err: HttpErrorResponse) => {
       if (err.status == HttpStatusCode.Unauthorized) {

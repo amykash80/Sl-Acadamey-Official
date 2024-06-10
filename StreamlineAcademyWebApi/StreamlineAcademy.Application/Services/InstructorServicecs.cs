@@ -128,14 +128,19 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse(APIMessages.TechnicalError);
         }
 
-        public async  Task<ApiResponse<IEnumerable<InstructorResponseModel>>> GetallInstructors()
+        public async Task<ApiResponse<IEnumerable<InstructorResponseModel>>> GetallInstructors()
         {
-            var academyId=contextService.GetUserId();
+            var academyId = contextService.GetUserId();
             var returnVal = await instructorRepository.GetAllInstructors(academyId);
-            if (returnVal is not null)
+
+            if (returnVal != null && returnVal.Any())
+            {
                 return ApiResponse<IEnumerable<InstructorResponseModel>>.SuccessResponse(returnVal.OrderBy(_ => _.Name), $"Found {returnVal.Count()} Instructors");
-            return ApiResponse<IEnumerable<InstructorResponseModel>>.ErrorResponse(APIMessages.InstructorManagement.InstructorNotFound, HttpStatusCodes.NotFound);
+            }
+
+            return ApiResponse<IEnumerable<InstructorResponseModel>>.ErrorResponse("No Instructors Found", HttpStatusCodes.InternalServerError);
         }
+
 
         public async Task<ApiResponse<InstructorResponseModel>> GetInstructorById(Guid id)
         {

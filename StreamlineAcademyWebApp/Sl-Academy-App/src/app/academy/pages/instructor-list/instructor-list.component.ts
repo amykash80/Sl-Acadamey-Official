@@ -3,6 +3,7 @@ import { InstructorService } from '../../../Services/instructor.service';
 import { SharedService } from '../../../Services/shared.service';
 import { InstructorResponseModel } from '../../../Models/Instructor/Instructor';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instructor-list',
@@ -13,7 +14,8 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 export class InstructorListComponent {
   constructor(
     private instructorService: InstructorService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router
   ) {
     this.loadAllInstructors();
   }
@@ -27,7 +29,7 @@ export class InstructorListComponent {
   totalItems: number = 0;
   pages: number[] = [];
   displayedInstructorList: InstructorResponseModel[] = [];
-
+  showNoContent = false;
   filterInstructors(): void {
     if (!this.searchText.trim()) {
       this.filteredInstructorList = this.instructorList.slice();
@@ -67,22 +69,38 @@ export class InstructorListComponent {
   loadAllInstructors() {
     this.instructorService.instructorList().subscribe({
       next: (response) => {
-        this.showSpinner=false;
-        this.showTable=true
-        this.instructorList = response.result;
-        this.filteredInstructorList = this.instructorList;
-        this.totalItems = this.filteredInstructorList.length;
-        this.currentPage = 1; 
-        this.updatePagination();
-        console.log(this.instructorList);
+        if (response.isSuccess) {
+          this.showSpinner = false;
+          this.showTable = true;
+          this.instructorList = response.result;
+          this.filteredInstructorList = this.instructorList;
+          this.totalItems = this.filteredInstructorList.length;
+          this.currentPage = 1;
+          this.updatePagination();
+          if (response.result.length > 0) {
+            this.showTable = true;
+            this.showNoContent = false;
+          } else {
+            this.showNoContent = true;
+          }
+          console.log(this.instructorList);
+        } else {
+          this.sharedService.NoDataSwal(response.message);
+          setTimeout(() => {
+            this.router.navigate(['/academy/dashboard']);
+          }, 2000);
+        }
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.Unauthorized) {
+        if (err.status === HttpStatusCode.Unauthorized) {
           console.log(err.message);
+        } else {
+          console.log(err);
         }
       },
     });
   }
+  
 
   deleteInstructor(instructorId: any) {
     this.sharedService

@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { LocationService } from '../../../Services/location.service';
 import { SharedService } from '../../../Services/shared.service';
 import { LocationResponseModel } from '../../../Models/Location/Location';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-list',
@@ -9,6 +11,9 @@ import { LocationResponseModel } from '../../../Models/Location/Location';
   styleUrl: './location-list.component.css'
 })
 export class LocationListComponent {
+  constructor(
+    private router: Router
+  ) {}
   locationService=inject(LocationService)
   sharedService=inject(SharedService)
   locationList:any[]=[]
@@ -20,22 +25,46 @@ export class LocationListComponent {
   displayedBatchList: LocationResponseModel[] = [];
   filteredLocationList: LocationResponseModel[] = [];
   showTable=false;
-  showSpinner=true
+  showSpinner=true;
+  showNoContent = false;
   ngOnInit(){
     this.getAllLocations()
   }
-getAllLocations(){
-this.locationService.getAllLocations().subscribe(res=>{
-  console.log(res)
-  this.showSpinner=false;
-  this.showTable=true
-  this.locationList=res.result
-  this.filteredLocationList = this.locationList;
-  this.totalItems = this.filteredLocationList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
-})
-}
+  getAllLocations() {
+    this.locationService.getAllLocations().subscribe({
+      next: (response) => {
+        if (response.isSuccess) {
+          this.showSpinner = false;
+          this.showTable = true;
+          this.locationList = response.result;
+          this.filteredLocationList = this.locationList;
+          this.totalItems = this.filteredLocationList.length;
+          this.currentPage = 1;
+          this.updatePagination();
+          if (response.result.length > 0) {
+            this.showTable = true;
+            this.showNoContent = false;
+          } else {
+            this.showNoContent = true;
+          }
+          console.log(this.locationList);
+        } else {
+          this.sharedService.NoDataSwal(response.message);
+          setTimeout(() => {
+            this.router.navigate(['/academy/dashboard']);
+          }, 2000);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === HttpStatusCode.Unauthorized) {
+          console.log(err.message);
+        } else {
+          console.log(err);
+        }
+      },
+    });
+  }
+  
 filterInstructors(): void {
   if (!this.searchText.trim()) {
     this.filteredLocationList = this.locationList.slice();

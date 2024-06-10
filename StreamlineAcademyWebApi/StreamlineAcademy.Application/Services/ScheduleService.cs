@@ -113,7 +113,7 @@ namespace StreamlineAcademy.Application.Services
 
         public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> GetAllSchedulesByBatchId(Guid? batchId)
         {
-            var scheduleId = await scheduleRepository.GetAsync(x => x.BatchId == batchId);
+            //var scheduleId = await scheduleRepository.GetAsync(x => x.BatchId == batchId);
             var schedule = await scheduleRepository.GetAllSchedulesByBatchId(batchId);
             if (schedule != null && schedule.Any())
             {
@@ -121,7 +121,7 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.SuccessResponse(sortedCourses, $"Found {schedule.Count()} Schedules");
             }
 
-            return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+            return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse("No Schedules Found", HttpStatusCodes.InternalServerError);
 
         }
 

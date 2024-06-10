@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../../../Services/course.service';
 import { CourseContentResponse, CourseResponse } from '../../../Models/Academy/Course';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
@@ -11,6 +11,9 @@ import { SharedService } from '../../../Services/shared.service';
   styleUrl: './course-content-list.component.css'
 })
 export class CourseContentListComponent {
+  constructor(
+    private router: Router
+  ) {}
   activatedRoute=inject(ActivatedRoute);
   courseService=inject(CourseService);
   sharedService=inject(SharedService);
@@ -25,7 +28,7 @@ export class CourseContentListComponent {
   totalItems: number = 0;
   pages: number[] = [];
   courseRes: CourseResponse = new CourseResponse();
-
+  showNoContent = false;
   displayecontentList: CourseContentResponse[] = [];
 ngOnInit(){
   this.activatedRoute.params.subscribe(paramVal=>{
@@ -41,25 +44,39 @@ getcourseById(){
    this.courseRes=data.result
   })
   }
-loadAllCourseContents(){
-  this.courseService.getCourseContentsByCourseId(this.courseId).subscribe({
-    next: (response) => {
-      this.showSpinner=false;
-      this.showTable=true
-      this.courseContentList = response.result;
-      this.filteredContentList = this.courseContentList;
-      this.totalItems = this.courseContentList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
-      console.log(this.courseContentList)
-    },
-    error: (err: HttpErrorResponse) => {
-      if (err.status == HttpStatusCode.Unauthorized) {
-        console.log(err.message);
-      }
-    },
-  });
-}
+  loadAllCourseContents() {
+    this.courseService.getCourseContentsByCourseId(this.courseId).subscribe({
+      next: (response) => {
+        if (response.isSuccess) {
+          this.showSpinner = false;
+          this.showTable = true;
+          this.courseContentList = response.result;
+          this.filteredContentList = this.courseContentList;
+          this.totalItems = this.filteredContentList.length;
+          this.currentPage = 1;
+          this.updatePagination();
+          if (response.result.length > 0) {
+            this.showTable = true;
+            this.showNoContent = false;
+          }
+          console.log(this.courseContentList);
+        } else {
+          this.sharedService.NoDataSwal(response.message);
+          setTimeout(() => {
+            this.router.navigate(['/academy/course-list']);
+          }, 2000);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === HttpStatusCode.Unauthorized) {
+          console.log(err.message);
+        } else {
+          console.log(err);
+        }
+      },
+    });
+  }
+  
 filterContents(): void {
   if (!this.searchText.trim()) {
     this.filteredContentList = this.courseContentList.slice();

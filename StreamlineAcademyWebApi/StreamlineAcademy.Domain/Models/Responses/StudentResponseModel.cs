@@ -29,6 +29,7 @@ namespace StreamlineAcademy.Domain.Models.Responses
         public Guid? StateId { get; set; }
         public Guid? CityId { get; set; }
         public BatchStatus BatchStatus { get; set; }
+        public string? BatchName {  get; set; }
 
     }
 }

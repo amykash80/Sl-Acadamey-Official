@@ -95,7 +95,7 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<IEnumerable<CourseContentResponseModel>>.SuccessResponse(sortedContent, $"Found {contents.Count()} CourseContents");
             }
 
-            return ApiResponse<IEnumerable<CourseContentResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
+            return ApiResponse<IEnumerable<CourseContentResponseModel>>.ErrorResponse("No Contents Found", HttpStatusCodes.InternalServerError);
         }
 
         public async Task<ApiResponse<CourseContentResponseModel>> GetContentById(Guid id)

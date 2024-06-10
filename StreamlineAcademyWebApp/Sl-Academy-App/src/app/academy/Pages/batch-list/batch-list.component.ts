@@ -16,7 +16,8 @@ export class BatchListComponent {
   courseId!: string;
   batchList: BatchResponseModel[] = [];
   filteredBatchList: BatchResponseModel[] = [];
-  searchText: string = '';
+  searchText: string = ''; 
+  flag: string = '';
   showNoContent = false;
   showTable = false;
   showSpinner = true;
@@ -24,7 +25,7 @@ export class BatchListComponent {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
-  flag: string = '';
+ 
   courseRes: CourseResponse = new CourseResponse();
   displayedBatchList: BatchResponseModel[] = [];
   constructor(

@@ -35,28 +35,37 @@ export class CourseListComponent {
   loadAllCourse() {
     this.courseServices.courseList().subscribe({
       next: (response) => {
-        this.showSpinner=false;
-        this.showTable=true
-        this.courseList = response.result;
-        this.filteredCourseList=this.courseList;
-        this.totalItems = this.filteredCourseList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
-        if(response.result.length>0){
-          this.showTable=true;
-        }
-        else{
-          this.showNoContent=true;
-          
+        if (response.isSuccess) {
+          this.showSpinner = false;
+          this.showTable = true;
+          this.courseList = response.result;
+          this.filteredCourseList = this.courseList;
+          this.totalItems = this.filteredCourseList.length;
+          this.currentPage = 1;
+          this.updatePagination();
+          if (response.result.length > 0) {
+            this.showTable = true;
+            this.showNoContent = false;
+          } else {
+            this.showNoContent = true;
+          }
+        } else {
+          this.sharedService.NoDataSwal(response.message);
+          setTimeout(() => {
+            this.router.navigate(['/academy/dashboard']);
+          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.Unauthorized) {
+        if (err.status === HttpStatusCode.Unauthorized) {
           console.log(err.message);
+        } else {
+          console.log(err);
         }
       },
     });
   }
+  
  
   filterCourses(event:any){
     const filterValue = event.target.value.toLowerCase();

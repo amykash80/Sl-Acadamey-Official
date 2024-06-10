@@ -31,7 +31,8 @@ export class StudentResponseModel{
   cityName?:string;
   academyName?:string;
   isActive?: boolean;
-  batchStatus?:BatchStatus
+  batchStatus?:BatchStatus;
+  batchName?:string;
   
 }
 export class UpdateStudentModel {

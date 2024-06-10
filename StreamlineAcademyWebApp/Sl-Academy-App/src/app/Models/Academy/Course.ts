@@ -19,6 +19,7 @@ export class CourseResponse{
     isActive?:boolean;
     categoryId?:string=''
     academyId?:string=''
+    selected: boolean = false;
 }
 export class UpdateCourse{
     id?:string;

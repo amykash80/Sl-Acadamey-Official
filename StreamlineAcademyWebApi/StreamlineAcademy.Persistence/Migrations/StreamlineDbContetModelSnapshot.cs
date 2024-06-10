@@ -1261,7 +1261,7 @@ namespace StreamlineAcademy.Persistence.Migrations
             modelBuilder.Entity("StreamlineAcademy.Domain.Entities.StudentBatch", b =>
                 {
                     b.HasOne("StreamlineAcademy.Domain.Entities.Batch", "Batch")
-                        .WithMany()
+                        .WithMany("StudentBatches")
                         .HasForeignKey("BatchId");
 
                     b.HasOne("StreamlineAcademy.Domain.Entities.Student", "Student")
@@ -1338,6 +1338,8 @@ namespace StreamlineAcademy.Persistence.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("Schedules");
+
+                    b.Navigation("StudentBatches");
                 });
 
             modelBuilder.Entity("StreamlineAcademy.Domain.Entities.City", b =>

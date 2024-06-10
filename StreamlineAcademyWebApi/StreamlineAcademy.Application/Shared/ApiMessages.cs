@@ -53,7 +53,7 @@ public static class APIMessages
             public static readonly string CourseResourcenotFound = "CourseResource not found.";
             public static readonly string CourseResourceAdded = "CourseResource Added Successfully.";
             public static readonly string CourseResourceDeleted = "CourseResource deleted Successfully";
-
+            public static readonly string CourseResourcesnotFound = "No CourseResources Found.";
 
         }
         public static class ContentManagement

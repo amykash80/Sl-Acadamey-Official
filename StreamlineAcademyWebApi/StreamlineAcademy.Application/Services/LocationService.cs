@@ -83,12 +83,16 @@ namespace StreamlineAcademy.Application.Services
         public async Task<ApiResponse<IEnumerable<LocationResponseModel>>> GetAllLocations()
         {
             var academyId = contextService.GetUserId();
-            var locationList =await locationRepository.GetAllLocations(academyId);
-            if (locationList is not null)
-                return ApiResponse<IEnumerable<LocationResponseModel>>.SuccessResponse(locationList.ToList().OrderBy(_ => _.Address), $"Found {locationList.Count()} Locations");
-                return ApiResponse<IEnumerable<LocationResponseModel>>.ErrorResponse(APIMessages.LocationManagement.LocationNotFound, HttpStatusCodes.NotFound);
+            var locationList = await locationRepository.GetAllLocations(academyId);
 
+            if (locationList != null && locationList.Any())
+            {
+                return ApiResponse<IEnumerable<LocationResponseModel>>.SuccessResponse(locationList.OrderBy(_ => _.Address), $"Found {locationList.Count()} Locations");
+            }
+
+            return ApiResponse<IEnumerable<LocationResponseModel>>.ErrorResponse("No Locations Found", HttpStatusCodes.InternalServerError);
         }
+
 
         public async Task<ApiResponse<LocationResponseModel>> GetLocationById(Guid id)
         {
