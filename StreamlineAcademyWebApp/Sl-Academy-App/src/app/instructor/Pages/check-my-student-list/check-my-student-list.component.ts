@@ -3,6 +3,7 @@ import { StudentResponseModel } from '../../../Models/student/students';
 import { InstructorService } from '../../../Services/instructor.service';
 import { ApiResponse } from '../../../Models/Common/api-response';
 import { AuthService } from '../../../Services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-check-my-student-list',
@@ -10,7 +11,6 @@ import { AuthService } from '../../../Services/auth.service';
   styleUrl: './check-my-student-list.component.css'
 })
 export class CheckMyStudentListComponent {
-  instructorId: string = '6BE88548-B04B-475F-1C68-08DC80741F4B'; // Replace with actual instructor ID
   studentList: StudentResponseModel[] = [];
   filteredList:StudentResponseModel[] = [];
   searchText:string=''
@@ -20,16 +20,23 @@ export class CheckMyStudentListComponent {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
+  loggedInUserDetails:any
+  instructorId:string=''
   pages: number[] = [];
   displayedStudentList: StudentResponseModel[] = [];
   errorMessage: string | null = null;
 
   constructor(private instructorService: InstructorService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+  
+  ) {
+
+  }
 
   ngOnInit(): void {
-    this.loadStudents();
+    this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!) 
+    console.log(this.loggedInUserDetails);
+    this.instructorId = this.loggedInUserDetails.userId;
   }
   filterStudents(event:any){
     const filterValue = event.target.value.toLowerCase();
