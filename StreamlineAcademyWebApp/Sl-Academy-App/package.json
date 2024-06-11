@@ -25,6 +25,7 @@
     "@ngxpert/hot-toast": "^2.0.0",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^5.3.3",
+    "ng-multiselect-dropdown": "^1.0.0",
     "rxjs": "~7.8.0",
     "select": "^1.1.2",
     "sweetalert2": "^11.11.0",

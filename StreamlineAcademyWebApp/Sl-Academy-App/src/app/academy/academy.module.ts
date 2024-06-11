@@ -40,6 +40,7 @@ import { ResourceTypePipe } from '../Pipes/resource-type.pipe';
 import { AssignedStudentsComponent } from './Pages/assigned-students/assigned-students.component';
 import { AssinStudentBatchComponent } from './Pages/assin-student-batch/assin-student-batch.component';
 import { BatchStatusPipe } from '../Pipes/batch-status.pipe';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -95,6 +96,7 @@ import { BatchStatusPipe } from '../Pipes/batch-status.pipe';
     AcademyRoutingModule,
     FormsModule,
     SharedModule,
+    NgMultiSelectDropDownModule.forRoot()
     
   
   ]
