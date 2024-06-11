@@ -33,30 +33,31 @@ export class ChangepasswordComponent {
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.result);
           this.loadSpinner=false;
+          if(this.userRole==UserRole.SuperAdmin){
+            this.router.navigate(['/admin/dashboard']);
+          }
+          else if (this.userRole==UserRole.AcademyAdmin){
+            this.router.navigate(['/academy/dashboard']);
+  
+          }
+          else if (this.userRole==UserRole.Instructor){
+            this.router.navigate(['/instructor/dashboard']);
+  
+          }
+          else if (this.userRole==UserRole.Student){
+            this.router.navigate(['/student/dashboard']);
+  
+          }
+          else{
+            return;
+          }
+  
         } else {
           this.sharedService.showErrorToast(response.message);
           this.loadSpinner=false;
 
         }
-        if(this.userRole==UserRole.SuperAdmin){
-          this.router.navigate(['/admin/dashboard']);
-        }
-        else if (this.userRole==UserRole.AcademyAdmin){
-          this.router.navigate(['/academy/dashboard']);
-
-        }
-        else if (this.userRole==UserRole.Instructor){
-          this.router.navigate(['/instructor/dashboard']);
-
-        }
-        else if (this.userRole==UserRole.Student){
-          this.router.navigate(['/student/dashboard']);
-
-        }
-        else{
-          return;
-        }
-
+      
       },
       error: (err) => {
         console.log(err);

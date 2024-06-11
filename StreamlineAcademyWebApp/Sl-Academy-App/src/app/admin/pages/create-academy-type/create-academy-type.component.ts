@@ -15,17 +15,21 @@ constructor(private _academyService: AcademyService,
             private sharedService:SharedService,
             private router:Router
 ){}
+loadSpinner=false;
 academyTypeModel:AcademyType=new AcademyType();
 createAcademyType()
 {
+  this.loadSpinner=true;
 this._academyService.createAcademyType(this.academyTypeModel).subscribe({
   next:(response)=>{
     console.log(response)
     if(response.isSuccess){
+      this.loadSpinner=false;
       this.sharedService.showSuccessToast(response.message)
       this.router.navigate(['/admin/academy-type-list'])
     }
     else{
+      this.loadSpinner=false
       this.sharedService.showErrorToast(response.message)
     }
   },

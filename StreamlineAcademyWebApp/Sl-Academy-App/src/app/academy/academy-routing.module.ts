@@ -70,7 +70,7 @@ const routes: Routes = [
     {path:"myProfile",component:ProfileComponent},
     {path:"add-course-category",component:AddCourseCategoryComponent},
     {path:"course-category-list",component:CourseCategoryListComponent},
-    {path:"change-password",component:ChangepasswordComponent},
+    {path:"change-password/:userRole",component:ChangepasswordComponent},
     {path:"add-batch-schedule/:id/:cId",component:AddBatchScheduleComponent},
     {path:"batch-schedule-list/:id/:courseId",component:BatchScheduleListComponent},
     {path:"update-batch-schedule/:id/:batchId/:courseId",component:UpdateBatchScheduleComponent},
