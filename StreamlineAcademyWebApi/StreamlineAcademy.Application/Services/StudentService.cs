@@ -326,7 +326,7 @@ namespace StreamlineAcademy.Application.Services
             var schdeulesFordate = schedules.Where(schedule => schedule.Date == slectedDate.Date);
             if (schdeulesFordate.Any())
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.SuccessResponse(schdeulesFordate, HttpStatusCodes.OK.ToString());
-            return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse("There are No Schedules for given date You provided");
+            return ApiResponse<IEnumerable<ScheduleResponseModel>>.ErrorResponse("There are No Schedules for this date");
         }
 
         public async Task<ApiResponse<StudentResponseModel>> DeleteStudent(Guid id)
