@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-lg-6 col-xl-9">
+      <div>
         <form
           #studentRegistrationForm="ngForm"
           method="POST"
@@ -85,7 +85,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="dropdown">
+              <!-- <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Select Courses
                   </button>
@@ -95,7 +95,16 @@
                           <label>{{ course.name }}</label>
                       </div>
                   </div>
-              </div>
+              </div> -->
+              <ng-multiselect-dropdown
+  [placeholder]="'custom placeholder'"
+  [settings]="dropdownSettings"
+  [data]="dropdownList"
+  [(ngModel)]="selectedItems"
+  (onSelect)="onItemSelect($event)"
+  (onSelectAll)="onSelectAll($event)"
+>
+</ng-multiselect-dropdown>
           </div>
           
           

@@ -20,6 +20,9 @@ export class RegisterStudentComponent {
   courseService = inject(CourseService);
   router = inject(Router);
   sharedService = inject(SharedService);
+  selectedItems=''
+  dropdownList:any
+  dropdownSettings:any
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
@@ -40,6 +43,12 @@ export class RegisterStudentComponent {
     this.getAllStates();
     this.getAllCities();
     this.getAllCourses();
+  }
+  onItemSelect(event:any){
+
+  }
+  onSelectAll(event:any){
+
   }
 
   toggleSelection(course: any) {
