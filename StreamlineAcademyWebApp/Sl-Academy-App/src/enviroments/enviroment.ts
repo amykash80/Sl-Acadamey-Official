@@ -1,5 +1,5 @@
 
 export const environment = {
     production: true,
-    apiUrl: 'https://api.streamlineacademies.com/api',
+    apiUrl: 'https://api.streamlineacademies.com/api/',
   };
