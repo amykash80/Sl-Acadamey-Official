@@ -203,31 +203,50 @@ namespace StreamlineAcademy.Application.Services
 
         public async Task<ApiResponse<AttendenceResponseModel>> SaveStudentAttendance(AttendenceRequestModel model)
         {
-            var instructorId= contextService.GetUserId();
-            if (await studentRepository.GetByIdAsync(_ => _.Id == model.StudentId) is null)
-                return ApiResponse<AttendenceResponseModel>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound);
-            var attendance = new Attendance
-            {
-                StudentId = model.StudentId,
-                ScheduleId = model.ScheduleId,
-                AttendanceDate = model.AttendanceDate,
-                AttendenceStatus = model.AttendenceStatus,
-                CreatedBy= instructorId,
-                CreatedDate=DateTime.Now,
-                ModifiedBy=Guid.Empty,
-                DeletedBy= Guid.Empty,
-            };
-           var returnVal=await studentRepository.SaveStudentAttendence(attendance);
-            if (returnVal is > 0)
-                return ApiResponse<AttendenceResponseModel>.SuccessResponse(new AttendenceResponseModel
-                {
-                    AttendenceStatus = attendance.AttendenceStatus,
-                    Date = attendance.AttendanceDate,
-                    ScheduleId = attendance.ScheduleId,
-                    StudentId = attendance.StudentId
+            var instructorId = contextService.GetUserId();
+            var attendances = new List<Attendance>();
 
-                },"Attendece Saved Successfully");
-            return ApiResponse<AttendenceResponseModel>.ErrorResponse(APIMessages.TechnicalError);
+            if (model.StudentId == null || model.AttendenceStatus == null)
+            {
+                return ApiResponse<AttendenceResponseModel>.ErrorResponse("Student IDs and attendance statuses are required.");
+            }
+
+            if (model.StudentId.Count != model.AttendenceStatus.Count)
+            {
+                return ApiResponse<AttendenceResponseModel>.ErrorResponse("The number of student IDs and attendance statuses must match.");
+            }
+
+            for (int i = 0; i < model.StudentId.Count; i++)
+            {
+                var attendance = new Attendance
+                {
+                    StudentId = model.StudentId[i],
+                    ScheduleId = model.ScheduleId,
+                    AttendanceDate = model.AttendanceDate,
+                    AttendenceStatus = model.AttendenceStatus[i],
+                    CreatedBy = instructorId,
+                    CreatedDate = DateTime.Now,
+                    ModifiedBy = Guid.Empty,
+                    DeletedBy = Guid.Empty,
+                };
+
+                var returnVal = await studentRepository.SaveStudentAttendence(attendance);
+
+                if (returnVal <= 0)
+                {
+                    return ApiResponse<AttendenceResponseModel>.ErrorResponse(APIMessages.TechnicalError);
+                }
+            }
+
+            return ApiResponse<AttendenceResponseModel>.SuccessResponse(new AttendenceResponseModel
+            {
+                // Optionally return a summary or details of the first saved entry
+                AttendenceStatus = model.AttendenceStatus.First(),
+                Date = model.AttendanceDate,
+                ScheduleId = model.ScheduleId,
+                StudentId = model.StudentId.First()
+
+            }, "Attendance Saved Successfully");
         }
 
         public async Task<bool> SendNotification(NotificationRequestModel request)

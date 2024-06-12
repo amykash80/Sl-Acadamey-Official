@@ -15,9 +15,9 @@ namespace StreamlineAcademy.Domain.Models.Requests
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTimeOffset AttendanceDate { get; set; }
         [Required(ErrorMessage = "Attendence Status is required")]
-        public AttendenceStatus AttendenceStatus { get; set; }
+        public List<AttendenceStatus>? AttendenceStatus { get; set; }
         [Required(ErrorMessage = "StudentId is required")]
-        public Guid StudentId { get; set; }
+        public List<Guid>? StudentId { get; set; }
         [Required(ErrorMessage = "ScheduleId is required")]
         public Guid ScheduleId { get; set; }
     }
