@@ -22,7 +22,6 @@ export class RegisterStudentComponent {
   sharedService = inject(SharedService);
   selectedItems=''
   dropdownList:any
-  dropdownSettings:any
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
@@ -37,6 +36,16 @@ export class RegisterStudentComponent {
   constructor() {
     
   }
+
+ dropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
  
   ngOnInit(): void {
     this.getAllCountries();
@@ -44,13 +53,13 @@ export class RegisterStudentComponent {
     this.getAllCities();
     this.getAllCourses();
   }
-  onItemSelect(event:any){
-
+  onItemSelect(item:any){
+    this.studentModel.courseId?.push(item.id);
   }
-  onSelectAll(event:any){
-
+  onSelectAll(item:any){
+    this.studentModel.courseId?.push(item.map((item: any) => item.id));
+    console.log(this.studentModel.courseId)
   }
-
   toggleSelection(course: any) {
     debugger;
     if (course.selected) {
@@ -62,6 +71,7 @@ export class RegisterStudentComponent {
   getAllCourses() {
     this.courseService.courseList().subscribe((courses) => {
       this.courses = courses.result;
+      console.log(this.courses)
     });
   }
   getAllCountries() {
@@ -97,7 +107,7 @@ export class RegisterStudentComponent {
   }
  
   addStudent() {
-    this.studentModel.courseId=["ED504AB1-A5AD-4B01-0180-08DC7BC476E6"]
+    console.log(this.studentModel)
     this.loadSpinner = true;
     this.studentService.saveStudent(this.studentModel).subscribe({
       next: (data) => {

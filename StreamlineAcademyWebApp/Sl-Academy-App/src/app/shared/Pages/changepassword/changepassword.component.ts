@@ -14,55 +14,44 @@ export class ChangepasswordComponent {
   constructor(
     private authService: AuthService,
     private sharedService: SharedService,
-    private route:ActivatedRoute,
-    private router:Router
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    this.route.params.subscribe(val=>{
-      this.userRole=val['userRole']
-      console.log(this.userRole)
-    })
+    this.route.params.subscribe((val) => {
+      this.userRole = val['userRole'];
+      console.log(this.userRole);
+    });
   }
   changePasswordModel: ChangePassword = new ChangePassword();
-  loadSpinner=false;
-  userRole!:UserRole
+  loadSpinner = false;
+  userRole!: UserRole;
   changeMyPassword() {
-    this.loadSpinner=true;
+    this.loadSpinner = true;
     this.authService.changePassword(this.changePasswordModel).subscribe({
       next: (response) => {
         console.log(response);
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.result);
-          this.loadSpinner=false;
-          if(this.userRole==UserRole.SuperAdmin){
+          this.loadSpinner = false;
+          if (this.userRole == UserRole.SuperAdmin) {
             this.router.navigate(['/admin/dashboard']);
-          }
-          else if (this.userRole==UserRole.AcademyAdmin){
+          } else if (this.userRole == UserRole.AcademyAdmin) {
             this.router.navigate(['/academy/dashboard']);
-  
-          }
-          else if (this.userRole==UserRole.Instructor){
+          } else if (this.userRole == UserRole.Instructor) {
             this.router.navigate(['/instructor/dashboard']);
-  
-          }
-          else if (this.userRole==UserRole.Student){
+          } else if (this.userRole == UserRole.Student) {
             this.router.navigate(['/student/dashboard']);
-  
-          }
-          else{
+          } else {
             return;
           }
-  
         } else {
           this.sharedService.showErrorToast(response.message);
-          this.loadSpinner=false;
-
+          this.loadSpinner = false;
         }
-      
       },
       error: (err) => {
         console.log(err);
-        this.loadSpinner=false;
-
+        this.loadSpinner = false;
       },
     });
   }

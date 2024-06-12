@@ -31,20 +31,27 @@ this.authService.login(this.loginModel).subscribe({
       if (response.result.isPasswordTemporary
       ) {
         this.sharedService.showErrorToast("please chnage your temporary password")
-        this.router.navigate(['change-password']);
+        this.router.navigate(['change-password',response.result.userRole]);
       } else {
         switch (response.result.userRole) {
           case UserRole.SuperAdmin:
             this.router.navigate(['/admin/dashboard']);
+            this.sharedService.showSuccessToast(`welcome ${response.result.fullName}`)
             break;
           case UserRole.AcademyAdmin:
             this.router.navigate(['/academy/dashboard']);
+            this.sharedService.showSuccessToast(`welcome ${response.result.fullName}`)
+
             break;
           case UserRole.Instructor:
             this.router.navigate(['/instructor/dashboard']);
+            this.sharedService.showSuccessToast(`welcome ${response.result.fullName}`)
+
             break;
           case UserRole.Student:
             this.router.navigate(['/student/dashboard']);
+            this.sharedService.showSuccessToast(`welcome ${response.result.fullName}`)
+
             break;
           default:
             break;

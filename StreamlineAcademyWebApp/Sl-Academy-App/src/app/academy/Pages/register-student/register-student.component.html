@@ -1,325 +1,139 @@
 <div class="container my-5">
-    <div class="row mb-4">
-      <div class="col">
-        <nav
-          aria-label="breadcrumb"
-          class="bg-body-tertiary rounded-3 p-3 custom-breadcrumb"
-        >
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item">academy</li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Add-Student
-            </li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div>
-        <form
-          #studentRegistrationForm="ngForm"
-          method="POST"
-          class="register-form ajax-contact"
-        >
-          <h5 class="form-title">Register Student</h5>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label><i class="far fa-user"></i> Name*</label>
-              <input
-                type="text"
-                class="form-control"
-                name="name"
-                #name="ngModel"
-                [(ngModel)]="studentModel.name"
-                placeholder="Enter your name"
-                required
-              />
-              <div
-                *ngIf="name.touched && name.errors?.['required']"
-                class="error-message"
-              >
-                Name is required
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-map-marker-alt"></i> Address*</label>
-              <input
-                type="text"
-                class="form-control"
-                name="address"
-                #address="ngModel"
-                [(ngModel)]="studentModel.address"
-                placeholder="Enter your address"
-                required
-              />
-              <div
-                *ngIf="address.touched && address.errors?.['required']"
-                class="error-message"
-              >
-                Address is required
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-map-pin"></i> Postal Code*</label>
-              <input
-                type="text"
-                class="form-control"
-                name="postalCode"
-                #postalCode="ngModel"
-                [(ngModel)]="studentModel.postalCode"
-                placeholder="Enter your postal code"
-                required
-                minlength="6"
-              />
-              <div
-                *ngIf="postalCode.touched && postalCode.errors?.['required']"
-                class="error-message"
-              >
-                Postal code is required
-              </div>
-              <div
-                *ngIf="postalCode.touched && postalCode.errors?.['minlength']"
-                class="error-message"
-              >
-                Postal code must be at least 6 characters
-              </div>
-            </div>
-            <div class="col-md-6">
-              <!-- <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Select Courses
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <div *ngFor="let course of courses" class="dropdown-item">
-                          <input type="checkbox" [(ngModel)]="course.selected" (change)="toggleSelection(course)"name="course_{{ course.id }}">
-                          <label>{{ course.name }}</label>
-                      </div>
-                  </div>
-              </div> -->
-              <ng-multiselect-dropdown
-  [placeholder]="'custom placeholder'"
-  [settings]="dropdownSettings"
-  [data]="dropdownList"
-  [(ngModel)]="selectedItems"
-  (onSelect)="onItemSelect($event)"
-  (onSelectAll)="onSelectAll($event)"
->
-</ng-multiselect-dropdown>
-          </div>
-          
-          
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-phone"></i> Phone Number*</label>
-              <input
-                type="text"
-                class="form-control"
-                name="phoneNumber"
-                #phoneNumber="ngModel"
-                [(ngModel)]="studentModel.phoneNumber"
-                placeholder="Enter your phone number"
-                required
-                minlength="10"
-                maxlength="10"
-              />
-              <div
-                *ngIf="phoneNumber.touched && phoneNumber.errors?.['required']"
-                class="error-message"
-              >
-                Phone number is required
-              </div>
-              <div
-                *ngIf="phoneNumber.touched && phoneNumber.errors?.['minlength'] && phoneNumber.errors?.['maxlength']"
-                class="error-message"
-              >
-                Phone number should be 10 digits
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-phone"></i> Emergency Contact*</label>
-              <input
-                type="text"
-                class="form-control"
-                name="emergencyContactNo"
-                #emergencyContactNo="ngModel"
-                [(ngModel)]="studentModel.emergencyContactNo"
-                placeholder="Enter your phone number"
-                required
-                minlength="10"
-                maxlength="10"
-              />
-              <div
-                *ngIf="emergencyContactNo.touched && emergencyContactNo.errors?.['required']"
-                class="error-message"
-              >
-                Emergency contact number is required
-              </div>
-              <div
-                *ngIf="emergencyContactNo.touched && emergencyContactNo.errors?.['minlength'] && emergencyContactNo.errors?.['maxlength']"
-                class="error-message"
-              >
-                Emergency contact number should be 10 digits
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label><i class="far fa-envelope"></i> Email*</label>
-              <input
-                type="email"
-                class="form-control"
-                name="email"
-                #email="ngModel"
-                [(ngModel)]="studentModel.email"
-                placeholder="Enter your email"
-                required
-              />
-              <div
-                *ngIf="email.touched && email.errors?.['required']"
-                class="error-message"
-              >
-                Email is required
-              </div>
-              <div
-                *ngIf="email.touched && email.errors?.['email']"
-                class="error-message"
-              >
-                Invalid email format
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-lock"></i> Password*</label>
-              <input
-                type="password"
-                class="form-control"
-                name="password"
-                #password="ngModel"
-                [(ngModel)]="studentModel.password"
-                placeholder="Enter your password"
-                required
-              />
-              <div
-                *ngIf="password.touched && password.errors?.['required']"
-                class="error-message"
-              >
-                Password is required
-              </div>
-            </div>
-       
-            <div class="form-group col-md-6">
-              <label><i class="far fa-calendar-alt"></i> Date of Birth*</label>
-              <input
-                type="date"
-                class="form-control"
-                name="dateOfBirth"
-                #dateOfBirth="ngModel"
-                [(ngModel)]="studentModel.dateOfBirth"
-                placeholder="Enter your date of birth"
-                required
-              />
-              <div
-                *ngIf="dateOfBirth.touched && dateOfBirth.errors?.['required']"
-                class="error-message"
-              >
-                Date of birth is required
-              </div>
-            </div>
-            <!-- <div class="form-group col-md-6">
-                <label for="courseId">Courses*</label>
-                <select
-                  class="form-control selectpicker"
-                  id="courseId"
-                  name="courseId"
-                  multiple
-                  [(ngModel)]="studentModel.courseId"
-                  required
-                  #courseId="ngModel"
-                >
-                  <option *ngFor="let course of courses" [value]="course.id">
-                    {{ course.name }}
-                  </option>
-                </select>
-                <div *ngIf="courseId.touched && courseId.errors?.['required']" class="error-message">
-                  At least one course is required
-                </div>
-              </div> -->
-    
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-globe"></i> Country*</label>
-              <select
-                class="form-control"
-                name="countryId"
-                #countryId="ngModel"
-                (change)="filterStates($event)"
-                [(ngModel)]="studentModel.countryId"
-                required
-              >
-                <option value="">Select Country</option>
-                <option *ngFor="let country of countries" [value]="country.id">
-                  {{ country.countryName }}
-                </option>
-              </select>
-              <div
-                *ngIf="countryId.touched && countryId.errors?.['required']"
-                class="error-message"
-              >
-                Country is required
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-flag"></i> State*</label>
-              <select
-                class="form-control"
-                name="stateId"
-                #stateId="ngModel"
-                (change)="filteredCities($event)"
-                [(ngModel)]="studentModel.stateId"
-                required
-              >
-                <option value="">Select state</option>
-                <option *ngFor="let state of filteredStates" [value]="state.id">
-                  {{ state.stateName }}
-                </option>
-              </select>
-              <div
-                *ngIf="stateId.touched && stateId.errors?.['required']"
-                class="error-message"
-              >
-                State is required
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-city"></i> City*</label>
-              <select
-                class="form-control"
-                name="cityId"
-                #cityId="ngModel"
-                [(ngModel)]="studentModel.cityId"
-                required
-              >
-                <option value="">Select city</option>
-                <option *ngFor="let city of filteredCitiesList" [value]="city.id">
-                  {{ city.cityName }}
-                </option>
-              </select>
-              <div
-                *ngIf="cityId.touched && cityId.errors?.['required']"
-                class="error-message"
-              >
-                City is required
-              </div>
-            </div>
-          </div>
-          <div class="form-btn col-12 text-center">
-            <button
-              class="th-btn black-btn-2 w-100"
-              [disabled]="studentRegistrationForm.invalid"
-              (click)="addStudent()"
-            >
-              <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
-              Register Now
-            </button>
-          </div>
-          <p class="form-messages mb-0 mt-3"></p>
-        </form>
-      </div>
+  <div class="row mb-4">
+    <div class="col">
+      <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 custom-breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item">academy</li>
+          <li class="breadcrumb-item active" aria-current="page">Add-Student</li>
+        </ol>
+      </nav>
     </div>
   </div>
-  
+  <div class="row justify-content-center">
+    <div>
+      <form #studentRegistrationForm="ngForm" method="POST" class="register-form ajax-contact">
+        <h5 class="form-title">Register Student</h5>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label><i class="far fa-user"></i> Name*</label>
+            <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="studentModel.name" placeholder="Enter your name" required />
+            <div *ngIf="name.touched && name.errors?.['required']" class="error-message">
+              Name is required
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-map-marker-alt"></i> Address*</label>
+            <input type="text" class="form-control" name="address" #address="ngModel" [(ngModel)]="studentModel.address" placeholder="Enter your address" required />
+            <div *ngIf="address.touched && address.errors?.['required']" class="error-message">
+              Address is required
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-map-pin"></i> Postal Code*</label>
+            <input type="text" class="form-control" name="postalCode" #postalCode="ngModel" [(ngModel)]="studentModel.postalCode" placeholder="Enter your postal code" required minlength="6" />
+            <div *ngIf="postalCode.touched && postalCode.errors?.['required']" class="error-message">
+              Postal code is required
+            </div>
+            <div *ngIf="postalCode.touched && postalCode.errors?.['minlength']" class="error-message">
+              Postal code must be at least 6 characters
+            </div>
+          </div>
+
+          <div class="form-group col-md-6 custom">
+            <label> Intreseted In*</label>
+            <ng-multiselect-dropdown  class="custom-dropdown" [placeholder]="'choose courses'" [settings]="dropdownSettings" [data]="courses" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+          </div> 
+
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-phone"></i> Phone Number*</label>
+            <input type="text" class="form-control" name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="studentModel.phoneNumber" placeholder="Enter your phone number" required minlength="10" maxlength="10" />
+            <div *ngIf="phoneNumber.touched && phoneNumber.errors?.['required']" class="error-message">
+              Phone number is required
+            </div>
+            <div *ngIf="phoneNumber.touched && (phoneNumber.errors?.['minlength'] || phoneNumber.errors?.['maxlength'])" class="error-message">
+              Phone number should be 10 digits
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-phone"></i> Emergency Contact*</label>
+            <input type="text" class="form-control" name="emergencyContactNo" #emergencyContactNo="ngModel" [(ngModel)]="studentModel.emergencyContactNo" placeholder="Enter your phone number" required minlength="10" maxlength="10" />
+            <div *ngIf="emergencyContactNo.touched && emergencyContactNo.errors?.['required']" class="error-message">
+              Emergency contact number is required
+            </div>
+            <div *ngIf="emergencyContactNo.touched && (emergencyContactNo.errors?.['minlength'] || emergencyContactNo.errors?.['maxlength'])" class="error-message">
+              Emergency contact number should be 10 digits
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="far fa-envelope"></i> Email*</label>
+            <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="studentModel.email" placeholder="Enter your email" required />
+            <div *ngIf="email.touched && email.errors?.['required']" class="error-message">
+              Email is required
+            </div>
+            <div *ngIf="email.touched && email.errors?.['email']" class="error-message">
+              Invalid email format
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-lock"></i> Password*</label>
+            <input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="studentModel.password" placeholder="Enter your password" required />
+            <div *ngIf="password.touched && password.errors?.['required']" class="error-message">
+              Password is required
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="far fa-calendar-alt"></i> Date of Birth*</label>
+            <input type="date" class="form-control" name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="studentModel.dateOfBirth" placeholder="Enter your date of birth" required />
+            <div *ngIf="dateOfBirth.touched && dateOfBirth.errors?.['required']" class="error-message">
+              Date of birth is required
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-globe"></i> Country*</label>
+            <select class="form-control" name="countryId" #countryId="ngModel" (change)="filterStates($event)" [(ngModel)]="studentModel.countryId" required>
+              <option value="">Select Country</option>
+              <option *ngFor="let country of countries" [value]="country.id">
+                {{ country.countryName }}
+              </option>
+            </select>
+            <div *ngIf="countryId.touched && countryId.errors?.['required']" class="error-message">
+              Country is required
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-flag"></i> State*</label>
+            <select class="form-control" name="stateId" #stateId="ngModel" (change)="filteredCities($event)" [(ngModel)]="studentModel.stateId" required>
+              <option value="">Select state</option>
+              <option *ngFor="let state of filteredStates" [value]="state.id">
+                {{ state.stateName }}
+              </option>
+            </select>
+            <div *ngIf="stateId.touched && stateId.errors?.['required']" class="error-message">
+              State is required
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-city"></i> City*</label>
+            <select class="form-control" name="cityId" #cityId="ngModel" [(ngModel)]="studentModel.cityId" required>
+              <option value="">Select city</option>
+              <option *ngFor="let city of filteredCitiesList" [value]="city.id">
+                {{ city.cityName }}
+              </option>
+            </select>
+            <div *ngIf="cityId.touched && cityId.errors?.['required']" class="error-message">
+              City is required
+            </div>
+          </div>
+        </div>
+        <div class="form-btn col-12 text-center">
+          <button class="th-btn black-btn-2 w-100" [disabled]="studentRegistrationForm.invalid" (click)="addStudent()">
+            <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
+            Register Now
+          </button>
+        </div>
+        <p class="form-messages mb-0 mt-3"></p>
+      </form>
+    </div>
+  </div>
+</div>

@@ -123,7 +123,7 @@ namespace StreamlineAcademy.Application.Services
                     if (await emailHelperService.SendRegistrationEmail(user.Email!, user.Name!, model.Password!))
                     {
                         var res = await studentRepository.GetStudentById(student.Id);
-                        return ApiResponse<StudentResponseModel>.SuccessResponse(res);
+                        return ApiResponse<StudentResponseModel>.SuccessResponse(res,"Student Registered Successfully");
                     }
                 }
                 return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest);
