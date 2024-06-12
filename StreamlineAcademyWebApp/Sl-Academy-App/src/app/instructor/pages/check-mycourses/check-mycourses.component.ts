@@ -35,28 +35,37 @@ export class CheckMycoursesComponent {
 
   loadAllCourse() {
     this.instructorServices.checkMyCourses().subscribe({
-      next: (response) => {
-        console.log(response);
-        this.loadSpinner = false;
-        this.showTable = true;
-        this.courseList = response.result;
-        this.filteredCourseList = this.courseList;
-        this.totalItems = this.filteredCourseList.length;
-        this.currentPage = 1;
-        this.updatePagination();
-        // if (response.result.length==0) {
-        //   this.showTable = true;
-        // } else {
-        //   this.showNoContent = true;
-        // }
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.Unauthorized) {
-          console.log(err.message);
-        }
-      },
+        next: (response) => {
+            if (response.isSuccess) {
+                console.log(response);
+                this.loadSpinner = false;
+                this.showTable = true;
+                this.courseList = response.result;
+                this.filteredCourseList = this.courseList;
+                this.totalItems = this.filteredCourseList.length;
+                this.currentPage = 1;
+                this.updatePagination();
+                if (response.result.length === 0) {
+                    this.showTable = true; 
+                } else {
+                    this.showNoContent = false;
+                }
+            } else {
+                this.sharedService.NoDataSwal(response.message);
+                setTimeout(() => {
+                    this.router.navigate(['/instructor/dashboard']);
+                }, 2000);
+            }
+        },
+        error: (err: HttpErrorResponse) => {
+            if (err.status === HttpStatusCode.Unauthorized) {
+                console.log(err.message);
+            }
+            
+        },
     });
-  }
+}
+
 
   filterCourses(event: any) {
     const filterValue = event.target.value.toLowerCase();

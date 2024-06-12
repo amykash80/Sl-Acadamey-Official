@@ -110,7 +110,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let batch of filteredList">
+                  <tr *ngFor="let batch of displayedBatchList">
                     <td>{{ batch.batchName }}</td>
                     <td>{{ batch.batchSize }}</td>
                     <td>{{ batch.startDate | date }}</td>
@@ -174,19 +174,19 @@
     </div>
   </div>
 </div>
-<!-- <div
+<div
 *ngIf="filteredList.length === 0"
 class="text-center my-5 p-5 border rounded"
 style="background-color: #f8f9fa"
 >
 <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
 <h4 class="text-muted">No data found</h4>
-</div> -->
+</div>
 
 <div>
   <app-spinner *ngIf="loadSpinner"></app-spinner>
 </div>
-<!-- <app-no-content *ngIf="showNoContent"></app-no-content> -->
+
 <div class="app-inner" *ngIf="showTable2">
   <div class="container">
     <div class="card custom-card overflow-auto">
@@ -346,3 +346,4 @@ style="background-color: #f8f9fa"
     </div>
   </div>
 </div>
+<app-no-content *ngIf="showNoContent"></app-no-content>

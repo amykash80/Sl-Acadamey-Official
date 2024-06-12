@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BatchService } from '../../../Services/batch.service';
 import { SharedService } from '../../../Services/shared.service';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
@@ -20,11 +20,18 @@ export class CheckMyBatchComponent {
   showTable=false;
   showTable2=false
   loadSpinner=true;
-  
-  
+  showNoContent = false;
+  showSpinner = true;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayedBatchList: BatchResponseModel[] = [];
+  searchText: string = ''; 
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
           private sharedService:SharedService,
+          private router:Router,
           private instructorService:InstructorService){
   this.activatedRoute.params.subscribe((paramVal) => {
     this.courseId = paramVal['courseId'];
@@ -38,20 +45,31 @@ ngOnInit(){
 getAllBatches() {
   this.instructorService.checkMyBatches().subscribe({
     next: (response) => {
-      this.loadSpinner=false;
-      this.showTable=true
-      this.batchList = response.result;
-      console.log(this.batchList);
-      
-      this.filteredList = this.batchList;
-      console.log(this.batchList);
-      
+      if (response.isSuccess) {
+        this.loadSpinner = false;
+        this.showTable = true;
+        this.batchList = response.result;
+        this.filteredList = this.batchList;
+        this.totalItems = this.filteredList.length;
+        this.currentPage = 1;
+        this.updatePagination();
+        if (response.result.length > 0) {
+          this.showTable = true;
+          this.showNoContent = false;
+        }
+      } else {
+        this.sharedService.NoDataSwal(response.message);
+        setTimeout(() => {
+          this.router.navigate(['/academy/course-list']);
+        }, 2000);
+      }
     },
     error: (err: HttpErrorResponse) => {
       console.log(err);
     }
   });
 }
+
 getAllStudentsByBatchId(batchId:any){
   this.batchService.getAllStudentsByBatchId(batchId).subscribe({
     next: (data) => {
@@ -74,6 +92,45 @@ getAllStudentsByBatchId(batchId:any){
   })
 }
 
+filterBatches(): void {
+  if (!this.searchText.trim()) {
+    this.filteredList = this.batchList.slice();
+  } else {
+    const searchTerm = this.searchText.toLowerCase();
+    this.filteredList = this.batchList.filter(
+      (batch) =>
+        batch.batchName!.toLowerCase().startsWith(searchTerm) ||
+        batch.courseName!.toLowerCase().startsWith(searchTerm) ||
+        batch.locationName!.toLowerCase().startsWith(searchTerm) ||
+        batch.batchSize!.toString().toLowerCase().startsWith(searchTerm)
+    );
+  }
+
+  // Reset pagination to the first page after filtering
+  this.totalItems = this.filteredList.length;
+  this.currentPage = 1;
+  this.updatePagination();
+}
+
+updatePagination(): void {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+  this.displayedBatchList = this.filteredList.slice(
+    startIndex,
+    endIndex
+  );
+  this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+    .fill(0)
+    .map((x, i) => i + 1);
+}
+
+goToPage(page: number): void {
+  if (page < 1 || page > this.pages.length) {
+    return;
+  }
+  this.currentPage = page;
+  this.updatePagination();
+}
 // filterBatches(): void {
 //   if (!this.searchText.trim()) {
 //     this.filteredBatchList = this.batchList.slice();

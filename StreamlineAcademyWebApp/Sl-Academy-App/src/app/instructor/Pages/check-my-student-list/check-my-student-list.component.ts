@@ -3,7 +3,8 @@ import { StudentResponseModel } from '../../../Models/student/students';
 import { InstructorService } from '../../../Services/instructor.service';
 import { ApiResponse } from '../../../Models/Common/api-response';
 import { AuthService } from '../../../Services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SharedService } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-check-my-student-list',
@@ -28,7 +29,9 @@ export class CheckMyStudentListComponent {
 
   constructor(
     private instructorService: InstructorService,
-    private authService: AuthService
+    private authService: AuthService,
+    private sharedService: SharedService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,28 +67,33 @@ export class CheckMyStudentListComponent {
     this.updatePagination();
   }
   loadStudents(): void {
-    this.instructorService
-      .checkMyAllBatchesStudents(this.instructorId)
-      .subscribe({
+    this.instructorService.checkMyAllBatchesStudents(this.instructorId).subscribe({
         next: (response) => {
-          console.log(response)
-          this.showSpinner = false;
-          this.showTable = true;
-          this.studentList = response.result;
-          this.filteredList = this.studentList;
-          this.totalItems = this.filteredList.length;
-          this.currentPage = 1;
-          this.updatePagination();
-          if (response.result.length > 0) {
-            this.showTable = true;
-          } else {
-            this.showNoContent = true;
-          }
+            if (response.isSuccess) {
+                this.showSpinner = false;
+                this.showTable = true;
+                this.studentList = response.result;
+                this.filteredList = this.studentList;
+                this.totalItems = this.filteredList.length;
+                this.currentPage = 1;
+                this.updatePagination();
+                if (response.result.length > 0) {
+                    this.showTable = true;
+                    this.showNoContent = false;
+                } else {
+                    this.showNoContent = true;
+                }
+            } else {
+                this.sharedService.NoDataSwal(response.message);
+                setTimeout(() => {
+                    this.router.navigate(['/instructor/dashboard']);
+                }, 2000);
+            }
         },
         error: (err) => {
-          this.errorMessage = 'An error occurred while fetching students';
-          console.error(err);
+            this.errorMessage = 'An error occurred while fetching students';
+            console.error(err);
         },
-      });
-  }
+    });
+}
 }

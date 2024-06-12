@@ -123,9 +123,11 @@ namespace StreamlineAcademy.Application.Services
         {
             var instructorId = contextService.GetUserId();
             var returnVal =  await instructorRepository.GetAllIntructorCourses(instructorId);
-            if(returnVal is not null)
+            if (returnVal is not null)
+            {
                 return ApiResponse<IEnumerable<CourseResponseModel>>.SuccessResponse(returnVal);
-            return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse(APIMessages.TechnicalError);
+            }
+            return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse("No Courses Found", HttpStatusCodes.InternalServerError);
         }
 
         public async Task<ApiResponse<IEnumerable<InstructorResponseModel>>> GetallInstructors()

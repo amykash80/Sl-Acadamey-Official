@@ -68,7 +68,7 @@ namespace StreamlineAcademy.Api.Controllers
             {
                 return ApiResponse<List<StudentResponseModel>>.SuccessResponse(res);
             }
-            return ApiResponse<List<StudentResponseModel>>.ErrorResponse("something Went Wrong");
+            return ApiResponse<List<StudentResponseModel>>.ErrorResponse("No Students Found", HttpStatusCodes.InternalServerError);
 
         }
     }

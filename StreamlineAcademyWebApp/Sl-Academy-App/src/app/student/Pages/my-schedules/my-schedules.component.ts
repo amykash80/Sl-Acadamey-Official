@@ -3,6 +3,8 @@ import { BatchScheduleResponseModel } from '../../../Models/BatchSchedule/BatchS
 import { StudentService } from '../../../Services/student.service';
 import { ApiResponse } from '../../../Models/Common/api-response';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { SharedService } from '../../../Services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-schedules',
@@ -21,7 +23,10 @@ export class MySchedulesComponent {
   totalItems: number = 0;
   pages: number[] = [];
   displayedScheduleList: BatchScheduleResponseModel[] = [];
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService,
+    private sharedService: SharedService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadSchedules();
@@ -74,10 +79,12 @@ export class MySchedulesComponent {
         this.updatePagination();
         if(response.result.length>0){
           this.showTable=true;
-        }
-        else{
-          this.showNoContent=true;
-          
+        } else {
+          this.showNoContent = true;
+          this.sharedService.NoDataSwal(response.message); // Display Swal with message
+          setTimeout(() => {
+            this.router.navigate(['/students/dashboard']);
+          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BatchService } from '../../../Services/batch.service';
 import { SharedService } from '../../../Services/shared.service';
 import { StudentService } from '../../../Services/student.service';
@@ -27,6 +27,7 @@ export class MyBatchesComponent {
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
            private studentService: StudentService,
+           private router: Router,
           private sharedService:SharedService){
   this.activatedRoute.params.subscribe((paramVal) => {
     this.courseId = paramVal['courseId'];
@@ -37,27 +38,35 @@ ngOnInit(){
   this.getAllBatchesByCourseId();
 }
 
-getAllBatchesByCourseId(){
+getAllBatchesByCourseId() {
   this.studentService.getAllMybatches().subscribe({
-    next: (response) => {
-      console.log(response)
-      this.showSpinner=false;
-      this.showTable=true
-      this.batchList = response.result;
-      this.filteredBatchList = this.batchList;
-      this.totalItems = this.filteredBatchList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
-      if(response.result.length>0){
-        this.showTable=true;
-        this.showNoContent=false
-
+      next: (response) => {
+          if (response.isSuccess) {
+              console.log(response);
+              this.showSpinner = false;
+              this.showTable = true;
+              this.batchList = response.result;
+              this.filteredBatchList = this.batchList;
+              this.totalItems = this.filteredBatchList.length;
+              this.currentPage = 1;
+              this.updatePagination();
+              if (response.result.length > 0) {
+                  this.showTable = true;
+                  this.showNoContent = false;
+              } else {
+                  this.showNoContent = true;
+              }
+          } else {
+              this.sharedService.NoDataSwal(response.message);
+              setTimeout(() => {
+                  this.router.navigate(['/academy/course-list']);
+              }, 2000);
+          }
+      },
+      error: (err: HttpErrorResponse) => {
+          console.log(err);
+          
       }
-     
-    },
-    error: (err: HttpErrorResponse) => {
-      console.log(err);
-    }
   });
 }
 

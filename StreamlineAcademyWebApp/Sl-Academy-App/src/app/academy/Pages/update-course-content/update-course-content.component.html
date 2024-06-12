@@ -1,29 +1,35 @@
 <div class="container my-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-6 col-xl-9">
-        <form  #courseForm="ngForm"
-        method="PUT"
-        class="register-form ajax-contact">
-          <h5 class="form-title">Update Course content</h5>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label><i class="far fa-user"></i>Task Name</label>
-              <input type="text" class="form-control" name="taskName" [(ngModel)]="courseContentModel.taskName" placeholder="Task name" required>
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-xl-9">
+      <form #courseForm="ngForm" method="PUT" class="register-form ajax-contact">
+        <h5 class="form-title">Update Course content</h5>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label><i class="far fa-user"></i> Task Name</label>
+            <input type="text" class="form-control" name="taskName" [(ngModel)]="courseContentModel.taskName" placeholder="Task name" required #taskName="ngModel">
+            <div *ngIf="taskName.invalid && (taskName.dirty || taskName.touched)" class="error-message">
+              <div *ngIf="taskName.errors?.['required']">Task Name is required</div>
             </div>
-            <div class="form-group col-md-6">
-              <label>  <i class="far fa-file-alt"></i>Description</label>
-              <textarea class="form-control" name="description" [(ngModel)]="courseContentModel.description" placeholder="description" required></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="far fa-file-alt"></i> Description</label>
+            <textarea class="form-control" name="description" [(ngModel)]="courseContentModel.description" placeholder="Description" required #description="ngModel"></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error-message">
+              <div *ngIf="description.errors?.['required']">Description is required</div>
             </div>
-            <div class="form-group col-md-6">
-              <label><i class="far fa-calendar-alt"></i>Duration</label>
-              <input type="number" class="form-control" name="duration" [(ngModel)]="courseContentModel.duration" placeholder=" content duration" required>
-            </div>    
-        
           </div>
-          <div class="form-btn col-12 text-center">
-            <button class="th-btn black-btn-2 w-100" (click)="updateCourseContent()">update Content</button>
+          <div class="form-group col-md-6">
+            <label><i class="far fa-calendar-alt"></i> Duration</label>
+            <input type="number" class="form-control" name="duration" [(ngModel)]="courseContentModel.duration" placeholder="Content duration" required #duration="ngModel">
+            <div *ngIf="duration.invalid && (duration.dirty || duration.touched)" class="error-message">
+              <div *ngIf="duration.errors?.['required']">Duration is required</div>
+            </div>
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="form-btn col-12 text-center">
+          <button class="th-btn black-btn-2 w-100" [disabled]="courseForm.invalid" (click)="updateCourseContent()">Update Content</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>

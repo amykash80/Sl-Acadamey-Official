@@ -6,3 +6,15 @@
     border-radius: 10px;
 
 }
+.error-message {
+    color: #ff6347;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  .error-message div {
+    margin-left: 10px; 
+  }
+  :host{
+    width: 100%;
+}

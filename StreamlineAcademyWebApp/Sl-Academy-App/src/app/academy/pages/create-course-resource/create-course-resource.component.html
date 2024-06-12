@@ -1,56 +1,65 @@
 <div class="col">
   <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
     <ol class="breadcrumb mb-0">
-      <li class="breadcrumb-item" routerLink="/academy/dashboard" >academy</li>
+      <li class="breadcrumb-item" routerLink="/academy/dashboard">academy</li>
       <li class="breadcrumb-item" routerLink="/academy/course-list" aria-current="page">{{courseRes.name}}</li>
-      <li class="breadcrumb-item active" aria-current="page">add-resouce</li>
+      <li class="breadcrumb-item active" aria-current="page">add-resource</li>
     </ol>
   </nav>
 </div>
 <div class="container my-5">
-    <div class="row justify-content-center">
-   
-      <div >
-        <form #courseResourseForm="ngForm" (ngSubmit)="createCourseResource($event)" method="POST" class="register-form ajax-contact">
-          <h5 class="form-title">Create Course Resource</h5>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label><i class="far fa-user"></i> Name</label>
-              <input type="text" class="form-control" name="Name"  placeholder="Resource name" required>
+  <div class="row justify-content-center">
+    <div>
+      <form #courseResourceForm="ngForm" (ngSubmit)="createCourseResource($event)" method="POST" class="register-form ajax-contact">
+        <h5 class="form-title">Create Course Resource</h5>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label><i class="far fa-user"></i> Name</label>
+            <input type="text" class="form-control" name="name" ngModel required #name="ngModel">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+              <div *ngIf="name.errors?.['required']">Name is required</div>
             </div>
-            <div class="form-group col-md-6">
-              <label><i class="far fa-file-alt"></i> Description</label>
-              <textarea class="form-control" name="Description" placeholder="Description" required></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="far fa-file-alt"></i> Description</label>
+            <textarea class="form-control" name="description" ngModel required #description="ngModel"></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error-message">
+              <div *ngIf="description.errors?.['required']">Description is required</div>
             </div>
-            <div class="form-group col-md-6">
-              <label for="resourceType">Resource Type:</label>
-              <select class="form-control" id="resourceType"  name="Type">
-                <option [ngValue]="0" selected>Select Resource Type</option>
-                <option [ngValue]="1">Youtube</option>
-                <option [ngValue]="2">PDF</option>
-                <option [ngValue]="3">Document</option>
-                <option [ngValue]="4">Video</option>
-                <option [ngValue]="5">Image</option>
-                <option [ngValue]="6">Other</option>
-              </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="resourceType">Resource Type:</label>
+            <select class="form-control" id="resourceType" name="type" ngModel required #type="ngModel">
+              <option [ngValue]="0" selected>Select Resource Type</option>
+              <option [ngValue]="1">Youtube</option>
+              <option [ngValue]="2">PDF</option>
+              <option [ngValue]="3">Document</option>
+              <option [ngValue]="4">Video</option>
+              <option [ngValue]="5">Image</option>
+              <option [ngValue]="6">Other</option>
+            </select>
+            <div *ngIf="type.invalid && (type.dirty || type.touched)" class="error-message">
+              <div *ngIf="type.errors?.['required']">Resource Type is required</div>
             </div>
-            <div class="form-group col-md-6">
-              <label><i class="fas fa-file"></i> File</label>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="fileInput" name="File" required>
-                <label class="custom-file-label" for="fileInput">Choose file</label>
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fas fa-file"></i> File</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="fileInput" name="file" ngModel required #file="ngModel">
+              <label class="custom-file-label" for="fileInput">Choose file</label>
+              <div *ngIf="file.invalid && (file.dirty || file.touched)" class="error-message">
+                <div *ngIf="file.errors?.['required']">File is required</div>
               </div>
             </div>
-            
           </div>
-          <div class="form-btn col-12 text-center">
-            <button class="th-btn black-btn-2 w-100">Create Resource</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="form-btn col-12 text-center">
+          <button class="th-btn black-btn-2 w-100" [disabled]="courseResourceForm.invalid">Create Resource</button>
+        </div>
+      </form>
     </div>
   </div>
-  <div>
-    <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
-  </div>
-  
+</div>
+<div>
+  <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
+</div>
