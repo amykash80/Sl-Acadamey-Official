@@ -50,17 +50,10 @@ getAllBatchesByCourseId() {
               this.totalItems = this.filteredBatchList.length;
               this.currentPage = 1;
               this.updatePagination();
-              if (response.result.length > 0) {
-                  this.showTable = true;
-                  this.showNoContent = false;
-              } else {
-                  this.showNoContent = true;
-              }
+            
           } else {
               this.sharedService.NoDataSwal(response.message);
-              setTimeout(() => {
-                  this.router.navigate(['/academy/course-list']);
-              }, 2000);
+                  this.router.navigate(['/student/dashboard']);
           }
       },
       error: (err: HttpErrorResponse) => {

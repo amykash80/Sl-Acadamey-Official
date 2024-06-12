@@ -169,7 +169,18 @@
   </div>
 
   <div class="container my-5" *ngIf="showUpdateForm">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/academy/dashboard">academy</li>
+            <li class="breadcrumb-item active" aria-current="page">update-course-category</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
     <div class="row justify-content-center">
+      
       <div class="col-lg-6 col-xl-6">
         <form 
           #updateCourseCategoryForm="ngForm"
