@@ -6,6 +6,8 @@ import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
 import { AddStudent } from '../Models/student/students';
 import { BatchScheduleResponseModel } from '../Models/BatchSchedule/BatchSchedule';
+import { CourseResponse } from '../Models/Academy/Course';
+
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +52,8 @@ export class StudentService {
   getSchedule(date: string): Observable<any> {
     const url = `${this.baseUrl}Student/check-Schedule-by-date/${date}`;
     return this.http.get<any>(url);
+  }
+  checkMyCourses(){
+    return this.http.get<ApiResponse<CourseResponse[]>>(this.baseUrl+"Student/check-my-courses")
   }
 }

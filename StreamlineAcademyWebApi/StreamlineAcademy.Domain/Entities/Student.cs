@@ -31,6 +31,7 @@ namespace StreamlineAcademy.Domain.Entities
         #region navigation
         public ICollection<Batch>? batches { get; set; }
         public ICollection<Attendance>? Attendances { get; set; }
+        public ICollection<StudentInterests>? StudentInterests { get; set; }
         #endregion
     }
 }

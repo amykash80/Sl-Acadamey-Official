@@ -33,6 +33,7 @@ export class RegisterEnquiryComponent {
   selectedStateId: string = '';
   enquiry:EnquiryResponse=new EnquiryResponse()
   academyRegistrationModel: RegisterAcademy = new RegisterAcademy();
+  loadSpinner: boolean = false;
   constructor() {
 this.route.params.subscribe(params => {
   this.enquiryId=params['id']
@@ -96,14 +97,17 @@ this.route.params.subscribe(params => {
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
+          this.loadSpinner = false;
           this.router.navigate(['/admin/academylist'])
         }
         else{
           this.sharedService.showErrorToast(response.message)
+          this.loadSpinner = false;
         }
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
+        this.loadSpinner = false;
       },
     });
   }

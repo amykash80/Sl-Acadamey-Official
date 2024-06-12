@@ -54,6 +54,11 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<IEnumerable<AttendenceResponseModel>>> CheckMyattendence() => await studentService.CheckMyAttendence();
         [HttpDelete("delete/{id:guid}")]
         public async Task<ApiResponse<StudentResponseModel>> DeleteStudent(Guid id) => await studentService.DeleteStudent(id);
+        [HttpGet("check-my-courses")]
+        [Authorize(Roles = nameof(UserRole.Student))]
+        public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesForStudent() => await studentService.GetAllCoursesForStudent();
+
 
     }
 }
+

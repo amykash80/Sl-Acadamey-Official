@@ -28,6 +28,7 @@ namespace StreamlineAcademy.Application.Services
         private readonly IScheduleRepository scheduleRepository;
         private readonly IInstructorReository instructorReository;
         private readonly IAcademyRepository academyRepository;
+        private readonly ICourseRepository courseRepository;
 
         public StudentService(IStudentRepository studentRepository,
                               IUserRepository userRepository,
@@ -36,7 +37,8 @@ namespace StreamlineAcademy.Application.Services
                               IBatchRepository batchRepository,
                               IScheduleRepository scheduleRepository,
                               IInstructorReository instructorReository,
-                              IAcademyRepository academyRepository
+                              IAcademyRepository academyRepository,
+                              ICourseRepository courseRepository
                               )
         {
             this.studentRepository = studentRepository;
@@ -47,6 +49,7 @@ namespace StreamlineAcademy.Application.Services
             this.scheduleRepository = scheduleRepository;
             this.instructorReository = instructorReository;
             this.academyRepository = academyRepository;
+            this.courseRepository = courseRepository;
         }
         public async Task<ApiResponse<StudentResponseModel>> AddStudent(StudentRequestModel model)
         {
@@ -123,7 +126,7 @@ namespace StreamlineAcademy.Application.Services
                     if (await emailHelperService.SendRegistrationEmail(user.Email!, user.Name!, model.Password!))
                     {
                         var res = await studentRepository.GetStudentById(student.Id);
-                        return ApiResponse<StudentResponseModel>.SuccessResponse(res,"Student Registered Successfully");
+                        return ApiResponse<StudentResponseModel>.SuccessResponse(res);
                     }
                 }
                 return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest);
@@ -350,7 +353,32 @@ namespace StreamlineAcademy.Application.Services
             }
             return ApiResponse<StudentResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
-       
+        public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesForStudent()
+       {
+            var studentId = contextService.GetUserId();
+            var student = await studentRepository.GetAllCoursesAsync(studentId);
+
+            if (student is null)
+                return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
+
+            if (student.StudentInterests is null || !student.StudentInterests.Any())
+
+                return ApiResponse<IEnumerable<CourseResponseModel>>.ErrorResponse("No Courses Found", HttpStatusCodes.InternalServerError);
+
+            var courseResponseModels = student.StudentInterests.Select(si => new CourseResponseModel
+            {
+                Id = si.Course!.Id,
+                Name = si.Course.Name,
+                AcademyName=si.Course.Name,
+                Description=si.Course.Description,
+                CategoryName=si.Course.Name,
+                IsActive = si.Course.IsActive,
+              
+            });
+
+            return ApiResponse<IEnumerable<CourseResponseModel>>.SuccessResponse(courseResponseModels, HttpStatusCodes.OK.ToString());
+        }
+
     }
 }
 

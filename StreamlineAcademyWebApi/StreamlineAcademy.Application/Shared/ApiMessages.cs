@@ -144,6 +144,7 @@ public static class APIMessages
             public static readonly string StudentAlreadyRegistered = "Student with this email already registered";
             public static readonly string BatchAssigned = "batch Assigned";
             public static readonly string BatchAlreadyAssigned = "student assigned to other batch";
+            public static readonly string NoCoursesFound = "student assigned to other batch";
 
 
 

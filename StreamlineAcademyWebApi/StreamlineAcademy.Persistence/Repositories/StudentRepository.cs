@@ -257,5 +257,10 @@ namespace StreamlineAcademy.Persistence.Repositories
         {
             return await context.StudentBatches.Select(sb => sb.StudentId).ToListAsync();
         }
+
+        public async Task<Student> GetAllCoursesAsync(Guid? studentId)
+        {
+           return await context.Students .Include(s => s.StudentInterests).ThenInclude(si => si.Course).FirstOrDefaultAsync(s => s.Id == studentId);
+        }
     }
 }
