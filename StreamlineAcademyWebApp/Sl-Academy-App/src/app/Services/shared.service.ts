@@ -7,11 +7,18 @@ import { AuthService } from './auth.service';
 import { EnquiryService } from './enquiry.service';
 import { AcademyResponse } from '../Models/Academy/Academy';
 import { EnquiryResponse } from '../Models/Common/enquiry';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
+  private profilePictureChangedSource = new Subject<string>();
+  profilePictureChanged$ = this.profilePictureChangedSource.asObservable();
+
+  broadcastProfilePictureChange(filePath: string) {
+    this.profilePictureChangedSource.next(filePath);
+  }
   constructor() {}
   toast = inject(HotToastService);
   router = inject(Router);

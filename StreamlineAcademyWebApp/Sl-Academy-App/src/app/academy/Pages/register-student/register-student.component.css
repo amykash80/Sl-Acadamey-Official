@@ -24,6 +24,9 @@
   .text-danger {
     font-size: 0.875em;
   }
+  .custom {
+    border-radius: 10px;
+  }
   
 
   .dropdown {

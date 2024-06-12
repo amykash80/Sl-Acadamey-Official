@@ -39,10 +39,10 @@
             </div>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 custom">
             <label> Intreseted In*</label>
-            <ng-multiselect-dropdown  [placeholder]="'choose courses'" [settings]="dropdownSettings" [data]="courses" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
-          </div>
+            <ng-multiselect-dropdown  class="custom-dropdown" [placeholder]="'choose courses'" [settings]="dropdownSettings" [data]="courses" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+          </div> 
 
           <div class="form-group col-md-6">
             <label><i class="fas fa-phone"></i> Phone Number*</label>

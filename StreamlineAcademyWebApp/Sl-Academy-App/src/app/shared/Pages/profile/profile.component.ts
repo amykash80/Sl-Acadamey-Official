@@ -216,9 +216,12 @@ export class ProfileComponent {
         this.sharedService.showSuccessToast(res.message);
         this.fileResponseModel = res.result;
         this.filePath = res.result.filePath!;
+        this.sharedService.broadcastProfilePictureChange(this.filePath);
       } else {
         this.sharedService.showErrorToast(res.message);
       }
+        
+      
     });
   }
 }

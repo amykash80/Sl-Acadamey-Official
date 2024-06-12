@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -8,22 +8,22 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class PublicComponent {
   showHeaderFooter: boolean = true;
-constructor(private router:Router){
-  this.router.events.subscribe(event => {
-    if (event instanceof NavigationEnd) {
-      this.checkRoute(event.urlAfterRedirects);
-    }
-  });
-}
 
-checkRoute(url: string) {
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.checkRoute(event.urlAfterRedirects);
+      }
+    });
+  }
 
-  const hideHeaderFooterRoutes = ['/change-password'];
+  checkRoute(url: string) {
+    const hideHeaderFooterRoutes = ['/change-password'];
+    this.showHeaderFooter = !hideHeaderFooterRoutes.includes(url);
+    this.cdr.detectChanges();  
+  }
 
-  this.showHeaderFooter = !hideHeaderFooterRoutes.includes(url);
-}
-
-onActivate(event: any) {
-  window.scroll(0, 0);
-}
+  onActivate(event: any) {
+    window.scroll(0, 0);
+  }
 }
