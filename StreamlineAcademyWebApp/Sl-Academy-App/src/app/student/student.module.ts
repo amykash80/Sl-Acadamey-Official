@@ -13,6 +13,7 @@ import { MySchedulesComponent } from './Pages/my-schedules/my-schedules.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckMyCoursesComponent } from './Pages/check-my-courses/check-my-courses.component';
 import { CourseResourceComponent } from './Pages/course-resource/course-resource.component';
+import { AttendenceComponent } from '../instructor/Pages/attendence/attendence.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CourseResourceComponent } from './Pages/course-resource/course-resource
     MyBatchesComponent,
     MySchedulesComponent,
     CheckMyCoursesComponent,
-    CourseResourceComponent
+    CourseResourceComponent,
+    AttendenceComponent
 
   ],
   imports: [

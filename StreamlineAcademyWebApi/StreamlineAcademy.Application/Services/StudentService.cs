@@ -224,7 +224,7 @@ namespace StreamlineAcademy.Application.Services
             var returnVal = await studentRepository.GetStudentWithBatchDetails(studentId);
             if (returnVal is not null)
                 return ApiResponse<IEnumerable<StudentBatchResponseModel>>.SuccessResponse(returnVal, HttpStatusCodes.OK.ToString());
-            return ApiResponse<IEnumerable<StudentBatchResponseModel>>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.BadRequest);
+            return ApiResponse<IEnumerable<StudentBatchResponseModel>>.ErrorResponse("No batches Found", HttpStatusCodes.BadRequest);
         }
 
         public async Task<ApiResponse<StudentResponseModel>> UpdateStudent(StudentUpdateRequestModel model)
@@ -284,7 +284,7 @@ namespace StreamlineAcademy.Application.Services
             schedules = schedules.OrderByDescending(s => s.Date);
             if (schedules.Any())
                 return ApiResponse<IEnumerable<ScheduleResponseModel>>.SuccessResponse(schedules, HttpStatusCodes.OK.ToString());
-            return ApiResponse< IEnumerable<ScheduleResponseModel>>.ErrorResponse(APIMessages.ScheduleManagement.ScheduleNotFound, HttpStatusCodes.NotFound);
+            return ApiResponse< IEnumerable<ScheduleResponseModel>>.ErrorResponse("No Schedules Found", HttpStatusCodes.NotFound);
         }
 
         public async Task<ApiResponse<IEnumerable<AttendenceResponseModel>>> CheckMyAttendence()

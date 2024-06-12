@@ -107,8 +107,8 @@ export class CheckMycoursesComponent {
               if (response.isSuccess) {
                 this.sharedService.showSuccessToast(response.message);
                 this.loadAllCourse();
-              } else {
-                this.sharedService.showErrorToast(response.message);
+              } else if (response.result.length==0) {
+                this.sharedService.showErrorToast("No course found");
               }
             },
           });

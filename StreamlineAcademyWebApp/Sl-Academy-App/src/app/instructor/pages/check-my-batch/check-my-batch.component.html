@@ -4,8 +4,16 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"style="cursor: pointer;" routerLink="/instructor/dashboard">instructor</li>
-            <li class="breadcrumb-item active" aria-current="page">my batches</li>
+            <li
+              class="breadcrumb-item"
+              style="cursor: pointer"
+              routerLink="/instructor/dashboard"
+            >
+              instructor
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              my batches
+            </li>
           </ol>
         </nav>
       </div>
@@ -152,7 +160,7 @@
                               <a
                                 class="nav-link fw-semibold"
                                 (click)="getAllStudentsByBatchId(batch.id)"
-                                >
+                              >
                                 <i
                                   class="nav-link-icon fa fa-graduation-cap"
                                 ></i>
@@ -166,7 +174,6 @@
                   </tr>
                 </tbody>
               </table>
-             
             </div>
           </div>
         </div>
@@ -174,14 +181,7 @@
     </div>
   </div>
 </div>
-<div
-*ngIf="filteredList.length === 0"
-class="text-center my-5 p-5 border rounded"
-style="background-color: #f8f9fa"
->
-<i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
-<h4 class="text-muted">No data found</h4>
-</div>
+
 
 <div>
   <app-spinner *ngIf="loadSpinner"></app-spinner>
@@ -189,6 +189,25 @@ style="background-color: #f8f9fa"
 
 <div class="app-inner" *ngIf="showTable2">
   <div class="container">
+    <div class="col">
+      <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+        <ol class="breadcrumb mb-0">
+          <li
+            class="breadcrumb-item"
+            style="cursor: pointer"
+            routerLink="/instructor/dashboard"
+          >
+            instructor
+          </li>
+          <li class="breadcrumb-item "  routerLink="/instructor/check-my-batch" aria-current="page">
+            batches
+          </li>
+          <li class="breadcrumb-item active " aria-current="page">
+            students
+          </li>
+        </ol>
+      </nav>
+    </div>
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
         <h4 class="card-title text-capitalize fs-5 mb-3">Students</h4>
@@ -227,7 +246,7 @@ style="background-color: #f8f9fa"
                       aria-label="Batch Name: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                       Name
+                      Name
                     </th>
                     <th
                       rowspan="1"
@@ -235,7 +254,7 @@ style="background-color: #f8f9fa"
                       aria-label="Batch Size: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                  Email
+                      Email
                     </th>
                     <th
                       rowspan="1"
@@ -243,7 +262,7 @@ style="background-color: #f8f9fa"
                       aria-label="Start Date: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                 Phone Number
+                      Phone Number
                     </th>
                     <th
                       rowspan="1"
@@ -251,11 +270,9 @@ style="background-color: #f8f9fa"
                       aria-label="End Date: activate to sort column descending"
                       style="width: 76.8375px"
                     >
-                  Dob
+                      Dob
                     </th>
-                    
 
-                   
                     <th
                       rowspan="1"
                       colspan="1"
@@ -312,22 +329,14 @@ style="background-color: #f8f9fa"
                         >
                           <ul class="nav flex-column">
                             <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                >
-                                <i
-                                  class="nav-link-icon fa fa-envelope"
-                                ></i>
+                              <a class="nav-link fw-semibold">
+                                <i class="nav-link-icon fa fa-envelope"></i>
                                 <span> Notify</span>
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                >
-                                <i
-                                  class="nav-link-icon fa fa-clock-o"
-                                ></i>
+                              <a class="nav-link fw-semibold">
+                                <i class="nav-link-icon fa fa-clock-o"></i>
                                 <span> Attendence</span>
                               </a>
                             </li>
@@ -338,7 +347,6 @@ style="background-color: #f8f9fa"
                   </tr>
                 </tbody>
               </table>
-             
             </div>
           </div>
         </div>
@@ -346,4 +354,3 @@ style="background-color: #f8f9fa"
     </div>
   </div>
 </div>
-<app-no-content *ngIf="showNoContent"></app-no-content>

@@ -111,6 +111,7 @@ export class CourseCategoryListComponent {
   getCourseCategoryById(){
 this.courseService.getCourseCategoryById(this.categoryId).subscribe(res=>{
   this.updateCourseCategoryModel=res.result;
+  
 })
   }
   updateCourseCategory(id:any){

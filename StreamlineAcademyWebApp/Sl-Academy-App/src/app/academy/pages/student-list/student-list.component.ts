@@ -3,7 +3,7 @@ import { StudentService } from '../../../Services/student.service';
 import { SharedService } from '../../../Services/shared.service';
 import { StudentResponseModel } from '../../../Models/student/students';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { AssignStudent } from '../../../Models/Batch/Batch';
 import { BatchService } from '../../../Services/batch.service';
 
@@ -17,7 +17,8 @@ export class StudentListComponent {
     private studentService: StudentService,
     private sharedService: SharedService,
     private batchService: BatchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router:Router
   ) {
     this.route.params.subscribe((val) => {
       this.batchId = val['batchId'];
@@ -59,7 +60,10 @@ export class StudentListComponent {
           this.showTable=true;
 
           this.showNoContent = false;
-        } else if (response.result.length == 0) {
+        } else  {
+          this.sharedService.NoDataSwal(response.message)
+          this.router.navigate(['/academy/dashboard'])
+          
           this.showStdList = false;
           this.showNoContent = true;
         }

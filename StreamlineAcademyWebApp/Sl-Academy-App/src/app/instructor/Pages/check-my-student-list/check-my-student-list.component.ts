@@ -69,7 +69,8 @@ export class CheckMyStudentListComponent {
   loadStudents(): void {
     this.instructorService.checkMyAllBatchesStudents(this.instructorId).subscribe({
         next: (response) => {
-            if (response.isSuccess) {
+            if (response.result.length>0) {
+              
                 this.showSpinner = false;
                 this.showTable = true;
                 this.studentList = response.result;
@@ -77,14 +78,9 @@ export class CheckMyStudentListComponent {
                 this.totalItems = this.filteredList.length;
                 this.currentPage = 1;
                 this.updatePagination();
-                if (response.result.length > 0) {
-                    this.showTable = true;
-                    this.showNoContent = false;
-                } else {
-                    this.showNoContent = true;
-                }
+               
             } else {
-                this.sharedService.NoDataSwal(response.message);
+                this.sharedService.NoDataSwal("No student Found");
                 setTimeout(() => {
                     this.router.navigate(['/instructor/dashboard']);
                 }, 2000);

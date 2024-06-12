@@ -54,10 +54,9 @@ export class SharedService {
   }
   NoDataSwal(message: string) {
     Swal.fire({
-      title: "sorry...",
       text: message,
        heightAuto: false, 
-    width: '400px'
+    width: '300px'
     
     });
   }

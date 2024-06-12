@@ -55,7 +55,6 @@ getAllBatches() {
         this.updatePagination();
         if (response.result.length > 0) {
           this.showTable = true;
-          this.showNoContent = false;
         }
       } else {
         this.sharedService.NoDataSwal(response.message);

@@ -53,7 +53,7 @@ namespace StreamlineAcademy.Api.Controllers
         [Authorize(Roles = nameof(UserRole.Instructor))]
         public async Task<ApiResponse<InstructorBatchResponseModel>> GetMyCoursebatch() => await instructorService.GetInstructorBatchByCourseId();
         [HttpPost("save-student-attendence")]
-        [Authorize(Roles = nameof(UserRole.Instructor))]
+        //[Authorize(Roles = nameof(UserRole.Instructor))]
         public async Task<ApiResponse<AttendenceResponseModel>> SaveAttendence(AttendenceRequestModel model) => await instructorService.SaveStudentAttendance(model);
         [HttpPost("sendNotification")]
         [Authorize(Roles = nameof(UserRole.Instructor))]
