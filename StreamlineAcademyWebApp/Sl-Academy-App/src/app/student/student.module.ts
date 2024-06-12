@@ -11,6 +11,7 @@ import { MyBatchesComponent } from './Pages/my-batches/my-batches.component';
 import { FormsModule } from '@angular/forms';
 import { MySchedulesComponent } from './Pages/my-schedules/my-schedules.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AttendenceComponent } from './Pages/attendence/attendence.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardHeaderComponent,
     SidebarComponent,
     MyBatchesComponent,
-    MySchedulesComponent
+    MySchedulesComponent,
+    AttendenceComponent
 
   ],
   imports: [

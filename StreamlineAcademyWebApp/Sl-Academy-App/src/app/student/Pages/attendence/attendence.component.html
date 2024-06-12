@@ -1,0 +1,83 @@
+<div class="app-inner">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/instructor/dashboard">instructor</li>
+            <li class="breadcrumb-item active" aria-current="page">my-student-list</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-right mr-2">
+        <p>Date: <span><strong style="color:red">12/23/2024</strong></span></p>
+        <!-- Save Attendance Button -->
+        <button class="btn btn-danger text-white mb-2" style="border-radius: 5px;">
+          Save Attendance
+        </button>
+      </div>
+    </div>
+    <div class="card custom-card overflow-auto">
+      <div class="card-body font-manrope">
+        <h4 class="card-title text-capitalize fs-5 mb-3">Students</h4>
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <input
+                  type="search"
+                  class="form-control mb-3"
+                  placeholder="Search students"
+                />
+              </div>
+            </div>
+            <!-- Student table -->
+            <table class="table">
+              <!-- Table headers -->
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Attendance</th>
+                </tr>
+              </thead>
+              <!-- Table body -->
+              <tbody>
+                <!-- Student rows -->
+                <tr *ngFor="let student of studentList">
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.phoneNumber }}</td>
+                  <!-- Attendance checkboxes -->
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="{{ 'present-' + student.id }}">
+                      <label class="form-check-label" for="{{ 'present-' + student.id }}">Present</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="{{ 'absent-' + student.id }}">
+                      <label class="form-check-label" for="{{ 'absent-' + student.id }}">Absent</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="{{ 'late-' + student.id }}">
+                      <label class="form-check-label" for="{{ 'late-' + student.id }}">Late</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="{{ 'excused-' + student.id }}">
+                      <label class="form-check-label" for="{{ 'excused-' + student.id }}">Excused</label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- No data message -->
+            <!-- Pagination -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

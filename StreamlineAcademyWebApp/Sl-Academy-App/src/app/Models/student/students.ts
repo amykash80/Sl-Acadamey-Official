@@ -1,3 +1,4 @@
+import { AttendenceStatus } from "../../Enums/AttendenceStatus";
 import { BatchStatus } from "../../Enums/Batchstatus";
 
 export class AddStudent {
@@ -57,4 +58,10 @@ export class UpdateStudentModel {
     batchName?: string;
     contentName?: string;
    
+  }
+  export class SaveAttendence{
+    attendanceDate?:Date;
+    attendenceStatus?:AttendenceStatus;
+    studentId?:string;
+    scheduleId?:string;
   }
