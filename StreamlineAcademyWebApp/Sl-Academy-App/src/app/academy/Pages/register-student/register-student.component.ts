@@ -54,11 +54,22 @@ export class RegisterStudentComponent {
     this.getAllCourses();
   }
   onItemSelect(item:any){
-    this.studentModel.courseId?.push(item.id);
+    if (!this.studentModel.courseId) {
+      this.studentModel.courseId = [];
+    }
+    this.studentModel.courseId.push(item.id);
   }
-  onSelectAll(item:any){
-    this.studentModel.courseId?.push(item.map((item: any) => item.id));
-    console.log(this.studentModel.courseId)
+  onSelectAll(items:any){
+    if (!this.studentModel.courseId) {
+      this.studentModel.courseId = [];
+    }
+    items.forEach((item: any) => {
+      if (!this.studentModel.courseId!.includes(item.id)) {
+        this.studentModel.courseId!.push(item.id);
+        console.log(this.studentModel.courseId)
+      }
+    });
+    console.log(this.studentModel.courseId);
   }
   toggleSelection(course: any) {
     debugger;
