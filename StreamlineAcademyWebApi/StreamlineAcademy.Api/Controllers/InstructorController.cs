@@ -71,5 +71,8 @@ namespace StreamlineAcademy.Api.Controllers
             return ApiResponse<List<StudentResponseModel>>.ErrorResponse("No Students Found", HttpStatusCodes.InternalServerError);
 
         }
+        [HttpGet("Check-my-Schedule-batch")]
+        [Authorize(Roles = nameof(UserRole.Instructor))]
+        public async Task<ApiResponse<ScheduleResponseModel>> GetInstructorScheduleByBatchId() => await instructorService.GetInstructorScheduleByBatchId();
     }
 }
