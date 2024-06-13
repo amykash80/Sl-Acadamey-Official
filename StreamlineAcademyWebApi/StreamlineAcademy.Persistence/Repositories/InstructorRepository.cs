@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
+using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Models.Responses;
 using StreamlineAcademy.Persistence.Data;
@@ -279,6 +280,25 @@ namespace StreamlineAcademy.Persistence.Repositories
 
             return students!;
         }
+        public async Task<ScheduleResponseModel?> GetInstructorSchedule(Guid? instructorId)
+        {
+            var schedule = await context.Batches
+                .Where(b => b.InstructorId == instructorId)
+                .SelectMany(b => b.Schedules!)
+                .Select(sb => new ScheduleResponseModel
+                {
+                    Id = sb.Id,
+                    Date = sb.Date,
+                    DurationInHours = sb.DurationInHours,
+                    IsActive = sb.IsActive,
+                    BatchName = sb.Batch!.BatchName  
+                })
+                .FirstOrDefaultAsync();  
+
+            return schedule;
+        }
+
+
 
     }
 }

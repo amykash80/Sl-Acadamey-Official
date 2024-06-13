@@ -1,4 +1,5 @@
-﻿using StreamlineAcademy.Domain.Entities;
+﻿using StreamlineAcademy.Application.Shared;
+using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<InstructorBatchResponseModel> GetInstructionBatchByCourseId(Guid? instructorId);
         Task<InstructorResponseModel> GetInstructorAcademy(Guid? id);
         Task<List<StudentResponseModel>> GetAllStudentsForInstructorAsync(Guid? instructorId);
-
+        Task<ScheduleResponseModel?> GetInstructorSchedule(Guid? instructorId);
     }
 
 }
