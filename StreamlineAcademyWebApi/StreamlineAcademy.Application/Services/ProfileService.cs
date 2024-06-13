@@ -125,8 +125,8 @@ namespace StreamlineAcademy.Application.Services
                 if(returnVal is not null)
                 {
                     var academy = await academyRepository.FirstOrDefaultAsync(x => x.Id == id);
-                    var student=await studentRepository.FirstOrDefaultAsync(x=>x.Id== id);
                     var instructor = await instructorReository.FirstOrDefaultAsync(x => x.Id == id);
+                    var student = await studentRepository.FirstOrDefaultAsync(x => x.Id == id);
                     if (returnVal.UserRole == UserRole.AcademyAdmin)
                     {
                         academy.CountryId = request.CountryId;

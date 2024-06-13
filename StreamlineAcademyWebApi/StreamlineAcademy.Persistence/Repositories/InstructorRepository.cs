@@ -31,9 +31,10 @@ namespace StreamlineAcademy.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Instructor> FirstOrDefaultAsync(Expression<Func<Instructor, bool>> expression)
+        public async Task<Instructor> FirstOrDefaultAsync(Expression<Func<Instructor, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await context.Instructors.FirstOrDefaultAsync(expression);
+
         }
 
         public Task<IEnumerable<Instructor>> GetAllAsync()
