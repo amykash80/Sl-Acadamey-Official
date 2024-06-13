@@ -7,6 +7,7 @@ import { CourseResponse } from '../../../Models/Academy/Course';
 import { InstructorResponseModel } from '../../../Models/Instructor/Instructor';
 import { StudentResponseModel } from '../../../Models/student/students';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
+import { BatchScheduleResponseModel } from '../../../Models/BatchSchedule/BatchSchedule';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,12 +31,13 @@ export class DashboardComponent {
     this.loadCourses();
     this.loadBatches();
     this.loadAllStudents();
+    this.loadSchedules();
   }
   coursesList: CourseResponse[] = [];
   batchList: BatchResponseModel[] = [];
   InstructorList: InstructorResponseModel[] = [];
   StudentList: StudentResponseModel[] = [];
-
+  scheduleList: BatchScheduleResponseModel[] = [];
   loadCourses() {
     this.instructorService.checkMyCourses().subscribe((d) => {
       this.coursesList = d.result;
@@ -47,6 +49,12 @@ export class DashboardComponent {
       this.batchList = data.result;
     });
   }
+  loadSchedules() {
+    this.instructorService.checkMySchedule().subscribe((data) => {
+      this.scheduleList = data.result;
+    });
+  }
+
   loadAllStudents() {
     this.instructorService
       .checkMyAllBatchesStudents(this.instructorId)

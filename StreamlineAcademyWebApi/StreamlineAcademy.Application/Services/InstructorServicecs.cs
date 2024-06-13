@@ -302,16 +302,16 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<InstructorBatchResponseModel>.ErrorResponse(APIMessages.TechnicalError);
         }
 
-        public async Task<ApiResponse<ScheduleResponseModel>> GetInstructorScheduleByBatchId()
+        public async Task<ApiResponse<List<ScheduleResponseModel>>> GetInstructorScheduleByBatchId()
         {
             var instructorId = contextService.GetUserId();
-            var instructor = await instructorRepository.GetByIdAsync(_ => _.Id == instructorId);
+            var instructor = await batchRepository.GetByIdAsync(_ => _.InstructorId == instructorId);
             if (instructor is null)
-                return ApiResponse<ScheduleResponseModel>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
+                return ApiResponse<List<ScheduleResponseModel>>.ErrorResponse(APIMessages.StudentManagement.StudentNotFound, HttpStatusCodes.NotFound);
             var returnVal = await instructorRepository.GetInstructorSchedule(instructorId);
             if (returnVal is not null)
-                return ApiResponse<ScheduleResponseModel>.SuccessResponse(returnVal);
-            return ApiResponse<ScheduleResponseModel>.ErrorResponse(APIMessages.TechnicalError);
+                return ApiResponse<List<ScheduleResponseModel>>.SuccessResponse(returnVal!);
+            return ApiResponse<List<ScheduleResponseModel>>.ErrorResponse(APIMessages.TechnicalError);
         }
     }
 }

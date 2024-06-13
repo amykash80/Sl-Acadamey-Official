@@ -30,7 +30,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<InstructorBatchResponseModel> GetInstructionBatchByCourseId(Guid? instructorId);
         Task<InstructorResponseModel> GetInstructorAcademy(Guid? id);
         Task<List<StudentResponseModel>> GetAllStudentsForInstructorAsync(Guid? instructorId);
-        Task<ScheduleResponseModel?> GetInstructorSchedule(Guid? instructorId);
+        Task<List<ScheduleResponseModel?>> GetInstructorSchedule(Guid? instructorId);
     }
 
 }

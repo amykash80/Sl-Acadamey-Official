@@ -281,22 +281,38 @@ namespace StreamlineAcademy.Persistence.Repositories
 
             return students!;
         }
-        public async Task<ScheduleResponseModel?> GetInstructorSchedule(Guid? instructorId)
+        public async Task<List<ScheduleResponseModel?>> GetInstructorSchedule(Guid? instructorId)
         {
-            var schedule = await context.Batches
-                .Where(b => b.InstructorId == instructorId)
-                .SelectMany(b => b.Schedules!)
-                .Select(sb => new ScheduleResponseModel
-                {
-                    Id = sb.Id,
-                    Date = sb.Date,
-                    DurationInHours = sb.DurationInHours,
-                    IsActive = sb.IsActive,
-                    BatchName = sb.Batch!.BatchName  
-                })
-                .FirstOrDefaultAsync();  
+            //var batch = context.Batches.Where(b => b.InstructorId == instructorId).Include(sch => sch.Schedules);
+            //var allSchedules = batch.SelectMany(b => b.Schedules!);
+            //var schedule = await context.Batches
+            //    .Where(b => b.InstructorId == instructorId)
+            //    .SelectMany(b => b.Schedules!)
+            //    .Select(sb => new ScheduleResponseModel
+            //    {
+            //        Id = sb.Id,
+            //        Date = sb.Date,
+            //        DurationInHours = sb.DurationInHours,
+            //        IsActive = sb.IsActive,
+            //        BatchName = sb.Batch!.BatchName  
+            //    })
+            //    .FirstOrDefaultAsync();  
 
-            return schedule;
+            //return schedule;
+            var schedules = await context.Batches
+        .Where(b => b.InstructorId == instructorId)
+        .SelectMany(b => b.Schedules!)
+        .Select(sb => new ScheduleResponseModel
+        {
+            Id = sb.Id,
+            Date = sb.Date,
+            DurationInHours = sb.DurationInHours,
+            IsActive = sb.IsActive,
+            BatchName = sb.Batch!.BatchName // Assuming sb.Batch is not null due to the SelectMany
+        })
+        .ToListAsync();
+
+            return schedules!;
         }
 
 
