@@ -12,7 +12,7 @@ namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles =nameof(UserRole.AcademyAdmin))]
+    [Authorize(Roles = nameof(UserRole.AcademyAdmin) + "," + nameof(UserRole.Student) + ",")]
     public class CourseResourceController : ControllerBase
     {
         private readonly ICourseResourceService courseResourceService;

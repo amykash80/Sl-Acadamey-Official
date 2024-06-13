@@ -3,6 +3,7 @@ import { AcademyService } from '../../../Services/academy.service';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { AcademyResponse } from '../../../Models/Academy/Academy';
 import { SharedService } from '../../../Services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-academy-list',
@@ -12,7 +13,8 @@ import { SharedService } from '../../../Services/shared.service';
 export class AcademyListComponent {
   constructor(
     private academyService: AcademyService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router:Router
   ) {
     this.loadAllAcademies();
   }
@@ -26,25 +28,37 @@ export class AcademyListComponent {
   displayedAcademyList: AcademyResponse[] = [];
   showSpinner=true;
   showTable=false
-
+  showNoContent = false;
   loadAllAcademies() {
     this.academyService.academyList().subscribe({
       next: (response) => {
-        this.showSpinner=false;
-        this.showTable=true
-        this.academyList = response.result;
-     this.filteredAcademyList=this.academyList;
-     this.totalItems = this.filteredAcademyList.length;
-      this.currentPage = 1; 
-      this.updatePagination();
+        if (response.isSuccess) {
+          this.showSpinner = false;
+          this.showTable = true;
+          this.academyList = response.result;
+          this.filteredAcademyList = this.academyList;
+          this.totalItems = this.filteredAcademyList.length;
+          this.currentPage = 1;
+          this.updatePagination();
+          if (response.result.length > 0) {
+            this.showTable = true;
+            this.showNoContent = false;
+          } else {
+            this.showNoContent = true;
+          }
+        } else {
+          this.sharedService.NoDataSwal(response.message);
+          setTimeout(() => {
+            this.router.navigate(['/admin/dashboard']);
+          }, 2000);
+        }
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.Unauthorized) {
-          console.log(err.message);
-        }
+        console.error(err);
       },
     });
   }
+
   filterAcademies(event:any): void {
     const filterValue = event.target.value.toLowerCase();
     this.filteredAcademyList = this.academyList.filter(academy => 

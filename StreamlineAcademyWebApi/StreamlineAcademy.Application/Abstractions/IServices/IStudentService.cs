@@ -22,6 +22,6 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> checkScheduleByDate(DateTimeOffset slectedDate);
         Task<ApiResponse<IEnumerable<AttendenceResponseModel>>> CheckMyAttendence();
         Task<ApiResponse<StudentResponseModel>> DeleteStudent(Guid id);
-
+        Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesForStudent();
     }
 }

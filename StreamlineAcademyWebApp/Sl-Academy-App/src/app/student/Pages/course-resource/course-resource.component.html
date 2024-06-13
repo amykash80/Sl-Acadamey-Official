@@ -1,139 +1,119 @@
-
 <div class="app-inner" *ngIf="showTable">
   <div class="container">
-    <div class="col">
-      <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item" routerLink="/admin/dashboard">admin</li>
-          <li class="breadcrumb-item active" aria-current="page">academy-list</li>
-        </ol>
-      </nav>
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item" routerLink="/student/dashboard" >student</li>
+            <li class="breadcrumb-item active" aria-current="page">resources</li>
+          </ol>
+        </nav>
+      </div>
     </div>
     <div class="card custom-card overflow-auto">
       <div class="card-body font-manrope">
-        <h4 class="card-title text-capitalize fs-5 mb-3">Academies</h4>
+        <h4 class="card-title text-capitalize fs-5 mb-3">Resources</h4>
         <div class="row">
-          
           <div class="col-12">
             <div
               id="order-listing_wrapper"
               class="dataTables_wrapper dt-bootstrap4 no-footer"
             >
               <div class="row">
+               
                 <div class="col-sm-12 col-md-6">
-                  <button class="btn btn-success bg-gradient" routerLink="/admin/register-academy"><i class="fas fa-plus mr-2"></i> Register Academy</button>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                  <div id="order-listing_filter" class="dataTables_filter">
+                  <div id="resource-listing_filter" class="dataTables_filter">
                     <label>
                       <input
                         type="search"
                         [(ngModel)]="searchText"
-                        (input)="filterAcademies($event)"
+                        (input)="filterResources()"
                         class="form-control"
-                        placeholder="Search academies"
-                        aria-controls="order-listing"
+                        placeholder="Search resources"
+                        aria-controls="resource-listing"
                       />
                     </label>
                   </div>
                 </div>
               </div>
+
               <table
-                id="order-listing"
+                id="resource-listing"
                 class="table dataTable no-footer"
-                aria-describedby="order-listing_info"
+                aria-describedby="resource-listing_info"
               >
                 <thead>
                   <tr>
                     <th
                       rowspan="1"
                       colspan="1"
-                      aria-label="Order #: activate to sort column descending"
-                      style="width: 76.8375px"
+                      aria-label="Name: activate to sort column descending"
+                      style="width: 100px;"
                     >
-                      Admin
+                      Name
                     </th>
                     <th
                       rowspan="1"
                       colspan="1"
-                      aria-label="Customer: activate to sort column ascending"
-                      style="width: 91.9375px"
+                      aria-label="Description: activate to sort column descending"
+                      style="width: 200px;"
                     >
-                      Academy Name
+                      Description
                     </th>
                     <th
                       rowspan="1"
                       colspan="1"
-                      aria-label="Ship to: activate to sort column ascending"
-                      style="width: 75.0125px"
+                      aria-label="Type: activate to sort column descending"
+                      style="width: 100px;"
                     >
-                   Address
+                      Resource
                     </th>
                     <th
                       rowspan="1"
                       colspan="1"
-                      aria-label="Ship to: activate to sort column ascending"
-                      style="width: 75.0125px"
+                      aria-label="IsActive: activate to sort column descending"
+                      style="width: 100px;"
                     >
-                      Phone Number
+                      IsActive
                     </th>
-                    <th
-                    rowspan="1"
-                    colspan="1"
-                    aria-label="Ship to: activate to sort column ascending"
-                    style="width: 75.0125px"
-                  >
-                 Email
-                  </th>
-                  <th
-                  rowspan="1"
-                  colspan="1"
-                  aria-label="Ship to: activate to sort column ascending"
-                  style="width: 75.0125px"
-                >
-               Type
-                </th>
-                <th
-                rowspan="1"
-                colspan="1"
-                aria-label="Ship to: activate to sort column ascending"
-                style="width: 75.0125px"
-              >
-             Country
-              </th>
-              <th
-              rowspan="1"
-              colspan="1"
-              aria-label="Ship to: activate to sort column ascending"
-              style="width: 75.0125px"
-            >
-           IsActive
-            </th>
                     <th
                       rowspan="1"
                       colspan="1"
-                      aria-label="Ship to: activate to sort column ascending"
-                      style="width: 75.0125px"
+                      aria-label="Actions: activate to sort column descending"
+                      style="width: 100px;"
                     >
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let academy of displayedAcademyList">
-                    <td>{{ academy.academyAdmin }}</td>
-                    <td>{{ academy.academyName }}</td>
-                    <td>{{ academy.address }}</td>
-                    <td>{{ academy.phoneNumber }}</td>
-                    <td>{{ academy.email }}</td>
-                    <td>{{ academy.academyType }}</td>
-                    <td>{{ academy.countryName }}</td>
+                  <tr *ngFor="let courseResource of displayedResourceList">
+                    <td>{{ courseResource.name }}</td>
+                    <td>{{ courseResource.description }}</td>
                     <td>
-                      <span [ngClass]="academy.isActive ? 'chip chip-success' : 'chip chip-danger'">
-                        {{
-                          academy.isActive | isActive
-                        }}</span
-                      >
+                      <ng-container [ngSwitch]="courseResource.type">
+                        <a *ngSwitchCase="5" [href]="apiBaseUrl + courseResource.filePath" download>
+                          <img [src]="apiBaseUrl + courseResource.filePath" alt="" style="width: 100px; height: auto; border-radius: 10px;" title="Open/Download image">
+                        </a>
+                        <a *ngSwitchCase="2" [href]="apiBaseUrl + courseResource.filePath" target="_blank" data-bs-toggle="tooltip" title="Open/Download PDF">
+                          <i class="fa fa-file-pdf-o" style="font-size:58px;color:red"></i>
+                        </a>
+                         
+                          <a *ngSwitchCase="3" [href]="apiBaseUrl + courseResource.filePath"  target="_blank" title="Open/view document">
+                            <i class="fa fa-file" style="font-size:58px;color:rgb(159, 44, 44)"></i>
+                          </a>
+                        <video *ngSwitchCase="4" controls  style="width: 100px; height: auto; border-radius: 10px;" title="Open/Download image">
+                          <source [src]="apiBaseUrl + courseResource.filePath" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                        <iframe *ngSwitchCase="1" [src]="courseResource.filePath" frameborder="0" allowfullscreen style="width: 100px; height: auto;"></iframe>
+                        <span *ngSwitchDefault>Unsupported resource type</span>
+                      </ng-container>
+                    </td>
+                    <td>
+                      <span [ngClass]="courseResource.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                        {{ courseResource.isActive }}
+                      </span>
                     </td>
                     <td>
                       <div class="d-inline-block dropdown">
@@ -154,31 +134,17 @@
                           class="dropdown-menu dropdown-menu-left"
                         >
                           <ul class="nav flex-column">
-                          
+                        
                             <li class="nav-item">
                               <a
                                 class="nav-link fw-semibold"
-                                [routerLink]="[
-                                  '/admin/update-academy',
-                                  academy.id
-                                ]"
-                              >
-                                <i class="nav-link-icon fas fa-pen"></i>
-                                <span> Edit</span>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a
-                                class="nav-link dangered fw-semibold"
-                                (click)="deleteAcademy(academy.id)"
                                 
                               >
-                                <i
-                                  class="nav-link-icon fas fa-trash dangered"
-                                ></i>
-                                <span> Delete</span>
+                                <i class="nav-link-icon fas fa-pen"></i>
+                                <span> Download</span>
                               </a>
                             </li>
+                           
                           </ul>
                         </div>
                       </div>
@@ -186,6 +152,10 @@
                   </tr>
                 </tbody>
               </table>
+              <div *ngIf="filteredResourceList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+                <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No data found</h4>
+              </div>
               <div class="row">
                 <div class="col-sm-12 col-md-5">
                   <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
@@ -197,6 +167,7 @@
                 <div class="col-sm-12 col-md-7">
                   <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
                     <ul class="pagination">
+                      <!-- Previous Button -->
                       <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
                         <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
                           Previous
@@ -224,8 +195,7 @@
       </div>
     </div>
   </div>
-  </div>
-
+</div>
 <div>
   <app-spinner *ngIf="showSpinner"></app-spinner>
 </div>

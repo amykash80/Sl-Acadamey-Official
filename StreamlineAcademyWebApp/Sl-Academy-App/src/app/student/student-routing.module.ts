@@ -6,6 +6,8 @@ import { AuthGuard } from '../shared/auth.guard';
 import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 import { MyBatchesComponent } from './Pages/my-batches/my-batches.component';
 import { MySchedulesComponent } from './Pages/my-schedules/my-schedules.component';
+import { CheckMyCoursesComponent } from './Pages/check-my-courses/check-my-courses.component';
+import { CourseResourceComponent } from './Pages/course-resource/course-resource.component';
 
 const routes: Routes = [
   {path:"",component:StudentComponent,canActivate:[AuthGuard],
@@ -14,7 +16,9 @@ const routes: Routes = [
     {path:"dashboard",component:DashboardComponent},
     {path:"profile",component:ProfileComponent},
     {path:"my-batches",component:MyBatchesComponent},
-    {path:"my-schedules",component:MySchedulesComponent}
+    {path:"my-schedules",component:MySchedulesComponent},
+    {path:"check-my-courses",component:CheckMyCoursesComponent},
+    {path:"course-resource/:id",component:CourseResourceComponent},
   ]
   }
 ];

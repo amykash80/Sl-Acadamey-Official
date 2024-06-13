@@ -13,7 +13,7 @@ namespace StreamlineAcademy.Domain.Entities
         public Guid? StudentId { get; set; }
         [ForeignKey(nameof(StudentId))]
         public Student? Student { get; set;}
-        public Guid CourseId { get; set; }
+        public Guid? CourseId { get; set; }
         [ForeignKey(nameof(CourseId))]
         public Course? Course { get; set; }
     }

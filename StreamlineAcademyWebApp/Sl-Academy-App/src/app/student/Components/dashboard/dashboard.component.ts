@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { StudentService } from '../../../Services/student.service';
 import { BatchScheduleResponseModel } from '../../../Models/BatchSchedule/BatchSchedule';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
+import { CourseResponse } from '../../../Models/Academy/Course';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,6 +33,7 @@ export class DashboardComponent {
   scheduleList: BatchScheduleResponseModel[] = [];
   scheduleResponse:any
   batchList: BatchResponseModel[] = [];
+  courseList: CourseResponse[] = [];
   status = false;
   selectedDate!: string;
   todaysSchedule!: any;
@@ -51,6 +53,9 @@ export class DashboardComponent {
     });
     this.studentService.getAllMybatches().subscribe((res) => {
       this.batchList = res.result;
+    });
+    this.studentService.checkMyCourses().subscribe((res) => {
+      this.courseList = res.result;
     });
   }
   getSchedule() {
