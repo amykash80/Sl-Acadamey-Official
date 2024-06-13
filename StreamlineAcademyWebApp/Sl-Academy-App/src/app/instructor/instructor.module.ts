@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CheckMyBatchComponent } from './pages/check-my-batch/check-my-batch.component';
 import { SharedModule } from '../shared/shared.module';
 import { CheckMyStudentListComponent } from './Pages/check-my-student-list/check-my-student-list.component';
+import { CheckMyScheduleComponent } from './Pages/check-my-schedule/check-my-schedule.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { CheckMyStudentListComponent } from './Pages/check-my-student-list/check
     CheckMycoursesComponent,
     CheckMyBatchComponent,
     CheckMyStudentListComponent,
+    CheckMyScheduleComponent,
     
   ],
   imports: [
