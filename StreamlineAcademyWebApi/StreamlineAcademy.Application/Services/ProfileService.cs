@@ -29,6 +29,8 @@ namespace StreamlineAcademy.Application.Services
         private readonly IUserRepository userRepository;
         private readonly IPortalAdminRepository portalAdminRepository;
         private readonly IAcademyRepository academyRepository;
+        private readonly IStudentRepository studentRepository;
+        private readonly IInstructorReository instructorReository;
 
         public ProfileService(IProfileRepository profileRepository,
                               IContextService contextService,
@@ -37,7 +39,9 @@ namespace StreamlineAcademy.Application.Services
                               IFileRepository fileRepository,
                               IUserRepository userRepository,
                               IPortalAdminRepository portalAdminRepository,
-                              IAcademyRepository academyRepository
+                              IAcademyRepository academyRepository,
+                              IStudentRepository studentRepository,
+                              IInstructorReository instructorReository
                              )
         {
             this.profileRepository = profileRepository;
@@ -48,6 +52,8 @@ namespace StreamlineAcademy.Application.Services
             this.userRepository = userRepository;
             this.portalAdminRepository = portalAdminRepository;
             this.academyRepository = academyRepository;
+            this.studentRepository = studentRepository;
+            this.instructorReository = instructorReository;
         }
         public async Task<ApiResponse<ContactInfoResponseModel>> GetContactInfoById()
         {
@@ -119,25 +125,78 @@ namespace StreamlineAcademy.Application.Services
                 if(returnVal is not null)
                 {
                     var academy = await academyRepository.FirstOrDefaultAsync(x => x.Id == id);
-                    academy.CountryId = request.CountryId;
-                    academy.StateId = request.StateId;
-                    academy.CityId = request.CityId;
-                    var res = await academyRepository.UpdateAsync(academy);
-                    var result = await academyRepository.GetAcademyById(academy.Id);
-                    var resultSet = new AddressInfoResponseModel() { 
-                    Id= academy.Id,
-                    Address = returnVal.Address,
-                    PostalCode= returnVal.PostalCode,
-                    CountryName=result.CountryName,
-                    StateName= result.StateName,
-                    CityName= result.CityName,
-                    CountryId=result.CountryId,
-                    StateId=result.SateId,
-                    CityId=result.CityId
+                    var student=await studentRepository.FirstOrDefaultAsync(x=>x.Id== id);
+                    var instructor = await instructorReository.FirstOrDefaultAsync(x => x.Id == id);
+                    if (returnVal.UserRole == UserRole.AcademyAdmin)
+                    {
+                        academy.CountryId = request.CountryId;
+                        academy.StateId = request.StateId;
+                        academy.CityId = request.CityId;
+                        var res = await academyRepository.UpdateAsync(academy);
+                        var result = await academyRepository.GetAcademyById(academy.Id);
+                        var resultSet = new AddressInfoResponseModel()
+                        {
+                            Id = academy.Id,
+                            Address = returnVal.Address,
+                            PostalCode = returnVal.PostalCode,
+                            CountryName = result.CountryName,
+                            StateName = result.StateName,
+                            CityName = result.CityName,
+                            CountryId = result.CountryId,
+                            StateId = result.SateId,
+                            CityId = result.CityId
 
-                    };
+                        };
+                        return ApiResponse<AddressInfoResponseModel>.SuccessResponse(resultSet, APIMessages.ProfileManagement.AddressUpdated.ToString());
 
-                    return ApiResponse<AddressInfoResponseModel>.SuccessResponse(resultSet,APIMessages.ProfileManagement.AddressUpdated.ToString());
+                    }
+                    else if (returnVal.UserRole == UserRole.Instructor)
+                    {
+                         instructor.CountryId = request.CountryId ?? Guid.Empty;
+                        instructor.StateId = request.StateId??Guid.Empty;
+                        instructor.CityId = request.CityId ?? Guid.Empty;
+                        var res = await instructorReository.UpdateAsync(instructor);
+                        var result = await instructorReository.GetInstructorById(instructor.Id);
+                        var resultSet = new AddressInfoResponseModel()
+                        {
+                            Id = instructor.Id,
+                            Address = returnVal.Address,
+                            PostalCode = returnVal.PostalCode,
+                            CountryName = result.CountryName,
+                            StateName = result.StateName,
+                            CityName = result.CityName,
+                            CountryId = result.CountryId,
+                            StateId = result.StateId,
+                            CityId = result.CityId
+
+                        };
+                        return ApiResponse<AddressInfoResponseModel>.SuccessResponse(resultSet, APIMessages.ProfileManagement.AddressUpdated.ToString());
+
+                    }
+                    else if (returnVal.UserRole == UserRole.Student)
+                    {
+                        student.CountryId = request.CountryId ?? Guid.Empty;
+                        student.StateId = request.StateId ?? Guid.Empty;
+                        student.CityId = request.CityId ?? Guid.Empty;
+                        var res = await studentRepository.UpdateAsync(student);
+                        var result = await studentRepository.GetStudentById(student.Id);
+                        var resultSet = new AddressInfoResponseModel()
+                        {
+                            Id = student.Id,
+                            Address = returnVal.Address,
+                            PostalCode = returnVal.PostalCode,
+                            CountryName = result.CountryName,
+                            StateName = result.StateName,
+                            CityName = result.CityName,
+                            CountryId = result.CountryId,
+                            StateId = result.StateId,
+                            CityId = result.CityId
+
+                        };
+                        return ApiResponse<AddressInfoResponseModel>.SuccessResponse(resultSet, APIMessages.ProfileManagement.AddressUpdated.ToString());
+
+                    }
+
                 }
                 return ApiResponse<AddressInfoResponseModel>.ErrorResponse(APIMessages.TechnicalError);
 
