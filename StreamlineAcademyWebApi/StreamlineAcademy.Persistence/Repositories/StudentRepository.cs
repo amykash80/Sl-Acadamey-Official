@@ -32,9 +32,10 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         }
 
-        public Task<Student> FirstOrDefaultAsync(Expression<Func<Student, bool>> expression)
+        public async Task<Student> FirstOrDefaultAsync(Expression<Func<Student, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await context.Students.FirstOrDefaultAsync(expression);
+
         }
 
         public Task<IEnumerable<Student>> GetAllAsync()

@@ -70,7 +70,7 @@ getcourseById(){
         } else {
           this.sharedService.NoDataSwal(response.message);
           setTimeout(() => {
-            this.router.navigate(['/student/course-list']);
+            this.router.navigate(['/student/check-my-courses']);
           }, 2000);
         }
       },

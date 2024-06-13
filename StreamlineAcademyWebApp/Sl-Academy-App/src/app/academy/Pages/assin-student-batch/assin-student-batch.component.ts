@@ -33,6 +33,7 @@ export class AssinStudentBatchComponent {
   searchText: string = '';
   batchId:string=''
   courseId=''
+  showSpinner=false;
 
 
   filterStudents(event: any) {
@@ -57,6 +58,7 @@ export class AssinStudentBatchComponent {
     }
   }
   assignStudentToBatch(batchId: any, studentId: any) {
+    this.showSpinner=true;
     this.studentBatchAssignmentModel.studentId = studentId;
     this.studentBatchAssignmentModel.batchId = batchId;
     this.batchService
@@ -66,10 +68,12 @@ export class AssinStudentBatchComponent {
           console.log(result);
           
           if (result.isSuccess) {
+            this.showSpinner=false;
             this.sharedService.showSuccessToast(result.message
             );
             this.loadAllStudents();
           } else {
+            this.showSpinner=false
             this.sharedService.showErrorToast(result.message
             );
           }
