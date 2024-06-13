@@ -8,6 +8,7 @@ import { CheckMyBatchComponent } from './pages/check-my-batch/check-my-batch.com
 import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 import { CheckMyStudentListComponent } from './Pages/check-my-student-list/check-my-student-list.component';
 import { AttendenceComponent } from './Pages/attendence/attendence.component';
+import { CheckMyScheduleComponent } from './Pages/check-my-schedule/check-my-schedule.component';
 
 const routes: Routes = [
   {path:"",component:InstructorComponent,canActivate:[AuthGuard],
@@ -16,6 +17,7 @@ const routes: Routes = [
     {path:"dashboard",component:DashboardComponent},
     {path:"check-mycourses",component:CheckMycoursesComponent},
     {path:"check-my-batch",component:CheckMyBatchComponent},
+    {path:"check-my-schedule",component:CheckMyScheduleComponent},
     {path:"profile",component:ProfileComponent},
     {path:"student-list",component:CheckMyStudentListComponent},
     {path:"attendence",component:AttendenceComponent}
