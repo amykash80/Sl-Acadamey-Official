@@ -29,6 +29,7 @@ export class CreateCourseResourceComponent {
   courseId: string = '';
   courseRes:CourseResponse=new CourseResponse()
   loadSpinner=true
+  type!:CourseResourceType
 
 
   ngOnInit() {
@@ -38,6 +39,10 @@ export class CreateCourseResourceComponent {
       console.log(this.courseId)
     });
   }
+  getDropdownValue(event:any){
+  this.type=event.target.value;
+  console.log(this.type)
+  }
   getcourseById(){
     this.courseService.getCourseById(this.courseId).subscribe(data =>{
      this.courseRes=data.result
@@ -46,6 +51,7 @@ export class CreateCourseResourceComponent {
   createCourseResource(event: Event) {
     this.courseResourceModel.CourseId = this.courseId;
     let myForm = event.target as HTMLFormElement;
+    console.log(myForm)
     let formData = new FormData(myForm);
     formData.append('CourseId', this.courseId);
     this.courseResourceService
