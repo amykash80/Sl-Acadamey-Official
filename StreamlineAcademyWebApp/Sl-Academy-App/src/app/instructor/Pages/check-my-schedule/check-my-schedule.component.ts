@@ -16,7 +16,9 @@ export class CheckMyScheduleComponent {
   filteredList: BatchScheduleResponseModel[] = [];
   totalItems = 0;
   currentPage = 1;
-  displayedScheduleList:BatchScheduleResponseModel[] = [];
+  displayedStudentList: BatchScheduleResponseModel[] = [];
+  loggedInUserDetails: any;
+  instructorId: string = '';
   constructor(
     private instructorService: InstructorService,
     private sharedService: SharedService,
@@ -24,12 +26,17 @@ export class CheckMyScheduleComponent {
   ) {}
 
   ngOnInit(): void {
+    this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
+    console.log(this.loggedInUserDetails);
+    this.instructorId = this.loggedInUserDetails.userId;
     this.getAllSchedules();
   }
 
   getAllSchedules(): void {
     this.instructorService.checkMySchedule().subscribe({
       next: (response) => {
+        debugger;
+        console.log(response);
         if (response.isSuccess) {
           this.loadSpinner = false;
           this.showTable = true;

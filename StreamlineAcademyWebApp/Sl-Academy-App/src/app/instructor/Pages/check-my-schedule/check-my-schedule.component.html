@@ -1,3 +1,4 @@
+
 <div class="app-inner" *ngIf="showTable">
   <div class="container">
     <div class="row">
@@ -40,24 +41,26 @@
                 <thead>
                   <tr>
                     <th>Batch Name</th>
-                    <th>Content Name</th>
+                    <th>Date</th>
+                    <th>Duration</th>
                     
                     <th>IsActive</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let student of displayedScheduleList">
-                    <td>{{ student.batchName }}</td>
-                    <td>{{ student.contentName}}</td>
+                  <tr *ngFor="let schedule of filteredList">
+                    <td>{{ schedule.batchName }}</td>
+                    <td>{{ schedule.date }}</td>
+                    <td>{{ schedule.durationInHours}}</td>
                     <td>
                       <span
                         [ngClass]="
-                          student.isActive
+                          schedule.isActive
                             ? 'chip chip-success'
                             : 'chip chip-danger'
                         "
                       >
-                        {{ student.isActive }}
+                        {{ schedule.isActive }}
                       </span>
                     </td>
                   
@@ -65,10 +68,10 @@
                 </tbody>
               </table>
               <!-- No data message -->
-              <!-- <div *ngIf="displayedScheduleList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+              <div *ngIf="filteredList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
                 <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
                 <h4 class="text-muted">No students found</h4>
-              </div> -->
+              </div>
               <!-- Pagination -->
               <div class="row">
                   <!-- <div class="row">

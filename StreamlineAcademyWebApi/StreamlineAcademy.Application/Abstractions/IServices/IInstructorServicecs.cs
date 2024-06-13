@@ -23,7 +23,7 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<InstructorBatchResponseModel>> GetInstructorBatchByCourseId();
         Task<bool> SendNotification(NotificationRequestModel request);
         Task<ApiResponse<InstructorResponseModel>> GetInstructorAcademy();
-        Task<ApiResponse<ScheduleResponseModel>> GetInstructorScheduleByBatchId();
+        Task<ApiResponse<List<ScheduleResponseModel>>> GetInstructorScheduleByBatchId();
 
     }
 }
