@@ -33,7 +33,7 @@ export class NotificationComponent {
   totalItems: number = 0;
   pages: number[] = [];
   displayedStudentList: StudentResponseModel[] = [];
-
+  currentDate!: string;
   constructor(
     private activatedRoute: ActivatedRoute,
     private instructorService: InstructorService,
@@ -47,6 +47,7 @@ export class NotificationComponent {
 
   ngOnInit() {
     this.loadStudents();
+    this.updateCurrentDate()
    
   }
 
@@ -63,24 +64,27 @@ export class NotificationComponent {
       },
       cancelButtonText: 'Cancel',
       confirmButtonText: 'Send',
+      showCancelButton: true,  
       preConfirm: () => {
-        return {
-          subject: (document.getElementById('subject') as HTMLInputElement).value,
-          message: (document.getElementById('message') as HTMLTextAreaElement).value,
-        };
+        const subject = (document.getElementById('subject') as HTMLInputElement).value;
+        const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+        
+        if (!subject || !message) {
+          Swal.showValidationMessage('Both subject and message are required');
+          return null;
+        }
+  
+        return { subject, message };
       },
     });
-    
   
     if (texts) {
-      Swal.fire(texts.message);
       this.notificationRequest.subject = texts.subject;
       this.notificationRequest.body = texts.message;
-      console.log(this.notificationRequest)
-      this.notificationRequest.scheduleId=this.scheduleId;
+      this.notificationRequest.scheduleId = this.scheduleId;
+      console.log('Notification Request:', this.notificationRequest);
       this.instructorService.sendNotification(this.notificationRequest).subscribe(
         (success) => {
-          
           if (success) {
             this.sharedService.showSuccessToast("Notification sent successfully")
           } else {
@@ -89,12 +93,13 @@ export class NotificationComponent {
         },
         (error) => {
           console.error('Error occurred:', error);
+          Swal.fire('Error occurred while sending notification.', '', 'error');
         }
       );
     }
   }
   
- 
+  
 
   loadStudents() {
     this.instructorService.checkMyScheduleStudents(this.scheduleId).subscribe({
@@ -125,6 +130,14 @@ export class NotificationComponent {
     });
   }
 
+  updateCurrentDate() {
+    const date = new Date();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    this.currentDate = `${month}/${day}/${year}`;
+  }
+
   filterStudents(): void {
     if (!this.searchText.trim()) {
       this.filteredStudentList = this.studentList.slice();
@@ -133,14 +146,14 @@ export class NotificationComponent {
       this.filteredStudentList = this.studentList.filter(
         (student) =>
           student.name!.toLowerCase().startsWith(searchTerm) ||
-          student.address!.toLowerCase().startsWith(searchTerm) ||
-          student.phoneNumber!.toLowerCase().startsWith(searchTerm) ||
-          student.email!.toLowerCase().startsWith(searchTerm) ||
-          student.batchName!.toLowerCase().startsWith(searchTerm)
+           student.address!.toLowerCase().startsWith(searchTerm) ||
+           student.phoneNumber!.toLowerCase().startsWith(searchTerm) ||
+           student.email!.toLowerCase().startsWith(searchTerm) 
+          
       );
     }
 
-    // Reset pagination to the first page after filtering
+    
     this.totalItems = this.filteredStudentList.length;
     this.currentPage = 1;
     this.updatePagination();

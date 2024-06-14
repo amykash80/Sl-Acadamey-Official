@@ -16,6 +16,7 @@ export class ResetPasswordComponent {
       this.resetCode = params['resetCode'];
     });
   }
+  loadspinner = false;
   resetCode: string = '';
   resetPasswordModel: ResetPasswordModel = new ResetPasswordModel();
   authService = inject(AuthService);
@@ -28,9 +29,11 @@ export class ResetPasswordComponent {
         console.log(res);
         if (res.isSuccess) {
           this.sharedService.showSuccessToast(res.result);
+          this.loadspinner = false;
           this.router.navigate(['/login'])
         } else {
           this.sharedService.showErrorToast(res.message);
+          this.loadspinner = false;
         }
       },
     });
