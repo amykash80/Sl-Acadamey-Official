@@ -283,6 +283,7 @@ namespace StreamlineAcademy.Persistence.Repositories
         }
         public async Task<List<ScheduleResponseModel?>> GetInstructorSchedule(Guid? instructorId)
         {
+           
             var schedules = await context.Batches
         .Where(b => b.InstructorId == instructorId)
         .SelectMany(b => b.Schedules!)
@@ -292,7 +293,7 @@ namespace StreamlineAcademy.Persistence.Repositories
             Date = sb.Date,
             DurationInHours = sb.DurationInHours,
             IsActive = sb.IsActive,
-            BatchName = sb.Batch!.BatchName 
+            BatchName = sb.Batch!.BatchName // Assuming sb.Batch is not null due to the SelectMany
         })
         .ToListAsync();
 

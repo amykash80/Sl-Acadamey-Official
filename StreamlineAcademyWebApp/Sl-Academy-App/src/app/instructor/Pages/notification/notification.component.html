@@ -1,22 +1,161 @@
 <div class="app-inner">
     <div class="container">
       <div class="row">
-        <div class="col">
-          <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
-            <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/instructor/dashboard">instructor</li>
-              <li class="breadcrumb-item active" aria-current="page">my-student-list</li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col text-right mr-2">
-          <p>Date: <span><strong style="color:red">12/23/2024</strong></span></p>
-          <!-- Save Attendance Button -->
-          <button class="btn btn-danger text-white mb-2" style="border-radius: 5px;">
-        Send Notification
-          </button>
+        <div class="row">
+          <div class="col text-right mr-2">
+            <p>Date: <span><strong style="color:red">12/23/2024</strong></span></p>
+            <!-- Send Notification Button -->
+            <button (click)="sendNotification()" class="btn btn-danger text-white mb-2" style="border-radius: 5px;">
+              Send Notification
+            </button>
+          </div>
         </div>
       </div>
     </div>
+  
+    <div class="app-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/instructor/dashboard">instructor</li>
+                <li class="breadcrumb-item active" aria-current="page">student-list</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="card custom-card overflow-auto">
+          <div class="card-body font-manrope">
+            <h4 class="card-title text-capitalize fs-5 mb-3">Student</h4>
+            <div class="row">
+              <div class="col-12">
+                <div id="order-listing" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                      <input
+                        type="search"
+                        [(ngModel)]="searchText"
+                        (input)="filterStudents()"
+                        class="form-control mb-3"
+                        placeholder="Search schedules"
+                      />
+                    </div>
+                  </div>
+                  <table
+                    id="student-listing"
+                    class="table dataTable no-footer"
+                    aria-describedby="student-listing_info"
+                  >
+                    <!-- Table headers -->
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                      <th>Address</th>
+                      <th>Phone Number</th>
+                      <th>Email</th>
+                      <th>Batch Name</th>
+                      <th>IsActive</th>
+                      <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <!-- Table body -->
+                    <tbody>
+                        <tr *ngFor="let student of displayedStudentList">
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.address }}</td>
+                            <td>{{ student.phoneNumber }}</td>
+                            <td>{{ student.email }}</td>
+                            <td>{{ student.batchName }}</td>
+                            <td>
+                              <span [ngClass]="student.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                                {{ student.isActive }}
+                              </span>
+                        </td>
+                        <td>
+                          <div class="d-inline-block dropdown">
+                            <button
+                              type="button"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                              title="Row Options"
+                              class="dropdown-toggle btn btn-success after-none squared-btn"
+                            >
+                              <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div
+                              tabindex="-1"
+                              role="menu"
+                              aria-hidden="true"
+                              class="dropdown-menu dropdown-menu-left"
+                            >
+                              <ul class="nav flex-column">
+                               
+                            
+                                <li class="nav-item">
+                                  <a [routerLink]="['/instructor/notification', student.id]" class="nav-link fw-semibold">
+                                    <i class="nav-link-icon fa fa-bell"></i>
+                                    <span>Notification</span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- No data message -->
+                  <div *ngIf="filteredStudentList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+                    <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No schedules found</h4>
+                  </div>
+                  <!-- Pagination -->
+                  <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                      <div class="dataTables_info" id="order-listing_info" role="status" aria-live="polite">
+                        Showing {{ (currentPage - 1) * itemsPerPage + 1 }}
+                        to {{ currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }}
+                        of {{ totalItems }} schedules
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                      <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                        <ul class="pagination">
+                          <!-- Previous Button -->
+                          <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
+                            <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
+                              Previous
+                            </button>
+                          </li>
+                          <!-- Page Numbers -->
+                          <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
+                            <button (click)="goToPage(page)" class="page-link">
+                              {{ page }}
+                            </button>
+                          </li>
+                          <!-- Next Button -->
+                          <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
+                            <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
+                              Next
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- <div>
+      <app-spinner *ngIf="showSpinner"></app-spinner>
+    </div> -->
+    <app-no-content *ngIf="showNoContent"></app-no-content>
+  </div>
+  

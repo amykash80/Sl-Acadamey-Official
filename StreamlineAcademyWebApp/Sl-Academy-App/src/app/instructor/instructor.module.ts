@@ -16,6 +16,7 @@ import { NotificationComponent } from './Pages/notification/notification.compone
 
 
 
+
 @NgModule({
   declarations: [
     InstructorComponent,
@@ -27,6 +28,7 @@ import { NotificationComponent } from './Pages/notification/notification.compone
     CheckMyStudentListComponent,
     CheckMyScheduleComponent,
     NotificationComponent,
+   
     
     
   ],
