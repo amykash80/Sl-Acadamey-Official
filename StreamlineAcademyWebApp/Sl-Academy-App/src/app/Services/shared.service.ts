@@ -97,11 +97,25 @@ updateConfirmSwal(){
     this.toast.loading('Logging IN');
   }
   logOutUser() {
-    this.fireConfirmSwal('Are You sure you want to Logout ').then((result) => {
+    Swal.fire({
+      title: "Are you sure you want to log out?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out!"
+    }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
         this.router.navigate(['login']);
+        Swal.fire({
+          title: "Logged Out!",
+          text: "You have been successfully logged out.",
+          icon: "success"
+        });
       }
     });
   }
+  
 }

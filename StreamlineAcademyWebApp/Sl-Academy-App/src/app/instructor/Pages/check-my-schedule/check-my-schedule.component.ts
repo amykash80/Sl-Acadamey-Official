@@ -35,7 +35,6 @@ export class CheckMyScheduleComponent {
   getAllSchedules(): void {
     this.instructorService.checkMySchedule().subscribe({
       next: (response) => {
-        debugger;
         console.log(response);
         if (response.isSuccess) {
           this.loadSpinner = false;

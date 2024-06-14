@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
           <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item"style="cursor: pointer;" routerLink="/instructor/dashboard">instructor</li>
-            <li class="breadcrumb-item active" aria-current="page">my-schedule</li>
+            <li class="breadcrumb-item active" aria-current="page">my-schedules</li>
           </ol>
         </nav>
       </div>
@@ -42,16 +42,16 @@
                   <tr>
                     <th>Batch Name</th>
                     <th>Date</th>
-                    <th>Duration</th>
-                    
+                    <th>Duration</th>                  
                     <th>IsActive</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let schedule of filteredList">
                     <td>{{ schedule.batchName }}</td>
-                    <td>{{ schedule.date }}</td>
-                    <td>{{ schedule.durationInHours}}</td>
+                    <td>{{ schedule.date | date }}</td>
+                    <td>{{ schedule.durationInHours?.toString()?.concat('hrs') }}</td>
                     <td>
                       <span
                         [ngClass]="
@@ -62,6 +62,49 @@
                       >
                         {{ schedule.isActive }}
                       </span>
+                    </td>
+                    <td>
+                      <div class="d-inline-block dropdown">
+                        <button
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          title="Row Options"
+                          class="dropdown-toggle btn btn-success after-none squared-btn"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div
+                          tabindex="-1"
+                          role="menu"
+                          aria-hidden="true"
+                          class="dropdown-menu dropdown-menu-left"
+                        >
+                          <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a routerLink="/instructor/attendence"
+                                class="nav-link fw-semibold"
+                              >
+                                <i
+                                  class="nav-link-icon fa fa-clock-o"
+                                ></i>
+                                <span>Attendence</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link fw-semibold"
+                              >
+                                <i
+                                  class="nav-link-icon fa fa-bell"
+                                ></i>
+                                <span>Notificaton</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </td>
                   
                   </tr>
