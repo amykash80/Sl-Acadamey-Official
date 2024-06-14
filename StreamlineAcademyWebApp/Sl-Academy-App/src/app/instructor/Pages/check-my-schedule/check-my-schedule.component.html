@@ -20,7 +20,6 @@
               id="order-listing"
               class="dataTables_wrapper dt-bootstrap4 no-footer"
             >
-              <!-- Search input -->
               <div class="row">
                 <div class="col-sm-12 col-md-6">
                   <input
@@ -28,11 +27,10 @@
                     [(ngModel)]="searchText"
                       (input)="filterSchedules()"
                     class="form-control mb-3"
-                    placeholder="Search students"
+                    placeholder="Search schedules"
                   />
                 </div>
               </div>
-              <!-- Student table -->
               <table
                 id="student-listing"
                 class="table dataTable no-footer"
@@ -84,7 +82,7 @@
                         >
                           <ul class="nav flex-column">
                             <li class="nav-item">
-                              <a routerLink="/instructor/attendence"
+                              <a [routerLink]="['/instructor/attendence',schedule.id]"
                                 class="nav-link fw-semibold"
                               >
                                 <i

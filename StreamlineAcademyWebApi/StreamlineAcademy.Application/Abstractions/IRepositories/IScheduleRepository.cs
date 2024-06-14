@@ -1,4 +1,5 @@
-﻿using StreamlineAcademy.Domain.Entities;
+﻿using StreamlineAcademy.Application.Shared;
+using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,9 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<List<ScheduleResponseModel>> GetAllSchedules();
         Task<List<ScheduleResponseModel>> GetAllSchedulesByBatchId(Guid? batchId);
         Task<ScheduleResponseModel> GetScheduleById(Guid? id);
-    
+        Task<List<StudentResponseModel>> GetAllStudentsByScheduleId(Guid scheduleId);
 
-}
+
+
+    }
 }

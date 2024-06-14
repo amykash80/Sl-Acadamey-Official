@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
+using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Models.Responses;
 using StreamlineAcademy.Persistence.Data;
@@ -94,5 +95,28 @@ namespace StreamlineAcademy.Persistence.Repositories
             return schedules;
         }
 
+        public async Task<List<StudentResponseModel>> GetAllStudentsByScheduleId(Guid scheduleId)
+        {
+            var students = await context.Schedules
+       .Where(s => s.Id == scheduleId)
+       .SelectMany(s => s.Batch!.StudentBatches!)
+       .Include(sb => sb.Student)
+           .ThenInclude(st => st!.User)
+       .Include(sb => sb.Student)
+           .ThenInclude(st => st!.Academy)
+       .Select(sb => new StudentResponseModel
+       {
+           Id = sb.Id,
+           Name = sb.Student!.User!.Name,
+           Address = sb.Student.User!.Address,
+           PhoneNumber = sb.Student.User!.PhoneNumber,
+           Email = sb.Student.User!.Email,
+           AcademyName = sb.Student!.Academy!.AcademyName,
+           IsActive = sb.Student.User.IsActive
+       })
+       .ToListAsync();
+
+            return students!;
+        }
     }
 }

@@ -98,7 +98,7 @@ updateConfirmSwal(){
   }
   logOutUser() {
     Swal.fire({
-      title: "Are you sure you want to log out?",
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -109,11 +109,7 @@ updateConfirmSwal(){
       if (result.isConfirmed) {
         localStorage.clear();
         this.router.navigate(['login']);
-        Swal.fire({
-          title: "Logged Out!",
-          text: "You have been successfully logged out.",
-          icon: "success"
-        });
+       
       }
     });
   }
