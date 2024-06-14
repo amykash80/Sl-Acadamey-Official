@@ -168,5 +168,16 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<ScheduleResponseModel>.SuccessResponse(responseModel);
         }
 
+        public async Task<ApiResponse<IEnumerable<StudentResponseModel>>> GetAllStudentsByScheduleId(Guid scheduleId)
+        {
+            var schedules = await scheduleRepository.GetAllStudentsByScheduleId(scheduleId);
+            if (schedules != null && schedules.Any())
+            {
+                var sortedSchedules = schedules.OrderBy(c => c.Id);
+                return ApiResponse<IEnumerable<StudentResponseModel>>.SuccessResponse(sortedSchedules, $"Found {schedules.Count()} Schedules");
+            }
+
+            return ApiResponse<IEnumerable<StudentResponseModel>>.ErrorResponse("No Schedules Found", HttpStatusCodes.InternalServerError);
+        }
     }
 }

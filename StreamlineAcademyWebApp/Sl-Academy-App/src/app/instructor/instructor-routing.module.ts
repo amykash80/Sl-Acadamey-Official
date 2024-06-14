@@ -20,7 +20,7 @@ const routes: Routes = [
     {path:"check-my-schedule",component:CheckMyScheduleComponent},
     {path:"profile",component:ProfileComponent},
     {path:"student-list",component:CheckMyStudentListComponent},
-    {path:"attendence",component:AttendenceComponent}
+    {path:"attendence/:scheduleId",component:AttendenceComponent}
   ]
   }
 ];

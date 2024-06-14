@@ -109,11 +109,7 @@ updateConfirmSwal(){
       if (result.isConfirmed) {
         localStorage.clear();
         this.router.navigate(['login']);
-        Swal.fire({
-          title: "Logged Out!",
-          text: "You have been successfully logged out.",
-          icon: "success"
-        });
+       
       }
     });
   }

@@ -13,7 +13,7 @@ namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles =nameof(UserRole.AcademyAdmin))]
+    //[Authorize(Roles =nameof(UserRole.AcademyAdmin))]
     public class BatchScheduleController : ControllerBase
     {
         private readonly IScheduleService scheduleService;
@@ -38,5 +38,8 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<ScheduleResponseModel>> DeleteSchedule(Guid id) => await scheduleService.DeleteSchedule(id);
         [HttpGet("getScheduleById/{id:guid}")]
         public async Task<ApiResponse<ScheduleResponseModel>> GetScheduleById(Guid id) => await scheduleService.GetScheduleById(id);
+        [HttpGet("getAllStudentsByScheduleId/{scheduleId:guid}")]
+
+        public async Task<ApiResponse<IEnumerable<StudentResponseModel>>> GetAllStudentsByScheduleId(Guid scheduleId) => await scheduleService.GetAllStudentsByScheduleId(scheduleId); 
     }
 }
