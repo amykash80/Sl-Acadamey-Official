@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Models.Responses;
 using StreamlineAcademy.Persistence.Data;
 using System;
 using System.Collections.Generic;
@@ -31,5 +32,42 @@ namespace StreamlineAcademy.Persistence.Repositories
             await Task.Run(() => context.SuperAdmins.Update(model));
             return await context.SaveChangesAsync();
         }
+        public async Task<AcademyResponseModel> GetPortalAdminById(Guid? id)
+        {
+
+            var superAdmin = await context.SuperAdmins
+              .Include(a => a.User)
+              .Include(a => a.Country)
+              .Include(a => a.State)
+              .Include(a => a.City)
+              .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (superAdmin is not null)
+            {
+
+                var response = new AcademyResponseModel
+                {
+                    Id = superAdmin.Id,
+                    AcademyAdmin = superAdmin.User!.Name,
+                    Email = superAdmin.User!.Email,
+                    PhoneNumber = superAdmin.User.PhoneNumber,
+                    PostalCode = superAdmin.User.PostalCode,
+                    Address = superAdmin.User.Address,
+                    CountryName = superAdmin.Country!.CountryName,
+                    StateName = superAdmin.State!.StateName,
+                    CityName = superAdmin.City!.CityName,
+                    IsActive = superAdmin.User.IsActive,
+                    UserRole = superAdmin.User.UserRole,
+                    CountryId = superAdmin.Country.Id,
+                    SateId = superAdmin.State.Id,
+                    CityId = superAdmin.City.Id,
+                };
+
+                return response;
+            }
+            return new AcademyResponseModel() { };
+
+        }
+
     }
 }

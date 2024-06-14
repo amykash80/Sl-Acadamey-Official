@@ -1,4 +1,5 @@
 ﻿using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
     {
         Task<SuperAdmin> FirstOrDefaultAsync(Expression<Func<SuperAdmin, bool>> expression);
         Task<int> UpdateAsync(SuperAdmin model);
+        Task<AcademyResponseModel> GetPortalAdminById(Guid? id);
 
 
     }
