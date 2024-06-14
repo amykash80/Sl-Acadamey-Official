@@ -25,7 +25,11 @@ export class LoginComponent {
   loginModel: Login = new Login();
   loadSpinner = false;
   showLoginForm = true;
+  passwordVisible = false;
   chnagePasswordModel: ChangePassword = new ChangePassword();
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
   onLogIn() {
     this.loadSpinner = true;
     this.authService.login(this.loginModel).subscribe({
@@ -197,7 +201,7 @@ export class LoginComponent {
         } else {
           this.sharedService.showErrorToast(response.message);
           this.loadSpinner = false;
-          this.showLoginForm=true
+          this.showLoginForm = true;
         }
       },
       error: (err) => {

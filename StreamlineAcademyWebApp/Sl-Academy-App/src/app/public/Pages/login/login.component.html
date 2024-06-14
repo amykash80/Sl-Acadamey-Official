@@ -30,7 +30,7 @@
           <div class="form-group style-3">
             <label>Password *</label>
             <input
-              type="password"
+              [type]="passwordVisible ? 'text' : 'password'"
               class="form-control style-white"
               name="password"
               #password="ngModel"
@@ -39,13 +39,13 @@
               placeholder=""
               [class.is-invalid]="password.touched && password.invalid"
               required
-            /><i class="far fa-eye-slash" aria-hidden="true"></i>
+            />
+            <i class="far" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'" aria-hidden="true" (click)="togglePasswordVisibility()"></i>
             <div *ngIf="password.touched && password.invalid" class="error-message">
               <div *ngIf="password.errors?.['required']">
                   password is required
               </div>
-              </div>
-         
+            </div>
           </div>
           <div class="form-group col-6 text-start align-self-center">
             <input class="style2" type="checkbox" id="remember" />
