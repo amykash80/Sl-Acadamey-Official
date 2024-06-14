@@ -82,9 +82,9 @@ export class NotificationComponent {
         (success) => {
           
           if (success) {
-            Swal.fire("Notification sent successfully!")
+            this.sharedService.showSuccessToast("Notification sent successfully")
           } else {
-            console.error('Failed to send notification.');
+            this.sharedService.showErrorToast("Failed to send notification.")
           }
         },
         (error) => {

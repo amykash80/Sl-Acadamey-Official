@@ -22,6 +22,7 @@ namespace StreamlineAcademy.Persistence.Repositories
         private readonly IFileRepository fileRepository;
         private readonly IStudentRepository studentRepository;
         private readonly IInstructorReository instructorReository;
+        private readonly IPortalAdminRepository portalAdminRepository;
         private readonly IAcademyRepository academyRepository;
 
         public ProfileRepository(StreamlineDbContet context,
@@ -30,6 +31,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                                  IFileRepository fileRepository,
                                  IStudentRepository studentRepository,
                                  IInstructorReository instructorReository,
+                                 IPortalAdminRepository portalAdminRepository,
                                  
                                  IAcademyRepository academyRepository) : base(context)
         {
@@ -39,6 +41,7 @@ namespace StreamlineAcademy.Persistence.Repositories
             this.fileRepository = fileRepository;
             this.studentRepository = studentRepository;
             this.instructorReository = instructorReository;
+            this.portalAdminRepository = portalAdminRepository;
             this.academyRepository = academyRepository;
         }
 
@@ -50,6 +53,7 @@ namespace StreamlineAcademy.Persistence.Repositories
                 var academy = await academyRepository.GetAcademyById(userId);
                 var student = await studentRepository.GetStudentById(userId);
                 var instuctor = await instructorReository.GetInstructorById(userId);
+                var portalAdmin = await portalAdminRepository.GetPortalAdminById(userId);
                 if (user.UserRole == UserRole.AcademyAdmin)
                 {
                     var res = new AddressInfoResponseModel()
@@ -105,9 +109,32 @@ namespace StreamlineAcademy.Persistence.Repositories
                     return res;
 
                 }
+                else if (user.UserRole == UserRole.SuperAdmin)
+                {
+                    var res = new AddressInfoResponseModel()
+                    {
+                        Id = user.Id,
+                        Address = user.Address,
+                        PostalCode = user.PostalCode,
+                        CountryName = portalAdmin.CountryName,
+                        StateName = portalAdmin.StateName,
+                        CityName = portalAdmin.CityName,
+                        CountryId = portalAdmin.CountryId,
+                        StateId =portalAdmin.SateId,
+                        CityId = portalAdmin.CityId,
+
+
+
+                    };
+                    return res;
+
+                }
+
                 return new AddressInfoResponseModel() { };
 
+
             }
+
             return new AddressInfoResponseModel() { };
         }
 
