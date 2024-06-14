@@ -124,3 +124,12 @@ li.breadcrumb-item.active::before {
   font-size: 14px; 
   width: 100px;
 }
+.swal2-cancel {
+  color: #d33; /* Example color */
+  font-weight: bold; /* Make the text bold */
+}
+
+.swal2-confirm {
+  background-color: #3085d6; /* Example color for confirm button */
+  color: white; /* Text color */
+}

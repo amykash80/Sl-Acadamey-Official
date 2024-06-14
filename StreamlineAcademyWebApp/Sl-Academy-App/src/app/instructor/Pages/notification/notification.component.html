@@ -51,7 +51,6 @@
                       <th>Phone Number</th>
                       <th>Email</th>
                       <th>IsActive</th>
-                      <th>Actions</th>
                       </tr>
                     </thead>
                     <!-- Table body -->
@@ -66,37 +65,7 @@
                                 {{ student.isActive }}
                               </span>
                         </td>
-                        <td>
-                          <div class="d-inline-block dropdown">
-                            <button
-                              type="button"
-                              data-toggle="dropdown"
-                              aria-haspopup="true"
-                              aria-expanded="false"
-                              title="Row Options"
-                              class="dropdown-toggle btn btn-success after-none squared-btn"
-                            >
-                              <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div
-                              tabindex="-1"
-                              role="menu"
-                              aria-hidden="true"
-                              class="dropdown-menu dropdown-menu-left"
-                            >
-                              <ul class="nav flex-column">
-                               
-                            
-                                <li class="nav-item">
-                                  <a [routerLink]="['/instructor/notification', student.id]" class="nav-link fw-semibold">
-                                    <i class="nav-link-icon fa fa-bell"></i>
-                                    <span>Notification</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </td>
+                       
                       </tr>
                     </tbody>
                   </table>

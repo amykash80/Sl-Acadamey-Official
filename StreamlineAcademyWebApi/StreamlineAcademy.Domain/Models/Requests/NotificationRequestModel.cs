@@ -10,5 +10,6 @@ namespace StreamlineAcademy.Domain.Models.Requests
     {
         public string? Subject { get; set; }
         public string? Body { get; set; }
+        public Guid ScheduleId { get; set; }    
     }
 }
