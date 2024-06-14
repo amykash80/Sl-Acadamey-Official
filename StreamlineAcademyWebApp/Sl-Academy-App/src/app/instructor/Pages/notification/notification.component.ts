@@ -91,7 +91,6 @@ export class NotificationComponent {
     }
   }
   
- 
 
   loadStudents() {
     this.instructorService.checkMyScheduleStudents(this.scheduleId).subscribe({
