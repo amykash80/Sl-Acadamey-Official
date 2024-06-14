@@ -25,7 +25,6 @@ export class BatchListComponent {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
- 
   courseRes: CourseResponse = new CourseResponse();
   displayedBatchList: BatchResponseModel[] = [];
   constructor(

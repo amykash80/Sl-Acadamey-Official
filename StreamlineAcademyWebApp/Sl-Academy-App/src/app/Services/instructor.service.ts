@@ -47,4 +47,6 @@ export class InstructorService {
   checkMySchedule(): Observable<ApiResponse<BatchScheduleResponseModel[]>> {
     return this.http.get<ApiResponse<BatchScheduleResponseModel[]>>(this.baseUrl+"Instructor/Check-my-schedules");
   }
+
+  
 }

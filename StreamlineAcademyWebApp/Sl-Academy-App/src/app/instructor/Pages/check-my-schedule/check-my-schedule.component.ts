@@ -14,11 +14,17 @@ export class CheckMyScheduleComponent {
   showTable = false;
   scheduleList: BatchScheduleResponseModel[] = [];
   filteredList: BatchScheduleResponseModel[] = [];
-  totalItems = 0;
-  currentPage = 1;
-  displayedStudentList: BatchScheduleResponseModel[] = [];
+  searchText: string = '';
+  showNoContent = false;
+  showSpinner = true;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+  pages: number[] = [];
+  displayedScheduleList: BatchScheduleResponseModel[] = [];
   loggedInUserDetails: any;
   instructorId: string = '';
+
   constructor(
     private instructorService: InstructorService,
     private sharedService: SharedService,
@@ -37,7 +43,7 @@ export class CheckMyScheduleComponent {
       next: (response) => {
         console.log(response);
         if (response.isSuccess) {
-          this.loadSpinner = false;
+          this.showSpinner = false;
           this.showTable = true;
           this.scheduleList = response.result;
           this.filteredList = this.scheduleList;
@@ -46,6 +52,7 @@ export class CheckMyScheduleComponent {
           this.updatePagination();
           if (response.result.length > 0) {
             this.showTable = true;
+            this.showNoContent = false;
           }
         } else {
           this.sharedService.NoDataSwal(response.message);
@@ -60,8 +67,38 @@ export class CheckMyScheduleComponent {
     });
   }
 
+  filterSchedules(): void {
+    if (!this.searchText.trim()) {
+      this.filteredList = this.scheduleList.slice();
+    } else {
+      const searchTerm = this.searchText.toLowerCase();
+      this.filteredList = this.scheduleList.filter(
+        (schedule) =>
+          schedule.batchName!.toLowerCase().startsWith(searchTerm) ||
+          schedule.durationInHours!.toString().toLowerCase().startsWith(searchTerm)
+      );
+    }
+
+    this.totalItems = this.filteredList.length;
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
   updatePagination(): void {
-    // Implement pagination logic if necessary
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+    this.displayedScheduleList = this.filteredList.slice(startIndex, endIndex);
+    this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.pages.length) {
+      return;
+    }
+    this.currentPage = page;
+    this.updatePagination();
   }
 }
 
