@@ -5,6 +5,7 @@
         <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/instructor/dashboard">instructor</li>
+            <li class="breadcrumb-item" style="cursor: pointer;" [routerLink]="['/instructor/check-my-schedule']">Schedule-list</li>
             <li class="breadcrumb-item active" aria-current="page">my-student-list</li>
           </ol>
         </nav>
@@ -12,7 +13,7 @@
     </div>
     <div class="row">
       <div class="col text-right mr-2">
-        <p>Date: <span><strong style="color:red">12/23/2024</strong></span></p>
+        <p>Date: <span><strong style="color:red">{{currentDate}}</strong></span></p>
         <!-- Save Attendance Button -->
         <button class="btn btn-danger text-white mb-2" style="border-radius: 5px;">
           Save Attendance
