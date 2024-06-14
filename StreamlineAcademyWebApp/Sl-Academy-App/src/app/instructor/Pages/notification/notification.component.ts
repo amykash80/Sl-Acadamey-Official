@@ -74,8 +74,10 @@ export class NotificationComponent {
       Swal.fire(texts.message);
       this.notificationRequest.subject = texts.subject;
       this.notificationRequest.body = texts.message;
+      console.log(this.notificationRequest)
       this.instructorService.sendNotification(this.notificationRequest).subscribe(
         (success) => {
+          
           if (success) {
             console.log('Notification sent successfully!');
           } else {

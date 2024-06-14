@@ -1,17 +1,4 @@
-<div class="app-inner">
-    <div class="container">
-      <div class="row">
-        <div class="row">
-          <div class="col text-right mr-2">
-            <p>Date: <span><strong style="color:red">12/23/2024</strong></span></p>
-            <!-- Send Notification Button -->
-            <button (click)="sendNotification()" class="btn btn-danger text-white mb-2" style="border-radius: 5px;">
-              Send Notification
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+
   
     <div class="app-inner">
       <div class="container">
@@ -23,6 +10,15 @@
                 <li class="breadcrumb-item active" aria-current="page">student-list</li>
               </ol>
             </nav>
+          </div>
+          <div class="row">
+            <div class="col text-right mr-2">
+              <p>Date: <span><strong style="color:red">12/23/2024</strong></span></p>
+              <!-- Save Attendance Button -->
+              <button (click)="sendNotification()" class="btn btn-danger text-white mb-2" style="border-radius: 5px;">
+                send notification
+              </button>
+            </div>
           </div>
         </div>
         <div class="card custom-card overflow-auto">
@@ -54,7 +50,6 @@
                       <th>Address</th>
                       <th>Phone Number</th>
                       <th>Email</th>
-                      <th>Batch Name</th>
                       <th>IsActive</th>
                       <th>Actions</th>
                       </tr>
@@ -66,7 +61,6 @@
                             <td>{{ student.address }}</td>
                             <td>{{ student.phoneNumber }}</td>
                             <td>{{ student.email }}</td>
-                            <td>{{ student.batchName }}</td>
                             <td>
                               <span [ngClass]="student.isActive ? 'chip chip-success' : 'chip chip-danger'">
                                 {{ student.isActive }}
@@ -153,9 +147,6 @@
       </div>
     </div>
   
-    <!-- <div>
-      <app-spinner *ngIf="showSpinner"></app-spinner>
-    </div> -->
+   
     <app-no-content *ngIf="showNoContent"></app-no-content>
-  </div>
   
