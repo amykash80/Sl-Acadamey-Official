@@ -34,6 +34,7 @@ export class NotificationComponent {
   pages: number[] = [];
   displayedStudentList: StudentResponseModel[] = [];
   currentDate!: string;
+  sendingNotification: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private instructorService: InstructorService,
@@ -82,23 +83,26 @@ export class NotificationComponent {
       this.notificationRequest.subject = texts.subject;
       this.notificationRequest.body = texts.message;
       this.notificationRequest.scheduleId = this.scheduleId;
+      this.sendingNotification = true;  // Show spinner
       console.log('Notification Request:', this.notificationRequest);
       this.instructorService.sendNotification(this.notificationRequest).subscribe(
         (success) => {
+          this.sendingNotification = false;  // Hide spinner
           if (success) {
-            this.sharedService.showSuccessToast("Notification sent successfully")
+            this.sharedService.showSuccessToast("Notification sent successfully");
           } else {
-            this.sharedService.showErrorToast("Failed to send notification.")
+            this.sharedService.showErrorToast("Failed to send notification.");
           }
         },
         (error) => {
+          this.sendingNotification = false;  // Hide spinner
           console.error('Error occurred:', error);
           Swal.fire('Error occurred while sending notification.', '', 'error');
         }
       );
     }
   }
-  
+
   
 
   loadStudents() {
