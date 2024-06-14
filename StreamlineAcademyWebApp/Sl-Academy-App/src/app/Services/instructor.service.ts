@@ -52,4 +52,7 @@ export class InstructorService {
     return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"BatchSchedule/getAllStudentsBYScheduleId/"+scheduleId)
   }
 
+  sendNotification(body: any): Observable<boolean> {
+    return this.http.post<boolean>(this.baseUrl+"Instructor/sendNotification",body);
+  }
 }

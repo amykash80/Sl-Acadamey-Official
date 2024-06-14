@@ -12,6 +12,9 @@ import { CheckMyBatchComponent } from './pages/check-my-batch/check-my-batch.com
 import { SharedModule } from '../shared/shared.module';
 import { CheckMyStudentListComponent } from './Pages/check-my-student-list/check-my-student-list.component';
 import { CheckMyScheduleComponent } from './Pages/check-my-schedule/check-my-schedule.component';
+import { NotificationComponent } from './Pages/notification/notification.component';
+
+
 
 
 @NgModule({
@@ -24,6 +27,9 @@ import { CheckMyScheduleComponent } from './Pages/check-my-schedule/check-my-sch
     CheckMyBatchComponent,
     CheckMyStudentListComponent,
     CheckMyScheduleComponent,
+    NotificationComponent,
+   
+    
     
   ],
   imports: [
