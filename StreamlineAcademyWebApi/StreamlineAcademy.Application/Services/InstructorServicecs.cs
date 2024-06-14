@@ -254,15 +254,8 @@ namespace StreamlineAcademy.Application.Services
         public async Task<bool> SendNotification(NotificationRequestModel request)
         {
             var instructorId = contextService.GetUserId();
-            var batch = await instructorRepository.GetInstructionBatchByCourseId(instructorId);
-            var students = await batchRepository.GetAllStudentsByBatchId(batch.Id);
-            var batchSchedule = await scheduleRepository.GetAllSchedulesByBatchId(batch.Id);
-            var today = DateTimeOffset.UtcNow.Date;
-            List<DateTimeOffset>? ScheduleDates = new List<DateTimeOffset>();
-            foreach (var schedule in batchSchedule) 
-            {
-                ScheduleDates.Add((DateTimeOffset)schedule.Date!);
-            }
+            var students = await scheduleRepository.GetAllStudentsByScheduleId(request.ScheduleId);
+            var todaysSchedule =await scheduleRepository.GetScheduleById(request.ScheduleId);
             List<string> emilAddresses = new List<string>();
             List<string> names= new List<string>();
             foreach (var student in students)
@@ -270,8 +263,7 @@ namespace StreamlineAcademy.Application.Services
                 emilAddresses.Add (student.Email!);
                 names.Add (student.Name!);
             }
-            var todaysSchedule=ScheduleDates.Where(date=>date.Date==today).FirstOrDefault();
-            var success = await emailHelperService.SendNotification(emilAddresses, names, request.Body!, request.Subject!, batch.BatchName!, todaysSchedule);
+            var success = await emailHelperService.SendNotification(emilAddresses, names, request.Body!, request.Subject!, todaysSchedule.BatchName!, todaysSchedule.Date ?? System.DateTimeOffset.Now);
 
             return success;
 

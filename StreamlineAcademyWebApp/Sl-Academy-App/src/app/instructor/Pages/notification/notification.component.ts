@@ -17,6 +17,7 @@ export class NotificationComponent {
     
     body: '',
     subject: '',
+    scheduleId: ''
     
   };
   scheduleId!: string;
@@ -51,35 +52,37 @@ export class NotificationComponent {
 
   async sendNotification() {
     const { value: texts } = await Swal.fire({
-      html:
-        `<label for="subject" class="swal2-label">Subject</label>` +
-        `<input id="subject" class="swal2-input" placeholder="Enter subject..." aria-label="Subject">` +
-        `<label for="message" class="swal2-label">Message</label>` +
-        `<textarea id="message" class="swal2-textarea" placeholder="Type your message here..." aria-label="Type your message here"></textarea>` 
-       ,
+      html: `
+        <label for="subject" class="swal2-label">Subject</label>
+        <input id="subject" class="swal2-input" placeholder="your subject..." aria-label="Subject">
+        <label for="message" class="swal2-label">Message</label>
+        <textarea id="message" class="swal2-textarea" placeholder="Type your body here..." aria-label="Type your message here"></textarea>
+      `,
       inputAttributes: {
         'aria-label': 'Type your message here',
       },
-      showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Send',
       preConfirm: () => {
         return {
           subject: (document.getElementById('subject') as HTMLInputElement).value,
           message: (document.getElementById('message') as HTMLTextAreaElement).value,
-         
         };
       },
     });
+    
   
     if (texts) {
       Swal.fire(texts.message);
       this.notificationRequest.subject = texts.subject;
       this.notificationRequest.body = texts.message;
       console.log(this.notificationRequest)
+      this.notificationRequest.scheduleId=this.scheduleId;
       this.instructorService.sendNotification(this.notificationRequest).subscribe(
         (success) => {
           
           if (success) {
-            console.log('Notification sent successfully!');
+            Swal.fire("Notification sent successfully!")
           } else {
             console.error('Failed to send notification.');
           }

@@ -1,6 +1,7 @@
 export class NotificationModel{
     subject?:string;
     body?:string;
+    scheduleId?:string
    
 }
 export class NotificationResponseModel {
