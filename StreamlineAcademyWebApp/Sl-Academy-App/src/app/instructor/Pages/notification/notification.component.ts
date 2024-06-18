@@ -89,9 +89,9 @@ export class NotificationComponent {
         (success) => {
           this.sendingNotification = false;  // Hide spinner
           if (success) {
-            this.sharedService.showSuccessToast("Notification sent successfully");
+            this.sharedService.showSuccessToast("Notification sent successfully")
           } else {
-            this.sharedService.showErrorToast("Failed to send notification.");
+            this.sharedService.showErrorToast("Failed to send notification.")
           }
         },
         (error) => {
