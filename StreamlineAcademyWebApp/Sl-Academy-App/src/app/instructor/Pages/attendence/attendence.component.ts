@@ -1,7 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { InstructorService } from '../../../Services/instructor.service';
-import { StudentResponseModel } from '../../../Models/student/students';
-import { ActivatedRoute } from '@angular/router';
+import { SaveAttendence, StudentResponseModel } from '../../../Models/student/students';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiResponse } from '../../../Models/Common/api-response';
+import { AttendenceStatus } from '../../../Enums/AttendenceStatus';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SharedService } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-attendence',
@@ -10,12 +14,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AttendenceComponent {
   instructorService=inject(InstructorService)
+  sharedService=inject(SharedService)
+  router=inject(Router)
   activatedRoute=inject(ActivatedRoute)
+  
+  attendanceData: SaveAttendence[] = [];
+  attendanceMap: { [studentId: string]: AttendenceStatus } = {};
+  filteredStudentList: StudentResponseModel[] = [];
   scheduleId: string = '';
   loggedInUserDetails:any
   currentDate!: string;
   studentList: StudentResponseModel[] = [];
-
+  
+  attendanceStatusList: AttendenceStatus[] = [];
+  studentIdList: string[] = [];
+ 
+  
   ngOnInit(): void {
     this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
     console.log(this.loggedInUserDetails);
@@ -27,24 +41,77 @@ export class AttendenceComponent {
     this.loadStudents();
   }
   updateCurrentDate() {
+    // const date = new Date();
+    // const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    // const day = date.getDate().toString().padStart(2, '0');
+    // const year = date.getFullYear();
+    // this.currentDate = `${month}/${day}/${year}`;
     const date = new Date();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const year = date.getFullYear();
-    this.currentDate = `${month}/${day}/${year}`;
+  this.currentDate = date.toISOString();
   }
   loadStudents(): void {
+    debugger;
     this.instructorService
       .checkMyScheduleStudents(this.scheduleId)
       .subscribe({
         next: (response) => {
-          console.log(response)
-          this.studentList=response.result
-        
+          if (response.isSuccess) {
+          
+            this.studentList = response.result;
+            this.filteredStudentList = this.studentList;
+            
+            if (response.result.length > 0) {
+              
+            }
+          } else {
+            this.sharedService.NoDataSwal(response.message);
+            setTimeout(()=>{
+              this.router.navigate(['/academy/course-list'])
+  
+            },2000)
+          }
         },
-        error: (err) => {
-          console.error(err);
-        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
       });
+    }
+
+  updateAttendance(studentId: string | undefined, status: number, event: Event): void {
+    if (studentId) {
+      const isChecked = (event.target as HTMLInputElement).checked;
+      if (isChecked) {
+        this.attendanceMap[studentId] = status as AttendenceStatus;
+      } else {
+        delete this.attendanceMap[studentId]; 
+      }
+    }
   }
+
+  saveAttendance() {
+    
+    this.filteredStudentList.forEach(student => {
+      this.attendanceStatusList.push(this.attendanceMap[student.id!] ?? AttendenceStatus.Present);
+      this.studentIdList.push(student.id!);
+    });
+  
+    const attendanceData = {
+      attendanceDate: this.currentDate,
+      AttendenceStatus: this.attendanceStatusList,
+      StudentId: this.studentIdList,
+      scheduleId: this.scheduleId
+    };
+  
+    this.instructorService.saveAttendance(attendanceData)
+      .subscribe(
+        response => {
+          console.log('Attendance saved successfully:', response);
+        },
+        error => {
+          console.error('Error saving attendance:', error);
+        }
+      );
+  }
+  
+
 }

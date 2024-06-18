@@ -9,9 +9,9 @@ namespace StreamlineAcademy.Domain.Models.Responses
 {
     public class AttendenceResponseModel
     {
-        public Guid? StudentId { get; set; }
+        public List<Guid>? StudentId { get; set; }
         public DateTimeOffset Date { get; set; }
         public Guid? ScheduleId { get; set; }
-        public AttendenceStatus AttendenceStatus { get; set; }
+        public List<AttendenceStatus>? AttendenceStatus { get; set; }
     }
 }

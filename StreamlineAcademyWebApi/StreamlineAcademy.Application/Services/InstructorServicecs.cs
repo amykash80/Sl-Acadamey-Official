@@ -213,10 +213,11 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<AttendenceResponseModel>.ErrorResponse("Student IDs and attendance statuses are required.");
             }
 
-            if (model.StudentId.Count != model.AttendenceStatus.Count)
-            {
-                return ApiResponse<AttendenceResponseModel>.ErrorResponse("The number of student IDs and attendance statuses must match.");
-            }
+            //if (model.StudentId.Count != model.AttendenceStatus.Count)
+            //{
+            //    return ApiResponse<AttendenceResponseModel>.ErrorResponse("The number of student IDs and attendance statuses must match.");
+            //}
+            //List<int> allStudentsPresent = Enumerable.Repeat(1, model.StudentId.Count).ToList();
 
             for (int i = 0; i < model.StudentId.Count; i++)
             {
@@ -243,10 +244,10 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<AttendenceResponseModel>.SuccessResponse(new AttendenceResponseModel
             {
                 // Optionally return a summary or details of the first saved entry
-                AttendenceStatus = model.AttendenceStatus.First(),
+                AttendenceStatus = model.AttendenceStatus,
                 Date = model.AttendanceDate,
                 ScheduleId = model.ScheduleId,
-                StudentId = model.StudentId.First()
+                StudentId = model.StudentId
 
             }, "Attendance Saved Successfully");
         }

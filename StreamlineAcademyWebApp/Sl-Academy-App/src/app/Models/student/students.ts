@@ -61,7 +61,12 @@ export class UpdateStudentModel {
   }
   export class SaveAttendence{
     attendanceDate?:Date;
-    attendenceStatus?:AttendenceStatus;
-    studentId?:string;
+    attendenceStatus?:AttendenceStatus[];
+    studentId?:string[];
     scheduleId?:string;
+  }
+  export class AttendanceResponseModel{
+    success: boolean = false;
+    message: string = '';
+   
   }

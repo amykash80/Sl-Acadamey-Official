@@ -15,7 +15,7 @@
       <div class="col text-right mr-2">
         <p>Date: <span><strong style="color:red">{{currentDate}}</strong></span></p>
         <!-- Save Attendance Button -->
-        <button class="btn btn-danger text-white mb-2" style="border-radius: 5px;">
+        <button class="btn btn-danger text-white mb-2" style="border-radius: 5px;" (click)="saveAttendance()">
           Save Attendance
         </button>
       </div>
@@ -48,27 +48,27 @@
               <!-- Table body -->
               <tbody>
                 <!-- Student rows -->
-                <tr *ngFor="let student of studentList">
+                <tr *ngFor="let student of filteredStudentList">
                   <td>{{ student.name }}</td>
                   <td>{{ student.email }}</td>
                   <td>{{ student.phoneNumber }}</td>
                   <!-- Attendance checkboxes -->
                   <td>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="{{ 'present-' + student.id }}">
-                      <label class="form-check-label" for="{{ 'present-' + student.id }}">Present</label>
+                      <input class="form-check-input" type="checkbox" [id]="'present-' + (student.id ?? '')" (change)="updateAttendance(student.id, 1, $event)">
+                      <label class="form-check-label" [for]="'present-' + (student.id ?? '')">Present</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="{{ 'absent-' + student.id }}">
-                      <label class="form-check-label" for="{{ 'absent-' + student.id }}">Absent</label>
+                      <input class="form-check-input" type="checkbox" [id]="'absent-' + (student.id ?? '')" (change)="updateAttendance(student.id, 2, $event)">
+                      <label class="form-check-label" [for]="'absent-' + (student.id ?? '')">Absent</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="{{ 'late-' + student.id }}">
-                      <label class="form-check-label" for="{{ 'late-' + student.id }}">Late</label>
+                      <input class="form-check-input" type="checkbox" [id]="'late-' + (student.id ?? '')" (change)="updateAttendance(student.id, 3, $event)">
+                      <label class="form-check-label" [for]="'late-' + (student.id ?? '')">Late</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="{{ 'excused-' + student.id }}">
-                      <label class="form-check-label" for="{{ 'excused-' + student.id }}">Excused</label>
+                      <input class="form-check-input" type="checkbox" [id]="'excused-' + (student.id ?? '')" (change)="updateAttendance(student.id, 4, $event)">
+                      <label class="form-check-label" [for]="'excused-' + (student.id ?? '')">Excused</label>
                     </div>
                   </td>
                 </tr>
