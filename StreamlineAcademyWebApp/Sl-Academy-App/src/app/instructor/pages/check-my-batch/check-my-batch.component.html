@@ -199,9 +199,8 @@
           >
             instructor
           </li>
-          <li class="breadcrumb-item "  routerLink="/instructor/check-my-batch" aria-current="page">
-            batches
-          </li>
+          <li class="breadcrumb-item" routerLink="/instructor/check-my-batch/{{ courseId }}" aria-current="page">{{ courseRes.batchName }}</li>
+
           <li class="breadcrumb-item active " aria-current="page">
             students
           </li>

@@ -66,7 +66,10 @@ export class UpdateStudentModel {
     scheduleId?:string;
   }
   export class AttendanceResponseModel{
-    success: boolean = false;
-    message: string = '';
+    
+    date?:Date;
+    attendenceStatus?:AttendenceStatus[];
+    studentId?:string[];
+    scheduleId?:string;
    
   }

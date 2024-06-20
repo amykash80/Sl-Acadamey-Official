@@ -6,6 +6,7 @@ import { ApiResponse } from '../../../Models/Common/api-response';
 import { AttendenceStatus } from '../../../Enums/AttendenceStatus';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SharedService } from '../../../Services/shared.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-attendence',
@@ -25,10 +26,9 @@ export class AttendenceComponent {
   loggedInUserDetails:any
   currentDate!: string;
   studentList: StudentResponseModel[] = [];
-  
   attendanceStatusList: AttendenceStatus[] = [];
   studentIdList: string[] = [];
- 
+  // markedAttendanceDate: string | undefined;
   
   ngOnInit(): void {
     this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
@@ -41,16 +41,17 @@ export class AttendenceComponent {
     this.loadStudents();
   }
   updateCurrentDate() {
-    // const date = new Date();
-    // const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    // const day = date.getDate().toString().padStart(2, '0');
-    // const year = date.getFullYear();
-    // this.currentDate = `${month}/${day}/${year}`;
     const date = new Date();
-  this.currentDate = date.toISOString();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    this.currentDate = `${month}/${day}/${year}`;
+  //   const date = new Date();
+  // this.currentDate = date.toISOString();
+  // this.markedAttendanceDate = date.toLocaleDateString();
   }
   loadStudents(): void {
-    debugger;
+    
     this.instructorService
       .checkMyScheduleStudents(this.scheduleId)
       .subscribe({
@@ -59,6 +60,7 @@ export class AttendenceComponent {
           
             this.studentList = response.result;
             this.filteredStudentList = this.studentList;
+            
             
             if (response.result.length > 0) {
               
@@ -77,21 +79,27 @@ export class AttendenceComponent {
       });
     }
 
-  updateAttendance(studentId: string | undefined, status: number, event: Event): void {
-    if (studentId) {
-      const isChecked = (event.target as HTMLInputElement).checked;
-      if (isChecked) {
+    updateAttendance(studentId: string | undefined, status: number): void {
+      if (studentId) {
         this.attendanceMap[studentId] = status as AttendenceStatus;
-      } else {
-        delete this.attendanceMap[studentId]; 
       }
     }
-  }
-
+    parseDate(dateString: string): Date {
+      const [month, day, year] = dateString.split('/');
+      return new Date(+year, +month - 1, +day);
+    }
   saveAttendance() {
-    
+    // if (this.markedAttendanceDate === new Date().toLocaleDateString()) {
+    //   console.log('Attendance already marked for today.');
+    //   return;
+    // }
+    const date = this.parseDate(this.currentDate);
+    const isoDateString = date.toISOString();
+    this.attendanceStatusList = []; 
+    this.studentIdList = []; 
+  
     this.filteredStudentList.forEach(student => {
-      this.attendanceStatusList.push(this.attendanceMap[student.id!] ?? AttendenceStatus.Present);
+      this.attendanceStatusList.push(this.attendanceMap[student.id!] ?? AttendenceStatus.Absent);
       this.studentIdList.push(student.id!);
     });
   
@@ -103,15 +111,22 @@ export class AttendenceComponent {
     };
   
     this.instructorService.saveAttendance(attendanceData)
-      .subscribe(
-        response => {
-          console.log('Attendance saved successfully:', response);
-        },
+    .subscribe(
+      response => {
+        if (response.isSuccess) {
+          Swal.fire('Success', 'Attendance marked successfully!', 'success');
+        } else {
+          console.log('Attendance not saved:', response.message);
+          Swal.fire('Massage', response.message, 'error');
+        }
+      },
         error => {
           console.error('Error saving attendance:', error);
+          Swal.fire('Error', 'Failed to save attendance.', 'error');
         }
       );
   }
-  
+  }
 
-}
+
+

@@ -237,10 +237,14 @@ namespace StreamlineAcademy.Persistence.Repositories
 
             return schedules;
         }
-
-        public async Task<int> SaveStudentAttendence(Attendance attendance)
+        public async Task<bool> HasAttendanceBeenMarked(Guid scheduleId, DateTimeOffset attendanceDate)
         {
-            await context.Attendances.AddAsync(attendance);
+            return await context.Attendances
+                .AnyAsync(a => a.ScheduleId == scheduleId && a.AttendanceDate.Date == attendanceDate.Date);
+        }
+        public async Task<int> SaveStudentAttendence(Attendance? attendance)
+        {
+            await context.Attendances.AddAsync(attendance!);
             return await context.SaveChangesAsync();
         }
 

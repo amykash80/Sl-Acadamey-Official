@@ -106,7 +106,7 @@ namespace StreamlineAcademy.Persistence.Repositories
            .ThenInclude(st => st!.Academy)
        .Select(sb => new StudentResponseModel
        {
-           Id = sb.Id,
+           Id = sb.Student!.Id,
            Name = sb.Student!.User!.Name,
            Address = sb.Student.User!.Address,
            PhoneNumber = sb.Student.User!.PhoneNumber,

@@ -19,8 +19,6 @@ namespace StreamlineAcademy.Domain.Entities
         public Guid? StudentId { get; set; }
         [ForeignKey(nameof(StudentId))]
         public Student? Student { get; set; }
-        public Guid? BatchId { get; set; }
-        [ForeignKey(nameof(BatchId))]
-        public Batch? Batch { get; set; }
+       
     }
 }

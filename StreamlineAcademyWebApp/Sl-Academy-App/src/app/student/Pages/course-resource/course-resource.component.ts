@@ -45,8 +45,8 @@ ngOnInit(){
 }
 getcourseById(){
   this.courseService.getCourseById(this.courseId).subscribe(data =>{
-   console.log(data)
-   this.courseRes=data.result
+    this.courseRes = data.result;
+      console.log(this.courseRes);
   })
   }
   loadAllCourseResource() {

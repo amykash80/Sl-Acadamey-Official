@@ -23,6 +23,7 @@ export class MySchedulesComponent {
   totalItems: number = 0;
   pages: number[] = [];
   displayedScheduleList: BatchScheduleResponseModel[] = [];
+  
   constructor(
     private studentService: StudentService,
     private sharedService: SharedService,

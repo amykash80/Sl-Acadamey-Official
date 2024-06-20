@@ -28,6 +28,7 @@ export class CheckMyBatchComponent {
   pages: number[] = [];
   displayedBatchList: BatchResponseModel[] = [];
   searchText: string = ''; 
+  courseRes: BatchResponseModel = new BatchResponseModel();
 constructor(private activatedRoute: ActivatedRoute,
            private batchService: BatchService,
           private sharedService:SharedService,
@@ -55,6 +56,8 @@ getAllBatches() {
         this.updatePagination();
         if (response.result.length > 0) {
           this.showTable = true;
+          
+          
         }
       } else {
         this.sharedService.NoDataSwal(response.message);
@@ -78,6 +81,10 @@ getAllStudentsByBatchId(batchId:any){
         this.showTable=false
         this.studentList = data.result;
         console.log(this.studentList);
+        const selectedBatch = this.batchList.find(batch => batch.id === batchId);
+        if (selectedBatch) {
+          this.courseRes = selectedBatch;
+        }
       } else {
         this.loadSpinner=false;
 

@@ -1,0 +1,27 @@
+
+.attendance-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.attendance-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+:host{
+  width: 100%;
+}
+.search{
+  margin-left: 100px;
+  display: inline-block;
+  width: auto;
+  margin-top: 15px;
+}
+.chip-excused {
+  background-color: #d1b18c; /* Blue */
+  color: black;
+}

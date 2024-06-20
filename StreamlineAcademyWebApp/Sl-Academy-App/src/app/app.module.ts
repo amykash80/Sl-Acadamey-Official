@@ -8,9 +8,10 @@ import { InterceptorService } from './Services/interceptor.service';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 import { IsActivePipe } from './Pipes/is-active.pipe';
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     
   ],
   imports: [

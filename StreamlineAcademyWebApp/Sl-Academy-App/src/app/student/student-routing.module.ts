@@ -8,6 +8,7 @@ import { MyBatchesComponent } from './Pages/my-batches/my-batches.component';
 import { MySchedulesComponent } from './Pages/my-schedules/my-schedules.component';
 import { CheckMyCoursesComponent } from './Pages/check-my-courses/check-my-courses.component';
 import { CourseResourceComponent } from './Pages/course-resource/course-resource.component';
+import { MyAttendancesComponent } from './Pages/my-attendances/my-attendances.component';
 
 const routes: Routes = [
   {path:"",component:StudentComponent,canActivate:[AuthGuard],
@@ -19,6 +20,7 @@ const routes: Routes = [
     {path:"my-schedules",component:MySchedulesComponent},
     {path:"check-my-courses",component:CheckMyCoursesComponent},
     {path:"course-resource/:id",component:CourseResourceComponent},
+    {path:"my-attendances",component:MyAttendancesComponent},
   ]
   }
 ];

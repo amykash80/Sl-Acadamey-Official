@@ -56,15 +56,9 @@ export class InstructorService {
     return this.http.post<boolean>(this.baseUrl+"Instructor/sendNotification",body);
   }
 
-  // saveStudentAttendance(model: SaveAttendence): Observable<ApiResponse<AttendanceResponseModel>> {
-    
-  //   return this.http.post<ApiResponse<AttendanceResponseModel>>(this.baseUrl + "Instructor/save-student-attendence", model);
-  // }
-
   saveAttendance(data: any): Observable<any> {
     var jsonData = JSON.stringify(data);
     console.log(jsonData);
-    debugger;
     return this.http.post<any>(this.baseUrl+"Instructor/save-student-attendence", data);
   }
 }

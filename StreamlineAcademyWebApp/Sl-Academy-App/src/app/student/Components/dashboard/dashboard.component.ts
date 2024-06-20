@@ -10,6 +10,10 @@ import { StudentService } from '../../../Services/student.service';
 import { BatchScheduleResponseModel } from '../../../Models/BatchSchedule/BatchSchedule';
 import { BatchResponseModel } from '../../../Models/Batch/Batch';
 import { CourseResponse } from '../../../Models/Academy/Course';
+import { AttendanceResponseModel } from '../../../Models/student/students';
+import { ApiResponse } from '../../../Models/Common/api-response';
+import { Router } from '@angular/router';
+import { AttendenceStatus } from '../../../Enums/AttendenceStatus';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +27,7 @@ export class DashboardComponent {
     private academyService: AcademyService,
     private enquiryService: EnquiryService,
     private studentService: StudentService,
+    private router: Router,
     private std: StudentService
   ) {}
   model!: { year: number, month: number, day: number };
@@ -41,13 +46,16 @@ export class DashboardComponent {
   showCard = true;
   resultSet: any;
   showSpinner=false;
- 
+  presentCount: number = 0;
+  absentCount: number = 0;
+  lateCount: number = 0;
+  ExcusedCount: number = 0;
   addToggle() {
     this.status = !this.status;
   }
   ngOnInit() {
     this.getSchedule();
-
+    this.fetchAttendances();
     this.studentService.getAllMySchedules().subscribe((res) => {
       this.scheduleList = res.result;
     });
@@ -123,4 +131,53 @@ export class DashboardComponent {
       }
     }
     
-  }
+    fetchAttendances(): void {
+      this.studentService.getAttendances().subscribe(
+        (response: ApiResponse<AttendanceResponseModel[]>) => {
+          if (response.isSuccess) {
+            this.calculateAttendanceCounts(response.result);
+          } else {
+            this.sharedService.NoDataSwal(response.message);
+            setTimeout(() => {
+              this.router.navigate(['/academy/course-list']);
+            }, 2000);
+          }
+        },
+        (error) => {
+          console.error('Error fetching attendance records:', error);
+          // Handle error case if needed
+        }
+      );
+    }
+    calculateAttendanceCounts(attendances: AttendanceResponseModel[]): void {
+      this.presentCount = 0;
+      this.absentCount = 0;
+      this.lateCount = 0;
+      this.ExcusedCount = 0;
+    
+      attendances.forEach((attendance) => {
+        if (attendance.attendenceStatus) {
+          // Assuming attendenceStatus is an array of AttendenceStatus enums
+          attendance.attendenceStatus.forEach((status) => {
+            switch (status) {
+              case AttendenceStatus.Present:
+                this.presentCount++;
+                break;
+              case AttendenceStatus.Absent:
+                this.absentCount++;
+                break;
+              case AttendenceStatus.Late:
+                this.lateCount++;
+                break;
+              case AttendenceStatus.Excused:
+                this.ExcusedCount++;
+                break;
+              default:
+                // Handle unexpected status
+                break;
+            }
+          });
+        }
+      });
+}
+}

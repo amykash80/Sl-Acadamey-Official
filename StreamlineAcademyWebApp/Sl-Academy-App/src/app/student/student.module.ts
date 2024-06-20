@@ -14,6 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckMyCoursesComponent } from './Pages/check-my-courses/check-my-courses.component';
 import { CourseResourceComponent } from './Pages/course-resource/course-resource.component';
 import { AttendenceComponent } from '../instructor/Pages/attendence/attendence.component';
+import { MyAttendancesComponent } from './Pages/my-attendances/my-attendances.component';
+import { AttendanceStatusPipe } from '../Pipes/attendance-status.pipe';
 
 
 @NgModule({
@@ -26,8 +28,10 @@ import { AttendenceComponent } from '../instructor/Pages/attendence/attendence.c
     MySchedulesComponent,
     CheckMyCoursesComponent,
     CourseResourceComponent,
-    AttendenceComponent
-
+    AttendenceComponent,
+    MyAttendancesComponent,
+    AttendanceStatusPipe
+    
   ],
   imports: [
     CommonModule,

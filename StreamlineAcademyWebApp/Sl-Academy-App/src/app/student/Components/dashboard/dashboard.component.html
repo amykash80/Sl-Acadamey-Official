@@ -69,7 +69,37 @@
       </div>
   <div class="tabs-animation">
     <div class="row">
-     
+      <div class="col-sm-12 col-md-6 col-xl-4">
+        <div class="card mb-3 widget-chart gradient-bb">
+          <div class="widget-chart-content">
+            <div class="icon-wrapper ml-0 rounded">
+              <div class="icon-wrapper-bg bg-invert"></div>
+              <i class="fas fa-user-check text-white"></i>
+            </div>
+            <div class="widget-numbers text-white"></div>
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
+              Attendance
+            </div>
+            <div class="widget-description fw-bold opacity-8">
+              <span class="text-white pr-1">{{ presentCount }}</span>
+              Present
+            </div>
+            <div class="widget-description fw-bold opacity-8">
+              <span class="text-white pr-1">{{ absentCount }}</span>
+              Absent
+            </div>
+            <div class="widget-description fw-bold opacity-8">
+              <span class="text-white pr-1">{{ lateCount }}</span>
+              Late
+            </div>
+            <div class="widget-description fw-bold opacity-8">
+              <span class="text-white pr-1">{{ ExcusedCount }}</span>
+              Excused
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="col-sm-12 col-md-6 col-xl-4">
         <div class="card mb-3 widget-chart gradient-ww">
           <div class="widget-chart-content">
@@ -97,6 +127,7 @@
           </div>
         </div>
       </div>
+      
        <div class="col-sm-12 col-md-6 col-xl-4">
         <div class="card mb-3 widget-chart gradient-ww">
           <div class="card-body">
@@ -112,7 +143,7 @@
         </div>
       </div>
     </div>
-
+   
     <div class="row">
    
 

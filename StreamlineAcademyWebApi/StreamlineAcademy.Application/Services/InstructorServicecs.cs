@@ -213,11 +213,16 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<AttendenceResponseModel>.ErrorResponse("Student IDs and attendance statuses are required.");
             }
 
-            //if (model.StudentId.Count != model.AttendenceStatus.Count)
-            //{
-            //    return ApiResponse<AttendenceResponseModel>.ErrorResponse("The number of student IDs and attendance statuses must match.");
-            //}
-            //List<int> allStudentsPresent = Enumerable.Repeat(1, model.StudentId.Count).ToList();
+            if (model.StudentId.Count != model.AttendenceStatus.Count)
+            {
+                return ApiResponse<AttendenceResponseModel>.ErrorResponse("The number of student IDs and attendance statuses must match.");
+            }
+           
+            bool attendanceMarked = await studentRepository.HasAttendanceBeenMarked(model.ScheduleId, model.AttendanceDate);
+            if (attendanceMarked)
+            {
+                return ApiResponse<AttendenceResponseModel>.ErrorResponse("Attendance has already been marked for this schedule and date.");
+            }
 
             for (int i = 0; i < model.StudentId.Count; i++)
             {
@@ -243,7 +248,7 @@ namespace StreamlineAcademy.Application.Services
 
             return ApiResponse<AttendenceResponseModel>.SuccessResponse(new AttendenceResponseModel
             {
-                // Optionally return a summary or details of the first saved entry
+                
                 AttendenceStatus = model.AttendenceStatus,
                 Date = model.AttendanceDate,
                 ScheduleId = model.ScheduleId,

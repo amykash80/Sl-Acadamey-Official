@@ -296,10 +296,10 @@ namespace StreamlineAcademy.Application.Services
 
             var attendanceResponses = attendances.Select(_ => new AttendenceResponseModel
             {
-                //StudentId = _.StudentId,
-                //ScheduleId = _.ScheduleId,
-                //Date = _.AttendanceDate,
-                //AttendenceStatus = _.AttendenceStatus
+                //StudentId = new List<Guid>{ _.StudentId},
+                ScheduleId = _.ScheduleId,
+                Date = _.AttendanceDate,
+                AttendenceStatus = new List<AttendenceStatus> { _.AttendenceStatus }
             });
             return ApiResponse<IEnumerable<AttendenceResponseModel>>.SuccessResponse(attendanceResponses, $"Found {attendanceResponses.Count()} attendences",HttpStatusCodes.OK);
         }
