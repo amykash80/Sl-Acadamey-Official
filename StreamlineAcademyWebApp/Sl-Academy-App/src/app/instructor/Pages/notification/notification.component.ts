@@ -82,7 +82,6 @@ export class NotificationComponent {
       this.notificationRequest.subject = texts.subject;
       this.notificationRequest.body = texts.message;
       this.notificationRequest.scheduleId = this.scheduleId;
-      console.log('Notification Request:', this.notificationRequest);
       this.instructorService.sendNotification(this.notificationRequest).subscribe(
         (success) => {
           if (success) {
