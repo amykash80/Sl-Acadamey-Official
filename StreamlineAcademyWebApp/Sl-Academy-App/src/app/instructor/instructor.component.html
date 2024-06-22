@@ -3,7 +3,13 @@
 >
   <app-header></app-header>
   <div class="app-main">
-    <app-sidebar class="app-sidebar sidebar-shadow"></app-sidebar>
+    <app-sidebar
+      class="app-sidebar sidebar-shadow"
+      [ngClass]="{
+        'SidebarAnimation-appear-active': sidebarOpen(),
+        'SidebarAnimation-appear': sidebarOpen()
+      }"
+    ></app-sidebar>
     <div class="app-main__outer">
       <router-outlet></router-outlet>
     </div>
