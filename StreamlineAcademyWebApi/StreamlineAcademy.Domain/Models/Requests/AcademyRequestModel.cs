@@ -50,7 +50,7 @@ namespace StreamlineAcademy.Domain.Models.Requests
         public Guid Id { get; set; }
 
        
-        public string? Name { get; set; }
+        public string? AcademyAdmin { get; set; }
         
         public string? AcademyName { get; set; }
        

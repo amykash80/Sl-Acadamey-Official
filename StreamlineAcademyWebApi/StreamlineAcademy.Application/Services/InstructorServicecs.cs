@@ -223,38 +223,40 @@ namespace StreamlineAcademy.Application.Services
             {
                 return ApiResponse<AttendenceResponseModel>.ErrorResponse("Attendance has already been marked for this schedule and date.");
             }
-
-            for (int i = 0; i < model.StudentId.Count; i++)
+            else
             {
-                var attendance = new Attendance
+                for (int i = 0; i < model.StudentId.Count; i++)
                 {
-                    StudentId = model.StudentId[i],
-                    ScheduleId = model.ScheduleId,
-                    AttendanceDate = model.AttendanceDate,
-                    AttendenceStatus = model.AttendenceStatus[i],
-                    CreatedBy = instructorId,
-                    CreatedDate = DateTime.Now,
-                    ModifiedBy = Guid.Empty,
-                    DeletedBy = Guid.Empty,
-                };
+                    var attendance = new Attendance
+                    {
+                        StudentId = model.StudentId[i],
+                        ScheduleId = model.ScheduleId,
+                        AttendanceDate = model.AttendanceDate,
+                        AttendenceStatus = model.AttendenceStatus[i],
+                        CreatedBy = instructorId,
+                        CreatedDate = DateTime.Now,
+                        ModifiedBy = Guid.Empty,
+                        DeletedBy = Guid.Empty,
+                    };
 
-                var returnVal = await studentRepository.SaveStudentAttendence(attendance);
+                    var returnVal = await studentRepository.SaveStudentAttendence(attendance);
 
-                if (returnVal <= 0)
-                {
-                    return ApiResponse<AttendenceResponseModel>.ErrorResponse(APIMessages.TechnicalError);
+                    if (returnVal <= 0)
+                    {
+                        return ApiResponse<AttendenceResponseModel>.ErrorResponse(APIMessages.TechnicalError);
+                    }
                 }
+
+                return ApiResponse<AttendenceResponseModel>.SuccessResponse(new AttendenceResponseModel
+                {
+
+                    AttendenceStatus = model.AttendenceStatus,
+                    Date = model.AttendanceDate,
+                    ScheduleId = model.ScheduleId,
+                    StudentId = model.StudentId
+
+                }, "Attendance Saved Successfully");
             }
-
-            return ApiResponse<AttendenceResponseModel>.SuccessResponse(new AttendenceResponseModel
-            {
-                
-                AttendenceStatus = model.AttendenceStatus,
-                Date = model.AttendanceDate,
-                ScheduleId = model.ScheduleId,
-                StudentId = model.StudentId
-
-            }, "Attendance Saved Successfully");
         }
 
         public async Task<bool> SendNotification(NotificationRequestModel request)

@@ -157,7 +157,7 @@ namespace StreamlineAcademy.Application.Services
             user.PhoneNumber = request.PhoneNumber;
             user.Address = request.Address;
             user.PostalCode = request.PostalCode;
-            user.Name = request.Name;
+            user.Name = request.AcademyAdmin;
             user.ModifiedDate = DateTime.Now;
             user.ModifiedBy = userId;
             user.IsActive = request.IsActive;
