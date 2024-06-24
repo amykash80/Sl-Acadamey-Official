@@ -10625,7 +10625,7 @@
   .app-sidebar.sidebar-text-light {
     border-right: 0 !important;
   }
-  .app-sidebar.sidebar-text-light .app-sidebar__heading {
+  .app-sidebar.sidebar-text-light __heading {
     color: rgba(255, 255, 255, 0.6);
   }
   .app-sidebar.sidebar-text-light .app-sidebar__heading::before {
