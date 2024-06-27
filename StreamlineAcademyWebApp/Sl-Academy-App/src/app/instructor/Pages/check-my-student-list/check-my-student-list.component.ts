@@ -43,7 +43,8 @@ export class CheckMyStudentListComponent {
   filterStudents(event: any) {
     const filterValue = event.target.value.toLowerCase();
     this.filteredList = this.studentList.filter((course) =>
-      course.name?.toLowerCase().startsWith(filterValue)
+      course.name?.toLowerCase().startsWith(filterValue)||
+      course.email?.toLowerCase().startsWith(filterValue)
     );
     console.log(this.filteredList);
     this.totalItems = this.filteredList.length;

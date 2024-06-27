@@ -54,6 +54,24 @@ namespace StreamlineAcademy.Api.Controllers
             var isUnique = await academyService.IsAcademyNameUnique(academyName);
             return Results.Ok(isUnique);
         }
+        [HttpDelete("deleteAcademyType/{id:guid}")]
+        public async Task<IActionResult> DeleteAcademyType(Guid id)
+        {
+            var result = await academyService.DeleteAcademyType(id);
 
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return StatusCode(result.StatusCode, result); 
+        }
+        [HttpPut("update-academy-type")]
+        public async Task<ApiResponse<AcademyTypeResponseModel>> UpdateAcademyType(AcademyTypeUpdateModel model) => await academyService.UpdateAcademyType(model);
+
+        [HttpGet("getAcademyTypeById/{id:guid}")]
+        public async Task<ApiResponse<AcademyTypeResponseModel>> GetAcademyTypeById(Guid id) => await academyService.GetAcademyTypeById(id);
     }
+
 }
+

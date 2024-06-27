@@ -62,13 +62,14 @@ export class EnquirylistComponent {
     if (!this.searchText.trim()) {
       this.filteredEnquiryList = [...this.enquirylist];
     } else {
-      const enteredValue=event!.target!.value;
-    console.log(enteredValue);
-    this.filteredEnquiryList = this.enquirylist.filter(enquiry => 
-      enquiry.name?.toLowerCase().startsWith(enteredValue) 
-      || enquiry.phoneNumber?.toLowerCase().startsWith(enteredValue)
-      || enquiry.email?.toLowerCase().startsWith(enteredValue)
-    );
+      const searchTerm = this.searchText.toLowerCase();
+      this.filteredEnquiryList = this.enquirylist.filter(
+        (enquiry) =>
+          enquiry.name!.toLowerCase().startsWith(searchTerm) ||
+        enquiry.email!.toLowerCase().startsWith(searchTerm) ||
+        enquiry.phoneNumber!.toLowerCase().startsWith(searchTerm) 
+        
+      );
     }
     this.totalItems = this.filteredEnquiryList.length;
     this.currentPage = 1;

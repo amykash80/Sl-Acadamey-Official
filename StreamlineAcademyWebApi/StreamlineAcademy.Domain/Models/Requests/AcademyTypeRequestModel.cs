@@ -11,6 +11,11 @@ namespace StreamlineAcademy.Domain.Models.Requests
     {
         public string? Name { get; set; } 
     }
+    public class AcademyTypeUpdateModel
+    {
+        public Guid Id { get; set; }
+        public string? AcademyTypeName { get; set; }
+        public bool IsActive { get; set; }
+    }
 
-    
 }

@@ -1,0 +1,46 @@
+<div class="col">
+    <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item" routerLink="/admin/dashboard">Admin</li>
+        <li class="breadcrumb-item active" aria-current="page">Update Academy Type</li>
+      </ol>
+    </nav>
+  </div>
+  
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-xl-6">
+        <form #academyTypeUpdateForm="ngForm" method="PUT" class="update-form ajax-contact">
+          <h5 class="form-title">Update Academy Type</h5>
+          <div class="row">
+            <!-- Academy Type Name -->
+            <div class="form-group col-md-12">
+              <label><i class="far fa-user"></i> Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                #name="ngModel"
+                [(ngModel)]="academyType.academyTypeName"
+                placeholder=""
+                required
+              />
+              <div *ngIf="name.errors?.['required']" class="text-danger">
+                Name is required.
+              </div>
+            </div>
+  
+            <!-- Form Button -->
+            <div class="form-btn col-12 text-center">
+              <button class="th-btn black-btn-2 w-100" [disabled]="academyTypeUpdateForm.invalid" (click)="updateAcademyType()">
+                <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
+                Update Now
+              </button>
+            </div>
+          </div>
+          <p class="form-messages mb-0 mt-3"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  

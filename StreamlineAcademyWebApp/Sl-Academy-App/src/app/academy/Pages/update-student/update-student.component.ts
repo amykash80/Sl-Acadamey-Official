@@ -84,7 +84,7 @@ export class UpdateStudentComponent {
       (city) => city.sateId === this.selectedStateId
     );
   }
-  updateInstructor(): void {
+  updateStudent(): void {
     this.loadSpinner=true;
     this.updateStudentModel=this.student;
   this.studentService.updateStudent(this.updateStudentModel).subscribe({

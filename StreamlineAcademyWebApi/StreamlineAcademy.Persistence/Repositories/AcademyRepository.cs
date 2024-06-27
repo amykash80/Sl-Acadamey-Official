@@ -21,31 +21,36 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace StreamlineAcademy.Persistence.Repositories
 {
-    public class AcademyRepository:IAcademyRepository
-    {
+	public class AcademyRepository : IAcademyRepository
+	{
 		private readonly StreamlineDbContet context;
 
-        public AcademyRepository(StreamlineDbContet context)
-        {
-			this.context = context;
-        }
-
-        public async Task<int> CreateAcademyType(AcademyType model)
-        {
-
-            await context.Set<AcademyType>().AddAsync(model);
-            return await context.SaveChangesAsync();
-        }
-
-        public async Task<int> Delete(User model)
+		public AcademyRepository(StreamlineDbContet context)
 		{
-			await Task.Run(()=>context.Set<User>().Update(model));
-		    return await context.SaveChangesAsync();
+			this.context = context;
+		}
+
+		public async Task<int> CreateAcademyType(AcademyType model)
+		{
+
+			await context.Set<AcademyType>().AddAsync(model);
+			return await context.SaveChangesAsync();
+		}
+
+		public async Task<int> Delete(User model)
+		{
+			await Task.Run(() => context.Set<User>().Update(model));
+			return await context.SaveChangesAsync();
 		}
 
 		public async Task<int> DeleteAsync(Academy model)
 		{
 			context.Set<Academy>().Remove(model);
+			return await context.SaveChangesAsync();
+		}
+		public async Task<int> DeleteTypeAsync(AcademyType model)
+		{
+			context.Set<AcademyType>().Remove(model);
 			return await context.SaveChangesAsync();
 		}
 
@@ -61,51 +66,51 @@ namespace StreamlineAcademy.Persistence.Repositories
 		}
 
 		public async Task<AcademyResponseModel> GetAcademyById(Guid? id)
-        {
+		{
 
-            var academy = await context.Academies
-              .Include(a => a.User)
-              .Include(a => a.AcademyType)
-              .Include(a => a.Country)
-              .Include(a => a.State)
-              .Include(a => a.City)
-              .FirstOrDefaultAsync(a=>a.Id==id);
+			var academy = await context.Academies
+			  .Include(a => a.User)
+			  .Include(a => a.AcademyType)
+			  .Include(a => a.Country)
+			  .Include(a => a.State)
+			  .Include(a => a.City)
+			  .FirstOrDefaultAsync(a => a.Id == id);
 
-            if (academy is not null)
-            {
+			if (academy is not null)
+			{
 
-                var response = new AcademyResponseModel
-                {
-                    Id = academy.Id,
-                    AcademyName = academy.AcademyName,
-					AcademyAdmin=academy.User!.Name,
-                    Email = academy.User!.Email,
-                    PhoneNumber = academy.User.PhoneNumber,
-                    PostalCode = academy.User.PostalCode,
-                    Address = academy.User.Address,
-                    AcademyType = academy.AcademyType!.Name,
-                    CountryName = academy.Country!.CountryName,
-                    StateName = academy.State!.StateName,
-                    CityName = academy.City!.CityName,
-					IsActive=academy.User.IsActive,
-                    UserRole = academy.User.UserRole,
-					CountryId=academy.Country.Id,
-					SateId=academy.State.Id,
-					CityId=academy.City.Id,
-					AcademyTypeId=academy.AcademyType.Id,
-                };
+				var response = new AcademyResponseModel
+				{
+					Id = academy.Id,
+					AcademyName = academy.AcademyName,
+					AcademyAdmin = academy.User!.Name,
+					Email = academy.User!.Email,
+					PhoneNumber = academy.User.PhoneNumber,
+					PostalCode = academy.User.PostalCode,
+					Address = academy.User.Address,
+					AcademyType = academy.AcademyType!.Name,
+					CountryName = academy.Country!.CountryName,
+					StateName = academy.State!.StateName,
+					CityName = academy.City!.CityName,
+					IsActive = academy.User.IsActive,
+					UserRole = academy.User.UserRole,
+					CountryId = academy.Country.Id,
+					SateId = academy.State.Id,
+					CityId = academy.City.Id,
+					AcademyTypeId = academy.AcademyType.Id,
+				};
 
-                return response;
-            }
-            return new AcademyResponseModel() {  };
+				return response;
+			}
+			return new AcademyResponseModel() { };
 
-        }
+		}
 
 
-        public async Task<List<AcademyResponseModel>> GetAllAcademies()
+		public async Task<List<AcademyResponseModel>> GetAllAcademies()
 		{
 			var academies = await context.Academies
-				.Include(a => a.User) 
+				.Include(a => a.User)
 				.Include(a => a.AcademyType)
 				.Include(a => a.Country)
 				.Include(a => a.State)
@@ -125,26 +130,26 @@ namespace StreamlineAcademy.Persistence.Repositories
 					CityName = a.City!.CityName,
 					UserRole = a.User.UserRole,
 					IsActive = a.User.IsActive,
-					AcademyTypeId=a.AcademyType.Id,
-					CountryId=a.Country.Id,
-					CityId=a.City.Id,
-					SateId=a.State.Id
-					
+					AcademyTypeId = a.AcademyType.Id,
+					CountryId = a.Country.Id,
+					CityId = a.City.Id,
+					SateId = a.State.Id
+
 				})
 				.ToListAsync();
 
 			return academies;
 		}
 
-        public async Task<List<AcademyType>> GetAllAcademyTypes()
-        {
-           return await context.Set<AcademyType>().ToListAsync();
-
-        }
-
-        public async Task<IEnumerable<Academy>> GetAllAsync()
+		public async Task<List<AcademyType>> GetAllAcademyTypes()
 		{
-           return await context.Set<Academy>().ToListAsync();
+			return await context.Set<AcademyType>().ToListAsync();
+
+		}
+
+		public async Task<IEnumerable<Academy>> GetAllAsync()
+		{
+			return await context.Set<Academy>().ToListAsync();
 
 		}
 
@@ -173,12 +178,12 @@ namespace StreamlineAcademy.Persistence.Repositories
 		}
 
 		public async Task<bool> UpdateRegistrationStatus(Guid? id, RegistrationStatus status)
-        {
+		{
 			var enquiry = await context.Enquiries.FirstOrDefaultAsync(e => e.Id == id);
 
 			if (enquiry == null)
 			{
-				return false; 
+				return false;
 			}
 
 			enquiry.RegistrationStatus = status;
@@ -188,13 +193,60 @@ namespace StreamlineAcademy.Persistence.Repositories
 			return rowsAffected > 0;
 		}
 
+		public async Task<AcademyType> GetByAcademyIdAsync(Expression<Func<AcademyType, bool>> expression)
+		{
+			return await context.AcademyTypes.FirstOrDefaultAsync(expression);
+		}
+
+
         public async Task<AcademyType> GetAcademyTypeById(Expression<Func<AcademyType, bool>> expression)
         {
             return await context.AcademyTypes.FirstOrDefaultAsync(expression);
 
         }
-    }
+        public async Task<int> DeleteAcademyTypeAsync(Guid id)
+        {
+            var academyType = await context.AcademyTypes.FirstOrDefaultAsync(x => x.Id == id);
 
-       
+            if (academyType == null)
+            {
+                return 0; 
+            }
+
+            academyType.IsActive = false;
+            academyType.DeletedDate = DateTime.Now;
+
+            context.Set<AcademyType>().Update(academyType);
+            return await context.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateAcademyType(AcademyType model)
+        {
+            context.Set<AcademyType>().Update(model);
+            return await context.SaveChangesAsync();
+        }
+
+        public async Task<AcademyTypeResponseModel> GetAcademyTypeById(Guid? id)
+        {
+            var academyType = await context.AcademyTypes
+                .FirstOrDefaultAsync(at => at.Id == id);
+
+            if (academyType is not null)
+            {
+                var response = new AcademyTypeResponseModel
+                {
+                    Id = academyType.Id,
+                    AcademyTypeName = academyType.Name,
+                    IsActive = academyType.IsActive
+                };
+
+                return response;
+            }
+
+            return new AcademyTypeResponseModel();
+        }
+
     }
+}
+    
 

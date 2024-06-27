@@ -4,7 +4,7 @@ import { environment } from '../../enviroments/enviroment';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/Common/api-response';
 import { AcademyResponse,RegisterAcademy, UpdateAcademy } from '../Models/Academy/Academy';
-import { AcademyType, AcademyTypeResponse } from '../Models/Academy/AcademyType';
+import { AcademyType, AcademyTypeResponse, UpdateAcademyType } from '../Models/Academy/AcademyType';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,4 +37,16 @@ export class AcademyService {
     return this.http.get<ApiResponse<AcademyTypeResponse[]>>(this.baseUrl+"Academy/getAll-acadamyTypes")
   }
 
+  deleteAcademyType(id:string):Observable<ApiResponse<string>>{
+    return this.http.delete<ApiResponse<string>>(this.baseUrl+"Academy/deleteAcademyType/"+id)
+   }
+   updateAcademyType(academyTypeUpdateModel:UpdateAcademyType):Observable<ApiResponse<AcademyTypeResponse>>{
+    debugger;
+    console.log(academyTypeUpdateModel);
+    
+    return this.http.put<ApiResponse<AcademyTypeResponse>>(this.baseUrl+"Academy/update-academy-type",academyTypeUpdateModel)
+  }
+  getAcademyTypeById(id:string):Observable<ApiResponse<AcademyTypeResponse>>{
+    return this.http.get<ApiResponse<AcademyTypeResponse>>(this.baseUrl+"Academy/getAcademyTypeById/"+id)
+   }
 }

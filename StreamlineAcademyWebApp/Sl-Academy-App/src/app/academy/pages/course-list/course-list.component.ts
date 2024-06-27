@@ -95,6 +95,7 @@ export class CourseListComponent {
   }
 
   deleteCourse(courseId: any) {
+    debugger;
     this.sharedService
       .fireConfirmSwal('Are You sure you want to delete this Course ')
       .then((result:any) => {

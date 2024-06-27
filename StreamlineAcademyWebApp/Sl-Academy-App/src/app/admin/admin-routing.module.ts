@@ -13,6 +13,7 @@ import { AcademyTypeListComponent } from './pages/academy-type-list/academy-type
 import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enquiry.component';
 import { AuthGuard } from '../shared/auth.guard';
+import { UpdateAcademytypeComponent } from './pages/update-academytype/update-academytype.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'register-enquiry/:id', component: RegisterEnquiryComponent },
       { path: 'change-password/:userRole', component: ChangepasswordComponent },
+      { path: 'update-academytype/:id', component: UpdateAcademytypeComponent },
     ],
   },
 ];

@@ -6,3 +6,8 @@ export class AcademyTypeResponse{
  academyTypeName?:string
  isActive?:boolean
 }
+export class UpdateAcademyType{
+    id?:string;
+    academyTypeName?:string
+    isActive?:boolean
+   }

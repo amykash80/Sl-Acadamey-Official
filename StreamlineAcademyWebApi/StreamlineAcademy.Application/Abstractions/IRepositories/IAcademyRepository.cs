@@ -30,7 +30,9 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
 		Task<bool> UpdateRegistrationStatus(Guid? id, RegistrationStatus status);
 		Task<int> Delete(User model);
 		Task<int> CreateAcademyType(AcademyType model);
-	  
+        Task<int> DeleteAcademyTypeAsync(Guid id);
+        Task<int> UpdateAcademyType(AcademyType model);
+        Task<AcademyTypeResponseModel> GetAcademyTypeById(Guid? id);
 
-	}
+    }
 }

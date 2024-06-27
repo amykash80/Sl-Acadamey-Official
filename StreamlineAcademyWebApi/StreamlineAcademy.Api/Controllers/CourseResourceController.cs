@@ -25,8 +25,8 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpPost("addCourseResource")]
         public async Task<ApiResponse<CourseResourceResponseModel>> AddCourceResource([FromForm]CourseResourceRequestModel request)=> await courseResourceService.AddCourseResource(request);
         [HttpPut("updateCourseResource")]
-        public async Task<ApiResponse<CourseResourceResponseModel>> UpdateCourseResource(CourseResourceUpdateRequest request)=>await courseResourceService.UpdateCourseResource(request);
-        [HttpDelete("deleteCourseResource")]
+        public async Task<ApiResponse<CourseResourceResponseModel>> UpdateCourseResource([FromForm]CourseResourceUpdateRequest request)=>await courseResourceService.UpdateCourseResource(request);
+        [HttpDelete("deleteCourseResource/{id:guid}")]
         public async Task<ApiResponse<CourseResourceResponseModel>> DeleteCourseResource(Guid Id)=>await courseResourceService.DeleteCourseResource(Id);
         [HttpGet("getAllCourseResource")]
         public async Task<ApiResponse<IEnumerable<CourseResourceResponseModel>>> GetAllCourseResource() => await courseResourceService.GetAllCourseResource();

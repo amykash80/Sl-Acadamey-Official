@@ -89,11 +89,12 @@ namespace StreamlineAcademy.Application.Services
             }
             var filePath = await storageService.UploadFileAsync(request.File!);
             var appFile = await courseResourceRepository.GetByEntityIdAsync(existingResource.Id);
-            if(appFile != null) {
-                appFile.FilePath = filePath;  
+            if (appFile != null)
+            {
+                appFile.FilePath = filePath;
                 await fileRepository.UpdateAsync(appFile);
             }
-                existingResource.Name = request.Name;
+            existingResource.Name = request.Name;
             existingResource.Description = request.Description;
             existingResource.Type = request.Type;
             existingResource.FilePath = filePath;
@@ -108,19 +109,22 @@ namespace StreamlineAcademy.Application.Services
             if (returnVal > 0)
             {
                 var responseModel = await courseResourceRepository.GetCourseResourceById(existingResource.Id);
-                //var response = new CourseResourceResponseModel()
-                //{
-                //    Id = existingResource.Id,
-                //    Name = existingResource.Name,
-                //    Description = existingResource.Description,
-                //    Type = existingResource.Type,
-                //    FilePath = filePath,
-                //    CourseName = existingResource.Course!.Name
-                //};
+                var response = new CourseResourceResponseModel()
+                {
+                    Id = existingResource.Id,
+                    Name = existingResource.Name,
+                    Description = existingResource.Description,
+                    Type = existingResource.Type,
+                    FilePath = filePath,
+                    CourseName = existingResource.Course!.Name
+                };
                 return ApiResponse<CourseResourceResponseModel>.SuccessResponse(responseModel, APIMessages.CourseResourceManagement.CourseResourceUpdated, HttpStatusCodes.OK);
             }
             return ApiResponse<CourseResourceResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
+
+       
+
         public async Task<ApiResponse<CourseResourceResponseModel>> DeleteCourseResource(Guid Id)
         {
             var existingResource = await courseResourceRepository.GetByIdAsync(x => x.Id == Id);

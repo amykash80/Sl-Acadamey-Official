@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using StreamlineAcademy.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace StreamlineAcademy.Domain.Models.Requests
@@ -16,8 +17,13 @@ namespace StreamlineAcademy.Domain.Models.Requests
         public IFormFile? File { get; set; }
 
     }
-    public class CourseResourceUpdateRequest : CourseResourceRequestModel  // to update  response 
+    public class CourseResourceUpdateRequest
     {
         public Guid Id { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public CourseResourceType? Type { get; set; }
+        public IFormFile? File { get; set; }
+        public Guid CourseId { get; set; }
     }
 }
