@@ -1,7 +1,9 @@
 :host{
     width: 100%;
-}
-.search{
- 
+  }
+  .search{
+    margin-left: 100px;
+    display: inline-block;
+    width: auto;
     margin-top: 15px;
-}
+  }
