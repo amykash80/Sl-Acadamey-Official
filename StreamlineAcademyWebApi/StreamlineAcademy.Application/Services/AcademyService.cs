@@ -252,7 +252,7 @@ namespace StreamlineAcademy.Application.Services
 
             if (result > 0)
             {
-                return ApiResponse<AcademyTypeResponseModel>.SuccessResponse(null, APIMessages.CourseManagement.CourseDeleted);
+                return ApiResponse<AcademyTypeResponseModel>.SuccessResponse(null, APIMessages.AcademyManagement.AcademyTypeDeleted);
             }
 
             return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
@@ -263,7 +263,7 @@ namespace StreamlineAcademy.Application.Services
             var academyType = await academyRepository.GetAcademyTypeById(x => x.Id == request.Id);
 
             if (academyType is null)
-                return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.AcademyManagement.AcademyNotFound, HttpStatusCodes.NotFound);
+                return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.AcademyManagement.AcademyTypeNotFound, HttpStatusCodes.NotFound);
 
             academyType.Name = request.AcademyTypeName;
             academyType.ModifiedDate = DateTime.Now;
@@ -280,7 +280,7 @@ namespace StreamlineAcademy.Application.Services
                     IsActive = academyType.IsActive
                 };
 
-                return ApiResponse<AcademyTypeResponseModel>.SuccessResponse(responseModel, APIMessages.AcademyManagement.AcademyUpdated);
+                return ApiResponse<AcademyTypeResponseModel>.SuccessResponse(responseModel, APIMessages.AcademyManagement.AcademyTypeUpdated);
             }
 
             return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
@@ -289,7 +289,7 @@ namespace StreamlineAcademy.Application.Services
         {
             var academy = await academyRepository.GetAcademyTypeById(x => x.Id == id);
             if (academy is null)
-                return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.AcademyManagement.AcademyNotFound, HttpStatusCodes.NotFound);
+                return ApiResponse<AcademyTypeResponseModel>.ErrorResponse(APIMessages.AcademyManagement.AcademyTypeNotFound, HttpStatusCodes.NotFound);
 
             var responseModel = await academyRepository.GetAcademyTypeById(id);
 

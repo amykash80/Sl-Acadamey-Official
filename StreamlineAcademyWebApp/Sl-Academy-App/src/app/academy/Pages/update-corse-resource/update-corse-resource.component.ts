@@ -16,6 +16,7 @@ export class UpdateCorseResourceComponent {
   resourceModel:CourseResourceResponse=new CourseResourceResponse();
   updateResouceModel:UpdateCourseResource=new UpdateCourseResource();
   selectedFile: File | null = null;
+  loadSpinner: boolean = false;
   constructor(
     private courseResourseService: CourseresourceService,
     private route: ActivatedRoute,
@@ -47,6 +48,7 @@ export class UpdateCorseResourceComponent {
     }
   }
   updateCourseResource(event: Event) {
+    this.loadSpinner=true;
     event.preventDefault();
     const formData = new FormData();
     if (this.resourceModel.name) {
@@ -68,9 +70,11 @@ export class UpdateCorseResourceComponent {
       next: (response) => {
         if (response.isSuccess) {
           this.sharedServcice.showSuccessToast(response.message);
+          this.loadSpinner=false;
           this.router.navigate(['/academy/course-resource-list', this.courseId]);
         } else {
           this.sharedServcice.showErrorToast(response.message);
+          this.loadSpinner=false;
         }
       },
       error: (err) => {

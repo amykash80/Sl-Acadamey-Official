@@ -28,6 +28,9 @@ export class StudentService {
   
   }
   updateStudent(stdModel:UpdateStudentModel):Observable<ApiResponse<StudentResponseModel>>{
+    debugger;
+    console.log();
+    
   return this.http.put<ApiResponse<StudentResponseModel>>(this.baseUrl + "Student/updateStudent",stdModel)
   }
 

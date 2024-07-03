@@ -90,12 +90,28 @@
             <div *ngIf="cityId.touched && cityId.invalid && cityId.errors?.['required']" class="error-message">City required</div>
           </div>
         </div>
-        <div class="form-btn col-12 text-center">
+        <div class="form-btn row p-0 col-12 text-center">
+          <div class="col-md-6 ps-4 p-0">
+            <button
+              class="th-btn mb-2 md-mb-0 black-btn-1 w-full"
+              [disabled]="updateInstructorForm.invalid" (click)="updateInstructor()"
+            >
+              <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
+              Update Now
+            </button>
+          </div>
+          <div class="col-md-6 ps-4 p-0">
+            <button type="reset" class="th-btn black-btn-2 w-full">
+              Reset Form
+            </button>
+          </div>
+        </div>
+        <!-- <div class="form-btn col-12 text-center">
           <button class="th-btn  w-100" [disabled]="updateInstructorForm.invalid" (click)="updateInstructor()">
             <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
             Update Instructor
           </button>
-        </div>
+        </div> -->
         <p class="form-messages mb-0 mt-3"></p>
       </form>
     </div>
