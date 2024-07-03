@@ -60,8 +60,13 @@ export class InstructorService {
   }
 
   saveAttendance(data: any): Observable<any> {
-    var jsonData = JSON.stringify(data);
-    console.log(jsonData);
+    if (data.attendanceDate instanceof Date) {
+      data.attendanceDate = data.attendanceDate.toISOString();
+    } else if (typeof data.attendanceDate === 'string') {
+      data.attendanceDate = new Date(data.attendanceDate).toISOString();
+    }
+
+    const jsonData = JSON.stringify(data);
     return this.http.post<any>(this.baseUrl+"Instructor/save-student-attendence", data);
   }
 }
