@@ -1,4 +1,4 @@
-<div class="app-inner" >
+<div class="app-inner" *ngIf="showTable">
     <div class="container">
       <div class="col">
         <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
@@ -35,15 +35,12 @@
                   <thead>
                     <tr>
                       <th style="width: 76.8375px">Date</th>
-                      <th style="width: 91.9375px">Schedule ID</th>
                       <th style="width: 75.0125px">Attendance Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let attendance of displayedBatchList">
                       <td>{{ attendance.date | date }}</td>
-                      <td>{{ attendance.scheduleId }}</td>
-                      <!-- <td>{{ attendance.attendenceStatus| AttendanceStatus}}</td> -->
                       <td>
                         <ng-container *ngIf="attendance.attendenceStatus && attendance.attendenceStatus.length > 0">
                           <span [ngClass]="getAttendanceStatusClass(attendance.attendenceStatus)">
@@ -94,5 +91,9 @@
   </div>
   <div>
     
+  </div>
+  <div>
+    <!-- Spinner -->
+    <app-spinner *ngIf="showSpinner"></app-spinner>
   </div>
   

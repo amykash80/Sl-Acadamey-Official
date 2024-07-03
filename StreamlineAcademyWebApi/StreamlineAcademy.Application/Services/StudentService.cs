@@ -293,11 +293,8 @@ namespace StreamlineAcademy.Application.Services
             var attendances = await studentRepository.checkMyAttendences(studentId);
             if (!attendances.Any())
                 return ApiResponse<IEnumerable<AttendenceResponseModel>>.ErrorResponse("No attendance records found.", HttpStatusCodes.NotFound);
-
             var attendanceResponses = attendances.Select(_ => new AttendenceResponseModel
             {
-                //StudentId = new List<Guid>{ _.StudentId},
-                ScheduleId = _.ScheduleId,
                 Date = _.AttendanceDate,
                 AttendenceStatus = new List<AttendenceStatus> { _.AttendenceStatus }
             });
