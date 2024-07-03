@@ -82,13 +82,13 @@
                         >
                           <ul class="nav flex-column">
                             <li class="nav-item">
-                              <a [routerLink]="['/instructor/attendence',schedule.id]"
+                              <a  (click)="redirectToAttendance(schedule)" 
                                 class="nav-link fw-semibold"
                               >
                                 <i
                                   class="nav-link-icon fa fa-clock-o"
                                 ></i>
-                                <span>Attendence</span>
+                                <span >Attendence</span>
                               </a>
                             </li>
                             <li class="nav-item">

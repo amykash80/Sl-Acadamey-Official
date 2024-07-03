@@ -66,6 +66,19 @@ export class CheckMyScheduleComponent {
       }
     });
   }
+  redirectToAttendance(schedule: any) {
+    const today = new Date();
+    const scheduleDate = new Date(schedule.date);
+    if (
+      today.getFullYear() === scheduleDate.getFullYear() &&
+      today.getMonth() === scheduleDate.getMonth() &&
+      today.getDate() === scheduleDate.getDate()
+    ) {
+      this.router.navigate(['/instructor/attendence', schedule.id]);
+    } else {
+      this.sharedService.showErrorToast('Attendance can only be recorded for today\'s schedule.');
+    }
+  }
 
   filterSchedules(): void {
     if (!this.searchText.trim()) {

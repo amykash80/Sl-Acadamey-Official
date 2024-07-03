@@ -33,7 +33,8 @@ export class AssinStudentBatchComponent {
   searchText: string = '';
   batchId:string=''
   courseId=''
-  showSpinner=false;
+  showTable=false;
+  showSpinner=true;
 
 
   filterStudents(event: any) {
@@ -85,6 +86,8 @@ export class AssinStudentBatchComponent {
       next: (response) => {
         console.log(response);
         if (response.result.length > 0) {
+          this.showSpinner=false;
+          this.showTable=true
           this.studentList = response.result;
           this.filteredStudentList = this.studentList;
         } else if (response.result.length == 0) {

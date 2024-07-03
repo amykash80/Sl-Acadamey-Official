@@ -7,7 +7,7 @@
             <li class="breadcrumb-item"  style="cursor: pointer;" routerLink="/student/dashboard">student</li>
             <!-- <li class="breadcrumb-item" style="cursor: pointer;" routerLink="/student/my-batches">my batches</li> -->
            
-            <li class="breadcrumb-item active" aria-current="page">my-schedule</li>
+            <li class="breadcrumb-item active" aria-current="page">my-schedules</li>
           </ol>
         </nav>
       </div>
@@ -24,7 +24,7 @@
                     <i class="fas fa-plus mr-2"></i> Add Batch Schedule
                   </button> -->
                 </div>
-                <div class="col-sm-12 col-md-6 search">
+                <div class="col-sm-12 col-md-12 ">
                   <div id="order-listing_filter" class="dataTables_filter">
                     <label>
                       <input
@@ -32,7 +32,7 @@
                         [(ngModel)]="searchText"
                         (input)="filterSchedules()"
                         class="form-control"
-                        placeholder="Search courses"
+                        placeholder="Search schedules"
                         aria-controls="order-listing"
                       />
                     </label>

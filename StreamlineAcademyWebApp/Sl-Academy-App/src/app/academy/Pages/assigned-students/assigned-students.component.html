@@ -4,7 +4,7 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item" routerLink="academy/dashboard">academy</li>
+            <li class="breadcrumb-item" routerLink="/academy/dashboard" >academy</li>
             <li class="breadcrumb-item active" aria-current="page">assigned-students</li>
           </ol>
         </nav>
@@ -20,7 +20,7 @@
               class="dataTables_wrapper dt-bootstrap4 no-footer"
             >
               <div class="row">
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-12">
                   <div id="student-listing_filter" class="dataTables_filter">
                     <label>
                       <input
@@ -168,5 +168,5 @@
   </div>
 </div>
 <div>
-  <app-spinner color="white" *ngIf="showSpinner"></app-spinner>
+  <app-spinner *ngIf="showSpinner"></app-spinner>
 </div>
