@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from '../Services/shared.service';
 
 @Component({
   selector: 'app-academy',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './academy.component.css'
 })
 export class AcademyComponent {
-
+  sidebarOpen = this.sharedService.mobileSidebarOpen;
+  constructor(private sharedService: SharedService) {
+  }
 }

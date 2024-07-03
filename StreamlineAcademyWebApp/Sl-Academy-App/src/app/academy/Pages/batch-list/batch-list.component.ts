@@ -16,8 +16,7 @@ export class BatchListComponent {
   courseId!: string;
   batchList: BatchResponseModel[] = [];
   filteredBatchList: BatchResponseModel[] = [];
-  searchText: string = ''; 
-  flag: string = '';
+  searchText: string = '';
   showNoContent = false;
   showTable = false;
   showSpinner = true;
@@ -25,6 +24,7 @@ export class BatchListComponent {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
+  flag: string = '';
   courseRes: CourseResponse = new CourseResponse();
   displayedBatchList: BatchResponseModel[] = [];
   constructor(
@@ -66,10 +66,9 @@ export class BatchListComponent {
           }
         } else {
           this.sharedService.NoDataSwal(response.message);
-          setTimeout(()=>{
-            this.router.navigate(['/academy/course-list'])
-
-          },2000)
+          setTimeout(() => {
+            this.router.navigate(['/academy/course-list']);
+          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {

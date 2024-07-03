@@ -11,9 +11,15 @@ import { UserRole } from '../../../Enums/userrole';
   },
 })
 export class DashboardHeaderComponent {
+  shared=inject(SharedService)
   userRole!:UserRole
   filePath!:string
   apiBaseUrl: string = 'http://localhost:5232';
+  sidebarOpen = this.shared.mobileSidebarOpen;
+  toggleSidebar() {
+    this.shared.toggleSidebar();
+    console.log(this.sidebarOpen)
+  }
 
   constructor(){
     this.loggedInUserDetails = JSON.parse(localStorage.getItem('responseObj')!);
@@ -23,7 +29,6 @@ export class DashboardHeaderComponent {
     console.log(this.userRole);
     
   }
-  shared = inject(SharedService);
   loggedInUserDetails: any = {};
   onLogOut() {
     this.shared.logOutUser();

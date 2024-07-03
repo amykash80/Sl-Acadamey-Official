@@ -77,24 +77,25 @@
               <i class="fas fa-user-check text-white"></i>
             </div>
             <div class="widget-numbers text-white"></div>
+            <div class="widget-subheading fsize-1 mb-3 opacity-10 text-white font-weight-bold">
+             My Attendance
+            </div>
             <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
-              Attendance
+              <span class="pr-1 ">{{presentCount}}</span>
+              present
             </div>
-            <div class="widget-description fw-bold opacity-8">
-              <span class="text-white pr-1">{{ presentCount }}</span>
-              Present
-            </div>
-            <div class="widget-description fw-bold opacity-8">
-              <span class="text-white pr-1">{{ absentCount }}</span>
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
+              <span class="pr-1 ">{{absentCount}}</span>
               Absent
             </div>
-            <div class="widget-description fw-bold opacity-8">
-              <span class="text-white pr-1">{{ lateCount }}</span>
-              Late
-            </div>
-            <div class="widget-description fw-bold opacity-8">
-              <span class="text-white pr-1">{{ ExcusedCount }}</span>
+       
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
+              <span class="pr-1 ">{{ExcusedCount}}</span>
               Excused
+            </div>
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-white font-weight-bold">
+              <span class="mr-3">{{lateCount}}</span>
+              <span>Late</span>
             </div>
           </div>
         </div>

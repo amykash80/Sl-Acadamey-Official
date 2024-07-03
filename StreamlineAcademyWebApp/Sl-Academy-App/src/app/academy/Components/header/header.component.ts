@@ -17,6 +17,12 @@ export class HeaderComponent {
   userRole!:UserRole
   filepath=''
   apiBaseUrl: string = 'http://localhost:5232';
+  sidebarOpen = this.shared.mobileSidebarOpen;
+  toggleSidebar() {
+    this.shared.toggleSidebar();
+    console.log(this.sidebarOpen)
+  }
+
   onLogOut() {
     this.shared.logOutUser();
   }

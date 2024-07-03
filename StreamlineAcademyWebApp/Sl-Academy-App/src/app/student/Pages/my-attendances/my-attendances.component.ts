@@ -17,12 +17,14 @@ export class MyAttendancesComponent {
   filteredAttendanceList: AttendanceResponseModel[] = [];
   displayedBatchList: AttendanceResponseModel[] = [];
   schedulelist: AttendanceResponseModel[] = [];
-  showSpinner: boolean = false;
+  showSpinner: boolean = true;
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
+  showTable=false
   searchText: string = ''; 
+  scheduleName:string=''
  
   constructor(private studentService:StudentService,
     private sharedService: SharedService,
@@ -87,21 +89,21 @@ export class MyAttendancesComponent {
     this.currentPage = 1;
     this.updatePagination();
   }
+
   fetchAttendances(): void {
-     this.showSpinner = true;
     this.studentService.getAttendances().subscribe(
       (response: ApiResponse<SaveAttendence[]>) => {
-        this.showSpinner = false;
         if (response.isSuccess) {
+        this.showSpinner = false;
+        this.showTable=true
           this.attendances = response.result;
+          console.log(this.attendances)
           this.schedulelist = response.result;
           this.filteredAttendanceList = this.schedulelist;
           this.totalItems = this.filteredAttendanceList.length;
           this.currentPage = 1;
           this.updatePagination();
           if (response.result.length > 0) {
-            // this.showTable = true;
-            // this.showNoContent = false;
           }
         } else {
           this.sharedService.NoDataSwal(response.message);

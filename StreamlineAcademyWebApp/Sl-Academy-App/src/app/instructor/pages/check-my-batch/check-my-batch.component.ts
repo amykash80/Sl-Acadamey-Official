@@ -42,6 +42,10 @@ constructor(private activatedRoute: ActivatedRoute,
 ngOnInit(){
   this.getAllBatches();
 }
+toogleTable(){
+  this.showTable2=false;
+  this.showTable=true;
+}
 
 getAllBatches() {
   this.instructorService.checkMyBatches().subscribe({
@@ -75,7 +79,7 @@ getAllBatches() {
 getAllStudentsByBatchId(batchId:any){
   this.batchService.getAllStudentsByBatchId(batchId).subscribe({
     next: (data) => {
-      if (data.isSuccess) {
+      if (data.result.length > 0)  {
         this.loadSpinner=false;
         this.showTable2=true
         this.showTable=false
@@ -87,6 +91,7 @@ getAllStudentsByBatchId(batchId:any){
         }
       } else {
         this.loadSpinner=false;
+        this.sharedService.showErrorToast("No students found")
 
       }
     },

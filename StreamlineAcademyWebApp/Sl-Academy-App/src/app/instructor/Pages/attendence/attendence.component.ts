@@ -40,15 +40,13 @@ export class AttendenceComponent {
   })
     this.loadStudents();
   }
+  
   updateCurrentDate() {
-    // const date = new Date();
-    // const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    // const day = date.getDate().toString().padStart(2, '0');
-    // const year = date.getFullYear();
-    // this.currentDate = `${month}/${day}/${year}`;
     const date = new Date();
-  this.currentDate = date.toISOString();
-  // this.markedAttendanceDate = date.toLocaleDateString();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    this.currentDate = `${month}/${day}/${year}`;
   }
   loadStudents(): void {
     
@@ -86,14 +84,9 @@ export class AttendenceComponent {
     }
 
   saveAttendance() {
-    // if (this.markedAttendanceDate === new Date().toLocaleDateString()) {
-    //   console.log('Attendance already marked for today.');
-    //   return;
-    // }
-    debugger;
+   
     this.attendanceStatusList = []; 
     this.studentIdList = []; 
-  
     this.filteredStudentList.forEach(student => {
       this.attendanceStatusList.push(this.attendanceMap[student.id!] ?? AttendenceStatus.Absent);
       this.studentIdList.push(student.id!);
