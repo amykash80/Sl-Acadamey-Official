@@ -1,4 +1,4 @@
-<div class="app-inner">
+<div class="app-inner" *ngIf="showTable">
   <div class="container">
     <div class="row">
        <!-- Spinner -->
@@ -119,5 +119,5 @@
   </div>
 </div>
 
-<app-no-content *ngIf="showNoContent"></app-no-content>
-<app-spinner color="white" *ngIf="showSpinner"></app-spinner>
+<app-spinner *ngIf="showSpinner"></app-spinner>
+

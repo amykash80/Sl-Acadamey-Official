@@ -199,7 +199,7 @@
           >
             instructor
           </li>
-          <li class="breadcrumb-item" routerLink="/instructor/check-my-batch/{{ courseId }}" aria-current="page">{{ courseRes.batchName }}</li>
+          <li class="breadcrumb-item" (click)="toogleTable()">{{ courseRes.batchName }}</li>
 
           <li class="breadcrumb-item active " aria-current="page">
             students
@@ -263,14 +263,7 @@
                     >
                       Phone Number
                     </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="End Date: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      Dob
-                    </th>
+              
 
                     <th
                       rowspan="1"
@@ -288,7 +281,6 @@
                     <td>{{ student.name }}</td>
                     <td>{{ student.email }}</td>
                     <td>{{ student.phoneNumber }}</td>
-                    <td>{{ student.dateOfBirth | date }}</td>
 
                     <td>
                       <span

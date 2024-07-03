@@ -30,6 +30,19 @@ export class ChangepasswordComponent {
   togglePasswordVisibility(){
     this.passwordVisible=!this.passwordVisible
   }
+  goBack(){
+    if (this.userRole == UserRole.SuperAdmin) {
+      this.router.navigate(['/admin/dashboard']);
+    } else if (this.userRole == UserRole.AcademyAdmin) {
+      this.router.navigate(['/academy/dashboard']);
+    } else if (this.userRole == UserRole.Instructor) {
+      this.router.navigate(['/instructor/dashboard']);
+    } else if (this.userRole == UserRole.Student) {
+      this.router.navigate(['/student/dashboard']);
+    } else {
+      return;
+    }
+  }
 
   changeMyPassword() {
     this.loadSpinner = true;
