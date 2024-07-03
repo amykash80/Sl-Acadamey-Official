@@ -56,6 +56,7 @@ export class UpdateCourseComponent {
     console.log(this.updateCourseModel);
     this.courseService.updateCourse(this.updateCourseModel).subscribe({
       next: (response) => {
+        debugger;
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message);
           this.loadSpinner = false;

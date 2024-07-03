@@ -26,6 +26,9 @@ export class InstructorService {
     return this.http.get<ApiResponse<InstructorResponseModel[]>>(this.baseUrl+"Instructor/getAll-instructors")
   }
   updateInstructor(instructorUpdateModel:InstructorUpdateModel):Observable<ApiResponse<InstructorResponseModel>>{
+    debugger;
+    console.log(instructorUpdateModel);
+    
     return this.http.put<ApiResponse<InstructorResponseModel>>(this.baseUrl+"Instructor/updateInstructor",instructorUpdateModel)
   }
   getInstructorById(id: string): Observable<ApiResponse<InstructorResponseModel>> {

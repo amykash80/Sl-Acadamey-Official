@@ -18,6 +18,8 @@ export class UpdateCourseContentComponent {
   courseId:string=''
   courseContentModel:CourseContentResponse=new CourseContentResponse();
   updateCourseContentModel:UpdateCourseContent=new UpdateCourseContent();
+  loadSpinner: boolean = false;
+
   ngOnInit(){
     this.activatedRoute.params.subscribe(paramVal=>{
       this.contentId=paramVal['id'];
@@ -31,16 +33,19 @@ export class UpdateCourseContentComponent {
     })
   }
   updateCourseContent(){
+  this.loadSpinner=true;
   this.updateCourseContentModel=this.courseContentModel;
   this.updateCourseContentModel.courseId=this.courseId
   this.courseService.updateCourseContent(this.updateCourseContentModel).subscribe({
     next:(response)=>{
       if(response.isSuccess){
         this.sharedService.showSuccessToast(response.message);
+        this.loadSpinner=false;
         this.router.navigate(['/academy/course-content-list',this.courseId])
       }
       else{
         this.sharedService.showErrorToast(response.message)
+        this.loadSpinner=false;
       }
     },
     error:(err)=>{

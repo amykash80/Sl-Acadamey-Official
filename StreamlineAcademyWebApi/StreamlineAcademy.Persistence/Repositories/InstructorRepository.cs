@@ -80,6 +80,9 @@ namespace StreamlineAcademy.Persistence.Repositories
                     CityName = instructor.City!.CityName,
                     IsActive = instructor.User.IsActive,
                     UserRole = instructor.User.UserRole,
+                    CountryId=instructor.CountryId,
+                    StateId=instructor.StateId,
+                    CityId=instructor.CityId,
 
                 };
 
@@ -136,7 +139,7 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<int> UpdateAsync(Instructor model)
         {
-            await context.Instructors.AddAsync(model);
+            context.Instructors.Update(model); 
             return await context.SaveChangesAsync();
         }
 
