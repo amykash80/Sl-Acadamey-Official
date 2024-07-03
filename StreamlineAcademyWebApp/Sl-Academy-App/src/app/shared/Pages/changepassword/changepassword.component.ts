@@ -4,6 +4,7 @@ import { AuthService } from '../../../Services/auth.service';
 import { SharedService } from '../../../Services/shared.service';
 import { UserRole } from '../../../Enums/userrole';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-changepassword',
@@ -25,6 +26,11 @@ export class ChangepasswordComponent {
   changePasswordModel: ChangePassword = new ChangePassword();
   loadSpinner = false;
   userRole!: UserRole;
+  passwordVisible = false;
+  togglePasswordVisibility(){
+    this.passwordVisible=!this.passwordVisible
+  }
+
   changeMyPassword() {
     this.loadSpinner = true;
     this.authService.changePassword(this.changePasswordModel).subscribe({
@@ -52,6 +58,8 @@ export class ChangepasswordComponent {
       error: (err) => {
         console.log(err);
         this.loadSpinner = false;
+        this.sharedService.showErrorToast("new Password and confirm password does not match");
+
       },
     });
   }
