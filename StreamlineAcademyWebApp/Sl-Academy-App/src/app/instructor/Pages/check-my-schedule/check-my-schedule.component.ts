@@ -55,10 +55,8 @@ export class CheckMyScheduleComponent {
             this.showNoContent = false;
           }
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast(response.message);
             this.router.navigate(['/instructor/dashboard']);
-          }, 2000);
         }
       },
       error: (err) => {

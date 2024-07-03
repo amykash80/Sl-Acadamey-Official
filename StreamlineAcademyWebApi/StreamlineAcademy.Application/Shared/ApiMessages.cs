@@ -113,7 +113,10 @@ public static class APIMessages
 			public static readonly string AcademyDeleted = "Academy Deleted Successfully.";
             public static readonly string AcademyAlreadyRegistered = "Academy with this email already registered";
             public static readonly string AcademyTypeAlreadyRegistered = "AcademyType with this name already registered";
-
+            public static readonly string AcademyTypeNotFound = "Academy not found.";
+            public static readonly string AcademyTypeAdded = "Academy Registered Successfully.";
+            public static readonly string AcademyTypeUpdated = "Academy Updated Successfully.";
+            public static readonly string AcademyTypeDeleted = "Academy Deleted Successfully.";
 
         }
         public static class UserManagement

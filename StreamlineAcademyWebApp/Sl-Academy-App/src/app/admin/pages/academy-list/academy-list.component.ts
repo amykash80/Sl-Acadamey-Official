@@ -47,10 +47,8 @@ export class AcademyListComponent {
             this.showNoContent = true;
           }
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast(response.message);
             this.router.navigate(['/admin/dashboard']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {

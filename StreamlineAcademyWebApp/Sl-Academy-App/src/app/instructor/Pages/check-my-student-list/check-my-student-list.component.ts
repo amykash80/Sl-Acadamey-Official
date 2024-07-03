@@ -42,9 +42,10 @@ export class CheckMyStudentListComponent {
   }
   filterStudents(event: any) {
     const filterValue = event.target.value.toLowerCase();
-    this.filteredList = this.studentList.filter((course) =>
-      course.name?.toLowerCase().startsWith(filterValue)||
-      course.email?.toLowerCase().startsWith(filterValue)
+    this.filteredList = this.studentList.filter(
+      (course) =>
+        course.name?.toLowerCase().startsWith(filterValue) ||
+        course.email?.toLowerCase().startsWith(filterValue)
     );
     console.log(this.filteredList);
     this.totalItems = this.filteredList.length;
@@ -68,29 +69,27 @@ export class CheckMyStudentListComponent {
     this.updatePagination();
   }
   loadStudents(): void {
-    this.instructorService.checkMyAllBatchesStudents(this.instructorId).subscribe({
+    this.instructorService
+      .checkMyAllBatchesStudents(this.instructorId)
+      .subscribe({
         next: (response) => {
-            if (response.result.length>0) {
-              
-                this.showSpinner = false;
-                this.showTable = true;
-                this.studentList = response.result;
-                this.filteredList = this.studentList;
-                this.totalItems = this.filteredList.length;
-                this.currentPage = 1;
-                this.updatePagination();
-               
-            } else {
-                this.sharedService.NoDataSwal("No student Found");
-                setTimeout(() => {
-                    this.router.navigate(['/instructor/dashboard']);
-                }, 2000);
-            }
+          if (response.result.length > 0) {
+            this.showSpinner = false;
+            this.showTable = true;
+            this.studentList = response.result;
+            this.filteredList = this.studentList;
+            this.totalItems = this.filteredList.length;
+            this.currentPage = 1;
+            this.updatePagination();
+          } else {
+            this.sharedService.showErrorToast('No student Found');
+              this.router.navigate(['/instructor/dashboard']);
+          }
         },
         error: (err) => {
-            this.errorMessage = 'An error occurred while fetching students';
-            console.error(err);
+          this.errorMessage = 'An error occurred while fetching students';
+          console.error(err);
         },
-    });
-}
+      });
+  }
 }

@@ -51,10 +51,8 @@ export class CheckMyCoursesComponent {
           }
         } else {
           this.showSpinner = false; 
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
-            this.router.navigate(['/student/dashboard']);
-          }, 2000);
+          this.sharedService.showErrorToast(response.message);
+          this.router.navigate(['/student/dashboard']);
         }
       },
       error: (error) => {

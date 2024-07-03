@@ -68,10 +68,8 @@ getcourseById(){
           }
           console.log(this.courseResourceList);
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast("No resource Found");
             this.router.navigate(['/student/check-my-courses']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {

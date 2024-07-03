@@ -136,12 +136,7 @@ export class DashboardComponent {
         (response: ApiResponse<AttendanceResponseModel[]>) => {
           if (response.isSuccess) {
             this.calculateAttendanceCounts(response.result);
-          } else {
-            this.sharedService.NoDataSwal(response.message);
-            setTimeout(() => {
-              this.router.navigate(['/academy/course-list']);
-            }, 2000);
-          }
+          } 
         },
         (error) => {
           console.error('Error fetching attendance records:', error);

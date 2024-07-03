@@ -90,7 +90,7 @@ export class MySchedulesComponent {
           this.updatePagination();
         } 
         else{
-          this.sharedService.NoDataSwal(response.message)
+          this.sharedService.showErrorToast(response.message)
           this.router.navigate(['/student/dashboard'])
         }
       },

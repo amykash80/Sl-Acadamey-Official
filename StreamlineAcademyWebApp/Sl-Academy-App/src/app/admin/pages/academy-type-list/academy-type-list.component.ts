@@ -76,10 +76,8 @@ export class AcademyTypeListComponent {
           this.totalItems = this.filteredAcademyTypeList.length;
           this.updatePagination();
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast(response.message);
             this.router.navigate(['/admin/dashboard']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {

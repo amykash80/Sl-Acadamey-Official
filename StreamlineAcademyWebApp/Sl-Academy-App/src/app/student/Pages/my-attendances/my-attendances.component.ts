@@ -106,11 +106,9 @@ export class MyAttendancesComponent {
           if (response.result.length > 0) {
           }
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(()=>{
-            this.router.navigate(['/academy/course-list'])
+          this.sharedService.showErrorToast(response.message);
+          this.router.navigate(['/student/dashboard'])
 
-          },2000)
         }
       },
       (error) => {

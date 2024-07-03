@@ -38,6 +38,12 @@ namespace StreamlineAcademy.Application.Services
             var existingBatch = await batchRepository.GetByIdAsync(x => x.Id == request.BatchId);
             if (existingBatch == null)
                 return ApiResponse<ScheduleResponseModel>.ErrorResponse(APIMessages.BatchManagement.BatchnotFound, HttpStatusCodes.NotFound);
+
+            if(request.Date < existingBatch.StartDate)
+            {
+                return ApiResponse<ScheduleResponseModel>.ErrorResponse($"Schedule cannot be created before Batch start date, Batch start date is, {existingBatch.StartDate.LocalDateTime
+                    }");
+            }
             var schedule = new Schedule()
             {
 

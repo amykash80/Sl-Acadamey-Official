@@ -121,7 +121,7 @@ export class NotificationComponent {
             this.showNoContent = false;
           }
         } else {
-          this.sharedService.NoDataSwal(response.message);
+          this.sharedService.showErrorToast(response.message);
           setTimeout(()=>{
             this.router.navigate(['/academy/course-list'])
 
