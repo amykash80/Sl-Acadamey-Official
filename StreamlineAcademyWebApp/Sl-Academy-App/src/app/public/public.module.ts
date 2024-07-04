@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FotterComponent } from './components/fotter/fotter.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 
 
@@ -21,6 +22,7 @@ import { SharedModule } from '../shared/shared.module';
     LoginComponent,
     NavbarComponent,
     FotterComponent,
+    AboutUsComponent,
     
   ],
   imports: [
