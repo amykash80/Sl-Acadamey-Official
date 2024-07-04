@@ -78,10 +78,9 @@ export class CourseCategoryListComponent {
             this.showNoContent = false;
           }
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(()=>{
+          this.sharedService.showErrorToast
+          (response.message);
             this.router.navigate(['/academy/course-list']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {

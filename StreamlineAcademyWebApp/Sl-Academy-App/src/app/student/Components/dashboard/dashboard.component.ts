@@ -61,6 +61,7 @@ export class DashboardComponent {
     });
     this.studentService.getAllMybatches().subscribe((res) => {
       this.batchList = res.result;
+      console.log(this.batchList)
     });
     this.studentService.checkMyCourses().subscribe((res) => {
       this.courseList = res.result;

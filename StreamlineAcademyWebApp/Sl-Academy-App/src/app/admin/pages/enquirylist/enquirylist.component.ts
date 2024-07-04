@@ -98,7 +98,7 @@ export class EnquirylistComponent {
     console.log(enquiryId);
 
     this.sharedService
-      .fireConfirmSwal('Are You sure you want to delete this Enquiry ')
+      .fireConfirmSwal('Are You sure')
       .then((result: any) => {
         if (result.isConfirmed) {
           this.enquiryService.deleteEnquiry(enquiryId).subscribe({

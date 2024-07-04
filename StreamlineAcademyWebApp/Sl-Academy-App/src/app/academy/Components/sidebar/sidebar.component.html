@@ -42,37 +42,63 @@
   <div class="app-sidebar__inner">
     <ul class="vertical-nav-menu font-manrope">
       <li class="app-sidebar__heading">Menu</li>
+      
       <li class="mm-active">
         <a routerLink="/academy/dashboard">
-          <i class="fa fa-dashboard"></i>Dashboard
+          <i class="fa fa-dashboard"  style='color:red'></i>Dashboard
         </a>
       </li>
+      
       <li>
-        <a routerLink="/academy/course-list">
-          <i class='fas fa-book-reader' style='color:red'></i>Courses
+        <a class="dropdown-toggle" href="#" id="coursesMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class='fas fa-book-reader' style='color:red'></i> Course
         </a>
+        <div class="dropdown-menu" aria-labelledby="coursesMenuButton">
+          <a class="dropdown-item" routerLink="/academy/create-course">Add Course</a>
+          <a class="dropdown-item" routerLink="/academy/course-list">Courses List</a>
+        </div>
       </li>
+      
       <li>
-        <a routerLink="/academy/instructor-list">
-          <i class="fas fa-chalkboard-teacher" style='color:red'></i>Instructors
+        <a class="dropdown-toggle" href="#" id="instructorsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-chalkboard-teacher" style='color:red'></i> Instructor
         </a>
+        <div class="dropdown-menu" aria-labelledby="instructorsMenuButton">
+          <a class="dropdown-item" routerLink="/academy/create-instructor">Add Instructor</a>
+          <a class="dropdown-item" routerLink="/academy/instructor-list">Instructors List</a>
+        </div>
       </li>
+      
       <li>
-        <a [routerLink]="['/academy/student-list']">
-          <i class="fas fa-user-graduate" style='color:red'></i> Students
+        <a class="dropdown-toggle" href="#" id="studentsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user-graduate" style='color:red'></i> Student
         </a>
+        <div class="dropdown-menu" aria-labelledby="studentsMenuButton">
+          <a class="dropdown-item" routerLink="/academy/register-student">Add Student</a>
+          <a class="dropdown-item" routerLink="/academy/student-list">Students List</a>
+        </div>
       </li>
+      
       <li>
-        <a routerLink="/academy/location-list">
-          <i class="fa fa-map-marker" style='color:red'></i>Locations
+        <a class="dropdown-toggle" href="#" id="locationsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-map-marker" style='color:red'></i> Location
         </a>
+        <div class="dropdown-menu" aria-labelledby="locationsMenuButton">
+          <a class="dropdown-item" routerLink="/academy/add-location">Add Location</a>
+          <a class="dropdown-item" routerLink="/academy/location-list">Locations List</a>
+        </div>
       </li>
+      
       <li>
-        <a routerLink="/academy/course-category-list">
-          <i class="fa fa-list-alt" style='color:red'></i>Course Categories
+        <a class="dropdown-toggle" href="#" id="categoriesMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-list-alt" style='color:red'></i> Course Category
         </a>
+        <div class="dropdown-menu" aria-labelledby="categoriesMenuButton">
+          <a class="dropdown-item" routerLink="/academy/add-course-category">Add Category</a>
+          <a class="dropdown-item" routerLink="/academy/course-category-list">Category List</a>
+        </div>
       </li>
-    
+      
     </ul>
   </div>
 </div>

@@ -65,10 +65,8 @@ export class BatchListComponent {
             this.showNoContent = false;
           }
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast(response.message);
             this.router.navigate(['/academy/course-list']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {
@@ -118,7 +116,7 @@ export class BatchListComponent {
   }
   deleteBatch(batchId: any) {
     this.sharedService
-      .fireConfirmSwal('Are You sure you want to delete this Batch ')
+      .fireConfirmSwal('Are You sure')
       .then((result: any) => {
         if (result.isConfirmed) {
           this.batchService.deleteBatch(batchId).subscribe({

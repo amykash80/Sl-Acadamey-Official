@@ -29,7 +29,7 @@ namespace StreamlineAcademy.Domain.Models.Requests
         [Required(ErrorMessage = "Emergency Contact Number is required")]
         [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "please enter valid Contact number ")]
         public string? EmergencyContactNo { get; set; }
-       
+
 
         [Required(ErrorMessage = "courseId is required")]
         public List<Guid>? CourseId { get; set; }

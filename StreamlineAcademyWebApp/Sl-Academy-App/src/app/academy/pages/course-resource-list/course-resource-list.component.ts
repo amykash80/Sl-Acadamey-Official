@@ -124,7 +124,7 @@ goToPage(page: number): void {
 
 deleteCourseResource(courseResourceId: any) {
   this.sharedService
-    .fireConfirmSwal('Are You sure you want to delete this Resource ')
+    .fireConfirmSwal('Are You sure')
     .then((result:any) => {
       if (result.isConfirmed) {
         this.courseResourceService.deleteCourseResource(courseResourceId).subscribe({

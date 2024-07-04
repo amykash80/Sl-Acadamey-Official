@@ -83,11 +83,11 @@ export class NotificationComponent {
       this.notificationRequest.subject = texts.subject;
       this.notificationRequest.body = texts.message;
       this.notificationRequest.scheduleId = this.scheduleId;
-      this.sendingNotification = true;  // Show spinner
+      this.sendingNotification = true;  
       console.log('Notification Request:', this.notificationRequest);
       this.instructorService.sendNotification(this.notificationRequest).subscribe(
         (success) => {
-          this.sendingNotification = false;  // Hide spinner
+          this.sendingNotification = false;  
           if (success) {
             this.sharedService.showSuccessToast("Notification sent successfully")
           } else {
@@ -121,11 +121,9 @@ export class NotificationComponent {
             this.showNoContent = false;
           }
         } else {
-          this.sharedService.showErrorToast(response.message);
-          setTimeout(()=>{
-            this.router.navigate(['/academy/course-list'])
-
-          },2000)
+          this.sharedService.showErrorToast("No students found for this schedule");
+          this.router.navigate(['/instructor/check-my-schedule']);
+         
         }
       },
       error: (err: HttpErrorResponse) => {

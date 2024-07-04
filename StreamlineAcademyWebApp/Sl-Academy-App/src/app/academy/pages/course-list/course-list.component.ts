@@ -50,10 +50,8 @@ export class CourseListComponent {
             this.showNoContent = true;
           }
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast(response.message);
             this.router.navigate(['/academy/dashboard']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {
@@ -97,7 +95,7 @@ export class CourseListComponent {
   deleteCourse(courseId: any) {
     debugger;
     this.sharedService
-      .fireConfirmSwal('Are You sure you want to delete this Course ')
+      .fireConfirmSwal('Are You sure')
       .then((result:any) => {
         if (result.isConfirmed) {
           this.courseServices.deleteCourse(courseId).subscribe({

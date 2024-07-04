@@ -65,7 +65,8 @@ export class SharedService {
   fireConfirmSwal(message: string) {
     return Swal.fire({
       title: message,
-      text: "You won't be able to revert this!",
+      icon:'error',
+      text: "Do you really want to delete this record? This process cannot be undone.",
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -75,7 +76,7 @@ export class SharedService {
       },
       didOpen: () => {
         const modal = Swal.getPopup();
-        modal!.style.maxWidth = '320px'; // Adjust the max-width to make the modal smaller
+        modal!.style.maxWidth = '500px'; // Adjust the max-width to make the modal smaller
       },
     });
   }

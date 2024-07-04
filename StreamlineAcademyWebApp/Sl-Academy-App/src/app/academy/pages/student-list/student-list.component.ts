@@ -61,7 +61,7 @@ export class StudentListComponent {
 
           this.showNoContent = false;
         } else  {
-          this.sharedService.NoDataSwal(response.message)
+          this.sharedService.showErrorToast(response.message)
           this.router.navigate(['/academy/dashboard'])
           
           this.showStdList = false;
@@ -114,7 +114,7 @@ export class StudentListComponent {
   }
   deleteStudent(studentId: any) {
     this.sharedService
-      .fireConfirmSwal('Are You sure you want to delete this Student ')
+      .fireConfirmSwal('Are You sure')
       .then((result: any) => {
         if (result.isConfirmed) {
           this.studentService.deleteStudent(studentId).subscribe({

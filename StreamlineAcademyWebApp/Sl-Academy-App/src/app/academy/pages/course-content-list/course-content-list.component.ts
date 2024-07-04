@@ -61,10 +61,8 @@ getcourseById(){
           }
           console.log(this.courseContentList);
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast(response.message);
             this.router.navigate(['/academy/course-list']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {
@@ -113,7 +111,7 @@ goToPage(page: number): void {
 
 deleteCourseContent(courseContentId: any) {
   this.sharedService
-    .fireConfirmSwal('Are You sure you want to delete this Content ')
+    .fireConfirmSwal('Are You sure')
     .then((result:any) => {
       if (result.isConfirmed) {
         this.courseService.deleteCourseContent(courseContentId).subscribe({

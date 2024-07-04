@@ -24,3 +24,6 @@
   .text-danger {
     font-size: 0.875em;
   }
+  .w-full{
+    width: 100%;
+  }

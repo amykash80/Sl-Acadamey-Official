@@ -42,27 +42,39 @@
   <div class="app-sidebar__inner">
     <ul class="vertical-nav-menu font-manrope">
       <li class="app-sidebar__heading">Menu</li>
+      
       <li class="mm-active">
         <a routerLink="/admin/dashboard">
-          <i class="fa fa-dashboard"></i>Dashboard
+          <i class="fa fa-dashboard" style='color:red'></i>Dashboard
         </a>
       </li>
+      
       <li>
-        <a routerLink="/admin/academylist">
-          <i class='fas fa-school' style='color:red'></i>Academies
+        <a class="dropdown-toggle" href="#" id="academiesMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class='fas fa-school' style='color:red'></i> Academies
         </a>
+        <div class="dropdown-menu" aria-labelledby="academiesMenuButton">
+          <a class="dropdown-item" routerLink="/admin/register-academy">Add Academy</a>
+          <a class="dropdown-item" routerLink="/admin/academylist">Academy List</a>
+        </div>
       </li>
+      
       <li>
         <a routerLink="/admin/enquirylist">
           <i class="fa fa-question-circle" style='color:red'></i>Enquiries
         </a>
       </li>
+      
       <li>
-        <a routerLink="/admin/academy-type-list">
-          <i class="fas fa-school" style='color:red'></i>Academy Types
+        <a class="dropdown-toggle" href="#" id="academyTypesMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-th-list" style='color:red'></i> Academy Types
         </a>
+        <div class="dropdown-menu" aria-labelledby="academyTypesMenuButton">
+          <a class="dropdown-item" routerLink="/admin/create-academyType">Add Academy Type</a>
+          <a class="dropdown-item" routerLink="/admin/academy-type-list">Academy Type List</a>
+        </div>
       </li>
-    
+      
     </ul>
   </div>
 </div>

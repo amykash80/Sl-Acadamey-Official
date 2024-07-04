@@ -3,8 +3,9 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 custom-breadcrumb">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item">academy</li>
-            <li class="breadcrumb-item active" aria-current="page">update-instructor</li>
+            <li class="breadcrumb-item" routerLink="/academy/dashboard">academy</li>
+            <li class="breadcrumb-item" routerLink="/academy/student-list">student-list</li>
+            <li class="breadcrumb-item active" aria-current="page">update-Student</li>
           </ol>
         </nav>
       </div>
@@ -78,12 +79,23 @@
               <div *ngIf="cityId.touched && cityId.invalid && cityId.errors?.['required']" class="error-message">City required</div>
             </div>
           </div>
-          <div class="form-btn col-12 text-center">
-            <button class="th-btn w-100" [disabled]="updateStudentForm.invalid" (click)="updateStudent()">
-              <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
-              Update Instructor
-            </button>
+          <div class="form-btn row p-0 col-12 text-center">
+            <div class="col-md-6 ps-4 p-0">
+              <button
+                class="th-btn mb-2 md-mb-0 black-btn-1 w-full"
+                [disabled]="updateStudentForm.invalid" (click)="updateStudent()"
+              >
+                <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
+                Update Now
+              </button>
+            </div>
+            <div class="col-md-6 ps-4 p-0">
+              <button type="reset" class="th-btn black-btn-2 w-full">
+                Reset Form
+              </button>
+            </div>
           </div>
+          
           <p class="form-messages mb-0 mt-3"></p>
         </form>
       </div> 

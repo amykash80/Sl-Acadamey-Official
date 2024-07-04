@@ -85,10 +85,8 @@ export class InstructorListComponent {
           }
           console.log(this.instructorList);
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
+          this.sharedService.showErrorToast(response.message);
             this.router.navigate(['/academy/dashboard']);
-          }, 2000);
         }
       },
       error: (err: HttpErrorResponse) => {
@@ -104,7 +102,7 @@ export class InstructorListComponent {
 
   deleteInstructor(instructorId: any) {
     this.sharedService
-      .fireConfirmSwal('Are You sure you want to delete this Academy ')
+      .fireConfirmSwal('Are You sure ')
       .then((result:any) => {
         if (result.isConfirmed) {
           this.instructorService.deleteInstructor(instructorId).subscribe({

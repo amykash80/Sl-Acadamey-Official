@@ -96,11 +96,9 @@ loadAllBatchSchedules(){
         this.showTable = true;
         this.showNoContent = false;
       }}else {
-        this.sharedService.NoDataSwal(response.message);
-        setTimeout(()=>{
+        this.sharedService.showErrorToast(response.message);
           this.router.navigate(['/academy/course-list'])
 
-        },2000)
       }
     },
     error: (err: HttpErrorResponse) => {
@@ -130,7 +128,7 @@ goToPage(page: number): void {
 
 deleteBatchSchedule(batchScheduleId: any) {
   this.sharedService
-    .fireConfirmSwal('Are You sure you want to delete this Content ')
+    .fireConfirmSwal('Are You sure')
     .then((result:any) => {
       if (result.isConfirmed) {
         this.batchScheduleService.deleteBatchSchedule(batchScheduleId).subscribe({
