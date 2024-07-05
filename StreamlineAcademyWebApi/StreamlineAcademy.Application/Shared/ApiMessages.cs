@@ -80,7 +80,7 @@ public static class APIMessages
         public static readonly string CourseNotFound = "Course not found.";
         public static readonly string CourseAdded = "Course Added Successfully.";
         public static readonly string CourseUpdated = "Course Updated Successfully.";
-        public static readonly string CourseAlreadyRegistered = "Course already Added";
+        public static readonly string CourseAlreadyRegistered = "Course already registerd";
         public static readonly string CourseDeleted = "Course deleted Successfully";
         public static readonly string NoCourse = "No ourse found for Academy";
 

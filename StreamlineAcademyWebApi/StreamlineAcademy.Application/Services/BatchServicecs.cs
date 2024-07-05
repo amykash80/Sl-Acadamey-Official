@@ -32,7 +32,7 @@ namespace StreamlineAcademy.Application.Services
         public async Task<ApiResponse<BatchResponseModel>> CreateBatch(BatchRequestModel request)
         {
             var academyId = contextService.GetUserId();
-            var existingBatch = await batchRepository.GetByIdAsync(x => x.BatchName == request.BatchName);
+            var existingBatch = await batchRepository.GetByIdAsync(x => x.BatchName == request.BatchName && x.CourseId==request.CourseId);
             if (existingBatch != null)
                 return ApiResponse<BatchResponseModel>.ErrorResponse(APIMessages.BatchManagement.BatchAlreadyExists, HttpStatusCodes.Conflict);
             

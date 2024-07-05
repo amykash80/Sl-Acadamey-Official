@@ -30,7 +30,7 @@ namespace StreamlineAcademy.Application.Services
         public async Task<ApiResponse<CourseResponseModel>> CreateCourse(CourseRequestModel request)
         {
             var academyId = contextService.GetUserId();
-            var existingCourse = await courseRepository.GetByIdAsync(x => x.Name == request.Name);
+            var existingCourse = await courseRepository.GetByIdAsync(x => x.Name == request.Name && x.AcademyId==request.AcademyId);
             if (existingCourse is not null)
                 return ApiResponse<CourseResponseModel>.ErrorResponse(APIMessages.CourseManagement.CourseAlreadyRegistered, HttpStatusCodes.Conflict);
             var course = new Course()

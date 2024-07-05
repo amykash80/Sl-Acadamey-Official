@@ -30,7 +30,7 @@ namespace StreamlineAcademy.Domain.Models.Requests
         [Required(ErrorMessage = "AcademyId is required")]
         public Guid? AcademyId { get; set; }
     }
-    public class CourseUpdateRequest : CourseRequestModel  // to update  response 
+    public class CourseUpdateRequest : CourseRequestModel 
     {
         public Guid Id { get; set; }
     }
