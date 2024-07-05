@@ -3,7 +3,7 @@ import { AssignStudent } from '../../../Models/Batch/Batch';
 import { StudentService } from '../../../Services/student.service';
 import { SharedService } from '../../../Services/shared.service';
 import { BatchService } from '../../../Services/batch.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentResponseModel } from '../../../Models/student/students';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { BatchStatus } from '../../../Enums/Batchstatus';
@@ -18,7 +18,8 @@ export class AssinStudentBatchComponent {
     private studentService: StudentService,
     private sharedService: SharedService,
     private batchService: BatchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router:Router
   ){
     this.route.params.subscribe((val) => {
       this.batchId = val['batchId'];
@@ -91,9 +92,11 @@ export class AssinStudentBatchComponent {
           this.studentList = response.result;
           this.filteredStudentList = this.studentList;
         } else if (response.result.length == 0) {
+          this.sharedService.showErrorToast(response.message)
+          this.showSpinner=false
+          this.router.navigate(['/academy/batch-list',this.courseId])
         }
         else{
-          this.sharedService.showErrorToast(response.message)
         }
       },
       error: (err: HttpErrorResponse) => {

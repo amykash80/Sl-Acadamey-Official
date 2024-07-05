@@ -57,7 +57,9 @@
                 <tbody>
                   <tr *ngFor="let courseContent of displayecontentList">
                     <td>{{ courseContent.taskName }}</td>
-                    <td>{{ courseContent.description }}</td>
+                    <td >
+                      <i class="fas fa-eye text-center" style="cursor: pointer;" [matTooltip]="courseContent.description || 'No description available'"></i>
+                    </td>
                     <td>{{ courseContent.duration | number: '1.0-0' }} hours</td>
                     <td>
                       <span [ngClass]="courseContent.isActive ? 'chip chip-success' : 'chip chip-danger'">

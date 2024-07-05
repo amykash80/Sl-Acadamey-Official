@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StudentResponseModel } from '../../../Models/student/students';
 import { BatchService } from '../../../Services/batch.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../../Services/shared.service';
 
 @Component({
@@ -12,15 +12,18 @@ import { SharedService } from '../../../Services/shared.service';
 export class AssignedStudentsComponent {
   constructor(private batchService:BatchService,
               private route:ActivatedRoute,
-              private sharedService:SharedService
+              private sharedService:SharedService,
+              private router:Router
   ){
     this.route.params.subscribe((val) => {
       this.batchId = val['batchId'];
+      this.courseId=val['courseId']
     });
     this.getstudentsByBatchId()
   }
   searchText=''
   batchId=''
+  courseId=''
   showSpinner=true
   showTable=false
   filteredStudentList:StudentResponseModel[] = [];
@@ -35,15 +38,19 @@ export class AssignedStudentsComponent {
   getstudentsByBatchId() {
     this.batchService.getAllStudentsByBatchId(this.batchId).subscribe({
       next: (data) => {
-        if (data.isSuccess) {
+        if (data.result.length>0) {
           this.showSpinner=false;
           this.showTable=true
           this.studentList = data.result;
           this.filteredStudentList = this.studentList;
-
+         
           console.log(this.filteredStudentList);
         } else {
           this.sharedService.showErrorToast(data.message);
+          this.showSpinner=false;
+          this.router.navigate(['/academy/batch-list',this.courseId])
+
+          
         }
       },
     });

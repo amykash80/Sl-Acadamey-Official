@@ -117,7 +117,7 @@ export class DashboardComponent {
               });
             }
             else{
-              this.sharedService.NoDataSwal(response.message)
+              this.sharedService.showErrorToast(response.message)
               this.showSpinner=false
             }
           },

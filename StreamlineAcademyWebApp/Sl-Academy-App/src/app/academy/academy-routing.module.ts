@@ -77,7 +77,7 @@ const routes: Routes = [
     {path:"register-student",component:RegisterStudentComponent},
     {path:"student-list",component:StudentListComponent},
     {path:"update-student/:id",component:UpdateStudentComponent},
-    {path:"assigned-students/:batchId",component:AssignedStudentsComponent},
+    {path:"assigned-students/:batchId/:courseId",component:AssignedStudentsComponent},
     {path:"assign-batch/:batchId/:courseId",component:AssinStudentBatchComponent}
   ]
   

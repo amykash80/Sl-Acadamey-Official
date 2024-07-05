@@ -41,6 +41,7 @@ import { AssignedStudentsComponent } from './Pages/assigned-students/assigned-st
 import { AssinStudentBatchComponent } from './Pages/assin-student-batch/assin-student-batch.component';
 import { BatchStatusPipe } from '../Pipes/batch-status.pipe';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -96,7 +97,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AcademyRoutingModule,
     FormsModule,
     SharedModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    MatTooltipModule
+
     
   
   ]

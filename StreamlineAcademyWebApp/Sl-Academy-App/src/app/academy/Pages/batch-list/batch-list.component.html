@@ -4,8 +4,8 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item" routerLink="/academy/dashboard" >academy</li>
-            <li class="breadcrumb-item" routerLink="/academy/course-list" aria-current="page">{{courseRes.name}}</li>
+            <li class="breadcrumb-item" routerLink="/academy/dashboard">academy</li>
+            <li class="breadcrumb-item" routerLink="/academy/course-list" aria-current="page">{{ courseRes.name }}</li>
             <li class="breadcrumb-item active" aria-current="page">batch-list</li>
           </ol>
         </nav>
@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-12">
             <div id="batch-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-              <div class="row">
+              <div class="row mb-3">
                 <div class="col-sm-12 col-md-6">
                   <button class="btn btn-success bg-gradient" [routerLink]="['/academy/create-batch', courseId]">
                     <i class="fas fa-plus mr-2"></i> Add Batch
@@ -47,70 +47,14 @@
               >
                 <thead>
                   <tr>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Batch Name: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      Batch Name
-                    </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Batch Size: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      Batch Size
-                    </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Start Date: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      Start Date
-                    </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="End Date: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      End Date
-                    </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Instructor Name: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      Instructor Name
-                    </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Location Name: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      Location Name
-                    </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="IsActive: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      IsActive
-                    </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Actions: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
-                      Actions
-                    </th>
+                    <th style="width: 100px;">Batch Name</th>
+                    <th style="width: 100px;">Batch Size</th>
+                    <th style="width: 100px;">Start Date</th>
+                    <th style="width: 100px;">End Date</th>
+                    <th style="width: 150px;">Instructor Name</th>
+                    <th style="width: 150px;">Location Name</th>
+                    <th style="width: 80px;">IsActive</th>
+                    <th style="width: 150px;">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -118,7 +62,7 @@
                     <td>{{ batch.batchName }}</td>
                     <td>{{ batch.batchSize }}</td>
                     <td>{{ batch.startDate | date }}</td>
-                    <td>{{ batch.endDate | date}}</td>
+                    <td>{{ batch.endDate | date }}</td>
                     <td>{{ batch.instructorName }}</td>
                     <td>{{ batch.locationName }}</td>
                     <td>
@@ -127,79 +71,36 @@
                       </span>
                     </td>
                     <td>
-                      <div class="d-inline-block dropdown">
+                      <div class="dropdown">
                         <button
                           type="button"
+                          class="btn btn-success bg-gradient dropdown-toggle after-none squared-btn"
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
                           title="Row Options"
-                          class="dropdown-toggle btn btn-success after-none squared-btn"
                         >
                           <i class="fas fa-ellipsis-v"></i>
                         </button>
-                        <div
-                          tabindex="-1"
-                          role="menu"
-                          aria-hidden="true"
-                          class="dropdown-menu dropdown-menu-left"
-                        >
-                          <ul class="nav flex-column">
-                            <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                [routerLink]="['/academy/assigned-students', batch.id]"
-                              >
-                                <i class="nav-link-icon fa fa-graduation-cap"></i>
-                                <span> students</span>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                [routerLink]="['/academy/assign-batch',batch.id,courseId]"
-                              >
-                                <i class="nav-link-icon fa fa-user"></i>
-                                <span> Assign</span>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                [routerLink]="['/academy/update-batch', batch.id, courseId]"
-                              >
-                                <i class="nav-link-icon fas fa-pen"></i>
-                                <span> Edit</span>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                [routerLink]="['/academy/add-batch-schedule', batch.id, courseId]"
-                              >
-                              <i class="nav-link-icon fa fa-calendar"></i>
-                                <span> Add Schedul</span>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a
-                                class="nav-link fw-semibold"
-                                [routerLink]="['/academy/batch-schedule-list', batch.id, courseId]"
-                              >
-                                <i class="nav-link-icon fa fa-calendar"></i>
-                                <span> Schedules</span>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a
-                                class="nav-link dangered fw-semibold"
-                                (click)="deleteBatch(batch.id)"
-                              >
-                                <i class="nav-link-icon fas fa-trash dangered"></i>
-                                <span> Delete</span>
-                              </a>
-                            </li>
-                          </ul>
+                        <div class="dropdown-menu dropdown-menu-left">
+                          <a class="dropdown-item" [routerLink]="['/academy/assigned-students', batch.id,courseId]">
+                            <i class="fas fa-graduation-cap mr-2"></i> View Students
+                          </a>
+                          <a class="dropdown-item" [routerLink]="['/academy/assign-batch', batch.id, courseId]">
+                            <i class="fas fa-users mr-2"></i> Assign Students
+                          </a>
+                          <a class="dropdown-item" [routerLink]="['/academy/update-batch', batch.id, courseId]">
+                            <i class="fas fa-pencil-alt mr-2"></i> Edit Batch
+                          </a>
+                          <a class="dropdown-item" [routerLink]="['/academy/add-batch-schedule', batch.id, courseId]">
+                            <i class="fas fa-calendar-plus mr-2"></i> Add Schedule
+                          </a>
+                          <a class="dropdown-item" [routerLink]="['/academy/batch-schedule-list', batch.id, courseId]">
+                            <i class="fas fa-calendar mr-2"></i> View Schedules
+                          </a>
+                          <a class="dropdown-item text-danger" (click)="deleteBatch(batch.id)">
+                            <i class="fas fa-trash-alt mr-2"></i> Delete Batch
+                          </a>
                         </div>
                       </div>
                     </td>
@@ -221,23 +122,14 @@
                 <div class="col-sm-12 col-md-7">
                   <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
                     <ul class="pagination">
-                      <!-- Previous Button -->
-                      <li class="paginate_button page-item previous" [class.disabled]="currentPage === 1">
-                        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">
-                          Previous
-                        </button>
+                      <li class="page-item previous" [class.disabled]="currentPage === 1">
+                        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-link">Previous</button>
                       </li>
-                      <!-- Page Numbers -->
-                      <li *ngFor="let page of pages" class="paginate_button page-item" [class.active]="currentPage === page">
-                        <button (click)="goToPage(page)" class="page-link">
-                          {{ page }}
-                        </button>
+                      <li *ngFor="let page of pages" class="page-item" [class.active]="currentPage === page">
+                        <button (click)="goToPage(page)" class="page-link">{{ page }}</button>
                       </li>
-                      <!-- Next Button -->
-                      <li class="paginate_button page-item next" [class.disabled]="currentPage === pages.length">
-                        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">
-                          Next
-                        </button>
+                      <li class="page-item next" [class.disabled]="currentPage === pages.length">
+                        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === pages.length" class="page-link">Next</button>
                       </li>
                     </ul>
                   </div>

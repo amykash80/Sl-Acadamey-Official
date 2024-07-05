@@ -92,7 +92,9 @@
                 <tbody>
                   <tr *ngFor="let courseResource of displayedResourceList">
                     <td>{{ courseResource.name }}</td>
-                    <td>{{ courseResource.description }}</td>
+                    <td >
+                      <i class="fas fa-eye text-center" style="cursor: pointer;" [matTooltip]="courseResource.description || 'No description available'"></i>
+                    </td>
                     <td>
                       <ng-container [ngSwitch]="courseResource.type">
                         <a *ngSwitchCase="5" [href]="apiBaseUrl + courseResource.filePath" download>
