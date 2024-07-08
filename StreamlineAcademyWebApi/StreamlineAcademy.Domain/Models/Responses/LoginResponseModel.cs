@@ -1,4 +1,5 @@
 ﻿using StreamlineAcademy.Domain.Enums;
+using StreamlineAcademy.Domain.Models.JWT;
 using System;
 using System.Collections.Generic;
 using System.Linq;

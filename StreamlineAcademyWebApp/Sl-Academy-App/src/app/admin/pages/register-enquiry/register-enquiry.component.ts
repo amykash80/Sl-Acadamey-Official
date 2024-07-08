@@ -89,6 +89,7 @@ this.route.params.subscribe(params => {
   }
 
   registerAcademy() {
+    this.loadSpinner=true
    this.academyRegistrationModel.name=this.enquiry.name;
    this.academyRegistrationModel.email=this.enquiry.email;
    this.academyRegistrationModel.phoneNumber=this.enquiry.phoneNumber;
@@ -97,7 +98,6 @@ this.route.params.subscribe(params => {
       next: (response) => {
         if(response.isSuccess){
           this.sharedService.showSuccessToast(response.message)
-          this.loadSpinner = false;
           this.router.navigate(['/admin/academylist'])
         }
         else{

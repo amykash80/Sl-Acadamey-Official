@@ -65,9 +65,9 @@ export class EnquirylistComponent {
       const searchTerm = this.searchText.toLowerCase();
       this.filteredEnquiryList = this.enquirylist.filter(
         (enquiry) =>
-          enquiry.name!.toLowerCase().startsWith(searchTerm) ||
-        enquiry.email!.toLowerCase().startsWith(searchTerm) ||
-        enquiry.phoneNumber!.toLowerCase().startsWith(searchTerm) 
+          enquiry.name!.toLowerCase().startsWith(event.target.value) ||
+        enquiry.email!.toLowerCase().startsWith(event.target.value) ||
+        enquiry.phoneNumber!.toLowerCase().startsWith(event.target.value) 
         
       );
     }
@@ -119,7 +119,7 @@ export class EnquirylistComponent {
   rejectEnquiry(enquiry:EnquiryUpdate) {
 
     this.sharedService
-      .fireConfirmSwal('Are You sure you want to reject this Enquiry ')
+      .fireConfirmSwal('Are You sure')
       .then((result: any) => {
         if (result.isConfirmed) {
           this.enquiryService.rejectEnquiry(enquiry).subscribe({

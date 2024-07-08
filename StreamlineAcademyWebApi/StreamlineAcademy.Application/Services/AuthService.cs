@@ -9,6 +9,7 @@ using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Application.Utils;
 using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Enums;
+using StreamlineAcademy.Domain.Models.JWT;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using System;
@@ -80,14 +81,16 @@ namespace StreamlineAcademy.Application.Services
             if(!res)
                 return ApiResponse<LoginResponseModel>.ErrorResponse(APIMessages.Auth.InvalidCredential, HttpStatusCodes.BadRequest);
             var filePath = await authRepository.getProfilePhoto(user.Id);
+            var userToken = jwtProvider.GenerateTokenKey(user);
             var response = new LoginResponseModel()
             {
                 FullName = user.Name,
                 UserRole = user.UserRole,
                 UserId = user.Id,
-                Token = jwtProvider.GenerateToken(user),
-                FilePath = filePath,
-                IsPasswordTemporary=user.IsPasswordTemporary,
+                Token = userToken.Token,
+                 FilePath = filePath,
+                IsPasswordTemporary = user.IsPasswordTemporary,
+
             };
 
             return ApiResponse<LoginResponseModel>.SuccessResponse(response,APIMessages.Auth.LoggedIn);

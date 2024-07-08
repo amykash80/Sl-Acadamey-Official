@@ -40,52 +40,22 @@
               >
                 <thead>
                   <tr>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Order #: activate to sort column descending"
-                      style="width: 76.8375px"
-                    >
+                    <th rowspan="1" colspan="1" style="width: 76.8375px">
                       Name
                     </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Customer: activate to sort column ascending"
-                      style="width: 91.9375px"
-                    >
+                    <th rowspan="1" colspan="1" style="width: 91.9375px">
                       Email
                     </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Ship to: activate to sort column ascending"
-                      style="width: 75.0125px"
-                    >
+                    <th rowspan="1" colspan="1" style="width: 75.0125px">
                       Phone Number
                     </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Ship to: activate to sort column ascending"
-                      style="width: 75.0125px"
-                    >
+                    <th rowspan="1" colspan="1" style="width: 75.0125px">
                       Registration Status
                     </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Ship to: activate to sort column ascending"
-                      style="width: 75.0125px"
-                    >
+                    <th rowspan="1" colspan="1" style="width: 75.0125px">
                       IsActive
                     </th>
-                    <th
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Ship to: activate to sort column ascending"
-                      style="width: 75.0125px"
-                    >
+                    <th rowspan="1" colspan="1" style="width: 75.0125px">
                       Actions
                     </th>
                   </tr>
@@ -95,26 +65,15 @@
                     <td>{{ enquiry.name }}</td>
                     <td>{{ enquiry.email }}</td>
                     <td>{{ enquiry.phoneNumber }}</td>
-
                     <td>
-                      <span
-                        [ngClass]="getStatusClass(enquiry.registrationStatus!)"
-                      >
-                        {{
-                          enquiry.registrationStatus | registrationStatus
-                        }}</span
-                      >
+                      <span [ngClass]="getStatusClass(enquiry.registrationStatus!)">
+                        {{ enquiry.registrationStatus | registrationStatus }}
+                      </span>
                     </td>
                     <td>
-                      <span
-                        [ngClass]="
-                          enquiry.isActive
-                            ? 'chip chip-success'
-                            : 'chip chip-danger'
-                        "
-                      >
-                        {{ enquiry.isActive | isActive}}</span
-                      >
+                      <span [ngClass]="enquiry.isActive ? 'chip chip-success' : 'chip chip-danger'">
+                        {{ enquiry.isActive | isActive }}
+                      </span>
                     </td>
                     <td>
                       <div class="d-inline-block dropdown">
@@ -128,39 +87,28 @@
                         >
                           <i class="fas fa-ellipsis-v"></i>
                         </button>
-                        <div
-                          tabindex="-1"
-                          role="menu"
-                          aria-hidden="true"
-                          class="dropdown-menu dropdown-menu-left"
-                        >
+                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-left">
                           <ul class="nav flex-column">
-                            <li class="nav-item">
+                            <li class="nav-item" *ngIf="enquiry.registrationStatus !==registrationStatus.Rejected && enquiry.registrationStatus!==registrationStatus.Approved ">
                               <a
                                 class="nav-link fw-semibold"
                                 *ngIf="pending"
-                                [routerLink]="[
-                                  '/admin/register-enquiry',
-                                  enquiry.id
-                                ]"
+                                [routerLink]="['/admin/register-enquiry', enquiry.id]"
                               >
                                 <i class="nav-link-icon fas fa-plus"></i>
                                 <span> Register</span>
                               </a>
                             </li>
-                            
                             <li class="nav-item">
                               <a
                                 class="nav-link dangered fw-semibold"
                                 (click)="deleteEnquiry(enquiry.id)"
                               >
-                                <i
-                                  class="nav-link-icon fas fa-trash dangered"
-                                ></i>
+                                <i class="nav-link-icon fas fa-trash dangered"></i>
                                 <span> Delete</span>
                               </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" *ngIf="enquiry.registrationStatus !==registrationStatus.Rejected && enquiry.registrationStatus!==registrationStatus.Approved ">
                               <a
                                 class="nav-link dangered fw-semibold"
                                 (click)="rejectEnquiry(enquiry)"
@@ -176,7 +124,11 @@
                   </tr>
                 </tbody>
               </table>
-              <div *ngIf="filteredEnquiryList.length === 0" class="text-center my-5 p-5 border rounded" style="background-color: #f8f9fa;">
+              <div
+                *ngIf="filteredEnquiryList.length === 0"
+                class="text-center my-5 p-5 border rounded"
+                style="background-color: #f8f9fa;"
+              >
                 <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
                 <h4 class="text-muted">No data found</h4>
               </div>

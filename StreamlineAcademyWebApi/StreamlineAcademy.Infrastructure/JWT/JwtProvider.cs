@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using StreamlineAcademy.Application.Abstractions.JWT;
 using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Enums;
+using StreamlineAcademy.Domain.Models.JWT;
 using StreamlineAcademy.Domain.Shared;
 using StreamlineAcademy.Infrastructure.Identity;
 using System;
@@ -26,30 +27,58 @@ namespace StreamlineAcademy.Infrastructure.JWT
         }
 
 
-
-        public string GenerateToken(User user)
-        { 
-
-            var descriptor = new SecurityTokenDescriptor
+        public UserTokens GenerateTokenKey(User user)
+        {
+            try
             {
-                Subject = new ClaimsIdentity(new List<Claim>
+                if (user == null) throw new ArgumentException(nameof(user));
+
+                var userToken = new UserTokens();
+                var jwtSettings = new JwtSettings
+                {
+                    IssuerSigningKey = configuration["Jwt:Key"],
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidAudience = configuration["Jwt:Audience"]
+                };
+
+                var key = Encoding.ASCII.GetBytes(jwtSettings.IssuerSigningKey);
+                Guid id = Guid.Empty;
+                DateTime expireTime = DateTime.UtcNow.AddHours(1);
+
+                userToken.Validaty = expireTime.TimeOfDay;
+
+                var claims = new List<Claim>
             {
-             new Claim(AppClaimTypes.UserId, user.Id.ToString()!),
-             new Claim(JwtRegisteredClaimNames.Name, user.Name!),
-             new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-             new Claim(ClaimTypes.Role , user.UserRole.ToString()),
-             }),
-                Expires = DateTime.Now.AddHours(1),
-                Issuer = configuration["Jwt:Issuer"],
-                Audience = configuration["Jwt:Audience"],
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!)), SecurityAlgorithms.HmacSha256),
+                new Claim(AppClaimTypes.UserId, user.Id.ToString()!),
+                new Claim(JwtRegisteredClaimNames.Name, user.Name!),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email!),
+                new Claim(ClaimTypes.Role, user.UserRole.ToString())
             };
-            var handler = new JwtSecurityTokenHandler();
-            var securityToken = handler.CreateToken(descriptor);
 
-            return handler.WriteToken(securityToken);
+                var jwtToken = new JwtSecurityToken(
+                    issuer: jwtSettings.ValidIssuer,
+                    audience: jwtSettings.ValidAudience,
+                    claims: claims,
+                    notBefore: DateTime.UtcNow,
+                    expires: expireTime,
+                    signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+                );
+
+                userToken.Token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+                userToken.UserName = user.Name;
+                userToken.Id = user.Id;
+                userToken.Role = user.UserRole;
+
+                return userToken;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
+
     }
 
-    
+
 }

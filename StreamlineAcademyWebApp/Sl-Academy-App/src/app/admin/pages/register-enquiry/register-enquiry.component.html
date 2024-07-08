@@ -1,12 +1,21 @@
-<div class="container my-5">
+<div class="col">
+  <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item" routerLink="/admin/dashboard">admin</li>
+      <li class="breadcrumb-item" routerLink="/admin/enquirylist">enquiry-list</li>
+      <li class="breadcrumb-item active" aria-current="page">register-enquiry-as-academy</li>
+    </ol>
+  </nav>
+</div>
+<div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-6 col-xl-9">
+      <div>
         <form
           #academyRegistrationForm="ngForm"
           method="POST"
           class="register-form ajax-contact"
         >
-          <h5 class="form-title">Register New Academy</h5>
+          <h5 class="form-title">Register As Academy</h5>
           <div class="row">
             <div class="form-group col-md-6">
               <label><i class="far fa-user"></i> Admin Name</label>

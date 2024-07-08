@@ -1,4 +1,5 @@
 ﻿using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Models.JWT;
 using StreamlineAcademy.Domain.Shared;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace StreamlineAcademy.Application.Abstractions.JWT
 {
     public interface IJwtProvider
     {
-        public string GenerateToken(User user); 
+        UserTokens GenerateTokenKey(User user);
     }
 }
