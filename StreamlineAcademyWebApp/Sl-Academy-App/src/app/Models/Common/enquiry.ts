@@ -1,9 +1,11 @@
 import { RegistrationStatus } from "../../Enums/RegistrationStatus";
+import { UserRole } from "../../Enums/userrole";
 
 export class Enquiry {
     name?: string;
     email?: string;
     phoneNumber?: string;
+    enquireAs=''
 }
 export class EnquiryResponse {
     id?: string;

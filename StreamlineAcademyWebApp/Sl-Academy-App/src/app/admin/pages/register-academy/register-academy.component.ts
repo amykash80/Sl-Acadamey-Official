@@ -1,4 +1,4 @@
-import { Component, inject, resolveForwardRef } from '@angular/core';
+import { Component, ElementRef, inject, resolveForwardRef, ViewChild } from '@angular/core';
 import { AcademyService } from '../../../Services/academy.service';
 import { RegisterAcademy } from '../../../Models/Academy/Academy';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { CountryService } from '../../../Services/country.service';
 import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
 import { SharedService } from '../../../Services/shared.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register-academy',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './register-academy.component.css',
 })
 export class RegisterAcademyComponent {
+
   academyService = inject(AcademyService);
   countryService = inject(CountryService);
   router = inject(Router);
@@ -28,6 +30,18 @@ export class RegisterAcademyComponent {
   academyRegistrationModel: RegisterAcademy = new RegisterAcademy();
   loadSpinner: boolean = false;
   constructor() {}
+  @ViewChild('academyRegistrationForm') academyRegistrationForm!: NgForm;
+  @ViewChild('adminNameInput') adminNameInput!: ElementRef;
+  @ViewChild('academyNameInput') academyNameInput!: ElementRef;
+  @ViewChild('emailInput') emailInput!: ElementRef;
+  @ViewChild('phoneNumberInput') phoneNumberInput!: ElementRef;
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+  @ViewChild('addressInput') addressInput!: ElementRef;
+  @ViewChild('postalCodeInput') postalCodeInput!: ElementRef;
+  @ViewChild('academyTypeInput') academyTypeInput!: ElementRef;
+  @ViewChild('countryInput') countryInput!: ElementRef;
+  @ViewChild('stateInput') stateInput!: ElementRef;
+  @ViewChild('cityInput') cityInput!: ElementRef;
 
   ngOnInit(): void {
     this.getAllCountries();
@@ -72,6 +86,38 @@ export class RegisterAcademyComponent {
     );
     console.log(this.filteredCitiesList);
   }
+  onRegisterClick() {
+    if (this.academyRegistrationForm.invalid) {
+      if (!this.academyRegistrationModel.name) {
+        this.adminNameInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.academyName) {
+        this.academyNameInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.email) {
+        this.emailInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.phoneNumber) {
+        this.phoneNumberInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.password) {
+        this.passwordInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.address) {
+        this.addressInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.postalCode) {
+        this.postalCodeInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.academyTypeId) {
+        this.academyTypeInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.countryId) {
+        this.countryInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.stateId) {
+        this.stateInput.nativeElement.focus();
+      } else if (!this.academyRegistrationModel.cityId) {
+        this.cityInput.nativeElement.focus();
+      }
+    }
+    else{
+      this.registerAcademy()
+
+    }
+  }
+
 
   registerAcademy() {
     this.loadSpinner = true;

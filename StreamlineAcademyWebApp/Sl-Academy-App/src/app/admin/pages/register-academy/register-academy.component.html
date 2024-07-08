@@ -1,4 +1,3 @@
-
 <div class="col">
   <nav aria-label="breadcrumb" class="border-bottom pr-3 py-3 mb-3">
     <ol class="breadcrumb mb-0">
@@ -27,6 +26,7 @@
               [(ngModel)]="academyRegistrationModel.name"
               required
               placeholder=""
+              #adminNameInput
             />
             <div *ngIf="name.touched && name.invalid" class="error-message">
               <div *ngIf="name.errors?.['required']">Admin Name is required</div>
@@ -42,12 +42,12 @@
               [(ngModel)]="academyRegistrationModel.academyName"
               required
               placeholder=""
+              #academyNameInput
             />
             <div *ngIf="academyName.touched && academyName.invalid" class="error-message">
               <div *ngIf="academyName.errors?.['required']">Academy Name is required</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="far fa-envelope"></i> Email address</label>
             <input
@@ -59,13 +59,13 @@
               required
               email
               placeholder=""
+              #emailInput
             />
             <div *ngIf="email.touched && email.invalid" class="error-message">
               <div *ngIf="email.errors?.['required']">Email is required</div>
               <div *ngIf="email.errors?.['email']">Invalid email address</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-phone"></i> Phone Number</label>
             <input
@@ -77,13 +77,13 @@
               required
               pattern="^\d{10}$"
               placeholder=""
+              #phoneNumberInput
             />
             <div *ngIf="phoneNumber.touched && phoneNumber.invalid" class="error-message">
               <div *ngIf="phoneNumber.errors?.['required']">Phone Number is required</div>
               <div *ngIf="phoneNumber.errors?.['pattern']">Phone Number must be 10 digits</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-lock"></i> Password</label>
             <input
@@ -95,13 +95,13 @@
               required
               minlength="6"
               placeholder=""
+              #passwordInput
             />
             <div *ngIf="password.touched && password.invalid" class="error-message">
               <div *ngIf="password.errors?.['required']">Password is required</div>
               <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-map-marker-alt"></i> Address</label>
             <input
@@ -112,12 +112,12 @@
               [(ngModel)]="academyRegistrationModel.address"
               required
               placeholder=""
+              #addressInput
             />
             <div *ngIf="address.touched && address.invalid" class="error-message">
               <div *ngIf="address.errors?.['required']">Address is required</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-map-pin"></i> Postal Code</label>
             <input
@@ -129,13 +129,13 @@
               required
               pattern="^\d{5,6}$"
               placeholder=""
+              #postalCodeInput
             />
             <div *ngIf="postalCode.touched && postalCode.invalid" class="error-message">
               <div *ngIf="postalCode.errors?.['required']">Postal Code is required</div>
               <div *ngIf="postalCode.errors?.['pattern']">Postal Code must be 5-6 digits</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-school"></i> Academy Type</label>
             <select
@@ -144,6 +144,7 @@
               #academyType="ngModel"
               [(ngModel)]="academyRegistrationModel.academyTypeId"
               required
+              #academyTypeInput
             >
               <option value="">Select Academy Type</option>
               <option *ngFor="let academyType of academyTypeList" [value]="academyType.id">{{ academyType.academyTypeName }}</option>
@@ -152,7 +153,6 @@
               <div *ngIf="academyType.errors?.['required']">Academy Type is required</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-globe"></i> Country</label>
             <select
@@ -162,6 +162,7 @@
               (change)="filterStates($event)"
               [(ngModel)]="academyRegistrationModel.countryId"
               required
+              #countryInput
             >
               <option value="">Select Country</option>
               <option *ngFor="let country of countries" [value]="country.id">{{ country.countryName }}</option>
@@ -170,7 +171,6 @@
               <div *ngIf="country.errors?.['required']">Country is required</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-flag"></i> State</label>
             <select
@@ -180,6 +180,7 @@
               (change)="filteredCities($event)"
               [(ngModel)]="academyRegistrationModel.stateId"
               required
+              #stateInput
             >
               <option value="">Select state</option>
               <option *ngFor="let state of filteredStates" [value]="state.id">{{ state.stateName }}</option>
@@ -188,7 +189,6 @@
               <div *ngIf="state.errors?.['required']">State is required</div>
             </div>
           </div>
-
           <div class="form-group col-md-6">
             <label><i class="fas fa-city"></i> City</label>
             <select
@@ -197,6 +197,7 @@
               #city="ngModel"
               [(ngModel)]="academyRegistrationModel.cityId"
               required
+              #cityInput
             >
               <option value="">Select city</option>
               <option *ngFor="let city of filteredCitiesList" [value]="city.id">{{ city.cityName }}</option>
@@ -205,12 +206,10 @@
               <div *ngIf="city.errors?.['required']">City is required</div>
             </div>
           </div>
-
           <div class="form-btn col-12 text-center">
             <button
               class="th-btn black-btn-2 w-100"
-              (click)="registerAcademy()"
-              [disabled]="academyRegistrationForm.invalid"
+              (click)="onRegisterClick()"
             >
               <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
               Register Now

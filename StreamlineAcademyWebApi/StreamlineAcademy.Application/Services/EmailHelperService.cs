@@ -45,7 +45,7 @@ namespace StreamlineAcademy.Application.Services
                 Email = emailAddress,
 				CompanyName=APIMessages.ProjectName,
                 Password = password,
-                Link = $"{contextService.HttpContextClientURL()}/{AppRoutes.loginRoute}"
+                Link = $"https://streamlineacademies.com/login"
 
             });
             var emailMessage = CreateMailMessage(emailAddress, subject, body);
@@ -100,7 +100,7 @@ namespace StreamlineAcademy.Application.Services
             string body = await emailTempelateRenderer.RenderTemplateAsync(APIMessages.TemplateNames.PasswordReset, new
             {
                     CompanyName = APIMessages.ProjectName,
-                    Link = $"http://localhost:4200/reset-password?resetCode={restcode}" 
+                    Link = $"https://streamlineacademies.com/reset-password?resetCode={restcode}" 
 			
             });
             var emailMessage = CreateMailMessage(emailAddress, subject, body);
