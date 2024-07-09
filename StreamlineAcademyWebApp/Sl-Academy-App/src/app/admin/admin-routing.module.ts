@@ -14,6 +14,7 @@ import { ProfileComponent } from '../shared/Pages/profile/profile.component';
 import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enquiry.component';
 import { AuthGuard } from '../shared/auth.guard';
 import { UpdateAcademytypeComponent } from './pages/update-academytype/update-academytype.component';
+import { RegisterStudentComponent } from '../shared/Pages/register-student/register-student.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
       { path: 'register-enquiry/:id', component: RegisterEnquiryComponent },
       { path: 'change-password/:userRole', component: ChangepasswordComponent },
       { path: 'update-academytype/:id', component: UpdateAcademytypeComponent },
+      {path:"add-student",component:RegisterStudentComponent}
     ],
   },
 ];

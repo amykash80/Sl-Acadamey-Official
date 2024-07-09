@@ -19,6 +19,8 @@ import { RegisterEnquiryComponent } from './pages/register-enquiry/register-enqu
 import { SharedModule } from '../shared/shared.module';
 import { IsActivePipe } from '../Pipes/is-active.pipe';
 import { UpdateAcademytypeComponent } from './pages/update-academytype/update-academytype.component';
+import { EnquireAs } from '../Enums/EnquireAs';
+import { EnquireAsPipe } from '../Pipes/enquire-as.pipe';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { UpdateAcademytypeComponent } from './pages/update-academytype/update-ac
     RegistrationStatusPipe,
     RegisterEnquiryComponent,
     IsActivePipe,
-    UpdateAcademytypeComponent
+    UpdateAcademytypeComponent,
+    EnquireAsPipe,
+
 
   ],
   imports: [

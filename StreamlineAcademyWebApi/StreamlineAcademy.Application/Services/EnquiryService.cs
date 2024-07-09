@@ -35,6 +35,7 @@ namespace StreamlineAcademy.Application.Services
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 IsActive = true,
+                EnquireAs=request.EnquireAs,
                 CreatedBy = Guid.Empty,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now,
@@ -52,6 +53,7 @@ namespace StreamlineAcademy.Application.Services
                     Email = enquiryResponse.Email,
                     PhoneNumber = enquiryResponse.PhoneNumber,
                     RegistrationStatus=RegistrationStatus.Pending,
+                    EnquireAs=enquiryResponse.EnquireAs,
                     IsActive = true,
                 };
                 return ApiResponse<EnquiryResponseModel>.SuccessResponse(response,APIMessages.EnquiryManagement.EnquiryAdded, HttpStatusCodes.Created);
@@ -129,6 +131,7 @@ namespace StreamlineAcademy.Application.Services
                     Email = e.Email,
                     PhoneNumber = e.PhoneNumber,
                     RegistrationStatus= e.RegistrationStatus,
+                    EnquireAs=e.EnquireAs,
                     IsActive = e.IsActive
                 });
                 return ApiResponse<IEnumerable<EnquiryResponseModel>>.SuccessResponse(sortedEnquiries, $"Found {enquiryList.Count()} Enquiries");

@@ -10,6 +10,7 @@ import { CheckMyStudentListComponent } from './Pages/check-my-student-list/check
 import { AttendenceComponent } from './Pages/attendence/attendence.component';
 import { CheckMyScheduleComponent } from './Pages/check-my-schedule/check-my-schedule.component';
 import { NotificationComponent } from './Pages/notification/notification.component';
+import { RegisterStudentComponent } from '../shared/Pages/register-student/register-student.component';
 
 const routes: Routes = [
   {path:"",component:InstructorComponent,canActivate:[AuthGuard],
@@ -23,7 +24,8 @@ const routes: Routes = [
     {path:"student-list",component:CheckMyStudentListComponent},
     {path:"attendence",component:AttendenceComponent},
     {path:"notification/:scheduleId",component:NotificationComponent},
-    {path:"attendence/:scheduleId",component:AttendenceComponent}
+    {path:"attendence/:scheduleId",component:AttendenceComponent},
+    {path:"register-student",component:RegisterStudentComponent}
   ]
   }
 ];

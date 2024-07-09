@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StreamlineAcademy.Domain.Models.Responses
 {
-    public class EnquiryResponseModel : EnquiryRequestModel // to send response to clint
+    public class EnquiryResponseModel : EnquiryRequestModel 
     {
         public Guid? Id { get; set; }
         public RegistrationStatus RegistrationStatus { get; set; } 

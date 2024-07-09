@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StreamlineAcademy.Domain.Models.Requests
 {
-    public class EnquiryRequestModel // Clint request model
+    public class EnquiryRequestModel 
     {
         [Required(ErrorMessage = "Name is required")]
         [StringLength(40, ErrorMessage = "Name must not exceed 50 characters.")]
@@ -21,6 +21,8 @@ namespace StreamlineAcademy.Domain.Models.Requests
         [Required(ErrorMessage = "Phone number is required.")]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be 10 digits.")]
         public string? PhoneNumber { get; set; }
+        [Required(ErrorMessage = "EnquireAs is required")]
+        public EnquireAs EnquireAs { get; set; }
     }
 
     public class EnquiryUpdateRequest : EnquiryRequestModel  // to update  response 

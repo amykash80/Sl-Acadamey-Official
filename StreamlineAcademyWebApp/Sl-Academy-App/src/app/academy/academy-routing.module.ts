@@ -28,7 +28,7 @@ import { ChangepasswordComponent } from '../shared/Pages/changepassword/changepa
 import { AddBatchScheduleComponent } from './pages/add-batch-schedule/add-batch-schedule.component';
 import { BatchScheduleListComponent } from './pages/batch-schedule-list/batch-schedule-list.component';
 import { UpdateBatchScheduleComponent } from './pages/update-batch-schedule/update-batch-schedule.component';
-import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
+import { RegisterStudentComponent } from '../shared/Pages/register-student/register-student.component';
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { UpdateStudentComponent } from './Pages/update-student/update-student.component';
 import { AssignedStudentsComponent } from './Pages/assigned-students/assigned-students.component';

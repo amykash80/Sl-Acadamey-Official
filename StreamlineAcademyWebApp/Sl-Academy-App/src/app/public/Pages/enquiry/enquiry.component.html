@@ -90,10 +90,10 @@
             required
             #enquireAs="ngModel"
           >
-            <option value="" disabled selected>Select an option</option>
-            <option value="academy">Academy</option>
-            <option value="instructor">Instructor</option>
-            <option value="student">Student</option>
+            <option value="0" disabled selected>Select an option</option>
+            <option value="1">Academy</option>
+            <option value="2">Instructor</option>
+            <option value="3">Student</option>
           </select>
           <div *ngIf="enquireAs.invalid && (enquireAs.dirty || enquireAs.touched)" class="text-danger">
             <div *ngIf="enquireAs.errors?.['required']">Please select an option.</div>

@@ -7,11 +7,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './Services/interceptor.service';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 import { IsActivePipe } from './Pipes/is-active.pipe';
+import { EnquireAsPipe } from './Pipes/enquire-as.pipe';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     
   ],
   imports: [

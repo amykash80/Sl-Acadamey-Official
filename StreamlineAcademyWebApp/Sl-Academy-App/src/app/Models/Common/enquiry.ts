@@ -1,3 +1,4 @@
+import { EnquireAs } from "../../Enums/EnquireAs";
 import { RegistrationStatus } from "../../Enums/RegistrationStatus";
 import { UserRole } from "../../Enums/userrole";
 
@@ -5,7 +6,7 @@ export class Enquiry {
     name?: string;
     email?: string;
     phoneNumber?: string;
-    enquireAs=''
+    enquireAs:number=0
 }
 export class EnquiryResponse {
     id?: string;
@@ -14,6 +15,7 @@ export class EnquiryResponse {
     name?: string;
     email?: string;
     phoneNumber?: string;
+    enquireAs?:EnquireAs
 }
 export class EnquiryUpdate {
     id?:string;

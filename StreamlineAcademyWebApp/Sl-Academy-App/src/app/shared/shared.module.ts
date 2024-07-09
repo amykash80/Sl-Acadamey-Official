@@ -11,6 +11,8 @@ import { ProfileComponent } from './Pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { NoContentComponent } from './Pages/no-content/no-content.component';
+import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -23,10 +25,13 @@ import { NoContentComponent } from './Pages/no-content/no-content.component';
     NotFoundComponent,
     FooterComponent,
     NoContentComponent,
+    RegisterStudentComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
+    NgMultiSelectDropDownModule.forRoot(),
+
     FormsModule,
   ],
   exports:[
@@ -37,7 +42,6 @@ import { NoContentComponent } from './Pages/no-content/no-content.component';
     NotFoundComponent,
     FooterComponent,
     NoContentComponent,
-    // IsActivePipe
   ]
 })
 export class SharedModule { }

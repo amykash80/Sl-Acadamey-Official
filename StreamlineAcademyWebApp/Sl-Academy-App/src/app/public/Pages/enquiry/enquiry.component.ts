@@ -20,6 +20,7 @@ export class EnquiryComponent {
   enquiryModel: Enquiry = new Enquiry();
 
   sendEnquiry() {
+    this.enquiryModel.enquireAs=parseInt(this.enquiryModel.enquireAs.toString())
     this.loadSpinner = true;
     this.authService.enquiry(this.enquiryModel).subscribe({
       next: (response) => {

@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 import { EnquiryService } from '../../../Services/enquiry.service';
-import { Enquiry, EnquiryResponse, EnquiryUpdate } from '../../../Models/Common/enquiry';
+import {
+  Enquiry,
+  EnquiryResponse,
+  EnquiryUpdate,
+} from '../../../Models/Common/enquiry';
 import { SharedService } from '../../../Services/shared.service';
 import { RegistrationStatus } from '../../../Enums/RegistrationStatus';
+import { Router } from '@angular/router';
+import { EnquireAs } from '../../../Enums/EnquireAs';
 
 @Component({
   selector: 'app-enquirylist',
@@ -12,33 +18,35 @@ import { RegistrationStatus } from '../../../Enums/RegistrationStatus';
 export class EnquirylistComponent {
   constructor(
     private enquiryService: EnquiryService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router
   ) {}
   enquirylist: EnquiryResponse[] = [];
   filteredEnquiryList: EnquiryResponse[] = [];
   searchText: string = '';
   pending: boolean = true;
   registrationStatus = RegistrationStatus;
+  enquire=EnquireAs;
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
-  showSpinner=true;
-  showTable=false
+  showSpinner = true;
+  showTable = false;
   ngOnInit() {
     this.loadAllEnquiries();
   }
   loadAllEnquiries() {
     this.enquiryService.enquiryList().subscribe({
-      next: (response) => {    
-        this.showSpinner=false;
-        this.showTable=true
+      next: (response) => {
+        console.log(response);
+        this.showSpinner = false;
+        this.showTable = true;
         this.enquirylist = response.result;
         this.filteredEnquiryList = this.enquirylist;
         this.totalItems = this.filteredEnquiryList.length;
-        this.currentPage = 1; 
+        this.currentPage = 1;
         this.updatePagination();
-       
       },
       error: (err) => {
         console.log(err);
@@ -46,8 +54,9 @@ export class EnquirylistComponent {
     });
   }
 
+
   getStatusClass(status: RegistrationStatus): string {
-    switch(status) {
+    switch (status) {
       case RegistrationStatus.Rejected:
         return 'chip chip-danger';
       case RegistrationStatus.Approved:
@@ -55,7 +64,7 @@ export class EnquirylistComponent {
       case RegistrationStatus.Pending:
         return 'chip chip-warning';
       default:
-        return 'chip'; 
+        return 'chip';
     }
   }
   filterEnquiries(event: any): void {
@@ -66,15 +75,13 @@ export class EnquirylistComponent {
       this.filteredEnquiryList = this.enquirylist.filter(
         (enquiry) =>
           enquiry.name!.toLowerCase().startsWith(event.target.value) ||
-        enquiry.email!.toLowerCase().startsWith(event.target.value) ||
-        enquiry.phoneNumber!.toLowerCase().startsWith(event.target.value) 
-        
+          enquiry.email!.toLowerCase().startsWith(event.target.value) ||
+          enquiry.phoneNumber!.toLowerCase().startsWith(event.target.value)
       );
     }
     this.totalItems = this.filteredEnquiryList.length;
     this.currentPage = 1;
     this.updatePagination();
-    
   }
   updatePagination(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -91,51 +98,42 @@ export class EnquirylistComponent {
     }
     this.currentPage = page;
     this.updatePagination();
-    }
-  
+  }
 
   deleteEnquiry(enquiryId: any) {
-    console.log(enquiryId);
+    this.sharedService.fireConfirmSwal('Are You sure').then((result: any) => {
+      if (result.isConfirmed) {
+        this.enquiryService.deleteEnquiry(enquiryId).subscribe({
+          next: (response) => {
+            console.log(response);
 
-    this.sharedService
-      .fireConfirmSwal('Are You sure')
-      .then((result: any) => {
-        if (result.isConfirmed) {
-          this.enquiryService.deleteEnquiry(enquiryId).subscribe({
-            next: (response) => {
-              console.log(response);
-
-              if (response.isSuccess) {
-                this.sharedService.showSuccessToast(response.message);
-                this.loadAllEnquiries();
-              } else {
-                this.sharedService.showErrorToast(response.message);
-              }
-            },
-          });
-        }
-      });
+            if (response.isSuccess) {
+              this.sharedService.showSuccessToast(response.message);
+              this.loadAllEnquiries();
+            } else {
+              this.sharedService.showErrorToast(response.message);
+            }
+          },
+        });
+      }
+    });
   }
-  rejectEnquiry(enquiry:EnquiryUpdate) {
+  rejectEnquiry(enquiry: EnquiryUpdate) {
+    this.sharedService.fireConfirmSwal('Are You sure').then((result: any) => {
+      if (result.isConfirmed) {
+        this.enquiryService.rejectEnquiry(enquiry).subscribe({
+          next: (response) => {
+            console.log(response);
 
-    this.sharedService
-      .fireConfirmSwal('Are You sure')
-      .then((result: any) => {
-        if (result.isConfirmed) {
-          this.enquiryService.rejectEnquiry(enquiry).subscribe({
-            next: (response) => {
-              console.log(response);
-
-              if (response.isSuccess) {
-                this.sharedService.showSuccessToast(response.message);
-                this.loadAllEnquiries();
-              } else {
-                this.sharedService.showErrorToast(response.message);
-              }
-            },
-          });
-        }
-      });
+            if (response.isSuccess) {
+              this.sharedService.showSuccessToast(response.message);
+              this.loadAllEnquiries();
+            } else {
+              this.sharedService.showErrorToast(response.message);
+            }
+          },
+        });
+      }
+    });
   }
-
 }
