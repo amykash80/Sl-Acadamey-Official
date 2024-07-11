@@ -94,7 +94,7 @@
                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-left">
                           <ul class="nav flex-column">
                             <li class="nav-item" *ngIf="enquiry.registrationStatus !== registrationStatus.Rejected && enquiry.registrationStatus !== registrationStatus.Approved && enquiry.enquireAs !== enquire.Student && enquiry.enquireAs !== enquire.Instructor">
-                              <a class="nav-link fw-semibold" [routerLink]="['/admin/register-academy', enquiry.id]">
+                              <a class="nav-link fw-semibold" [routerLink]="['/admin/register-enquiry', enquiry.id]">
                                 <i class="nav-link-icon fas fa-plus"></i>
                                 <span> Register</span>
                               </a>
