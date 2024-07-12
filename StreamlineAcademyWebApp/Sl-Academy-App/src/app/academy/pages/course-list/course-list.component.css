@@ -7,3 +7,10 @@
     width: auto;
     margin-top: 15px;
   }
+  .mat-tooltip {
+    font-size: 1.2rem; /* Increase the font size */
+    background-color: rgba(199, 24, 24, 0.8); /* Make the background more opaque */
+    color: #ffffff; /* Change the text color to white */
+    padding: 8px 16px; /* Increase the padding */
+    border-radius: 4px; /* Optional: Add some border radius for rounded corners */
+  }

@@ -99,6 +99,25 @@ export class SharedService {
   showLoader() {
     this.toast.loading('Logging IN');
   }
+  showDescriptorSwal(description:string){
+    Swal.fire({
+      title: description,
+      showClass: {
+        popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `
+      },
+      hideClass: {
+        popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `
+      }
+    });
+  }
   logOutUser() {
     Swal.fire({
       title: 'Are you sure?',
@@ -112,6 +131,21 @@ export class SharedService {
       if (result.isConfirmed) {
         localStorage.clear();
         this.router.navigate(['login']);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: "success",
+          title: "logged out successfully"
+        });
       }
     });
   }

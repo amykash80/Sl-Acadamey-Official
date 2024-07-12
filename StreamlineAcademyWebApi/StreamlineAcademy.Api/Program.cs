@@ -24,13 +24,18 @@ builder.Services.AddPersistenceService(builder.Configuration)
 
 
 
-var app = builder.Build();
-app.UseCors(option =>
+builder.Services.AddCors(options =>
 {
-    option.SetIsOriginAllowed(_ => true)
-    .AllowAnyHeader()
-    .AllowAnyMethod();
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:4200", "https://api.streamlineacademies.com")
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials();
+    });
 });
+var app = builder.Build();
+
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.

@@ -46,7 +46,13 @@
                   <tr *ngFor="let course of displayedCourseList">
                     <td>{{ course.name }}</td>
                     <td>
-                      <i class="fas fa-eye text-center" style="cursor: pointer;" [matTooltip]="course.description || 'No description available'"></i>
+                      <i
+                      class="fas fa-eye text-center"
+                      style="cursor: pointer;"
+                      (click)="showDescription(course.description)"
+                      [matTooltip]="course.description || 'No description available'"
+                      matTooltipClass="custom-tooltip"
+                    ></i>
                     </td>
                     <td>{{ course.durationInWeeks }}</td>
                     <td>{{ course.fee | currency:'₹' }}</td>

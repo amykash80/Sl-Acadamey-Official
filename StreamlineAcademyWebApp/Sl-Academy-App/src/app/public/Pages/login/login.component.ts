@@ -142,6 +142,21 @@ export class LoginComponent {
                 break;
               case UserRole.AcademyAdmin:
                 this.router.navigate(['/academy/dashboard']);
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  }
+                });
+                Toast.fire({
+                  icon: "success",
+                  title: "Signed in successfully"
+                });
                 this.sharedService.showSuccessToast(
                   `welcome ${response.result.fullName}`
                 );
@@ -149,6 +164,21 @@ export class LoginComponent {
                 break;
               case UserRole.Instructor:
                 this.router.navigate(['/instructor/dashboard']);
+                const Toaster = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  }
+                });
+                Toaster.fire({
+                  icon: "success",
+                  title: "Signed in successfully"
+                });
                 this.sharedService.showSuccessToast(
                   `welcome ${response.result.fullName}`
                 );
@@ -156,6 +186,21 @@ export class LoginComponent {
                 break;
               case UserRole.Student:
                 this.router.navigate(['/student/dashboard']);
+                const Toaster2 = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  }
+                });
+                Toaster2.fire({
+                  icon: "success",
+                  title: "Signed in successfully"
+                });
                 this.sharedService.showSuccessToast(
                   `welcome ${response.result.fullName}`
                 );
@@ -166,7 +211,7 @@ export class LoginComponent {
             }
           }
         } else {
-          this.sharedService.showErrorToast(response.message);
+          this.sharedService.showErrorToast("email/password is incorrect!");
           this.loadSpinner = false;
         }
       },

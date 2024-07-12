@@ -6,6 +6,7 @@ import { CourseResourceResponse } from '../../../Models/CourseResource/CourseRes
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { CourseResponse } from '../../../Models/Academy/Course';
 import { CourseService } from '../../../Services/course.service';
+import { environment } from '../../../../enviroments/enviroment';
 
 @Component({
   selector: 'app-course-resource-list',
@@ -21,7 +22,7 @@ export class CourseResourceListComponent {
   courseService=inject(CourseService)
   sharedService=inject(SharedService)
   courseId:string=''
-  apiBaseUrl: string = 'http://localhost:5232';
+  apiBaseUrl: string = environment.apiUrl;
   courseResourceList:CourseResourceResponse[]=[];
   filteredResourceList: CourseResourceResponse[] = [];
   searchText: string = '';

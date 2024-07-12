@@ -4,6 +4,7 @@ import { SharedService } from '../../../Services/shared.service';
 import { CourseResponse } from '../../../Models/Academy/Course';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -91,7 +92,9 @@ export class CourseListComponent {
     this.currentPage = page;
     this.updatePagination();
   }
-
+showDescription(description:any){
+this.sharedService.showDescriptorSwal(description)
+}
   deleteCourse(courseId: any) {
     debugger;
     this.sharedService
