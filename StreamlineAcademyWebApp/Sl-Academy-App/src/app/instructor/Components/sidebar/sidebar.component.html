@@ -62,10 +62,15 @@
           <i class="fa fa-calendar" style="color: red"></i>Schedules
         </a>
       </li>
+   
       <li>
-        <a [routerLink]="['/instructor/student-list']">
-          <i class="fas fa-user-graduate" style="color: red"></i> Students
+        <a class="dropdown-toggle" href="#" id="studentsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user-graduate" style='color:red'></i> Student
         </a>
+        <div class="dropdown-menu" aria-labelledby="studentsMenuButton">
+          <a class="dropdown-item" routerLink="/instructor/register-student">Add Student</a>
+          <a class="dropdown-item"  [routerLink]="['/instructor/student-list']">Students List</a>
+        </div>
       </li>
     </ul>
   </div>

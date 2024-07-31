@@ -238,7 +238,7 @@ namespace StreamlineAcademy.Application.Services
         {
             var stateList = await profileRepository.GetAllStates();
             var newResponse = stateList.Select(state => new StateResponse() {Id=state.Id,StateName=state.StateName,CountryId=state.CountryId});
-            return ApiResponse<List<StateResponse>>.SuccessResponse(newResponse.ToList());
+            return ApiResponse<List<StateResponse>>.SuccessResponse(newResponse.OrderBy(state=>state.StateName).ToList());
         }
 
         public async Task<ApiResponse<List<CityResponse>>> GetAllCities()

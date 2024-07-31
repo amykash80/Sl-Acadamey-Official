@@ -53,6 +53,9 @@ export class RegisterStudentComponent {
     this.getAllCities();
     this.getAllCourses();
   }
+  goBack(){
+    window.history.back()
+  }
   onItemSelect(item:any){
     if (!this.studentModel.courseId) {
       this.studentModel.courseId = [];
@@ -69,7 +72,6 @@ export class RegisterStudentComponent {
         console.log(this.studentModel.courseId)
       }
     });
-    console.log(this.studentModel.courseId);
   }
   toggleSelection(course: any) {
     debugger;
@@ -88,7 +90,6 @@ export class RegisterStudentComponent {
   getAllCountries() {
     this.countryService.getCountries().subscribe((countries) => {
       this.countries = countries.result;
-      console.log(this.countries);
     });
   }
   getAllStates() {
@@ -99,7 +100,6 @@ export class RegisterStudentComponent {
   getAllCities() {
     this.countryService.getCities().subscribe((res) => {
       this.cities = res.result;
-      console.log(this.cities);
     });
   }
   filterStates(event: any) {
@@ -107,14 +107,12 @@ export class RegisterStudentComponent {
     this.filteredStates = this.states.filter(
       (state) => state.countryId === this.selectedCountryId
     );
-    console.log(this.filteredStates);
   }
   filteredCities(event: any) {
     this.selectedStateId = event.target.value;
     this.filteredCitiesList = this.cities.filter(
       (city) => city.sateId === this.selectedStateId
     );
-    console.log(this.filteredCitiesList);
   }
  
   addStudent() {

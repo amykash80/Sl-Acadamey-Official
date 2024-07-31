@@ -45,7 +45,7 @@ export class LoginComponent {
           if (response.result.isPasswordTemporary) {
             this.showLoginForm = false;
             this.sharedService.showErrorToast(
-              'please chnage your temporary password'
+              'please change your temporary password'
             );
             const { value: formValues } = await Swal.fire({
               title: 'Change Password',
@@ -136,6 +136,21 @@ export class LoginComponent {
             switch (response.result.userRole) {
               case UserRole.SuperAdmin:
                 this.router.navigate(['/admin/dashboard']);
+                const ToasterShow = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  },
+                });
+                ToasterShow.fire({
+                  icon: 'success',
+                  title: 'Signed in successfully',
+                });
                 this.sharedService.showSuccessToast(
                   `welcome ${response.result.fullName}`
                 );
@@ -144,18 +159,18 @@ export class LoginComponent {
                 this.router.navigate(['/academy/dashboard']);
                 const Toast = Swal.mixin({
                   toast: true,
-                  position: "top-end",
+                  position: 'top-end',
                   showConfirmButton: false,
                   timer: 3000,
                   timerProgressBar: true,
                   didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
                     toast.onmouseleave = Swal.resumeTimer;
-                  }
+                  },
                 });
                 Toast.fire({
-                  icon: "success",
-                  title: "Signed in successfully"
+                  icon: 'success',
+                  title: 'Signed in successfully',
                 });
                 this.sharedService.showSuccessToast(
                   `welcome ${response.result.fullName}`
@@ -166,18 +181,18 @@ export class LoginComponent {
                 this.router.navigate(['/instructor/dashboard']);
                 const Toaster = Swal.mixin({
                   toast: true,
-                  position: "top-end",
+                  position: 'top-end',
                   showConfirmButton: false,
                   timer: 3000,
                   timerProgressBar: true,
                   didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
                     toast.onmouseleave = Swal.resumeTimer;
-                  }
+                  },
                 });
                 Toaster.fire({
-                  icon: "success",
-                  title: "Signed in successfully"
+                  icon: 'success',
+                  title: 'Signed in successfully',
                 });
                 this.sharedService.showSuccessToast(
                   `welcome ${response.result.fullName}`
@@ -188,18 +203,18 @@ export class LoginComponent {
                 this.router.navigate(['/student/dashboard']);
                 const Toaster2 = Swal.mixin({
                   toast: true,
-                  position: "top-end",
+                  position: 'top-end',
                   showConfirmButton: false,
                   timer: 3000,
                   timerProgressBar: true,
                   didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
                     toast.onmouseleave = Swal.resumeTimer;
-                  }
+                  },
                 });
                 Toaster2.fire({
-                  icon: "success",
-                  title: "Signed in successfully"
+                  icon: 'success',
+                  title: 'Signed in successfully',
                 });
                 this.sharedService.showSuccessToast(
                   `welcome ${response.result.fullName}`
@@ -211,7 +226,7 @@ export class LoginComponent {
             }
           }
         } else {
-          this.sharedService.showErrorToast("email/password is incorrect!");
+          this.sharedService.showErrorToast('email/password is incorrect!');
           this.loadSpinner = false;
         }
       },

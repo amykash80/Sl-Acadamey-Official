@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using StreamlineAcademy.Api.Middlewares;
 using StreamlineAcademy.Api.DI;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,13 +17,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Adding Services added inside AddPersistenceService Etension Method
+
+// Adding Services added inside below chained Etension Methods
 builder.Services.AddPersistenceService(builder.Configuration)
                .AddAplicationService(builder.Environment.WebRootPath,builder.Configuration)
                .AddInfrastructureService()
                .AddPresentationService();
-
-
 
 builder.Services.AddCors(options =>
 {
@@ -44,9 +44,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

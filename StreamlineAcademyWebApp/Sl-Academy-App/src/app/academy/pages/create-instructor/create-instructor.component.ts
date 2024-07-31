@@ -74,6 +74,10 @@ export class CreateInstructorComponent {
     );
     console.log(this.filteredCitiesList);
   }
+
+  onPostalCodeChange(value: string) {
+    this.instructorModel.postalCode = value.trim();
+  }
   addInstructor() {   
     this.loadSpinner=true; 
     this.instructorModel.postalCode=this.instructorModel.postalCode?.toString();

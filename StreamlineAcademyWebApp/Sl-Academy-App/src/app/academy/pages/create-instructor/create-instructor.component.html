@@ -54,10 +54,8 @@
                 [(ngModel)]="instructorModel.postalCode"
                 placeholder="Enter your postal code"
                 required
-                minlength="6"
               />
               <div *ngIf="postalCode.touched && postalCode.errors?.['required']" class="error-message">Postal code is required</div>
-              <div *ngIf="postalCode.touched && postalCode.errors?.['minlength']" class="error-message">Postal code must be at least 6 characters</div>
             </div>
             <div class="form-group col-md-6">
               <label><i class="fas fa-phone"></i> Phone Number*</label>
@@ -67,6 +65,7 @@
                 name="phoneNumber"
                 #phoneNumber="ngModel"
                 [(ngModel)]="instructorModel.phoneNumber"
+                (ngModelChange)="onPostalCodeChange($event)"
                 placeholder="Enter your phone number"
                 required
                 minlength="10"

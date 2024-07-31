@@ -7,7 +7,8 @@ namespace StreamlineAcademy.Api.DI
         public static IServiceCollection AddPresentationService(this IServiceCollection services)
         {
             services.AddTransient<GlobalExceptionHandlingMiddleware>();
-            return services;
+       
+          return services;
         }
     }
 }

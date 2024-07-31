@@ -30,7 +30,6 @@ export class InterceptorService implements HttpInterceptor {
           this.sharedService.showErrorToast('Token expired');
           localStorage.clear();
           this.router.navigate(['login']);
-          this.router.navigate(['/login']); 
         }
         return throwError(error);
       })

@@ -24,7 +24,6 @@ namespace StreamlineAcademy.Domain.Models.Requests
         public string? Address { get; set; } 
         [Required(ErrorMessage = "PostalCode is required")]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "PostalCode must contain only numbers")]
-        [StringLength(8, ErrorMessage = "PostalCode must not exceed 8 characters.")]
         public string? PostalCode { get; set; }
         [Required(ErrorMessage = "PhoneNumber is required")]
         [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "please enter valid phone number ")]

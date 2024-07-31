@@ -63,7 +63,7 @@ export class RegisterAcademyComponent {
   }
   getAllStates() {
     this.countryService.getStates().subscribe((res) => {
-      this.states = res.result;
+      this.states = res.result.sort((a:any, b:any) => a.stateName.localeCompare(b.stateName));
     });
   }
   getAllCities() {
