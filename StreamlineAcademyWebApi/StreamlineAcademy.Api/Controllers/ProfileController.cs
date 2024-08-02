@@ -47,6 +47,8 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<List<StateResponse>>> GetAllStates() => await profileService.GetAllStates();
         [HttpGet("cities")]
         public async Task<ApiResponse<List<CityResponse>>> GetAllCities() => await profileService.GetAllCities();
+        [HttpPost("addNewCity")]
+        public async Task<ApiResponse<CityResposseModel>> AddNewCity(CityRequestModel model) => await profileService.AddCity(model);
        
     }
 }

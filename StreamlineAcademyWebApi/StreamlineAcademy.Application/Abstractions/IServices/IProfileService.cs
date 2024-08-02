@@ -24,6 +24,8 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<FileResponseModel>> GetFilePath();
         Task<ApiResponse<FileResponseModel>> changeProfilePicture(FileRequestUpdateModel model);
 
+        Task<ApiResponse<CityResposseModel>> AddCity(CityRequestModel model);
+
 
 
 

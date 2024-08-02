@@ -1,4 +1,10 @@
-import { Component, ElementRef, inject, resolveForwardRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  resolveForwardRef,
+  ViewChild,
+} from '@angular/core';
 import { AcademyService } from '../../../Services/academy.service';
 import { RegisterAcademy } from '../../../Models/Academy/Academy';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -7,6 +13,13 @@ import { AcademyTypeResponse } from '../../../Models/Academy/AcademyType';
 import { SharedService } from '../../../Services/shared.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
+import {
+  CityRequestModel,
+  CityResponseModel,
+} from '../../../Models/Common/CityResponseModel';
+import { ProfileService } from '../../../Services/profile.service';
+import { ApiResponse } from '../../../Models/Common/api-response';
 
 @Component({
   selector: 'app-register-academy',
@@ -14,9 +27,9 @@ import { NgForm } from '@angular/forms';
   styleUrl: './register-academy.component.css',
 })
 export class RegisterAcademyComponent {
-
   academyService = inject(AcademyService);
   countryService = inject(CountryService);
+  profileService = inject(ProfileService);
   router = inject(Router);
   sharedService = inject(SharedService);
   countries: any[] = [];
@@ -63,7 +76,9 @@ export class RegisterAcademyComponent {
   }
   getAllStates() {
     this.countryService.getStates().subscribe((res) => {
-      this.states = res.result.sort((a:any, b:any) => a.stateName.localeCompare(b.stateName));
+      this.states = res.result.sort((a: any, b: any) =>
+        a.stateName.localeCompare(b.stateName)
+      );
     });
   }
   getAllCities() {
@@ -86,6 +101,65 @@ export class RegisterAcademyComponent {
     );
     console.log(this.filteredCitiesList);
   }
+  openAddCityDialog(stateId: string): void {
+    Swal.fire({
+      title: 'Add New City',
+      html: `
+        <input id="city-name" class="swal2-input" placeholder="City Name">
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Add',
+      preConfirm: () => {
+        const cityName = (
+          document.getElementById('city-name') as HTMLInputElement
+        ).value;
+
+        if (!cityName) {
+          Swal.showValidationMessage('City Name is required');
+          return null;
+        }
+
+        return { cityName, stateId };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const cityRequestModel: CityRequestModel = {
+          cityName: result.value.cityName,
+          stateId: result.value.stateId,
+        };
+
+        this.profileService.AddNewCity(cityRequestModel).subscribe(
+          (response: ApiResponse<CityResponseModel>) => {
+            if (response.isSuccess) {
+              const newCity = {
+                id: response.result.id,
+                cityName: response.result.cityName,
+              };
+              this.filteredCitiesList.push(newCity);
+              this.academyRegistrationModel.cityId = newCity.id;
+            this.sharedService.showSuccessToast('New city has been added');
+            } else {
+              this.sharedService.showErrorToast( response.message);
+            }
+          },
+          (error) => {
+            Swal.fire(
+              'Error!',
+              'An error occurred while adding the city.',
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
+
+  onStateChange(event: Event): void {
+    const selectedStateId = (event.target as HTMLSelectElement).value;
+    this.academyRegistrationModel.stateId = selectedStateId;
+    this.filterStates(selectedStateId);
+  }
+
   onRegisterClick() {
     if (this.academyRegistrationForm.invalid) {
       if (!this.academyRegistrationModel.name) {
@@ -111,13 +185,10 @@ export class RegisterAcademyComponent {
       } else if (!this.academyRegistrationModel.cityId) {
         this.cityInput.nativeElement.focus();
       }
-    }
-    else{
-      this.registerAcademy()
-
+    } else {
+      this.registerAcademy();
     }
   }
-
 
   registerAcademy() {
     this.loadSpinner = true;

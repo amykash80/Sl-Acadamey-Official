@@ -61,6 +61,7 @@ export class AcademyListComponent {
     const filterValue = event.target.value.toLowerCase();
     this.filteredAcademyList = this.academyList.filter(academy => 
       academy.name?.toLowerCase().startsWith(filterValue) 
+      || academy.academyName?.toLowerCase().startsWith(filterValue)
       || academy.phoneNumber?.toLowerCase().startsWith(filterValue)
       || academy.email?.toLowerCase().startsWith(filterValue)
     );

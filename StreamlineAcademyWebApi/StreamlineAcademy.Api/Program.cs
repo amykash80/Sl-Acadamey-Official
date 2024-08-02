@@ -24,17 +24,23 @@ builder.Services.AddPersistenceService(builder.Configuration)
                .AddInfrastructureService()
                .AddPresentationService();
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.WithOrigins("http://localhost:4200", "https://api.streamlineacademies.com")
-               .AllowAnyHeader()
-               .AllowAnyMethod()
-               .AllowCredentials();
-    });
-});
+//builder.Services.AddCors(options =>
+//{
+//    options.AddDefaultPolicy(builder =>
+//    {
+//        builder.WithOrigins("http://localhost:4200",
+//               "https://api.streamlineacademies.com")
+//               .AllowAnyHeader()
+//               .AllowAnyMethod();
+//    });
+//});
 var app = builder.Build();
+app.UseCors(option =>
+{
+    option.SetIsOriginAllowed(_ => true)
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+});
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
@@ -46,7 +52,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

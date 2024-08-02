@@ -1,4 +1,5 @@
 ﻿using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using StreamlineAcademy.Domain.Shared;
 using System;
@@ -16,5 +17,6 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<List<Country>> GetAllCountries();
         Task<List<State>> GetAllStates();
         Task<List<City>> GetAllCities();
+        Task<int> AddNewCity (City cityRequestModel);
     }
 }

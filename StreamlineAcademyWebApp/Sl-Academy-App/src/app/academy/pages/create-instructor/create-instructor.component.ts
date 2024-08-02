@@ -75,8 +75,12 @@ export class CreateInstructorComponent {
     console.log(this.filteredCitiesList);
   }
 
-  onPostalCodeChange(value: string) {
-    this.instructorModel.postalCode = value.trim();
+  onPostalCodeChange(event: any) {
+    console.log('Original value:', event.target.value);
+    let trimmedValue = event.target.value.replace(" ","");
+    console.log('Trimmed value:', trimmedValue);
+    this.instructorModel.postalCode = trimmedValue;
+    console.log('Model postal code:', this.instructorModel.postalCode);
   }
   addInstructor() {   
     this.loadSpinner=true; 

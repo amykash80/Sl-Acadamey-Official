@@ -284,5 +284,22 @@ namespace StreamlineAcademy.Application.Services
                 return ApiResponse<FileResponseModel>.SuccessResponse(new FileResponseModel() { Id = userId, FilePath = uploadedPhoto.Result.FilePath }, APIMessages.ProfileManagement.ProfileChanged);
             return ApiResponse<FileResponseModel>.ErrorResponse(APIMessages.TechnicalError);
         }
+
+        public async Task<ApiResponse<CityResposseModel>> AddCity(CityRequestModel model)
+        {
+            City city = new()
+            {
+                Id=Guid.NewGuid(),
+                CityName= model.CityName,  
+                StateId=model.StateId,
+                CreatedDate=DateTimeOffset.Now,
+                IsActive=true       
+
+            };
+            var retVal = await profileRepository.AddNewCity(city);
+            if (retVal > 0)
+                return ApiResponse<CityResposseModel>.SuccessResponse(new CityResposseModel() { Id = city.Id, CityName = city.CityName, StateId = city.StateId },"city added successfully");
+                return ApiResponse<CityResposseModel>.ErrorResponse(APIMessages.TechnicalError);
+        }
     }
 }

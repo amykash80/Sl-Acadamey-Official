@@ -4,13 +4,7 @@ using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Responses;
-using StreamlineAcademy.Domain.Shared;
 using StreamlineAcademy.Persistence.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StreamlineAcademy.Persistence.Repositories
 {
@@ -43,6 +37,12 @@ namespace StreamlineAcademy.Persistence.Repositories
             this.instructorReository = instructorReository;
             this.portalAdminRepository = portalAdminRepository;
             this.academyRepository = academyRepository;
+        }
+
+        public async Task<int> AddNewCity(City cityRequestModel)
+        {
+           await context.Cities.AddAsync(cityRequestModel);
+            return await context.SaveChangesAsync();
         }
 
         public async Task<AddressInfoResponseModel> GetAddressInfo(Guid? userId)

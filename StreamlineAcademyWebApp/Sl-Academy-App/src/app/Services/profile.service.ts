@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/Common/api-response';
 import { AddressResponse, ContactResponse, GetAddress, GetContact } from '../Models/Common/Profile';
 import { FileResponse } from '../Models/Common/fileResponse';
+import { CityRequestModel, CityResponseModel } from '../Models/Common/CityResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,9 @@ export class ProfileService {
   }
   changeProfilePicture(data:FormData){
     return this.http.post<ApiResponse<FileResponse>>(this.baseUrl+"Profile/changeProfilePicture",data)
+  }
+  AddNewCity(cityModel:CityRequestModel):Observable<ApiResponse<CityResponseModel>>{
+   return this.http.post<ApiResponse<CityResponseModel>>(this.baseUrl+"Profile/addNewCity",cityModel)
   }
 
 }

@@ -177,6 +177,7 @@
               name="stateId"
               #state="ngModel"
               (change)="filteredCities($event)"
+              (change)="onStateChange($event)"
               [(ngModel)]="academyRegistrationModel.stateId"
               required
               #stateInput
@@ -201,6 +202,7 @@
               <option value="">Select city</option>
               <option *ngFor="let city of filteredCitiesList" [value]="city.id">{{ city.cityName }}</option>
             </select>
+            <button type="button" class="btn btn-danger mt-2" (click)="openAddCityDialog(academyRegistrationModel.stateId!)">Add New City</button>
             <div *ngIf="city.touched && city.invalid" class="error-message">
               <div *ngIf="city.errors?.['required']">City is required</div>
             </div>

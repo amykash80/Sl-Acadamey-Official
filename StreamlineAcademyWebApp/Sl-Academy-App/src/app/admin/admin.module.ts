@@ -21,6 +21,7 @@ import { IsActivePipe } from '../Pipes/is-active.pipe';
 import { UpdateAcademytypeComponent } from './pages/update-academytype/update-academytype.component';
 import { EnquireAs } from '../Enums/EnquireAs';
 import { EnquireAsPipe } from '../Pipes/enquire-as.pipe';
+import { AddCityComponent } from './add-city/add-city.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { EnquireAsPipe } from '../Pipes/enquire-as.pipe';
     IsActivePipe,
     UpdateAcademytypeComponent,
     EnquireAsPipe,
+    AddCityComponent,
 
 
   ],
@@ -48,7 +50,8 @@ import { EnquireAsPipe } from '../Pipes/enquire-as.pipe';
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    
   ]
 })
 export class AdminModule { }
