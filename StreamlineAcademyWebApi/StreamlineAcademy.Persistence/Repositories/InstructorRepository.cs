@@ -152,24 +152,25 @@ namespace StreamlineAcademy.Persistence.Repositories
         public async Task<IEnumerable<CourseResponseModel>> GetAllIntructorCourses(Guid? id)
         {
             var courses = await context.Courses
-          .Join(context.Batches,
-          course => course.Id,
-         batch => batch.CourseId,
-         (course, batch) => new { Course = course, Batch = batch })
-        .Where(x => x.Batch.InstructorId == id)
-        .Select(x => new CourseResponseModel
-        {
-            Id = x.Course.Id,
-            Name = x.Course.Name,
-            Description = x.Course.Description,
-            DurationInWeeks = x.Course.DurationInWeeks,
-            AcademyName = x.Course.Academy!.AcademyName,
-            CategoryName = x.Course.CourseCategory!.CategoryName,
-            Fee = x.Course.Fee,
-            IsActive = x.Course.IsActive,
-
-        })
-     .ToListAsync();
+         .Join(context.Batches,
+             course => course.Id,
+             batch => batch.CourseId,
+             (course, batch) => new { Course = course, Batch = batch })
+         .Where(x => x.Batch.InstructorId == id)
+         .GroupBy(x => x.Course.Id)
+         .Select(g => g.First().Course)
+         .Select(course => new CourseResponseModel
+         {
+             Id = course.Id,
+             Name = course.Name,
+             Description = course.Description,
+             DurationInWeeks = course.DurationInWeeks,
+             AcademyName = course.Academy!.AcademyName,
+             CategoryName = course.CourseCategory!.CategoryName,
+             Fee = course.Fee,
+             IsActive = course.IsActive,
+         })
+         .ToListAsync();
 
             return courses;
 

@@ -5,6 +5,7 @@ using StreamlineAcademy.Application.Abstractions.IServices;
 using StreamlineAcademy.Application.Services;
 using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
+using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using StreamlineAcademy.Persistence.Data;
@@ -13,6 +14,9 @@ namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
+
     public class ProfileController : ControllerBase
     {
        
@@ -23,9 +27,9 @@ namespace StreamlineAcademy.Api.Controllers
             
             this.profileService = profileService;
         }
+
         [HttpGet("getContactInfo")] 
         public async Task<ApiResponse<ContactInfoResponseModel>> GetContactInfoById() => await profileService.GetContactInfoById();
-
         [HttpPut("updateContactInfo")]
         public async Task<ApiResponse<ContactUpdateModel>> UpdaContact(ContactUpdateModel model) => await profileService.UpdateContact(model);
 

@@ -43,6 +43,7 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpDelete("deleteCourseCategory/{id:guid}")]
         public async Task<ApiResponse<CourseCategoryResponseModel>> DeleteCourseCategory(Guid id) => await courseService.DeleteCourseCategory(id);
 
+        [Authorize(Roles = nameof(UserRole.Instructor) + "," + nameof(UserRole.AcademyAdmin) + ",")]
         [HttpGet("getAllCoursesByAcademyId")]
         public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesByAcademyId() => await courseService.GetAllCoursesByAcademyId();
     }

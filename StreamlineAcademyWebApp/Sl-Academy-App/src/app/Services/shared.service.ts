@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
+  
   private profilePictureChangedSource = new Subject<string>();
   profilePictureChanged$ = this.profilePictureChangedSource.asObservable();
   mobileSidebarOpen = signal(false);
@@ -65,8 +66,26 @@ export class SharedService {
   fireConfirmSwal(message: string) {
     return Swal.fire({
       title: message,
-      icon:'error',
-      text: "Do you really want to delete this record? This process cannot be undone.",
+      icon: 'error',
+      text: 'Do you really want to delete this record? This process cannot be undone.',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      customClass: {
+        popup: 'small-swal', // Define a custom class for the modal
+      },
+      didOpen: () => {
+        const modal = Swal.getPopup();
+        modal!.style.maxWidth = '500px'; // Adjust the max-width to make the modal smaller
+      },
+    });
+  }
+  fireConfirmRejectSwal(message: string) {
+    return Swal.fire({
+      title: message,
+      icon: 'error',
+      text: ' you want to reject this enquiry!.',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -99,7 +118,7 @@ export class SharedService {
   showLoader() {
     this.toast.loading('Logging IN');
   }
-  showDescriptorSwal(description:string){
+  showDescriptorSwal(description: string) {
     Swal.fire({
       title: description,
       showClass: {
@@ -107,15 +126,15 @@ export class SharedService {
           animate__animated
           animate__fadeInUp
           animate__faster
-        `
+        `,
       },
       hideClass: {
         popup: `
           animate__animated
           animate__fadeOutDown
           animate__faster
-        `
-      }
+        `,
+      },
     });
   }
   logOutUser() {
@@ -133,18 +152,18 @@ export class SharedService {
         this.router.navigate(['login']);
         const Toast = Swal.mixin({
           toast: true,
-          position: "top-end",
+          position: 'top-end',
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
           didOpen: (toast) => {
             toast.onmouseenter = Swal.stopTimer;
             toast.onmouseleave = Swal.resumeTimer;
-          }
+          },
         });
         Toast.fire({
-          icon: "success",
-          title: "logged out successfully"
+          icon: 'success',
+          title: 'logged out successfully',
         });
       }
     });

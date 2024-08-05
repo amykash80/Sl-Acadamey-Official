@@ -119,7 +119,7 @@ export class EnquirylistComponent {
     });
   }
   rejectEnquiry(enquiry: EnquiryUpdate) {
-    this.sharedService.fireConfirmSwal('Are You sure').then((result: any) => {
+    this.sharedService.fireConfirmRejectSwal('Are You sure').then((result: any) => {
       if (result.isConfirmed) {
         this.enquiryService.rejectEnquiry(enquiry).subscribe({
           next: (response) => {
