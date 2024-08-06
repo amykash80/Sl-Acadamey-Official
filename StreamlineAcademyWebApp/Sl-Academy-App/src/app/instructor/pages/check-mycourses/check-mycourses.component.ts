@@ -22,6 +22,7 @@ export class CheckMycoursesComponent {
   filteredCourseList: CourseResponse[] = [];
   searchText: string = '';
   showNoContent = false;
+  academyName: any;
   showTable = false;
   loadSpinner = true;
   currentPage: number = 1;
@@ -29,41 +30,52 @@ export class CheckMycoursesComponent {
   totalItems: number = 0;
   pages: number[] = [];
   displayedCourseList: CourseResponse[] = [];
+  academyId:any
   ngOnInit() {
     this.loadAllCourse();
   }
 
   loadAllCourse() {
     this.instructorServices.checkMyCourses().subscribe({
-        next: (response) => {
-            if (response.isSuccess) {
-                console.log(response);
-                this.loadSpinner = false;
-                this.showTable = true;
-                this.courseList = response.result;
-                this.filteredCourseList = this.courseList;
-                this.totalItems = this.filteredCourseList.length;
-                this.currentPage = 1;
-                this.updatePagination();
-                if (response.result.length === 0) {
-                    this.showTable = true; 
-                } else {
-                    this.showNoContent = false;
-                }
-            } else {
-                this.sharedService.showErrorToast(response.message);
-                    this.router.navigate(['/instructor/dashboard']);
-            }
-        },
-        error: (err: HttpErrorResponse) => {
-            if (err.status === HttpStatusCode.Unauthorized) {
-                console.log(err.message);
-            }
-            
-        },
+      next: (response) => {
+        if (response.isSuccess) {
+          console.log(response);
+          this.loadSpinner = false;
+          this.showTable = true;
+          this.courseList = response.result;
+          this.academyName = this.courseList[0].academyName;
+          this.getAcademyByName();
+          console.log(this.academyName);
+          this.filteredCourseList = this.courseList;
+          this.totalItems = this.filteredCourseList.length;
+          this.currentPage = 1;
+          this.updatePagination();
+          if (response.result.length === 0) {
+            this.showTable = true;
+          } else {
+            this.showNoContent = false;
+          }
+        } else {
+          this.sharedService.showErrorToast(response.message);
+          this.router.navigate(['/instructor/dashboard']);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === HttpStatusCode.Unauthorized) {
+          console.log(err.message);
+        }
+      },
     });
-}
+  }
 
+  getAcademyByName(){
+    console.log('inside method',this.academyName)
+   this.instructorServices.getAcademyByName(this.academyName).subscribe(res=>{
+    console.log(res)
+    this.academyId=res.result.id;
+    this.sharedService.setAcademyId(this.academyId)
+   })
+  }
 
   filterCourses(event: any) {
     const filterValue = event.target.value.toLowerCase();
@@ -75,6 +87,7 @@ export class CheckMycoursesComponent {
     this.currentPage = 1;
     this.updatePagination();
   }
+
   updatePagination(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
@@ -105,8 +118,8 @@ export class CheckMycoursesComponent {
               if (response.isSuccess) {
                 this.sharedService.showSuccessToast(response.message);
                 this.loadAllCourse();
-              } else if (response.result.length==0) {
-                this.sharedService.showErrorToast("No course found");
+              } else if (response.result.length == 0) {
+                this.sharedService.showErrorToast('No course found');
               }
             },
           });

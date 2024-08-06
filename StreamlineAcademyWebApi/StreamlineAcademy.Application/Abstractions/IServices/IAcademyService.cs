@@ -24,5 +24,7 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<AcademyTypeResponseModel>> DeleteAcademyType(Guid id);
         Task<ApiResponse<AcademyTypeResponseModel>> UpdateAcademyType(AcademyTypeUpdateModel request);
         Task<ApiResponse<AcademyTypeResponseModel>> GetAcademyTypeById(Guid id);
+
+        Task<ApiResponse<AcademyResponseModel>> GetAcademyByName(string academyName);   
     }
 }

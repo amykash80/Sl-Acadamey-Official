@@ -18,8 +18,8 @@ export class CourseService {
   createCourse(courseModel:CreateCourse):Observable<ApiResponse<CourseResponse>>{
     return this.http.post<ApiResponse<CourseResponse>>(this.baseUrl + "Course/createCourses",courseModel)
   }
-  courseList():Observable<ApiResponse<CourseResponse[]>>{
-    return this.http.get<ApiResponse<CourseResponse[]>>(this.baseUrl+"Course/getAllCoursesByAcademyId")
+  courseList(id:any):Observable<ApiResponse<CourseResponse[]>>{
+    return this.http.get<ApiResponse<CourseResponse[]>>(this.baseUrl+"Course/getAllCoursesByAcademyId/"+id)
   }
   updateCourse(courseUpdateModel:UpdateCourse):Observable<ApiResponse<CourseResponse>>{
     return this.http.put<ApiResponse<CourseResponse>>(this.baseUrl+"Course/update",courseUpdateModel)

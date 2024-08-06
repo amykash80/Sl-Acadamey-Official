@@ -1,16 +1,10 @@
-﻿using AutoMapper;
-using StreamlineAcademy.Application.Abstractions.Identity;
+﻿using StreamlineAcademy.Application.Abstractions.Identity;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Application.Abstractions.IServices;
 using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StreamlineAcademy.Application.Services
 {
@@ -186,9 +180,8 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<CourseResponseModel>.ErrorResponse(APIMessages.TechnicalError, HttpStatusCodes.InternalServerError);
         }
        
-        public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesByAcademyId()
+        public async Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesByAcademyId(Guid? academyId)
         {
-            var academyId = contextService.GetUserId();
             var courses = await courseRepository.GetAllCoursesByAcademyId(academyId);
             if (courses != null && courses.Any())
             {

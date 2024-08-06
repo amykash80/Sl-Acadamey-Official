@@ -1,4 +1,5 @@
-﻿using StreamlineAcademy.Domain.Entities;
+﻿using StreamlineAcademy.Application.Shared;
+using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
@@ -33,6 +34,7 @@ namespace StreamlineAcademy.Application.Abstractions.IRepositories
         Task<int> DeleteAcademyTypeAsync(Guid id);
         Task<int> UpdateAcademyType(AcademyType model);
         Task<AcademyTypeResponseModel> GetAcademyTypeById(Guid? id);
+		Task<Academy> GetAcademyByName(string academyName);
 
     }
 }

@@ -23,18 +23,21 @@ export class CourseListComponent {
   showNoContent=false;
   showTable=false;
   showSpinner=true;
+  userId:any
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
   displayedCourseList: CourseResponse[] = [];
   ngOnInit() {
+    this.getUserIdFromLocalStorage()
     this.loadAllCourse();
   }
 
   
   loadAllCourse() {
-    this.courseServices.courseList().subscribe({
+    console.log(this.userId)
+    this.courseServices.courseList(this.userId).subscribe({
       next: (response) => {
         if (response.isSuccess) {
           this.showSpinner = false;
@@ -64,7 +67,27 @@ export class CourseListComponent {
       },
     });
   }
-  
+  getUserIdFromLocalStorage(): void {
+    // Retrieve the object from local storage
+    const responseObjStr = localStorage.getItem('responseObj');
+
+    if (responseObjStr) {
+      try {
+        // Parse the JSON string to an object
+        const responseObj = JSON.parse(responseObjStr);
+
+        // Extract userId from the parsed object
+        this.userId = responseObj.userId;
+
+        // Use userId as needed
+        console.log('User ID:', this.userId);
+      } catch (error) {
+        console.error('Error parsing local storage object:', error);
+      }
+    } else {
+      console.warn('No responseObj found in local storage.');
+    }
+  }
  
   filterCourses(event:any){
     const filterValue = event.target.value.toLowerCase();

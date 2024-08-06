@@ -18,27 +18,43 @@ export class DashboardComponent {
     private courseService: CourseService,
     private studentService: StudentService,
     private instructorService: InstructorService
-  ) {
-    
-  }
-  ngOnInit(){
+  ) {}
+  userId: any;
+  ngOnInit() {
+    this.getUserIdFromLocalStorage();
     this.courseList();
     this.InstructorListItems();
     this.stdList();
   }
-
-   
 
   coursesList: CourseResponse[] = [];
   InstructorList: InstructorResponseModel[] = [];
   StudentList: StudentResponseModel[] = [];
 
   courseList() {
-    this.courseService.courseList().subscribe((d) => {
+    this.courseService.courseList(this.userId).subscribe((d) => {
       this.coursesList = d.result;
     });
   }
-   InstructorListItems() {
+  getUserIdFromLocalStorage(): void {
+    const responseObjStr = localStorage.getItem('responseObj');
+
+    if (responseObjStr) {
+      try {
+        const responseObj = JSON.parse(responseObjStr);
+
+        this.userId = responseObj.userId;
+
+        console.log('User ID:', this.userId);
+      } catch (error) {
+        console.error('Error parsing local storage object:', error);
+      }
+    } else {
+      console.warn('No responseObj found in local storage.');
+    }
+  }
+
+  InstructorListItems() {
     this.instructorService.instructorList().subscribe((i) => {
       this.InstructorList = i.result;
     });

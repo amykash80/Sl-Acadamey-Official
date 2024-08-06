@@ -24,6 +24,8 @@ namespace StreamlineAcademy.Application.Abstractions.IServices
         Task<ApiResponse<CourseCategoryResponseModel>> DeleteCourseCategory(Guid id);
 
         Task<ApiResponse<CourseCategoryResponseModel>> GetCourseCategoryById(Guid id);
-        Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesByAcademyId();
+        Task<ApiResponse<IEnumerable<CourseResponseModel>>> GetAllCoursesByAcademyId(Guid? academyId);
+
+
     }
 }

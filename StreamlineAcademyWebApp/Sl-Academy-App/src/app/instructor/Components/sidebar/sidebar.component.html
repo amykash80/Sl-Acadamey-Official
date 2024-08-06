@@ -68,7 +68,7 @@
           <i class="fas fa-user-graduate" style='color:red'></i> Student
         </a>
         <div class="dropdown-menu" aria-labelledby="studentsMenuButton">
-          <a class="dropdown-item" routerLink="/instructor/register-student">Add Student</a>
+          <a class="dropdown-item" [routerLink]="['/instructor/register-student',acdemyId]">Add Student</a>
           <a class="dropdown-item"  [routerLink]="['/instructor/student-list']">Students List</a>
         </div>
       </li>

@@ -28,6 +28,7 @@ export class SharedService {
   constructor() {}
   toast = inject(HotToastService);
   router = inject(Router);
+   academyId: any;
   academyService = inject(AcademyService);
   enquiryService = inject(EnquiryService);
   academyList: AcademyResponse[] = [];
@@ -117,6 +118,15 @@ export class SharedService {
   }
   showLoader() {
     this.toast.loading('Logging IN');
+  }
+
+
+  setAcademyId(id: string): void {
+    this.academyId = id;
+  }
+
+  getAcademyId(): string | undefined {
+    return this.academyId;
   }
   showDescriptorSwal(description: string) {
     Swal.fire({

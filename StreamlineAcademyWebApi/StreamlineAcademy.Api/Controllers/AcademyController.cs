@@ -15,7 +15,8 @@ namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = nameof(UserRole.SuperAdmin))]
+    [Authorize(Roles = $"{nameof(UserRole.AcademyAdmin)},{nameof(UserRole.Instructor)}")]
+
     public class AcademyController : ControllerBase
     {
         private readonly IAcademyService academyService;
@@ -71,6 +72,9 @@ namespace StreamlineAcademy.Api.Controllers
 
         [HttpGet("getAcademyTypeById/{id:guid}")]
         public async Task<ApiResponse<AcademyTypeResponseModel>> GetAcademyTypeById(Guid id) => await academyService.GetAcademyTypeById(id);
+
+        [HttpGet("getAcademyByName")]
+        public async Task<ApiResponse<AcademyResponseModel>> GetAcademyByName(string academyName) =>await academyService.GetAcademyByName(academyName);
     }
 
 }

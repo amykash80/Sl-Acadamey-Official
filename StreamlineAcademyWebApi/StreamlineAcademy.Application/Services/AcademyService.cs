@@ -296,6 +296,18 @@ namespace StreamlineAcademy.Application.Services
             return ApiResponse<AcademyTypeResponseModel>.SuccessResponse(responseModel);
         }
 
+        public async  Task<ApiResponse<AcademyResponseModel>> GetAcademyByName(string academyName)
+        {
+           var academy= await academyRepository.GetAcademyByName(academyName);
+            if(academy is null)
+                return ApiResponse<AcademyResponseModel>.ErrorResponse("academy not found",HttpStatusCodes.NotFound);  
+            
+            return ApiResponse<AcademyResponseModel>.SuccessResponse(new AcademyResponseModel
+            {
+                AcademyName=academy.AcademyName,
+                Id=academy.Id   
+            },"Academy Found",HttpStatusCodes.Found);
+        }
     }
 }
 

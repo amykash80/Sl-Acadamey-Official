@@ -25,7 +25,7 @@ const routes: Routes = [
     {path:"attendence",component:AttendenceComponent},
     {path:"notification/:scheduleId",component:NotificationComponent},
     {path:"attendence/:scheduleId",component:AttendenceComponent},
-    {path:"register-student",component:RegisterStudentComponent}
+    {path:"register-student/:academyId",component:RegisterStudentComponent}
   ]
   }
 ];

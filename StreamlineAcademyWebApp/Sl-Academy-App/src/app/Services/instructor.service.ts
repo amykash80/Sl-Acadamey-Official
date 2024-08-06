@@ -16,6 +16,7 @@ import {
   StudentResponseModel,
 } from '../Models/student/students';
 import { BatchScheduleResponseModel } from '../Models/BatchSchedule/BatchSchedule';
+import { AcademyResponse } from '../Models/Academy/Academy';
 
 @Injectable({
   providedIn: 'root',
@@ -97,6 +98,10 @@ export class InstructorService {
       this.baseUrl + 'Instructor/sendNotification',
       body
     );
+  }
+
+  getAcademyByName(academyName:any):Observable<ApiResponse<AcademyResponse>>{
+  return this.http.get<ApiResponse<AcademyResponse>>(this.baseUrl+`Academy/getAcademyByName?academyName=${academyName}`)
   }
 
   saveAttendance(data: any): Observable<any> {

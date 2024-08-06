@@ -246,6 +246,13 @@ namespace StreamlineAcademy.Persistence.Repositories
             return new AcademyTypeResponseModel();
         }
 
+        public async Task<Academy> GetAcademyByName(string academyName)
+        {
+		    var academybyName= await context.Academies.FirstOrDefaultAsync(x=>x.AcademyName == academyName);
+			return academybyName!;	
+			
+        }
+
     }
 }
     

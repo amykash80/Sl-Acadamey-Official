@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { StudentService } from '../../../Services/student.service';
 import { CountryService } from '../../../Services/country.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../../Services/shared.service';
 import { AddStudent } from '../../../Models/student/students';
 import { Skill } from '../../../Enums/skill';
 import { CourseService } from '../../../Services/course.service';
 import { CourseResponse } from '../../../Models/Academy/Course';
 import { HttpErrorResponse } from '@angular/common/http';
+import { __param } from 'tslib';
 
 @Component({
   selector: 'app-register-student',
@@ -20,8 +21,9 @@ export class RegisterStudentComponent {
   courseService = inject(CourseService);
   router = inject(Router);
   sharedService = inject(SharedService);
-  selectedItems=''
-  dropdownList:any
+  activatedRoute = inject(ActivatedRoute);
+  selectedItems = '';
+  dropdownList: any;
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
@@ -32,44 +34,54 @@ export class RegisterStudentComponent {
   studentModel: AddStudent = new AddStudent();
   loadSpinner = false;
   courses: CourseResponse[] = [];
+  instructorAcademyCourse: CourseResponse[] = [];
   selectedCourses: any[] = [];
+  userId: any;
+  academyIdByInstructor: any;
   constructor() {
-    
+    this.activatedRoute.params.subscribe((__param) => {
+      this.academyIdByInstructor = __param['academyId'];
+      console.log(
+        'academyId passed from Instructor component is',
+        this.academyIdByInstructor
+      );
+    });
   }
 
- dropdownSettings = {
+  dropdownSettings = {
     singleSelection: false,
     idField: 'id',
     textField: 'name',
     selectAllText: 'Select All',
     unSelectAllText: 'UnSelect All',
     itemsShowLimit: 3,
-    allowSearchFilter: true
+    allowSearchFilter: true,
   };
- 
+
   ngOnInit(): void {
+    this.getUserIdFromLocalStorage();
     this.getAllCountries();
     this.getAllStates();
     this.getAllCities();
     this.getAllCourses();
   }
-  goBack(){
-    window.history.back()
+  goBack() {
+    window.history.back();
   }
-  onItemSelect(item:any){
+  onItemSelect(item: any) {
     if (!this.studentModel.courseId) {
       this.studentModel.courseId = [];
     }
     this.studentModel.courseId.push(item.id);
   }
-  onSelectAll(items:any){
+  onSelectAll(items: any) {
     if (!this.studentModel.courseId) {
       this.studentModel.courseId = [];
     }
     items.forEach((item: any) => {
       if (!this.studentModel.courseId!.includes(item.id)) {
         this.studentModel.courseId!.push(item.id);
-        console.log(this.studentModel.courseId)
+        console.log(this.studentModel.courseId);
       }
     });
   }
@@ -78,14 +90,58 @@ export class RegisterStudentComponent {
     if (course.selected) {
       this.selectedCourses.push(course);
     } else {
-      this.selectedCourses = this.selectedCourses.filter(selectedCourse => selectedCourse.id !== course.id);
+      this.selectedCourses = this.selectedCourses.filter(
+        (selectedCourse) => selectedCourse.id !== course.id
+      );
     }
   }
   getAllCourses() {
-    this.courseService.courseList().subscribe((courses) => {
-      this.courses = courses.result;
-      console.log(this.courses)
-    });
+    const responseObj = JSON.parse(localStorage.getItem('responseObj') || '{}');
+    const userRole = responseObj.userRole;
+    if (userRole === 2 || userRole === 3) {
+      let idToUse: string | undefined;
+
+      if (userRole === 2) {
+        idToUse = this.userId;
+      } else if (userRole === 3) {
+        idToUse = this.academyIdByInstructor;
+      }
+      if (idToUse) {
+        this.courseService.courseList(idToUse).subscribe((courses) => {
+          this.courses = courses.result;
+          console.log(this.courses);
+        });
+      } else {
+        console.error('ID is not defined');
+      }
+    } else {
+      console.error('Invalid userRole');
+    }
+  }
+  getInstructorAcademyCourses() {
+    this.courseService
+      .courseList(this.academyIdByInstructor)
+      .subscribe((courses) => {
+        this.courses = courses.result;
+        console.log(this.courses);
+      });
+  }
+  getUserIdFromLocalStorage(): void {
+    const responseObjStr = localStorage.getItem('responseObj');
+
+    if (responseObjStr) {
+      try {
+        const responseObj = JSON.parse(responseObjStr);
+
+        this.userId = responseObj.userId;
+
+        console.log('User ID:', this.userId);
+      } catch (error) {
+        console.error('Error parsing local storage object:', error);
+      }
+    } else {
+      console.warn('No responseObj found in local storage.');
+    }
   }
   getAllCountries() {
     this.countryService.getCountries().subscribe((countries) => {
@@ -114,9 +170,9 @@ export class RegisterStudentComponent {
       (city) => city.sateId === this.selectedStateId
     );
   }
- 
+
   addStudent() {
-    console.log(this.studentModel)
+    console.log(this.studentModel);
     this.loadSpinner = true;
     this.studentService.saveStudent(this.studentModel).subscribe({
       next: (data) => {
@@ -130,7 +186,7 @@ export class RegisterStudentComponent {
         }
       },
       error: (err: HttpErrorResponse) => {
-        this.loadSpinner=false
+        this.loadSpinner = false;
         console.log(err);
       },
     });
