@@ -177,9 +177,18 @@ export class RegisterStudentComponent {
     this.studentService.saveStudent(this.studentModel).subscribe({
       next: (data) => {
         if (data.isSuccess) {
-          this.sharedService.showSuccessToast(data.message);
           this.loadSpinner = false;
-          this.router.navigate(['/academy/student-list']);
+          const responseObj = JSON.parse(localStorage.getItem('responseObj') || '{}');
+          const userRole = responseObj.userRole;
+          if(userRole==2){
+            this.sharedService.showSuccessToast("The student has been added successfully.");
+            this.router.navigate(['/academy/student-list']);
+          }
+          else{
+            this.router.navigate(['/instructor/dashboard']);
+          this.sharedService.showSuccessToast("The student has been added to the academy successfully.");
+
+          }
         } else {
           this.sharedService.showErrorToast(data.message);
           this.loadSpinner = false;
