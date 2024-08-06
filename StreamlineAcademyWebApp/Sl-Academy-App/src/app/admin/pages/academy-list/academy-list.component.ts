@@ -71,6 +71,8 @@ export class AcademyListComponent {
   }
   
   updatePagination(): void {
+    console.log("inside academy list",this.totalItems);
+    
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
     this.displayedAcademyList = this.filteredAcademyList.slice(startIndex, endIndex);

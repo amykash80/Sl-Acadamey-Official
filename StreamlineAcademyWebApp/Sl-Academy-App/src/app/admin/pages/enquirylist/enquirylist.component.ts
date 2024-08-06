@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { EnquiryService } from '../../../Services/enquiry.service';
 import {
   Enquiry,
@@ -26,13 +26,14 @@ export class EnquirylistComponent {
   searchText: string = '';
   pending: boolean = true;
   registrationStatus = RegistrationStatus;
-  enquire=EnquireAs;
+  enquire = EnquireAs;
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
   pages: number[] = [];
   showSpinner = true;
   showTable = false;
+
   ngOnInit() {
     this.loadAllEnquiries();
   }
@@ -54,7 +55,6 @@ export class EnquirylistComponent {
     });
   }
 
-
   getStatusClass(status: RegistrationStatus): string {
     switch (status) {
       case RegistrationStatus.Rejected:
@@ -67,26 +67,38 @@ export class EnquirylistComponent {
         return 'chip';
     }
   }
+
   filterEnquiries(event: any): void {
-    if (!this.searchText.trim()) {
+    const filterValue = event.target.value.toLowerCase();
+    console.log('Filter value:', filterValue);
+
+    if (!filterValue) {
+      console.log('Search box is empty, resetting the list.');
       this.filteredEnquiryList = [...this.enquirylist];
     } else {
-      const searchTerm = this.searchText.toLowerCase();
+      console.log('Filtering enquiries...');
       this.filteredEnquiryList = this.enquirylist.filter(
         (enquiry) =>
-          enquiry.name!.toLowerCase().startsWith(event.target.value) ||
-          enquiry.email!.toLowerCase().startsWith(event.target.value) ||
-          enquiry.phoneNumber!.toLowerCase().startsWith(event.target.value)
+          enquiry.name?.toLowerCase().startsWith(filterValue) ||
+          enquiry.email?.toLowerCase().startsWith(filterValue) ||
+          enquiry.phoneNumber?.toLowerCase().startsWith(filterValue)
       );
     }
+
+    console.log('Filtered Enquiry List:', this.filteredEnquiryList);
     this.totalItems = this.filteredEnquiryList.length;
     this.currentPage = 1;
-    this.updatePagination();
+    this.updatePagination(filterValue?false:true);
   }
-  updatePagination(): void {
+
+  updatePagination(isSlice:boolean=true): void {
+    console.log('inside enquiry list', this.totalItems);
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
-    this.filteredEnquiryList = this.enquirylist.slice(startIndex, endIndex);
+    if(isSlice){
+      this.filteredEnquiryList = this.enquirylist.slice(startIndex, endIndex);
+    }
+   
     this.pages = Array(Math.ceil(this.totalItems / this.itemsPerPage))
       .fill(0)
       .map((x, i) => i + 1);
@@ -119,21 +131,23 @@ export class EnquirylistComponent {
     });
   }
   rejectEnquiry(enquiry: EnquiryUpdate) {
-    this.sharedService.fireConfirmRejectSwal('Are You sure').then((result: any) => {
-      if (result.isConfirmed) {
-        this.enquiryService.rejectEnquiry(enquiry).subscribe({
-          next: (response) => {
-            console.log(response);
+    this.sharedService
+      .fireConfirmRejectSwal('Are You sure')
+      .then((result: any) => {
+        if (result.isConfirmed) {
+          this.enquiryService.rejectEnquiry(enquiry).subscribe({
+            next: (response) => {
+              console.log(response);
 
-            if (response.isSuccess) {
-              this.sharedService.showSuccessToast(response.message);
-              this.loadAllEnquiries();
-            } else {
-              this.sharedService.showErrorToast(response.message);
-            }
-          },
-        });
-      }
-    });
+              if (response.isSuccess) {
+                this.sharedService.showSuccessToast(response.message);
+                this.loadAllEnquiries();
+              } else {
+                this.sharedService.showErrorToast(response.message);
+              }
+            },
+          });
+        }
+      });
   }
 }

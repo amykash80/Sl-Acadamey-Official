@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.Timeouts;
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Ocsp;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
 using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
@@ -151,30 +153,66 @@ namespace StreamlineAcademy.Persistence.Repositories
 
         public async Task<IEnumerable<CourseResponseModel>> GetAllIntructorCourses(Guid? id)
         {
-            var courses = await context.Courses
-         .Join(context.Batches,
-             course => course.Id,
-             batch => batch.CourseId,
-             (course, batch) => new { Course = course, Batch = batch })
-         .Where(x => x.Batch.InstructorId == id)
-         .GroupBy(x => x.Course.Id)
-         .Select(g => g.First().Course)
-         .Select(course => new CourseResponseModel
-         {
-             Id = course.Id,
-             Name = course.Name,
-             Description = course.Description,
-             DurationInWeeks = course.DurationInWeeks,
-             AcademyName = course.Academy!.AcademyName,
-             CategoryName = course.CourseCategory!.CategoryName,
-             Fee = course.Fee,
-             IsActive = course.IsActive,
-         })
-         .ToListAsync();
+            if (id == null)
+            {
+                
+                return Enumerable.Empty<CourseResponseModel>();
+            }
 
-            return courses;
+            try
+            {
+                var courses = await context.Batches
+                    .Where(b => b.InstructorId == id)
+                    .Join(context.Courses,
+                          batch => batch.CourseId,
+                          course => course.Id,
+                          (batch, course) => course)
+                    .Distinct()
+                    .Select(course => new CourseResponseModel
+                    {
+                        Id = course.Id,
+                        Name = course.Name,
+                        Description = course.Description,
+                        DurationInWeeks = course.DurationInWeeks,
+                        AcademyName = course.Academy != null ? course.Academy.AcademyName : "Unknown",
+                        CategoryName = course.CourseCategory != null ? course.CourseCategory.CategoryName : "Unknown",
+                        Fee = course.Fee,
+                        IsActive = course.IsActive,
+                    })
+                    .ToListAsync();
 
+      
+                if (courses == null)
+                {
+                    Console.WriteLine("Courses is null.");
+                }
+                else if (!courses.Any())
+                {
+                    Console.WriteLine("No courses found.");
+                }
+                else
+                {
+                    Console.WriteLine($"Found {courses.Count} courses.");
+                }
+
+                return courses!;
+            }
+            catch (KeyNotFoundException ex)
+            {
+          
+                Console.WriteLine($"KeyNotFoundException: {ex.Message}");
+                throw; // Re-throw the exception to preserve the stack trace
+            }
+            catch (Exception ex)
+            {
+                // Log unexpected exceptions
+                Console.WriteLine($"Exception: {ex.Message}");
+                throw; // Re-throw the exception to preserve the stack trace
+            }
         }
+
+
+
 
         public async Task<List<InstructorBatchResponseModel>> GetInstructorBatches(Guid? instructorId)
         {

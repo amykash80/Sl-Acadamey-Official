@@ -16,7 +16,7 @@ export class HeaderComponent {
   loggedInUserDetails:any = {};
   userRole!:UserRole
   filepath=''
-  apiBaseUrl: string = 'http://localhost:5232';
+  apiBaseUrl: string = 'https://api.streamlineacademies.com';
   sidebarOpen = this.shared.mobileSidebarOpen;
   toggleSidebar() {
     this.shared.toggleSidebar();

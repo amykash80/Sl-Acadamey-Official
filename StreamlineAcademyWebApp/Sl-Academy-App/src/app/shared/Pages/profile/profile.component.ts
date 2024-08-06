@@ -42,7 +42,7 @@ export class ProfileComponent {
   changeProfile!:File
   fileId: string = '';
   filePath: string = '';
-  apiBaseUrl: string = 'http://localhost:5232';
+  apiBaseUrl: string = 'https://api.streamlineacademies.com';
   module!: AppModule;
   countries: any[] = [];
   states: any[] = [];
