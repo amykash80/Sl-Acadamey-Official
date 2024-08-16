@@ -13,7 +13,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
-  
   private profilePictureChangedSource = new Subject<string>();
   profilePictureChanged$ = this.profilePictureChangedSource.asObservable();
   mobileSidebarOpen = signal(false);
@@ -28,7 +27,7 @@ export class SharedService {
   constructor() {}
   toast = inject(HotToastService);
   router = inject(Router);
-   academyId: any;
+  academyId: any;
   academyService = inject(AcademyService);
   enquiryService = inject(EnquiryService);
   academyList: AcademyResponse[] = [];
@@ -74,11 +73,11 @@ export class SharedService {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes',
       customClass: {
-        popup: 'small-swal', // Define a custom class for the modal
+        popup: 'small-swal',
       },
       didOpen: () => {
         const modal = Swal.getPopup();
-        modal!.style.maxWidth = '500px'; // Adjust the max-width to make the modal smaller
+        modal!.style.maxWidth = '500px'; 
       },
     });
   }
@@ -92,11 +91,11 @@ export class SharedService {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes',
       customClass: {
-        popup: 'small-swal', // Define a custom class for the modal
+        popup: 'small-swal', 
       },
       didOpen: () => {
         const modal = Swal.getPopup();
-        modal!.style.maxWidth = '500px'; // Adjust the max-width to make the modal smaller
+        modal!.style.maxWidth = '500px'; 
       },
     });
   }
@@ -108,7 +107,6 @@ export class SharedService {
       confirmButtonText: 'Save',
       denyButtonText: `Don't save`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('Saved!', '', 'success');
       } else if (result.isDenied) {
@@ -119,7 +117,6 @@ export class SharedService {
   showLoader() {
     this.toast.loading('Logging IN');
   }
-
 
   setAcademyId(id: string): void {
     this.academyId = id;

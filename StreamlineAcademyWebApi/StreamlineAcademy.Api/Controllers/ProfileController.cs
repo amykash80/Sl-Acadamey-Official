@@ -15,8 +15,6 @@ namespace StreamlineAcademy.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-
-
     public class ProfileController : ControllerBase
     {
        

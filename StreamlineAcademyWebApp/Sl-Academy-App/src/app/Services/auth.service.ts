@@ -10,29 +10,47 @@ import { ForgotPasswordModel } from '../Models/Common/ForgotPassword';
 import { ResetPasswordModel } from '../Models/Common/ResetPassword';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpCleint:HttpClient) { }
-  baseUrl:string=environment.apiUrl
+  constructor(private httpCleint: HttpClient) {}
+  baseUrl: string = environment.apiUrl;
 
-  login(loginModel:Login):Observable<ApiResponse<LoginResponse>>{
-    return this.httpCleint.post<ApiResponse<LoginResponse>>(this.baseUrl+"Auth/login",loginModel)
+  login(loginModel: Login): Observable<ApiResponse<LoginResponse>> {
+    return this.httpCleint.post<ApiResponse<LoginResponse>>(
+      this.baseUrl + 'Auth/login',
+      loginModel
+    );
   }
-   enquiry(enquiryModel:Enquiry):Observable<ApiResponse<EnquiryResponse>>{
-    return this.httpCleint.post<ApiResponse<EnquiryResponse>>(this.baseUrl+"Enquiry/add",enquiryModel)
-   }
-   changePassword(changePasswordModel:ChangePassword):Observable<ApiResponse<string>>{
-    return this.httpCleint.post<ApiResponse<string>>(this.baseUrl+"Auth/changePassword",changePasswordModel)
-   }
-   resetPassword(resetPasswordModel:ResetPasswordModel):Observable<ApiResponse<string>>{
-    return this.httpCleint.post<ApiResponse<string>>(this.baseUrl+"Auth/resetpassword",resetPasswordModel)
-   }
-   isUserAuthenticated(): boolean {
+  enquiry(enquiryModel: Enquiry): Observable<ApiResponse<EnquiryResponse>> {
+    return this.httpCleint.post<ApiResponse<EnquiryResponse>>(
+      this.baseUrl + 'Enquiry/add',
+      enquiryModel
+    );
+  }
+  changePassword(
+    changePasswordModel: ChangePassword
+  ): Observable<ApiResponse<string>> {
+    return this.httpCleint.post<ApiResponse<string>>(
+      this.baseUrl + 'Auth/changePassword',
+      changePasswordModel
+    );
+  }
+  resetPassword(
+    resetPasswordModel: ResetPasswordModel
+  ): Observable<ApiResponse<string>> {
+    return this.httpCleint.post<ApiResponse<string>>(
+      this.baseUrl + 'Auth/resetpassword',
+      resetPasswordModel
+    );
+  }
+  isUserAuthenticated(): boolean {
     return !!localStorage.getItem('streamlineToken');
   }
-  forgotPassword(model:ForgotPasswordModel):Observable<ApiResponse<string>>{
-   return this.httpCleint.post<ApiResponse<string>>(this.baseUrl+"Auth/forgotPassword",model)
+  forgotPassword(model: ForgotPasswordModel): Observable<ApiResponse<string>> {
+    return this.httpCleint.post<ApiResponse<string>>(
+      this.baseUrl + 'Auth/forgotPassword',
+      model
+    );
   }
-
 }

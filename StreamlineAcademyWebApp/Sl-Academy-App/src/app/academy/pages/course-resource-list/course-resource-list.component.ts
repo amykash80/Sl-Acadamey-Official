@@ -22,7 +22,7 @@ export class CourseResourceListComponent {
   courseService=inject(CourseService)
   sharedService=inject(SharedService)
   courseId:string=''
-  apiBaseUrl: string = environment.apiUrl;
+  apiBaseUrl: string = 'https://api.streamlineacademies.com'
   courseResourceList:CourseResourceResponse[]=[];
   filteredResourceList: CourseResourceResponse[] = [];
   searchText: string = '';
@@ -69,10 +69,9 @@ getcourseById(){
           }
           console.log(this.courseResourceList);
         } else {
-          this.sharedService.NoDataSwal(response.message);
-          setTimeout(() => {
-            this.router.navigate(['/academy/course-list']);
-          }, 2000);
+          this.sharedService.showErrorToast("No resources found");
+          this.router.navigate(['/academy/course-list']);
+         
         }
       },
       error: (err: HttpErrorResponse) => {

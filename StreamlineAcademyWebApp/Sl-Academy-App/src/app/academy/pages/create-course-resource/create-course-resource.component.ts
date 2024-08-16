@@ -28,7 +28,7 @@ export class CreateCourseResourceComponent {
   courses: CourseResourceResponse[] = [];
   courseId: string = '';
   courseRes:CourseResponse=new CourseResponse()
-  loadSpinner=true
+  loadSpinner=false
   type!:CourseResourceType
 
 
@@ -49,6 +49,7 @@ export class CreateCourseResourceComponent {
     })
     }
   createCourseResource(event: Event) {
+    this.loadSpinner=true;
     this.courseResourceModel.CourseId = this.courseId;
     let myForm = event.target as HTMLFormElement;
     console.log(myForm)
@@ -59,7 +60,7 @@ export class CreateCourseResourceComponent {
       .subscribe((res) => {
         if (res.isSuccess) {
           this.loadSpinner=false
-          this.sharedService.showSuccessToast(res.message);
+          this.sharedService.showSuccessToast("resource successfully created");
           this.router.navigate(['/academy/course-resource-list',this.courseId])
         }
         else{

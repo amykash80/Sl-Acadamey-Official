@@ -171,7 +171,7 @@ export class ProfileComponent {
     this.file = event.target.files[0];
     this.uploadImage();
   }
-
+  
   uploadImage() {
     const form = new FormData();
     form.append('File', this.file);

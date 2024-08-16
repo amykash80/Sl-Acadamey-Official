@@ -5,6 +5,7 @@ import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryService } from '../../../Services/country.service';
 import { AddStudent, StudentResponseModel, UpdateStudentModel } from '../../../Models/student/students';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-student',
@@ -100,9 +101,16 @@ export class UpdateStudentComponent {
 
       }
     },
-    error:(err)=>{
-      console.log(err)
-      this.loadSpinner=false
+    error: (err:HttpErrorResponse) => {
+      if(err.status==HttpStatusCode.Forbidden){
+        console.log(err.status)
+        this.sharedService.showErrorToast("Forbideen")
+        this.loadSpinner=false
+      }
+      else{
+        this.sharedService.showErrorToast("something went wrong,try again later")
+        this.loadSpinner=false
+      }
     }
   })
   }

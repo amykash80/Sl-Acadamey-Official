@@ -1,3 +1,13 @@
+<div class="col mt-2">
+  <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 custom-breadcrumb">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item" routerLink="/academy/dashboard">academy</li>
+      <li class="breadcrumb-item " style="cursor: pointer;" [routerLink]="['/academy/course-resource-list',courseId]" aria-current="page">{{courseName}}</li>
+      <li class="breadcrumb-item active" aria-current="page">update-resource</li>
+
+    </ol>
+  </nav>
+</div>
 <div class="container my-5">
   <div class="row justify-content-center">
     <div>

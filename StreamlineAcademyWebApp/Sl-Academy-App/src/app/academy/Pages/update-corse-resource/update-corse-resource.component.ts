@@ -3,6 +3,7 @@ import { CourseresourceService } from '../../../Services/courseresource.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseResourceResponse, UpdateCourseResource } from '../../../Models/CourseResource/CourseResource';
 import { SharedService } from '../../../Services/shared.service';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-corse-resource',
@@ -16,6 +17,7 @@ export class UpdateCorseResourceComponent {
   resourceModel:CourseResourceResponse=new CourseResourceResponse();
   updateResouceModel:UpdateCourseResource=new UpdateCourseResource();
   selectedFile: File | null = null;
+  courseName:any
   loadSpinner: boolean = false;
   constructor(
     private courseResourseService: CourseresourceService,
@@ -37,7 +39,8 @@ export class UpdateCorseResourceComponent {
       .subscribe({
         next: (response) => {
           this.resourceModel=response.result
-          console.log(this.resourceModel);
+          this.courseName=this.resourceModel.name 
+          console.log(this.courseName)
           
         },
       });
@@ -77,30 +80,18 @@ export class UpdateCorseResourceComponent {
           this.loadSpinner=false;
         }
       },
-      error: (err) => {
-        console.error(err);
+      error: (err:HttpErrorResponse) => {
+        if(err.status==HttpStatusCode.Forbidden){
+          console.log(err.status)
+          this.sharedServcice.showErrorToast("Forbideen")
+          this.loadSpinner=false
+        }
+        else{
+          this.sharedServcice.showErrorToast("something went wrong,try again later")
+          this.loadSpinner=false
+        }
       }
     });
   }
 }
-//   updateCourseResource(event: Event) {
-//   let myForm=event.target as HTMLFormElement
-//    const formData=new FormData(myForm);
-//    formData.append("CourseId",this.courseId);
-//    formData.append("Id",this.resourceId);
-//    this.courseResourseService.updateCourseResource(formData).subscribe({
-//     next:(response)=>{
-//       if(response.isSuccess){
-//         this.sharedServcice.showSuccessToast(response.message);
-//         this.router.navigate(['/academy/course-resource-list',this.courseId])
-//       }
-//       else{
-//         this.sharedServcice.showErrorToast(response.message)
-//       }
-//     },
-//     error:(err)=>{
-//       console.log(err)
-//     }
-//    })
-//   }
-// }
+

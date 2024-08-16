@@ -5,6 +5,7 @@ import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryService } from '../../../Services/country.service';
 import { Skill } from '../../../Enums/skill';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-instructor',
@@ -106,8 +107,16 @@ export class UpdateInstructorComponent {
 
       }
     },
-    error:(err)=>{
-      console.log(err)
+    error: (err:HttpErrorResponse) => {
+      if(err.status==HttpStatusCode.Forbidden){
+        console.log(err.status)
+        this.sharedService.showErrorToast("Forbideen")
+        this.loadSpinner=false
+      }
+      else{
+        this.sharedService.showErrorToast("something went wrong,try again later")
+        this.loadSpinner=false
+      }
     }
   })
   }

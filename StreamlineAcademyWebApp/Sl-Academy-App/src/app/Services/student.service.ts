@@ -1,66 +1,94 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
-import { AttendanceResponseModel, SaveAttendence, StudentResponseModel, StudentScheduleResponseModel, UpdateStudentModel } from '../Models/student/students';
+import {
+  AttendanceResponseModel,
+  SaveAttendence,
+  StudentResponseModel,
+  StudentScheduleResponseModel,
+  UpdateStudentModel,
+} from '../Models/student/students';
 import { ApiResponse } from '../Models/Common/api-response';
 import { Observable } from 'rxjs';
 import { AddStudent } from '../Models/student/students';
 import { BatchScheduleResponseModel } from '../Models/BatchSchedule/BatchSchedule';
 import { CourseResponse } from '../Models/Academy/Course';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentService {
+  constructor(private http: HttpClient) {}
+  baseUrl: string = environment.apiUrl;
 
-  constructor(private http:HttpClient) { }
-  baseUrl:string = environment.apiUrl
-
-  studentList():Observable<ApiResponse<StudentResponseModel[]>>{
-    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/getAll-Students")
+  studentList(): Observable<ApiResponse<StudentResponseModel[]>> {
+    return this.http.get<ApiResponse<StudentResponseModel[]>>(
+      this.baseUrl + 'Student/getAll-Students'
+    );
   }
-  saveStudent(studentModel:AddStudent):Observable<any>{
-    return this.http.post<any>(this.baseUrl+"Student/register-student",studentModel)
+  saveStudent(studentModel: AddStudent): Observable<any> {
+    return this.http.post<any>(
+      this.baseUrl + 'Student/register-student',
+      studentModel
+    );
   }
-  getStudentById(id:string):Observable<ApiResponse<StudentResponseModel>>{
-    return this.http.get<ApiResponse<StudentResponseModel>>(this.baseUrl+"Student/getStudentById/"+id)
-  
+  getStudentById(id: string): Observable<ApiResponse<StudentResponseModel>> {
+    return this.http.get<ApiResponse<StudentResponseModel>>(
+      this.baseUrl + 'Student/getStudentById/' + id
+    );
   }
-  updateStudent(stdModel:UpdateStudentModel):Observable<ApiResponse<StudentResponseModel>>{
+  updateStudent(
+    stdModel: UpdateStudentModel
+  ): Observable<ApiResponse<StudentResponseModel>> {
     debugger;
     console.log();
-    
-  return this.http.put<ApiResponse<StudentResponseModel>>(this.baseUrl + "Student/updateStudent",stdModel)
+
+    return this.http.put<ApiResponse<StudentResponseModel>>(
+      this.baseUrl + 'Student/updateStudent',
+      stdModel
+    );
   }
 
-  deleteStudent(id:string):Observable<ApiResponse<string>>{
-    return this.http.delete<ApiResponse<string>>(this.baseUrl+"Student/delete/"+id)
-   }
-   studentListByCourseId(courseId:string):Observable<ApiResponse<StudentResponseModel[]>>{
-    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Batch/getAllStudentsByCourseId/"+courseId)
+  deleteStudent(id: string): Observable<ApiResponse<string>> {
+    return this.http.delete<ApiResponse<string>>(
+      this.baseUrl + 'Student/delete/' + id
+    );
   }
-  getAllMybatches(){
-    return this.http.get<ApiResponse<StudentResponseModel[]>>(this.baseUrl+"Student/check-my-Batches")
-
+  studentListByCourseId(
+    courseId: string
+  ): Observable<ApiResponse<StudentResponseModel[]>> {
+    return this.http.get<ApiResponse<StudentResponseModel[]>>(
+      this.baseUrl + 'Batch/getAllStudentsByCourseId/' + courseId
+    );
   }
-  getAllMySchedules(){
-    return this.http.get<ApiResponse<BatchScheduleResponseModel[]>>(this.baseUrl+"Student/check-my-all-Schedules")
-
+  getAllMybatches() {
+    return this.http.get<ApiResponse<StudentResponseModel[]>>(
+      this.baseUrl + 'Student/check-my-Batches'
+    );
   }
-  checkMyTodaysSchedule(){
-    return this.http.get<ApiResponse<StudentScheduleResponseModel[]>>(this.baseUrl+"Student/check-my-todays-Schedule")
-
+  getAllMySchedules() {
+    return this.http.get<ApiResponse<BatchScheduleResponseModel[]>>(
+      this.baseUrl + 'Student/check-my-all-Schedules'
+    );
+  }
+  checkMyTodaysSchedule() {
+    return this.http.get<ApiResponse<StudentScheduleResponseModel[]>>(
+      this.baseUrl + 'Student/check-my-todays-Schedule'
+    );
   }
   getSchedule(date: string): Observable<any> {
     const url = `${this.baseUrl}Student/check-Schedule-by-date/${date}`;
     return this.http.get<any>(url);
   }
-  checkMyCourses(){
-    return this.http.get<ApiResponse<CourseResponse[]>>(this.baseUrl+"Student/check-my-courses")
+  checkMyCourses() {
+    return this.http.get<ApiResponse<CourseResponse[]>>(
+      this.baseUrl + 'Student/check-my-courses'
+    );
   }
 
   getAttendances(): Observable<ApiResponse<AttendanceResponseModel[]>> {
-    return this.http.get<ApiResponse<AttendanceResponseModel[]>>(this.baseUrl+"Student/check-my-attendence");
+    return this.http.get<ApiResponse<AttendanceResponseModel[]>>(
+      this.baseUrl + 'Student/check-my-attendence'
+    );
   }
 }

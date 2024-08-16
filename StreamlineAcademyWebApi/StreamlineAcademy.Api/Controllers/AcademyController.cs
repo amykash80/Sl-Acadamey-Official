@@ -9,14 +9,12 @@ using StreamlineAcademy.Domain.Enums;
 using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using System.Runtime.InteropServices;
-//using static StreamlineAcademy.Domain.Models.Requests.AcademyResponseModel;
 
 namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = $"{nameof(UserRole.AcademyAdmin)},{nameof(UserRole.Instructor)}")]
-
+    [Authorize]
     public class AcademyController : ControllerBase
     {
         private readonly IAcademyService academyService;

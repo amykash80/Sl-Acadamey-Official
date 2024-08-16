@@ -3,41 +3,74 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/enviroment';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/Common/api-response';
-import { AddressResponse, ContactResponse, GetAddress, GetContact } from '../Models/Common/Profile';
+import {
+  AddressResponse,
+  ContactResponse,
+  GetAddress,
+  GetContact,
+} from '../Models/Common/Profile';
 import { FileResponse } from '../Models/Common/fileResponse';
-import { CityRequestModel, CityResponseModel } from '../Models/Common/CityResponseModel';
+import {
+  CityRequestModel,
+  CityResponseModel,
+} from '../Models/Common/CityResponseModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
+  constructor(private http: HttpClient) {}
+  baseUrl: string = environment.apiUrl;
 
-  constructor(private http:HttpClient) { }
-  baseUrl:string =environment.apiUrl
-
-  contactInfo():Observable<ApiResponse<ContactResponse>>{
-    return this.http.get<ApiResponse<ContactResponse>>(this.baseUrl+"Profile/getContactInfo")
+  contactInfo(): Observable<ApiResponse<ContactResponse>> {
+    return this.http.get<ApiResponse<ContactResponse>>(
+      this.baseUrl + 'Profile/getContactInfo'
+    );
   }
-  updateContact(contactUpdateModel:GetContact):Observable<ApiResponse<ContactResponse>>{
-    return this.http.put<ApiResponse<ContactResponse>>(this.baseUrl+"Profile/updateContactInfo",contactUpdateModel)
+  updateContact(
+    contactUpdateModel: GetContact
+  ): Observable<ApiResponse<ContactResponse>> {
+    return this.http.put<ApiResponse<ContactResponse>>(
+      this.baseUrl + 'Profile/updateContactInfo',
+      contactUpdateModel
+    );
   }
-  addressInfo():Observable<ApiResponse<AddressResponse>>{
-    return this.http.get<ApiResponse<AddressResponse>>(this.baseUrl+"Profile/getAddressInfo")
+  addressInfo(): Observable<ApiResponse<AddressResponse>> {
+    return this.http.get<ApiResponse<AddressResponse>>(
+      this.baseUrl + 'Profile/getAddressInfo'
+    );
   }
-  updateAddress(addressUpdateModel:GetAddress):Observable<ApiResponse<AddressResponse>>{
-    return this.http.put<ApiResponse<AddressResponse>>(this.baseUrl+"Profile/updateAddressInfo",addressUpdateModel)
+  updateAddress(
+    addressUpdateModel: GetAddress
+  ): Observable<ApiResponse<AddressResponse>> {
+    return this.http.put<ApiResponse<AddressResponse>>(
+      this.baseUrl + 'Profile/updateAddressInfo',
+      addressUpdateModel
+    );
   }
-  uploadImage(data:FormData):Observable<ApiResponse<FileResponse>>{
-    return this.http.post<ApiResponse<FileResponse>>(this.baseUrl+"Profile/uploadPhoto",data)
+  uploadImage(data: FormData): Observable<ApiResponse<FileResponse>> {
+    return this.http.post<ApiResponse<FileResponse>>(
+      this.baseUrl + 'Profile/uploadPhoto',
+      data
+    );
   }
-  getImagePath(){
-    return this.http.get<ApiResponse<FileResponse>>(this.baseUrl+"Profile/filePath")
+  getImagePath() {
+    return this.http.get<ApiResponse<FileResponse>>(
+      this.baseUrl + 'Profile/filePath'
+    );
   }
-  changeProfilePicture(data:FormData){
-    return this.http.post<ApiResponse<FileResponse>>(this.baseUrl+"Profile/changeProfilePicture",data)
+  changeProfilePicture(data: FormData) {
+    return this.http.post<ApiResponse<FileResponse>>(
+      this.baseUrl + 'Profile/changeProfilePicture',
+      data
+    );
   }
-  AddNewCity(cityModel:CityRequestModel):Observable<ApiResponse<CityResponseModel>>{
-   return this.http.post<ApiResponse<CityResponseModel>>(this.baseUrl+"Profile/addNewCity",cityModel)
+  AddNewCity(
+    cityModel: CityRequestModel
+  ): Observable<ApiResponse<CityResponseModel>> {
+    return this.http.post<ApiResponse<CityResponseModel>>(
+      this.baseUrl + 'Profile/addNewCity',
+      cityModel
+    );
   }
-
 }

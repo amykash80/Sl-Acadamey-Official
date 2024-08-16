@@ -49,7 +49,6 @@ export class NotificationComponent {
   ngOnInit() {
     this.loadStudents();
     this.updateCurrentDate()
-   
   }
 
   async sendNotification() {
@@ -90,6 +89,7 @@ export class NotificationComponent {
           this.sendingNotification = false;  
           if (success) {
             this.sharedService.showSuccessToast("Notification sent successfully")
+            this.router.navigate(['/instructor/check-my-schedule']);
           } else {
             this.sharedService.showErrorToast("Failed to send notification.")
           }
@@ -102,8 +102,6 @@ export class NotificationComponent {
       );
     }
   }
-
-  
 
   loadStudents() {
     this.instructorService.checkMyScheduleStudents(this.scheduleId).subscribe({
@@ -176,22 +174,6 @@ export class NotificationComponent {
     this.updatePagination();
   }
 
-  // deleteStudent(studentId: any) {
-  //   this.sharedService.fireConfirmSwal('Are You sure you want to delete this Student ').then((result: any) => {
-  //     if (result.isConfirmed) {
-  //       this.instructorService.deleteStudent(studentId).subscribe({
-  //         next: (response) => {
-  //           if (response.isSuccess) {
-  //             this.sharedService.showSuccessToast(response.message);
-  //             this.getStudentsByScheduleId();
-  //           } else {
-  //             this.sharedService.showErrorToast(response.message);
-  //           }
-  //         },
-  //       });
-  //     }
-  //   });
-  // }
 }
 
 

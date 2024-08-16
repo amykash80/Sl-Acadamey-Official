@@ -3,6 +3,7 @@ import { CourseService } from '../../../Services/course.service';
 import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseContentResponse, UpdateCourseContent } from '../../../Models/Academy/Course';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-course-content',
@@ -48,8 +49,16 @@ export class UpdateCourseContentComponent {
         this.loadSpinner=false;
       }
     },
-    error:(err)=>{
-      console.log(err)
+    error: (err:HttpErrorResponse) => {
+      if(err.status==HttpStatusCode.Forbidden){
+        console.log(err.status)
+        this.sharedService.showErrorToast("Forbideen")
+        this.loadSpinner=false
+      }
+      else{
+        this.sharedService.showErrorToast("something went wrong,try again later")
+        this.loadSpinner=false
+      }
     }
   })
   }

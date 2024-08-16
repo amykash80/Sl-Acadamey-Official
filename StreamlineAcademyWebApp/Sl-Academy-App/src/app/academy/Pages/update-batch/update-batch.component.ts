@@ -87,9 +87,13 @@ export class UpdateBatchComponent {
         }
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status == HttpStatusCode.BadRequest) {
-          console.log(err.message);
+        if (err.status == HttpStatusCode.Forbidden) {
+          this.sharedService.showErrorToast("Forbidden");
           this.loadSpinner = false;
+        }
+        else{
+          this.loadSpinner=false;
+          this.sharedService.showErrorToast("something went wrong,try again later..");
         }
       },
     });

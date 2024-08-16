@@ -6,11 +6,13 @@ import { SharedService } from '../../../Services/shared.service';
 import { Router } from '@angular/router';
 import { CourseResponse } from '../../../Models/Academy/Course';
 import { AttendenceStatus } from '../../../Enums/AttendenceStatus';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-my-attendances',
   templateUrl: './my-attendances.component.html',
-  styleUrl: './my-attendances.component.css'
+  styleUrl: './my-attendances.component.css',
+  providers: [DatePipe]
 })
 export class MyAttendancesComponent {
   attendances: AttendanceResponseModel[] = [];
@@ -24,11 +26,12 @@ export class MyAttendancesComponent {
   pages: number[] = [];
   showTable=false
   searchText: string = ''; 
-  scheduleName:string=''
+  scheduleName:string='';
  
   constructor(private studentService:StudentService,
     private sharedService: SharedService,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -73,22 +76,32 @@ export class MyAttendancesComponent {
     this.currentPage = page;
     this.updatePagination();
   }
+filteredAttendance(): void {
+  if (!this.searchText.trim()) {
+    this.filteredAttendanceList = this.schedulelist.slice();
+  } else {
+    const searchTerm = this.searchText.toLowerCase();
+    let filteredByDate = this.attendances;
+    console.log(filteredByDate)
 
-  filterSchedules(): void {
-    if (!this.searchText.trim()) {
-      this.filteredAttendanceList = this.schedulelist.slice();
-    } else {
-      const searchTerm = this.searchText.toLowerCase();
+    const date = new Date(searchTerm);
+    console.log(date);
+    if (!isNaN(date.getTime())) {
+      const formattedDate = this.datePipe.transform(date, "MMM d, yyyy");
       this.filteredAttendanceList = this.attendances.filter(attendance =>
-        attendance.attendenceStatus?.some(status =>
-          status.toString().toLowerCase().includes(searchTerm)
-        )
+        this.datePipe.transform(new Date(attendance.date!), "MMM d, yyyy") === formattedDate
+
       );
+      console.log(filteredByDate)
     }
-    this.totalItems = this.filteredAttendanceList.length;
-    this.currentPage = 1;
-    this.updatePagination();
+
   }
+
+  this.totalItems = this.filteredAttendanceList.length;
+  this.currentPage = 1;
+  this.updatePagination();
+}
+
 
   fetchAttendances(): void {
     this.studentService.getAttendances().subscribe(

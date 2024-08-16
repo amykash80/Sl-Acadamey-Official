@@ -8,6 +8,7 @@ import {
 import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseCategoryResponse } from '../../../Models/CourseCategory/CourseCategory';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-course',
@@ -44,7 +45,7 @@ export class UpdateCourseComponent {
 
   getAllCategory() {
     this.courseService.getAllCourseCategories().subscribe((categories) => {
-      this.categories = categories.result
+      this.categories = categories.result;
       console.log(this.categories);
     });
   }
@@ -66,9 +67,17 @@ export class UpdateCourseComponent {
           this.loadSpinner = false;
         }
       },
-      error: (err) => {
-        console.log(err);
-        this.loadSpinner = false;
+      error: (err: HttpErrorResponse) => {
+        if (err.status == HttpStatusCode.Forbidden) {
+          console.log(err.status);
+          this.sharedService.showErrorToast('Forbideen');
+          this.loadSpinner = false;
+        } else {
+          this.sharedService.showErrorToast(
+            'something went wrong,try again later'
+          );
+          this.loadSpinner = false;
+        }
       },
     });
   }

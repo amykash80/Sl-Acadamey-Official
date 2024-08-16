@@ -112,7 +112,7 @@
                           Your browser does not support the video tag.
                         </video>
                         <iframe *ngSwitchCase="1" [src]="courseResource.filePath" frameborder="0" allowfullscreen style="width: 100px; height: auto;"></iframe>
-                        <span *ngSwitchDefault>Unsupported resource type</span>
+                        <span *ngSwitchDefault style="color: red;font-weight: bolder;">Unsupported resource type</span>
                       </ng-container>
                     </td>
                     <td>

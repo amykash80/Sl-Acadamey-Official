@@ -3,6 +3,7 @@ import { BatchscheduleService } from '../../../Services/batchschedule.service';
 import { SharedService } from '../../../Services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BatchScheduleResponseModel, UpdateBatchScheduleModel } from '../../../Models/BatchSchedule/BatchSchedule';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-batch-schedule',
@@ -18,6 +19,7 @@ export class UpdateBatchScheduleComponent {
   batchScheduleId:string='';
   batchId:string=''
   courseId:string=''
+  contentName:string=''
   contents: any[] = [];
   batchScheduleModel:BatchScheduleResponseModel=new BatchScheduleResponseModel();
   updateBatchScheduleModel:UpdateBatchScheduleModel=new UpdateBatchScheduleModel();
@@ -27,9 +29,10 @@ export class UpdateBatchScheduleComponent {
       this.batchScheduleId=paramVal['id'];
       this.courseId=paramVal['courseId'];
       this.batchId=paramVal['batchId'];
-      this.getBatchScheduleById()   
     })
     this.getAllContents();
+    this.getBatchScheduleById()   
+
   }
   getAllContents() {
     this.batchScheduleService.getContents(this.courseId).subscribe((contents) => {
@@ -42,6 +45,9 @@ export class UpdateBatchScheduleComponent {
     this.batchScheduleService.getBatchScheduleById(this.batchScheduleId).subscribe(res => {
       this.batchScheduleModel = res.result;
       console.log(this.batchScheduleModel);
+      this.contentName=res.result.contentName!;
+      console.log(res.result.batchName)
+      console.log("inside console",this.contentName);
       this.batchScheduleModel.date = this.formatDateToISOStringDateOnly(this.batchScheduleModel.date);
     });
   }
@@ -68,10 +74,18 @@ export class UpdateBatchScheduleComponent {
         this.loadSpinner = false;
       }
     },
-    error:(err)=>{
-      console.log(err)
-      this.loadSpinner = false;
+    error:(err:HttpErrorResponse)=>{
+      if(err.status==HttpStatusCode.Forbidden)
+      {
+        this.loadSpinner = false;
+        this.sharedService.showErrorToast(err.message)
+      }
+      else{
+        this.loadSpinner=false;
+        this.sharedService.showErrorToast("something went wrong,try again later..")
+      }
     }
+    
   })
   }
 }

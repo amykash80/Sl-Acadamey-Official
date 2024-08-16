@@ -4,19 +4,18 @@ import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/enviroment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CountryService {
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getCountries():Observable<any>{
-    return this.http.get<any>(environment.apiUrl+"Profile/countries");
+  getCountries(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + 'Profile/countries');
   }
-  getStates():Observable<any>{
-    return this.http.get<any>(environment.apiUrl+"Profile/states");
+  getStates(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + 'Profile/states');
   }
-  getCities():Observable<any>{
-    return this.http.get<any>(environment.apiUrl+"Profile/cities");
+  getCities(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + 'Profile/cities');
   }
 }
-
