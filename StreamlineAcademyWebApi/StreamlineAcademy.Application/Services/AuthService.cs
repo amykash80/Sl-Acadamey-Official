@@ -88,7 +88,7 @@ namespace StreamlineAcademy.Application.Services
                 UserRole = user.UserRole,
                 UserId = user.Id,
                 Token = userToken.Token,
-                 FilePath = filePath,
+                FilePath = filePath,
                 IsPasswordTemporary = user.IsPasswordTemporary,
 
             };

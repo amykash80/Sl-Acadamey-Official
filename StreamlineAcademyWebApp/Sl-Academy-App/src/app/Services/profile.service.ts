@@ -8,6 +8,7 @@ import {
   ContactResponse,
   GetAddress,
   GetContact,
+  UpdateContact,
 } from '../Models/Common/Profile';
 import { FileResponse } from '../Models/Common/fileResponse';
 import {
@@ -28,10 +29,10 @@ export class ProfileService {
     );
   }
   updateContact(
-    contactUpdateModel: GetContact
+    contactUpdateModel: UpdateContact,dbId:string
   ): Observable<ApiResponse<ContactResponse>> {
     return this.http.put<ApiResponse<ContactResponse>>(
-      this.baseUrl + 'Profile/updateContactInfo',
+      this.baseUrl + 'Profile/updateContactInfo/'+dbId,
       contactUpdateModel
     );
   }

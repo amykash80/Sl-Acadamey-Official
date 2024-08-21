@@ -73,12 +73,12 @@ namespace StreamlineAcademy.Application.Services
 
         }
 
-        public async Task<ApiResponse<ContactUpdateModel>> UpdateContact(ContactUpdateModel request)
+        public async Task<ApiResponse<ContactUpdateModel>> UpdateContact(Guid id,ContactUpdateModel request)
         {
-            var userId = contextService.GetUserId();
-            var existingContact = await profileRepository.GetByIdAsync(x => x.Id == userId);
+            //var userId = contextService.GetUserId();
+            var existingContact = await profileRepository.GetByIdAsync(x => x.Id == id);
 
-            if (existingContact == null)
+            if (existingContact is null)
                 return ApiResponse<ContactUpdateModel>.ErrorResponse(APIMessages.ProfileManagement.UserNotFound);
             existingContact.Name = request.Name;
             existingContact.Email = request.Email;

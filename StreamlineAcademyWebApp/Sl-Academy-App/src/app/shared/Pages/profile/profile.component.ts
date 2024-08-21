@@ -30,7 +30,7 @@ export class ProfileComponent {
     this.getAddressInfo();
     this.getPath();
   }
-
+  dbId:string=''
   contactInfo: ContactResponse = new ContactResponse();
   addressInfo: AddressResponse = new AddressResponse();
   fileResponseModel: FileResponse = new FileResponse();
@@ -101,7 +101,11 @@ export class ProfileComponent {
   toggleContactEditMode() {
     this.isContactEditMode = !this.isContactEditMode;
     if (this.isContactEditMode) {
-      this.contactModel = { ...this.contactInfo };
+      this.contactModel = {
+        name: this.contactInfo.name,
+        email: this.contactInfo.email,
+        phoneNumber: this.contactInfo.phoneNumber,
+      };
     }
   }
 
@@ -137,7 +141,9 @@ export class ProfileComponent {
   }
 
   saveContact() {
-    this.profileService.updateContact(this.contactModel).subscribe({
+    this.dbId=this.contactInfo.id!;
+    console.log(this.dbId)
+    this.profileService.updateContact(this.contactModel,this.dbId).subscribe({
       next: (response) => {
         if (response.isSuccess) {
           this.sharedService.showSuccessToast(response.message);
