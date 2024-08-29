@@ -39,7 +39,7 @@ namespace StreamlineAcademy.Api.Controllers
         [Authorize(Roles = nameof(UserRole.AcademyAdmin))]
         public async Task<ApiResponse<InstructorResponseModel>> DeleteInstructor(Guid id) => await instructorService.DeleteInstructor(id);
 
-        [HttpPut("updateInstructor")]
+        [HttpPost("updateInstructor")]
         [Authorize(Roles = nameof(UserRole.AcademyAdmin))]
         public async Task<ApiResponse<InstructorResponseModel>> UpdateInstructor(InstructorUpdateRequestModel model) => await instructorService.UpdateInstructor(model);
 

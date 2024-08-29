@@ -25,7 +25,7 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpPost("add")]
         public async Task<ApiResponse<EnquiryResponseModel>> PostEnquiry(EnquiryRequestModel model) => await enquiryService.AddEnquiry(model);
 
-        [HttpPut("update")]
+        [HttpPost("update")]
 
         public async Task<ApiResponse<EnquiryResponseModel>> UpdateEnquiry(EnquiryUpdateRequest model) => await enquiryService.UpdateEnquiry(model);
 

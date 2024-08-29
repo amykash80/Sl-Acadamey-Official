@@ -34,7 +34,7 @@ export class CourseresourceService {
   updateCourseResource(
     courseResourceUpdateModel: FormData
   ): Observable<ApiResponse<CourseResourceResponse>> {
-    return this.http.put<ApiResponse<CourseResourceResponse>>(
+    return this.http.post<ApiResponse<CourseResourceResponse>>(
       this.baseUrl + 'CourseResource/updatecourseResource/',
       courseResourceUpdateModel
     );

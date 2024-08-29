@@ -34,9 +34,9 @@ namespace StreamlineAcademy.Api.Controllers
 
         [HttpGet("getCourseCategoryById/{id:guid}")]
         public async Task<ApiResponse<CourseCategoryResponseModel>> GetCourseCategorywithId(Guid id) => await courseService.GetCourseCategoryById(id);
-        [HttpPut("update")] 
+        [HttpPost("update")] 
         public async Task<ApiResponse<CourseResponseModel>> UpdateCourse(CourseUpdateRequest model) => await courseService.UpdateCourse(model);
-        [HttpPut("updateCourseCategory")]
+        [HttpPost("updateCourseCategory")]
         public async Task<ApiResponse<CourseCategoryResponseModel>> UpdateCourseCategory(CourseCategoryUpdateModel model) => await courseService.UpdateCourseCategory(model);
         [HttpDelete("delete/{id:guid}")]
         public async Task<ApiResponse<CourseResponseModel>> DeleteCourse(Guid id) => await courseService.DeleteCourse(id);

@@ -43,7 +43,7 @@ export class StudentService {
     debugger;
     console.log();
 
-    return this.http.put<ApiResponse<StudentResponseModel>>(
+    return this.http.post<ApiResponse<StudentResponseModel>>(
       this.baseUrl + 'Student/updateStudent',
       stdModel
     );

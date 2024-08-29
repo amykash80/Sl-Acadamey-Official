@@ -38,7 +38,7 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<IEnumerable<StudentResponseModel>>> GetAllStudents() => await studentService.GetallStudents();
         [HttpGet("getStudentById/{id:guid}")]
         public async Task<ApiResponse<StudentResponseModel>> GetStudentById(Guid id) => await studentService.GetStudentById(id);
-        [HttpPut("updateStudent")]
+        [HttpPost("updateStudent")]
         public async Task<ApiResponse<StudentResponseModel>> UpdateStudent(StudentUpdateRequestModel model) => await studentService.UpdateStudent(model);
         [HttpGet("check-my-all-Schedules")]
         [Authorize(Roles = nameof(UserRole.Student))]

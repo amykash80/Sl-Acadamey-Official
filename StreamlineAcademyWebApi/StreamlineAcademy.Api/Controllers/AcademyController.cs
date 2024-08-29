@@ -42,7 +42,7 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpDelete("delete/{id:guid}")]
         public async Task<ApiResponse<AcademyResponseModel>> DeleteAcademy(Guid id) => await academyService.DeleteAcademy(id);
 
-        [HttpPut("update")]
+        [HttpPost("update")]
         public async Task<ApiResponse<AcademyResponseModel>> UpdateAcademy(AcademyUpdateRequest model) => await academyService.UpdateAcademy(model);
      
 

@@ -39,7 +39,7 @@ export class BatchscheduleService {
   updateBatchSchedule(
     batchScheduleUpdateModel: UpdateBatchScheduleModel
   ): Observable<ApiResponse<BatchScheduleResponseModel>> {
-    return this.http.put<ApiResponse<BatchScheduleResponseModel>>(
+    return this.http.post<ApiResponse<BatchScheduleResponseModel>>(
       this.baseUrl + 'BatchSchedule/updateSchedule',
       batchScheduleUpdateModel
     );

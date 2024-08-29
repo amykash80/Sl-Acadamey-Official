@@ -63,6 +63,7 @@ export class SharedService {
       width: '300px',
     });
   }
+
   fireConfirmSwal(message: string) {
     return Swal.fire({
       title: message,
@@ -77,10 +78,11 @@ export class SharedService {
       },
       didOpen: () => {
         const modal = Swal.getPopup();
-        modal!.style.maxWidth = '500px'; 
+        modal!.style.maxWidth = '500px';
       },
     });
   }
+
   fireConfirmRejectSwal(message: string) {
     return Swal.fire({
       title: message,
@@ -91,14 +93,15 @@ export class SharedService {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes',
       customClass: {
-        popup: 'small-swal', 
+        popup: 'small-swal',
       },
       didOpen: () => {
         const modal = Swal.getPopup();
-        modal!.style.maxWidth = '500px'; 
+        modal!.style.maxWidth = '500px';
       },
     });
   }
+
   updateConfirmSwal() {
     return Swal.fire({
       title: 'Do you want to save the changes?',
@@ -114,6 +117,7 @@ export class SharedService {
       }
     });
   }
+
   showLoader() {
     this.toast.loading('Logging IN');
   }
@@ -125,6 +129,7 @@ export class SharedService {
   getAcademyId(): string | undefined {
     return this.academyId;
   }
+
   showDescriptorSwal(description: string) {
     Swal.fire({
       title: description,
@@ -144,6 +149,7 @@ export class SharedService {
       },
     });
   }
+
   logOutUser() {
     Swal.fire({
       title: 'Are you sure?',

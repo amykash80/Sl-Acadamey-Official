@@ -31,7 +31,7 @@ export class ProfileService {
   updateContact(
     contactUpdateModel: UpdateContact,dbId:string
   ): Observable<ApiResponse<ContactResponse>> {
-    return this.http.put<ApiResponse<ContactResponse>>(
+    return this.http.post<ApiResponse<ContactResponse>>(
       this.baseUrl + 'Profile/updateContactInfo/'+dbId,
       contactUpdateModel
     );
@@ -44,7 +44,7 @@ export class ProfileService {
   updateAddress(
     addressUpdateModel: GetAddress
   ): Observable<ApiResponse<AddressResponse>> {
-    return this.http.put<ApiResponse<AddressResponse>>(
+    return this.http.post<ApiResponse<AddressResponse>>(
       this.baseUrl + 'Profile/updateAddressInfo',
       addressUpdateModel
     );

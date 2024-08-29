@@ -29,7 +29,7 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<IEnumerable<BatchResponseModel>>> GetAllBatches() => await batchService.GetAllBatches();
         [HttpGet("getBatchById/{id:guid}")]
         public async Task<ApiResponse<BatchResponseModel>> GetBatchById(Guid id) => await batchService.GetBatchById(id);
-        [HttpPut("updateBatch")]
+        [HttpPost("updateBatch")]
         public async Task<ApiResponse<BatchResponseModel>> UpdateBatch(BatchUpdateRequest model) => await batchService.UpdateBatch(model);
         [HttpDelete("deleteBatch/{id:guid}")]
         public async Task<ApiResponse<BatchResponseModel>> DeleteBatch(Guid id) => await batchService.DeleteBatch(id);

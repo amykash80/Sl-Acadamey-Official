@@ -30,7 +30,7 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<LocationResponseModel>> DeleteLocation(Guid id) => await locationService.DeleteLocation(id);
         [HttpGet("getLocationById/{id:guid}")]
         public async Task<ApiResponse<LocationResponseModel>> GetLocationById(Guid id) => await locationService.DeleteLocation(id);
-        [HttpPut("updateLocation")]
+        [HttpPost("updateLocation")]
         public async Task<ApiResponse<LocationResponseModel>> UpdateLocation(LocationUpdateRequestModel model) => await locationService.UpdateLocation(model);
 
 

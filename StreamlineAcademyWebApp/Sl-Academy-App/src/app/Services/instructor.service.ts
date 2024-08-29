@@ -44,7 +44,7 @@ export class InstructorService {
     debugger;
     console.log(instructorUpdateModel);
 
-    return this.http.put<ApiResponse<InstructorResponseModel>>(
+    return this.http.post<ApiResponse<InstructorResponseModel>>(
       this.baseUrl + 'Instructor/updateInstructor',
       instructorUpdateModel
     );

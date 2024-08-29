@@ -41,7 +41,7 @@ export class LocationService {
   updateLocation(
     locationUpdateModel: UpdateLocationModel
   ): Observable<ApiResponse<LocationResponseModel>> {
-    return this.http.put<ApiResponse<LocationResponseModel>>(
+    return this.http.post<ApiResponse<LocationResponseModel>>(
       this.baseUrl + 'Location/updateLocation',
       locationUpdateModel
     );

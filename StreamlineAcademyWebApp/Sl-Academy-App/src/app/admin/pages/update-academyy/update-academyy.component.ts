@@ -89,6 +89,7 @@ export class UpdateAcademyyComponent {
   updateAcademy(){
     this.loadSpinner=true;
     this.updateAcademyModel=this.academy;
+    this.updateAcademyModel.postalCode =
     this.updateAcademyModel.postalCode?.toString();
     this.academyService.updateAcademy(this.updateAcademyModel).subscribe({
       next:(response)=>{

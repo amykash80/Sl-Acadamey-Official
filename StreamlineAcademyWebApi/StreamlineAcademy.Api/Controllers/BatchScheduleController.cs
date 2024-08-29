@@ -30,7 +30,7 @@ namespace StreamlineAcademy.Api.Controllers
         [HttpGet("getAllSchedules")]
         
         public async Task<ApiResponse<IEnumerable<ScheduleResponseModel>>> GetAllSchedules() => await scheduleService.GetAllSchedules();
-        [HttpPut("updateSchedule")]
+        [HttpPost("updateSchedule")]
         
         public async Task<ApiResponse<ScheduleResponseModel>> UpdateSchedule(ScheduleUpdateRequest model) => await scheduleService.UpdateSchedule(model);
         [HttpDelete("deleteSchedule/{id:guid}")]

@@ -36,7 +36,7 @@ export class AcademyService {
   updateAcademy(
     academyUpdateModel: UpdateAcademy
   ): Observable<ApiResponse<AcademyResponse>> {
-    return this.http.put<ApiResponse<AcademyResponse>>(
+    return this.http.post<ApiResponse<AcademyResponse>>(
       this.baseUrl + 'Academy/update',
       academyUpdateModel
     );
@@ -78,7 +78,7 @@ export class AcademyService {
     debugger;
     console.log(academyTypeUpdateModel);
 
-    return this.http.put<ApiResponse<AcademyTypeResponse>>(
+    return this.http.post<ApiResponse<AcademyTypeResponse>>(
       this.baseUrl + 'Academy/update-academy-type',
       academyTypeUpdateModel
     );

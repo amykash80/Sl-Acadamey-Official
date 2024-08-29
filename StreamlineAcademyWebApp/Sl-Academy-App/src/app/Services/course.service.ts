@@ -39,7 +39,7 @@ export class CourseService {
   updateCourse(
     courseUpdateModel: UpdateCourse
   ): Observable<ApiResponse<CourseResponse>> {
-    return this.http.put<ApiResponse<CourseResponse>>(
+    return this.http.post<ApiResponse<CourseResponse>>(
       this.baseUrl + 'Course/update',
       courseUpdateModel
     );
@@ -85,7 +85,7 @@ export class CourseService {
   updateCourseContent(
     courseContentUpdateModel: UpdateCourseContent
   ): Observable<ApiResponse<CourseContentResponse>> {
-    return this.http.put<ApiResponse<CourseContentResponse>>(
+    return this.http.post<ApiResponse<CourseContentResponse>>(
       this.baseUrl + 'CourseContent/updateContent',
       courseContentUpdateModel
     );
@@ -118,7 +118,7 @@ export class CourseService {
   updateCourseCategory(
     courseCategoryUpdateModel: CourseCategoryRequestModel
   ): Observable<ApiResponse<CourseCategoryResponse>> {
-    return this.http.put<ApiResponse<CourseCategoryResponse>>(
+    return this.http.post<ApiResponse<CourseCategoryResponse>>(
       this.baseUrl + 'Course/updateCourseCategory',
       courseCategoryUpdateModel
     );
