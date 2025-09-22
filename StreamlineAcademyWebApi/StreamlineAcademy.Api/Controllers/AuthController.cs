@@ -21,13 +21,13 @@ namespace StreamlineAcademy.Api.Controllers
         {
             this.authService = authService;
         }
-        [Authorize(Roles =nameof(UserRole.SuperAdmin))]
+        [Authorize(Roles = nameof(UserRole.SuperAdmin))]
         [HttpPost("add-new-user")]
         public async Task<ApiResponse<int>> Adduser(UserRequestModel model) => await authService.AddUser(model);
         [Authorize]
         [HttpPost("changePassword")]
         public async Task<ApiResponse<string>> ChangePassword(ChangePasswordRequestModel model) => await authService.ChangePassword(model);
-        
+
         [HttpPost("login")]
         public async Task<ApiResponse<LoginResponseModel>> login(LoginRequestModel model) => await authService.Login(model);
 
@@ -41,19 +41,19 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<string>> ResendResetCode(ResendResetCodeRequestModel model) => await authService.ResendResetCode(model);
 
         [HttpGet("check-email/{email}")]
-       public async Task<IActionResult> CheckEmailAvailability(string email)
-    {
-         bool isUnique = await authService.IsEmailUnique(email);
+        public async Task<IActionResult> CheckEmailAvailability(string email)
+        {
+            bool isUnique = await authService.IsEmailUnique(email);
 
-        return Ok(new { isUniqueEmail = isUnique });
-    }
+            return Ok(new { isUniqueEmail = isUnique });
+        }
 
-    [HttpGet("check-phonenumber/{phonenumber}")]
-    public async Task<IResult> CheckPhoneNumberAvailability(string phoneNumber)
-    {
-        bool isUnique = await authService.IsPhoneNumberUnique(phoneNumber);
+        [HttpGet("check-phonenumber/{phonenumber}")]
+        public async Task<IResult> CheckPhoneNumberAvailability(string phoneNumber)
+        {
+            bool isUnique = await authService.IsPhoneNumberUnique(phoneNumber);
 
-        return Results.Ok(new { isUniquePhoneNumber = isUnique });
-    }
+            return Results.Ok(new { isUniquePhoneNumber = isUnique });
+        }
     }
 }

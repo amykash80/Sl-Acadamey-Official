@@ -1,12 +1,9 @@
+using StreamlineAcademy.Api.Controllers;
+using StreamlineAcademy.Api.DI;
+using StreamlineAcademy.Api.Middlewares;
 using StreamlineAcademy.Application.DI;
 using StreamlineAcademy.Infrastructure.DI;
 using StreamlineAcademy.Persistence.DI;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using StreamlineAcademy.Api.Middlewares;
-using StreamlineAcademy.Api.DI;
-using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,11 +21,15 @@ builder.Services.AddPersistenceService(builder.Configuration)
                .AddInfrastructureService()
                .AddPresentationService();
 
+Employee emp = new Employee();
+emp.Name = "Abid";
+emp.CountedSalary();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "https://streamlineacademies.com")
+        policy.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();

@@ -31,4 +31,30 @@ namespace StreamlineAcademy.Api.Controllers
         public async Task<ApiResponse<IEnumerable<CourseContentResponseModel>>>GetContentByCourseId(Guid id) => await contentService.GetContentByCourseId(id);
 
     }
+
+    public class Employee
+    {
+        private string name;
+        private Guid Id;
+
+        public string Name
+        {
+            get { return name; }
+
+            set { name = value; }
+        }
+        public Guid id
+        {
+            get { return id; }
+
+            set { id = value; }
+        }
+        public void CountedSalary()
+        {
+            string FullName = Name + "Rather";
+            Console.WriteLine(FullName);
+        }
+        
+    }
+    
 }
