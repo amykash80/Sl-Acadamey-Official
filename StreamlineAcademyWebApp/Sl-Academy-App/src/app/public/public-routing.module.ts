@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from '../shared/Pages/forgot-password/forgot-
 import { ResetPasswordComponent } from '../shared/Pages/reset-password/reset-password.component';
 import { ChangepasswordComponent } from '../shared/Pages/changepassword/changepassword.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { GoogleOAuthComponent } from './Pages/google-oauth/google-oauth.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'enquiry', component: EnquiryComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'google-auth', component: GoogleOAuthComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'change-password/:userRole', component: ChangepasswordComponent },

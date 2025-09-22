@@ -61,6 +61,28 @@
             <button class="th-btn w-100" (click)="onLogIn()" [disabled]="loginForm.invalid">Log In
               <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
             </button>
+            <button 
+  class="google-btn w-100 d-flex align-items-center justify-content-center"
+  (click)="logInWithGoogle()" 
+  [disabled]="loadSpinner">
+  
+  <!-- Google Logo -->
+  <img 
+    src="https://developers.google.com/identity/images/g-logo.png" 
+    alt="Google logo" 
+    class="google-logo me-2" 
+  />
+
+  <!-- Button Text or Spinner -->
+  <ng-container *ngIf="!loadSpinner; else loading">
+    Sign in with Google
+  </ng-container>
+
+  <ng-template #loading>
+    <app-spinner color="white"></app-spinner>
+  </ng-template>
+</button>
+
           </div>
         </div>
         <p class="form-messages mb-0 mt-3"></p>

@@ -8,12 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './Pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NotFoundComponent } from './Pages/not-found/not-found.component'
 import { FooterComponent } from './Components/footer/footer.component';
 import { NoContentComponent } from './Pages/no-content/no-content.component';
 import { RegisterStudentComponent } from './Pages/register-student/register-student.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+// import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown'
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
 
 @NgModule({
   declarations: [

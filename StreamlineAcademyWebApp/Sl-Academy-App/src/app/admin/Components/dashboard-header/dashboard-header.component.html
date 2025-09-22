@@ -83,9 +83,10 @@
                               width="50"
                               style="object-fit: cover; aspect-ratio: 1"
                               class="rounded-circle"
-                              src="{{ apiBaseUrl + filePath }}"
+                              [src]="buildProfileURL(filePath)"
                               alt
                             />
+                            <p>hi</p>
                           </div>
                           <div class="widget-content-left text-capitalize">
                             <div class="widget-heading font-manrope">

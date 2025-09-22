@@ -36,4 +36,14 @@ export class DashboardHeaderComponent {
   ngOnInit() {
 
 }
+buildProfileURL(filePath:string){
+  console.clear()
+  console.log('File Path')
+  console.log(filePath)
+  console.log(this.apiBaseUrl)
+  if(filePath.startsWith('http')){
+    return filePath;
+  }
+  return this.apiBaseUrl + filePath
+}
 }

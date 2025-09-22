@@ -239,6 +239,10 @@ export class LoginComponent {
       },
     });
   }
+  logInWithGoogle(){
+    this.authService.googleOAuthRedirect();
+    
+  }
   changeMyPassword() {
     console.log(this.chnagePasswordModel);
     this.authService.changePassword(this.chnagePasswordModel).subscribe({

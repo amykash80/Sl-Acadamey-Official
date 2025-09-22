@@ -22,6 +22,23 @@ export class AuthService {
       loginModel
     );
   }
+googleOAuthRedirect() {
+    
+    const queryParams = new URLSearchParams({
+      client_id: environment.googleOAuthClientId,
+      redirect_uri: environment.redirectUrl,
+      response_type: 'code',
+      scope: "profile openid  email",
+      // state: ${challange.code_verifier}^${model.id},
+      access_type: 'offline',
+      //check model later to move all the token logic to server side
+      // prompt: 'consent',
+      // login_hint: model.email
+    });
+
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${queryParams.toString()}`;
+  
+  }
   enquiry(enquiryModel: Enquiry): Observable<ApiResponse<EnquiryResponse>> {
     return this.httpCleint.post<ApiResponse<EnquiryResponse>>(
       this.baseUrl + 'Enquiry/add',

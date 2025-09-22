@@ -16,6 +16,7 @@ import { CourseResourceComponent } from './Pages/course-resource/course-resource
 import { AttendenceComponent } from '../instructor/Pages/attendence/attendence.component';
 import { MyAttendancesComponent } from './Pages/my-attendances/my-attendances.component';
 import { AttendanceStatusPipe } from '../Pipes/attendance-status.pipe';
+import { PaypalComponent } from './Components/paypal/paypal.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AttendanceStatusPipe } from '../Pipes/attendance-status.pipe';
     CourseResourceComponent,
     AttendenceComponent,
     MyAttendancesComponent,
-    AttendanceStatusPipe
+    AttendanceStatusPipe,
+    PaypalComponent
     
   ],
   imports: [
