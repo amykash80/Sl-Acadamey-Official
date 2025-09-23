@@ -133,6 +133,7 @@ export class LoginComponent {
 
             // this.router.navigate(['change-password',response.result.userRole]);
           } else {
+            console.log("result cpoming from backend",response.result)
             switch (response.result.userRole) {
               case UserRole.SuperAdmin:
                 this.router.navigate(['/admin/dashboard']);
