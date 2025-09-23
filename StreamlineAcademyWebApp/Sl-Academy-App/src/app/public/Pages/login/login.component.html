@@ -58,32 +58,36 @@
             <p>Don't have an account? <a routerLink="/enquiry" class="register-here-btn">Register Here</a></p>
         </div>
           <div class="form-btn col-12 text-center">
-            <button class="th-btn w-100" (click)="onLogIn()" [disabled]="loginForm.invalid">Log In
-              <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
-            </button>
-            <button 
-  class="google-btn w-100 d-flex align-items-center justify-content-center"
-  (click)="logInWithGoogle()" 
-  [disabled]="loadSpinner">
-  
-  <!-- Google Logo -->
-  <img 
-    src="https://developers.google.com/identity/images/g-logo.png" 
-    alt="Google logo" 
-    class="google-logo me-2" 
-  />
+  <button
+    class="th-btn w-100 mb-3"
+    (click)="onLogIn()"
+    [disabled]="loginForm.invalid"
+  >
+    Log In
+    <app-spinner color="white" *ngIf="loadSpinner"></app-spinner>
+  </button>
 
-  <!-- Button Text or Spinner -->
-  <ng-container *ngIf="!loadSpinner; else loading">
-    Sign in with Google
-  </ng-container>
+  <button
+    class="google-btn w-100 d-flex align-items-center justify-content-center py-3"
+    (click)="logInWithGoogle()"
+    [disabled]="loadSpinner"
+  >
+    <img
+      src="https://developers.google.com/identity/images/g-logo.png"
+      alt="Google logo"
+      class="google-logo me-2"
+    />
 
-  <ng-template #loading>
-    <app-spinner color="white"></app-spinner>
-  </ng-template>
-</button>
+    <ng-container *ngIf="!loadSpinner; else loading">
+      Sign in with Google
+    </ng-container>
 
-          </div>
+    <ng-template #loading>
+      <app-spinner color="white"></app-spinner>
+    </ng-template>
+  </button>
+</div>
+
         </div>
         <p class="form-messages mb-0 mt-3"></p>
       </form>
