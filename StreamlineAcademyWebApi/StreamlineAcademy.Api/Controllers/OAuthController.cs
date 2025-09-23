@@ -25,7 +25,7 @@ namespace StreamlineAcademy.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Something went wrong!"); 
+                throw new Exception( ex.Message); 
             }
         }
     }
