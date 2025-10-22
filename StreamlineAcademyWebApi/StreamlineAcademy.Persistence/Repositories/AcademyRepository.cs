@@ -1,23 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using StreamlineAcademy.Application.Abstractions.IRepositories;
-using StreamlineAcademy.Application.Shared;
 using StreamlineAcademy.Domain.Entities;
 using StreamlineAcademy.Domain.Enums;
-using StreamlineAcademy.Domain.Models.Requests;
 using StreamlineAcademy.Domain.Models.Responses;
 using StreamlineAcademy.Persistence.Data;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace StreamlineAcademy.Persistence.Repositories
 {

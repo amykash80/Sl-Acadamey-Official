@@ -30,10 +30,10 @@ namespace StreamlineAcademy.Application.Services
                 var payLoad = new Dictionary<string, string>
             {
                 { "client_id" , model.ClientId },
-                {  "client_secret" , "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" },
+                { "client_secret" , "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" },
                 { "code" , model.Code },
-                    { "grant_type" , "authorization_code" },
-                    { "redirect_uri" , model.Redirect_Uri },
+                { "grant_type" , "authorization_code" },
+                { "redirect_uri" , model.Redirect_Uri },
                 };
                 //Create an HttpClient to send HTTP requests to Google.
 

@@ -23,8 +23,10 @@ namespace StreamlineAcademy.Api.Controllers
         {
             this.academyService = academyService;
         }
+        
 
         [HttpPost("register")]
+    
         public async Task<ApiResponse<AcademyResponseModel>> RegisterAcademy(AcademyRequestModel request) => await academyService.RegisterAcademy(request);
 
         [HttpPost("academy-type")]
