@@ -1,14 +1,11 @@
 ﻿using StreamlineAcademy.Application.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StreamlineAcademy.Domain.Models.Requests;
 
 namespace StreamlineAcademy.Application.Abstractions.IServices
 {
     public interface IPaymentService
     {
-        Task<string> CreatePaymentIntentAsync(long amount,string currency);
+        Task<string> CreateCheckoutSessionAsync();
+        Task<ApiResponse<string>> ConfirmPaymentAsync(string paymentIntentId);
     }
 }

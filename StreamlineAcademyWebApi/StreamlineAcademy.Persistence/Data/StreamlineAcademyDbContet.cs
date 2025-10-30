@@ -1,13 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StreamlineAcademy.Application.Utils;
 using StreamlineAcademy.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using StreamlineAcademy.Domain.Enums;
-using System.Threading.Tasks;
-using Org.BouncyCastle.Math.EC.Rfc7748;
 
 namespace StreamlineAcademy.Persistence.Data
 {

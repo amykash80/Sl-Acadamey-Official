@@ -27,6 +27,7 @@ namespace StreamlineAcademy.Domain.Entities
         public ICollection<Student>? students { get; set; }
         public ICollection<CourseResource>? CourseResources { get; set; }
         public ICollection<StudentInterests>? StudentInterests { get; set; }
+        public ICollection<Enrollment>? Enrollments { get; set; }
 
         #endregion
 

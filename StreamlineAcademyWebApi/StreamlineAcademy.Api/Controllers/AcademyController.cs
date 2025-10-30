@@ -14,7 +14,7 @@ namespace StreamlineAcademy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class AcademyController : ControllerBase
     {
         private readonly IAcademyService academyService;

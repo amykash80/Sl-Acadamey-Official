@@ -2,7 +2,7 @@
 
 namespace StreamlineAcademy.Infrastructure;
 
-public class PaymentService
+public class PaymentRepository
 {
 
 }

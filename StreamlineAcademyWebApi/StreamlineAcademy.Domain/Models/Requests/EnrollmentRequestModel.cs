@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace StreamlineAcademy.Domain.Models.Requests
 {
-    public class PaymentRequestModel
+    public class EnrollmentRequestModel
     {
-        public double Amount { get; set; }
-        public string Currency { get; set; } = string.Empty;
+        public Guid StudentId { get; set; }
+        public Guid CourseId { get; set; }
     }
-    
 }
-
